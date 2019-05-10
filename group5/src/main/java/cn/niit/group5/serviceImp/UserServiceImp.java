@@ -5,9 +5,8 @@ import cn.niit.group5.entity.dto.UserDTO;
 import cn.niit.group5.mapper.UserMapper;
 import cn.niit.group5.service.UserService;
 import cn.niit.group5.util.NewCodeUtil;
-import cn.niit.group5.util.SmsUtil;
+import cn.niit.group5.util.SMSUtil;
 import cn.niit.group5.util.StatusConst;
-import com.aliyuncs.exceptions.ClientException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -76,21 +75,16 @@ public class UserServiceImp implements UserService {
         User user = userMapper.getUserByPhoneNumber(phoneNumber);
         if (user==null)
         {
-            String newcode = String.valueOf(NewCodeUtil.getNewCode());
-            try {
-               SmsUtil.sendSms(phoneNumber, newcode);
-                rts.opsForValue().set(phoneNumber,newcode,5, TimeUnit.MINUTES);
-                return StatusConst.SUCCESS;
-            } catch (ClientException e) {
-                e.printStackTrace();
-            }
+            String newCode = NewCodeUtil.getNewCode();
+            SMSUtil.send(phoneNumber);
+            rts.opsForValue().set(phoneNumber,newCode,1, TimeUnit.MINUTES);
+
+            return StatusConst.SUCCESS;
 
         }else {
 //            手机号已经被注册过
             return StatusConst.MOBILE_EXIST;
         }
-//        发送验证码失败
-        return StatusConst.VERIFYCODE_ERROR;
     }
 
 }
