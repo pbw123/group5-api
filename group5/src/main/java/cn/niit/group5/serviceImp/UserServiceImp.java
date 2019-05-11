@@ -54,37 +54,35 @@ public class UserServiceImp implements UserService {
 
 
     public int plogin(String phoneNumber, String pcode) throws Exception {
-        try{
-            Object code=rts.opsForValue().get(phoneNumber);
-            if (code.equals(pcode)) {
+            String code=(String) rts.opsForValue().get(phoneNumber);
+            System.out.println(code+"----+++++++++++++++++");
+            if (code==null)
+            {
+                return  StatusConst.VERIFYCODE_ERROR;
+
+            }else {
+                if (code.equals(pcode)) {
 //                验证码正确
-                return  StatusConst.SUCCESS;
-            } else {
+                    return  StatusConst.SUCCESS;
+                } else {
 //                验证码错误
-                return StatusConst.VERIFYCODE_ERROR;
+                    System.out.println("验证码错误");
+                    return StatusConst.VERIFYCODE_ERROR;
+                }
             }
-        }catch (Exception e){
-            e.printStackTrace();
-//            验证码失效？
-            return StatusConst.VERIFYCODE_ERROR;
-        }
+
     }
 
     public int saveCode(String phoneNumber)
     {
-        User user = userMapper.getUserByPhoneNumber(phoneNumber);
-        if (user==null)
-        {
+
             String newCode = NewCodeUtil.getNewCode();
-            SMSUtil.send(phoneNumber);
-            rts.opsForValue().set(phoneNumber,newCode,1, TimeUnit.MINUTES);
+        SMSUtil.send(phoneNumber, newCode);
+        rts.opsForValue().set(phoneNumber,newCode,5, TimeUnit.MINUTES);
+        System.out.println(newCode+"+++++++++++++");
 
             return StatusConst.SUCCESS;
 
-        }else {
-//            手机号已经被注册过
-            return StatusConst.MOBILE_EXIST;
-        }
     }
 
 }

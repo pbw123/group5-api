@@ -13,7 +13,7 @@ import com.aliyuncs.profile.DefaultProfile;
  * 短信发送工具类
  */
 public class SMSUtil {
-    public static String send(String mobile) {
+    public static int send(String mobile,String newCode) {
         DefaultProfile profile = DefaultProfile.getProfile(
                 "cn-hangzhou",
                 "LTAIelFvJkV74tTC",
@@ -28,8 +28,8 @@ public class SMSUtil {
         request.putQueryParameter("PhoneNumbers", mobile);
         request.putQueryParameter("SignName", "小生不才");
         request.putQueryParameter("TemplateCode", "SMS_162732775");
-        String verifyCode =NewCodeUtil.getNewCode();
-        request.putQueryParameter("TemplateParam", "{\"code\":" + verifyCode + "}");
+//        String verifyCode =NewCodeUtil.getNewCode();
+        request.putQueryParameter("TemplateParam", "{\"code\":" + newCode + "}");
         try {
             CommonResponse response = client.getCommonResponse(request);
             System.out.println(response.getData());
@@ -38,7 +38,7 @@ public class SMSUtil {
         } catch (ClientException e) {
             e.printStackTrace();
         }
-        return verifyCode;
+        return StatusConst.SUCCESS;
     }
 
 
