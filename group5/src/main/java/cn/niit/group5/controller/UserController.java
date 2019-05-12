@@ -1,14 +1,10 @@
 package cn.niit.group5.controller;
 
-import cn.niit.group5.entity.User;
 import cn.niit.group5.entity.dto.UserCode;
 import cn.niit.group5.entity.dto.UserDTO;
 import cn.niit.group5.mapper.UserMapper;
 import cn.niit.group5.serviceImp.UserServiceImp;
-import cn.niit.group5.util.MsgConst;
-import cn.niit.group5.util.RegexUtil;
 import cn.niit.group5.util.ResponseResult;
-import cn.niit.group5.util.StatusConst;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,103 +24,32 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     * 登录
+     */
     @ApiOperation(value = "登录",notes = "输入手机号和密码进行登录")
     @PostMapping(value = "/signIn")
     public ResponseResult signIn(@RequestBody UserDTO userDTO) {
-//        System.out.println(userDTO.toString()+"========我操你==========="+userDTO.getPhoneNumber()+userDTO.getPassword());
-        if (userDTO.getPhoneNumber()==null)
-        {
-            return   new ResponseResult(StatusConst.PHONE_NULL_ERROR, MsgConst.PHONE_NUMBER_NULL);
-        }else if (!RegexUtil.phoneNumberRegex(userDTO.getPhoneNumber()))
-        {
-            return     new ResponseResult(StatusConst.PHONE_VALIDATOR_ERROR_,
-                    MsgConst.PHONE_NUMBER_VALIDATOR);
-        }else if (userDTO.getPassword()==null)
-        {
-            return new ResponseResult(StatusConst.PASSWORD_NULL,
-                    MsgConst.PASSWORD_NULL_);
-        }else if (!RegexUtil.passRegex(userDTO.getPassword()))
-        {
-            return new ResponseResult(StatusConst.PASSWORD_VALIDATOR,MsgConst.PASSWORD_VALIDATOR);
-        }
-        else {
-            int status = userServiceImp.signIn(userDTO);
-            if (status == StatusConst.SUCCESS) {
-                User user = userMapper.getUserByPhoneNumber(userDTO.getPhoneNumber());
-                return ResponseResult.success(user);
-            } else {
-                if (status == StatusConst.USER_MOBILE_NOT_FOUND) {
-                    //                手机号不存在
-                    return ResponseResult.error(status, MsgConst.USER_MOBILE_NO_FOUND);
-                } else if (status == StatusConst.USER_STATUS_ERROR) {
-                    //                手机号状态异常
-                    return ResponseResult.error(status, MsgConst.USER_STATUS_ERROR);
-                } else {
-//                密码错误
-                    return ResponseResult.error(status, MsgConst.PASSWORD_ERROR);
-                }
-            }
-        }
-
+        return userServiceImp.userSignIn(userDTO);
     }
 
     /**
-     * 检测短信验证码是否相同  注册
+     * 检测短信验证码是否相同
      */
     @ApiOperation(value = "验证验证码",notes = "将手机号和验证码进行匹配")
     @PostMapping(value = "/matchVerify")
-    public ResponseResult signUp(@RequestBody UserCode userCode) throws Exception {
-
-       if (userCode.getCode()==null)
-       {
-           return new ResponseResult(StatusConst.VERIFYCODE_NUll,MsgConst.VERIFYCODE_NULL_ERROR);
-       }else if (userCode.getPhoneNumber()==null)
-       {
-           return new ResponseResult(StatusConst.PHONE_NULL_ERROR,MsgConst.PHONE_NUMBER_NULL);
-       }else if (!RegexUtil.phoneNumberRegex(userCode.getPhoneNumber()))
-       {
-           return new ResponseResult(StatusConst.PHONE_VALIDATOR_ERROR_,
-                   MsgConst.PHONE_NUMBER_VALIDATOR);
-       }
-       else {
-           int status = userServiceImp.plogin(userCode.getPhoneNumber(), userCode.getCode());
-           if (status == StatusConst.SUCCESS) {
-//            验证码和手机号匹配得上,返回手机号和验证码
-               return ResponseResult.success(userCode);
-           } else {
-//         验证码错误或失效
-               return ResponseResult.error(StatusConst.VERIFYCODE_ERROR, MsgConst.VERIFYCODE_ERROR);
-           }
-       }
+    public ResponseResult matchVerify(@RequestBody UserCode userCode) throws Exception {
+        return userServiceImp.matchVerifySignUp(userCode);
     }
 
-    /*发送验证码*/
+    /**
+     *发送验证码
+     */
     @ApiOperation(value = "发送验证码",notes = "通过手机号获取验证码")
     @PostMapping(value = "/sendCode")
     public ResponseResult sendCode(@RequestBody  UserCode userCode){
-//        发送验证码并保存到redis
-        System.out.println(userCode.getPhoneNumber()+"===================");
-        if (userCode.getPhoneNumber()==null)
-        {
-            return   new ResponseResult(StatusConst.PHONE_NULL_ERROR, MsgConst.PHONE_NUMBER_NULL);
-        }else if (!RegexUtil.phoneNumberRegex(userCode.getPhoneNumber()))
-        {
-         return     new ResponseResult(StatusConst.PHONE_VALIDATOR_ERROR_,
-                MsgConst.PHONE_NUMBER_VALIDATOR);
-        }else {
-            int status = userServiceImp.saveCode(userCode.getPhoneNumber());
-            if (status == StatusConst.SUCCESS) {
-//            验证码发送成功
-                return ResponseResult.success();
-            } else {
-
-//                验证码错误
-                    return ResponseResult.error(StatusConst.VERIFYCODE_ERROR, MsgConst.SEND_VERIFYCODE_ERROR);
-                }
-            }
+          return userServiceImp.sendVerify(userCode);
         }
-
-
     }
 
 
