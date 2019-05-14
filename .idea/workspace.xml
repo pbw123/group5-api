@@ -5,16 +5,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/GlobalExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/ResponseResult.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/dto/PhoneNumberDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/exceptionhandler/PassNullException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/exceptionhandler/PassValidatorException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/exceptionhandler/PhoneNullException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/exceptionhandler/PhonePassNullException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/exceptionhandler/PhoneValidatorException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/UserServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/UserServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/UserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/MsgConst.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/MsgConst.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/RegexUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/RegexUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/StatusConst.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/StatusConst.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group5/src/main/resources/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/group5/target/" />
@@ -47,7 +41,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/Group5Application.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
@@ -59,80 +53,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/GlobalExceptionHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="15" column="62" selection-start-line="15" selection-start-column="62" selection-end-line="15" selection-end-column="62" />
+            <state relative-caret-position="351">
+              <caret line="12" column="48" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/resources/application.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="28" column="32" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/UserController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1053">
-              <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/ResponseResult.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1122">
-              <caret line="41" column="49" selection-start-line="41" selection-start-column="49" selection-end-line="41" selection-end-column="49" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/NewCodeUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/RegexUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="8" column="64" selection-start-line="8" selection-start-column="64" selection-end-line="8" selection-end-column="64" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/StatusConst.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/MsgConst.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="3" column="48" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -140,8 +65,77 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1560">
-              <caret line="41" selection-start-line="41" selection-end-line="41" />
+            <state relative-caret-position="390">
+              <caret line="20" column="31" lean-forward="true" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mapper/UserMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-456">
+              <caret line="95" column="19" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="28" column="32" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mybatis/mybatis-config.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="5" column="64" selection-start-line="5" selection-start-column="64" selection-end-line="5" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/UserMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/UserController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="81" column="13" lean-forward="true" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/MsgConst.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/UserServiceImp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1026">
+              <caret line="123" column="26" selection-start-line="123" selection-start-column="26" selection-end-line="123" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -162,6 +156,8 @@
       <find>rts</find>
       <find>@req</find>
       <find>signIn</find>
+      <find>user</find>
+      <find>group5</find>
     </findStrings>
     <replaceStrings>
       <replace>smsUtil</replace>
@@ -176,8 +172,6 @@
       <list>
         <option value="$PROJECT_DIR$/group5/src/main/resources/mybatis/mybatis-config.xml" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp.java" />
-        <option value="$PROJECT_DIR$/group5/src/main/resources/mapper/UserMapper.xml" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/UserMapper.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/service/UserService.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/SmsUtil.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/NewCodeUtil.java" />
@@ -199,17 +193,19 @@
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/exceptionhandler/PassValidatorException.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/exceptionhandler/PhoneNullException.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/exceptionhandler/PhoneValidatorException.java" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/StatusConst.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/ResponseResult.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/Validator.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/Regex.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/SMSUtil.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/exceptionhandler/PhonePassNullException.java" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/MsgConst.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/RegexUtil.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/UserServiceImp.java" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/StatusConst.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/GlobalExceptionHandler.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/UserMapper.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/MsgConst.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/resources/mapper/UserMapper.xml" />
       </list>
     </option>
   </component>
@@ -253,7 +249,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="30" />
     <option name="y" value="15" />
     <option name="width" value="1940" />
@@ -268,8 +264,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -303,10 +297,98 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="group5" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="group5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="group5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="group5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="group5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="mapper" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="group5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="group5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="serviceImp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="group5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="group5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="group5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="mapper" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="group5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="group5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="mybatis" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -447,17 +529,20 @@
       <workItem from="1557561864538" duration="11778000" />
       <workItem from="1557626082533" duration="12522000" />
       <workItem from="1557652332753" duration="165000" />
+      <workItem from="1557729334742" duration="6828000" />
+      <workItem from="1557742991049" duration="893000" />
+      <workItem from="1557794566975" duration="9243000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75038000" />
+    <option name="totallyTimeSpent" value="92002000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49768874" visible="true" weight="0.34345478" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49768874" visible="true" weight="0.25978407" />
       <window_info id="Designer" order="1" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -467,7 +552,7 @@
       <window_info anchor="bottom" id="Messages" order="0" weight="0.3266564" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.32973805" />
-      <window_info anchor="bottom" id="Run" order="3" weight="0.50385207" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.4761171" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -492,18 +577,17 @@
       <window_info anchor="right" id="Theme Preview" order="10" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49768874" visible="true" weight="0.33738193" />
-      <window_info id="Structure" order="1" sideWeight="0.5023112" side_tool="true" weight="0.33738193" />
-      <window_info id="Designer" order="2" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info id="Web" order="7" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49768874" visible="true" weight="0.25978407" />
+      <window_info id="Designer" order="1" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Capture Tool" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="Web" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.3266564" />
       <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Find" order="2" />
-      <window_info anchor="bottom" id="Run" order="3" weight="0.50385207" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.32973805" />
+      <window_info anchor="bottom" id="Run" order="3" visible="true" weight="0.4761171" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -516,15 +600,16 @@
       <window_info anchor="bottom" id="Database Changes" order="13" />
       <window_info anchor="bottom" id="Version Control" order="14" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Bean Validation" order="1" weight="0.3299595" />
-      <window_info anchor="right" id="Ant Build" order="2" weight="0.24966262" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="4" weight="0.18893388" />
+      <window_info anchor="right" id="Maven" order="1" weight="0.18893388" />
+      <window_info anchor="right" id="Bean Validation" order="2" show_stripe_button="false" weight="0.3299595" />
+      <window_info anchor="right" id="Ant Build" order="3" show_stripe_button="false" weight="0.24966262" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
       <window_info anchor="right" id="Palette" order="5" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="right" id="Database" order="7" weight="0.3299595" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="right" id="Theme Preview" order="9" />
+      <window_info anchor="right" id="Structure" order="7" sideWeight="0.5023112" weight="0.33738193" />
+      <window_info anchor="right" id="Database" order="8" weight="0.3299595" />
+      <window_info anchor="right" id="Palette&#9;" order="9" />
+      <window_info anchor="right" id="Theme Preview" order="10" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,20 +621,6 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp.java" />
-    <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mybatis/mybatis-config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="5" column="64" selection-start-line="5" selection-start-column="64" selection-end-line="5" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mapper/UserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="89" column="9" selection-start-line="89" selection-start-column="9" selection-end-line="89" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../maven/maven_jar/com/aliyun/aliyun-java-sdk-dysmsapi/1.1.0/aliyun-java-sdk-dysmsapi-1.1.0.jar!/com/aliyuncs/dysmsapi/model/v20170525/SendSmsResponse.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
@@ -580,12 +651,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/group5/pom.xml">
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2613">
           <caret line="67" selection-start-line="67" selection-end-line="67" />
         </state>
       </provider>
-      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
     </entry>
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/exceptionhandler/PhoneNullException.java" />
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/config/WebConfig.java">
@@ -601,13 +672,6 @@
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/exceptionhandler/PassNullException.java" />
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/exceptionhandler/PassValidatorException.java" />
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/exceptionhandler/PhoneValidatorException.java" />
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/UserMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/SMSUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
@@ -637,30 +701,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/exceptionhandler/PhonePassNullException.java" />
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/dto/PhoneNumberDTO.java" />
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/UserServiceImp.java">
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/ResponseResult.java" />
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/ResponseResult.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5421">
-          <caret line="141" column="29" selection-start-line="141" selection-start-column="29" selection-end-line="141" selection-end-column="29" />
+        <state relative-caret-position="1521">
+          <caret line="41" column="49" selection-start-line="41" selection-start-column="49" selection-end-line="41" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1053">
-          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/NewCodeUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -671,61 +719,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$PROJECT_DIR$/../maven/maven_jar/org/springframework/spring-web/5.1.6.RELEASE/spring-web-5.1.6.RELEASE.jar!/org/springframework/web/bind/annotation/RestControllerAdvice.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/StatusConst.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+        <state relative-caret-position="702">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/MsgConst.java">
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/NewCodeUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="3" column="48" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1560">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/ResponseResult.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="41" column="49" selection-start-line="41" selection-start-column="49" selection-end-line="41" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/ResponseResult.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/GlobalExceptionHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="15" column="62" selection-start-line="15" selection-start-column="62" selection-end-line="15" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="28" column="32" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+        <state relative-caret-position="702">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
@@ -733,6 +744,78 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/GlobalExceptionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="12" column="48" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mybatis/mybatis-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="5" column="64" selection-start-line="5" selection-start-column="64" selection-end-line="5" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/UserServiceImp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1026">
+          <caret line="123" column="26" selection-start-line="123" selection-start-column="26" selection-end-line="123" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/MsgConst.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="32" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="81" column="13" lean-forward="true" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="20" column="31" lean-forward="true" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mapper/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-456">
+          <caret line="95" column="19" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
         </state>
       </provider>
     </entry>

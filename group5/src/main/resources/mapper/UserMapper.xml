@@ -86,5 +86,29 @@
     select  * from t_user where phone_number=#{phoneNumber} and is_delete=0
   </select>
 
+  <sql id="signUpColumns">
+    <trim suffixOverrides=",">
+      <if test="phoneNumber!=null">phone_number,</if>
+      <if test="password!=null">password,</if>
+      <if test="userName!=null">user_name,</if>
+      <if test="identity!=null">identity,</if>
+      <if test="userAddress!=null">user_address,</if>
+      <if test="isForbidden!=null">is_forbidden</if>
+    </trim>
+  </sql>
+  <sql id="signUpValues">
+    <trim suffixOverrides=",">
+      <if test="phoneNumber!=null">#{phoneNumber},</if>
+      <if test="password!=null">#{password},</if>
+      <if test="userName!=null">#{userName},</if>
+      <if test="identity!=null">#{identity},</if>
+      <if test="userAddress!=null">#{userAddress},</if>
+      <if test="isForbidden!=null">#{isForbidden}</if>
+    </trim>
+  </sql>
+  <insert id="signUp" parameterType="cn.niit.group5.entity.User">
+    insert into t_user(<include refid="signUpColumns"></include>)
+    values (<include refid="signUpValues"></include>)
+  </insert>
 
 </mapper>

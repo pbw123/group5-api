@@ -15,5 +15,7 @@ public class StatusConst {
     public static final int PHONE_PASSWORD_NULL_ERROR = 10;
     public static final int PASSWORD_NULL = 11;
     public static final int PASSWORD_VALIDATOR =12;
+    public static final int ERROR =13;
+
 
 }

@@ -1,7 +1,6 @@
 package cn.niit.group5.controller;
 
 import cn.niit.group5.util.ResponseResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalExceptionHandler {
        private ResponseResult result;
 
-    @ExceptionHandler(value = Exception.class)
+//    @ExceptionHandler(value = Exception.class)
     public ResponseResult phoneNull(HttpServletRequest request, Exception ex)
     {
           result=new ResponseResult(996,"发生了异常，请联系组长1592155834");

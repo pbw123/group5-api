@@ -15,5 +15,6 @@ public class MsgConst {
     public static final String PHONE_NUMBER_NULL="手机号码不能为空";
     public static final String PHONE_NUMBER_VALIDATOR="输入正确的手机号码";
     public static final String PASSWORD_NULL_="密码不能为空";
-    public static final String PASSWORD_VALIDATOR="密码长度不能小于6位";
+    public static final String PASSWORD_VALIDATOR="密码长度不能小于6位且只能含英文和数字";
+    public static final String FAIL="操作失败";
 }
