@@ -24,5 +24,7 @@ public interface UserMapper {
     User getUserByPhoneNumber(String phoneNumber);
 //    注册
     int signUp(User user);
+//    更新我的资料
+    int updateMyMsg(User user);
 
 }

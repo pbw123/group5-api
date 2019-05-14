@@ -114,7 +114,7 @@ public class UserServiceImp implements UserService {
         if (send==StatusConst.SUCCESS)
         {
 //            保存
-            rts.opsForValue().set(phoneNumber,newCode,5, TimeUnit.MINUTES);
+            rts.opsForValue().set(phoneNumber,newCode,15, TimeUnit.DAYS);
             System.out.println(newCode+"+++++++++++++");
             return  StatusConst.SUCCESS;
         }
@@ -186,8 +186,20 @@ public class UserServiceImp implements UserService {
                     return ResponseResult.error(status, MsgConst.PASSWORD_ERROR);
                 }
             }
+
         }
     }
-
+//            更新我的资料
+    public int updateMyDocument(User user)
+    {
+        int index = userMapper.updateMyMsg(user);
+        System.out.println(index+"=============");
+        if (index==1)
+        {
+            return  StatusConst.SUCCESS;
+        }
+        System.out.println("业务层操作失败");
+        return StatusConst.ERROR;
+    }
 
 }

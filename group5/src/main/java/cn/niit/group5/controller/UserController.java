@@ -20,7 +20,7 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @RestController
 @Api(tags = "用户模块")
-@RequestMapping(value = "/api/user",produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/user", produces = APPLICATION_JSON_VALUE)
 public class UserController {
     @Autowired
     private UserServiceImp userServiceImp;
@@ -30,7 +30,7 @@ public class UserController {
     /**
      * 登录
      */
-    @ApiOperation(value = "登录",notes = "输入手机号和密码进行登录")
+    @ApiOperation(value = "登录", notes = "输入手机号和密码进行登录")
     @PostMapping(value = "/signIn")
     public ResponseResult signIn(@RequestBody UserDTO userDTO) {
         return userServiceImp.userSignIn(userDTO);
@@ -39,51 +39,79 @@ public class UserController {
     /**
      * 检测短信验证码是否相同
      */
-    @ApiOperation(value = "验证验证码",notes = "将手机号和验证码进行匹配")
+    @ApiOperation(value = "验证验证码", notes = "将手机号和验证码进行匹配")
     @PostMapping(value = "/matchVerify")
     public ResponseResult matchVerify(@RequestBody UserCode userCode) throws Exception {
         return userServiceImp.matchVerifySignUp(userCode);
     }
 
     /**
-     *发送验证码
+     * 发送验证码
      */
-    @ApiOperation(value = "发送验证码",notes = "通过手机号获取验证码")
+    @ApiOperation(value = "发送验证码", notes = "通过手机号获取验证码")
     @PostMapping(value = "/sendCode")
-    public ResponseResult sendCode(@RequestBody  UserCode userCode){
-          return userServiceImp.sendVerify(userCode);
-        }
+    public ResponseResult sendCode(@RequestBody UserCode userCode) {
+        return userServiceImp.sendVerify(userCode);
+    }
 
     /**
      * 注册
      */
-        @ApiOperation(value = "注册",notes = "填写注册信息")
-        @PostMapping(value = "signUp")
+    @ApiOperation(value = "注册", notes = "填写注册信息")
+    @PostMapping(value = "signUp")
     public ResponseResult signUp(@RequestParam(required = true) String phoneNumber,
                                  @RequestParam(required = true) String password,
-                @RequestParam(required = true) String userName,Integer identity,String userAddress)
-        {
-           if (!RegexUtil.passRegex(password))
-            {
-                return new ResponseResult(StatusConst.PASSWORD_VALIDATOR,
-                        MsgConst.PASSWORD_VALIDATOR);
-            }else {
-                User user =new User();
-                user.setPhoneNumber(phoneNumber);
-                user.setPassword(password);
-                user.setUserName(userName);
-                user.setUserAddress(userAddress);
-                user.setIdentity(identity);
-                user.setRegitsterTime(new Date());
-                int index = userMapper.signUp(user);
-                if (index==1)
-                {
-                    return new ResponseResult(StatusConst.SUCCESS, MsgConst.SUCCESS);
-                }else {
-                    return new ResponseResult(StatusConst.ERROR,MsgConst.FAIL);
-                }
+                                 @RequestParam(required = true) String userName, Integer identity
+            , String userAddress) {
+        if (!RegexUtil.passRegex(password)) {
+            return new ResponseResult(StatusConst.PASSWORD_VALIDATOR,
+                    MsgConst.PASSWORD_VALIDATOR);
+        } else {
+            User user = new User();
+            user.setPhoneNumber(phoneNumber);
+            user.setPassword(password);
+            user.setUserName(userName);
+            user.setUserAddress(userAddress);
+            user.setIdentity(identity);
+            user.setRegitsterTime(new Date());
+            int index = userMapper.signUp(user);
+            if (index == 1) {
+                return new ResponseResult(StatusConst.SUCCESS, MsgConst.SUCCESS);
+            } else {
+                return new ResponseResult(StatusConst.ERROR, MsgConst.FAIL);
             }
         }
     }
+
+    /**
+     * 我的资料，一个查询接口(登录或注册成功时已经返回数据了，不再写)
+     * 一个更新接口
+     */
+    @ApiOperation(value = "我的资料", notes = "修改我的资料并保存")
+    @PostMapping(value = "updateMyMsg")
+    public ResponseResult updateMyMsg(@RequestParam(required = true) String id, String vocation,
+                                      String headUrl, String userName, String unitName,
+                                      int identity,String educational, String email, Byte sex)
+    {
+        User user =new User();
+        user.setId(Integer.valueOf(id));
+        user.setVocation(vocation);
+        user.setHeadUrl(headUrl);
+        user.setUserName(userName);
+        user.setIdentity(identity);
+        user.setUnitName(unitName);
+        user.setSex(sex);
+        user.setEmail(email);
+        if (userServiceImp.updateMyDocument(user) == StatusConst.SUCCESS) {
+
+            System.out.println("控制层操作成功");
+            return ResponseResult.success(user);
+        }else {
+            System.out.println("控制层操作失败");
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
+        }
+    }
+
+}
 
 

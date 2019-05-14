@@ -112,5 +112,21 @@
     insert into t_user(<include refid="signUpColumns"></include>)
     values (<include refid="signUpValues"></include>)
   </insert>
+  
+  <update id="updateMyMsg" parameterType="User">
+    update t_user
+    <trim prefix="set" suffixOverrides=",">
+      <if test="vocation!=null">vocation=#{vocation},</if>
+      <if test="headUrl!=null">head_url=#{headUrl},</if>
+      <if test="userName!=null">user_name=#{userName},</if>
+      <if test="unitName!=null">unit_name=#{unitName},</if>
+      <if test="identity!=null">identity=#{identity},</if>
+      <if test="educational!=null">educational=#{educational},</if>
+      <if test="userAddress!=null">user_address=#{userAddress},</if>
+      <if test="sex!=null">sex=#{sex},</if>
+      <if test="email!=null">email=#{email}</if>
+    </trim>
+    where id=#{id}
+  </update>
 
 </mapper>
