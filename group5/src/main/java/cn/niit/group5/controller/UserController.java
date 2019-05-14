@@ -14,6 +14,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -72,6 +74,7 @@ public class UserController {
                 user.setUserName(userName);
                 user.setUserAddress(userAddress);
                 user.setIdentity(identity);
+                user.setRegitsterTime(new Date());
                 int index = userMapper.signUp(user);
                 if (index==1)
                 {
