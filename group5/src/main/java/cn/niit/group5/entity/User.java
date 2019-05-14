@@ -14,30 +14,43 @@ public class User implements Serializable {
 
     private Date regitsterTime;
 
-    private Byte sex;
+    private String sex;
 
-    private Integer identity;
+    //身份/人员类别
+    private String identity;
 
+    //    用户地址
     private String userAddress;
+    //工作地址
+    private String unitAddress;
 
+    //单位名称
     private String unitName;
 
-    private Integer plantCategory;
+    //种植种类
+    private String plantCategory;
 
+    //    种植范围
     private String plantSize;
 
+    //总签到次数
     private Integer checkAll;
 
+    //连续签到次数
     private Integer checkContinuous;
 
+    //    总积分
     private Integer score;
 
+    //    是否禁用
     private Byte isForbidden;
 
+    //    学历/教育背景
     private String educational;
 
     private String email;
 
+    //行业类型
     private String vocation;
 
     private Byte isDelete;
@@ -56,6 +69,14 @@ public class User implements Serializable {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String getUnitAddress() {
+        return unitAddress;
+    }
+
+    public void setUnitAddress(String unitAddress) {
+        this.unitAddress = unitAddress;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -86,20 +107,28 @@ public class User implements Serializable {
         this.regitsterTime = regitsterTime;
     }
 
-    public Byte getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Byte sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
-    public Integer getIdentity() {
+    public String getIdentity() {
         return identity;
     }
 
-    public void setIdentity(Integer identity) {
+    public void setIdentity(String identity) {
         this.identity = identity;
+    }
+
+    public String getPlantCategory() {
+        return plantCategory;
+    }
+
+    public void setPlantCategory(String plantCategory) {
+        this.plantCategory = plantCategory;
     }
 
     public String getUserAddress() {
@@ -118,13 +147,6 @@ public class User implements Serializable {
         this.unitName = unitName == null ? null : unitName.trim();
     }
 
-    public Integer getPlantCategory() {
-        return plantCategory;
-    }
-
-    public void setPlantCategory(Integer plantCategory) {
-        this.plantCategory = plantCategory;
-    }
 
     public String getPlantSize() {
         return plantSize;

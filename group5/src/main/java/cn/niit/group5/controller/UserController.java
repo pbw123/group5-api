@@ -61,8 +61,8 @@ public class UserController {
     @PostMapping(value = "signUp")
     public ResponseResult signUp(@RequestParam(required = true) String phoneNumber,
                                  @RequestParam(required = true) String password,
-                                 @RequestParam(required = true) String userName, Integer identity
-            , String userAddress) {
+                                 @RequestParam(required = true) String userName,
+                                 String identity, String unitAddress) {
         if (!RegexUtil.passRegex(password)) {
             return new ResponseResult(StatusConst.PASSWORD_VALIDATOR,
                     MsgConst.PASSWORD_VALIDATOR);
@@ -71,8 +71,8 @@ public class UserController {
             user.setPhoneNumber(phoneNumber);
             user.setPassword(password);
             user.setUserName(userName);
-            user.setUserAddress(userAddress);
             user.setIdentity(identity);
+            user.setUnitAddress(unitAddress);
             user.setRegitsterTime(new Date());
             int index = userMapper.signUp(user);
             if (index == 1) {
@@ -91,9 +91,8 @@ public class UserController {
     @PostMapping(value = "updateMyMsg")
     public ResponseResult updateMyMsg(@RequestParam(required = true) String id, String vocation,
                                       String headUrl, String userName, String unitName,
-                                      int identity,String educational, String email, Byte sex)
-    {
-        User user =new User();
+                                      String identity, String educational, String email, String sex) {
+        User user = new User();
         user.setId(Integer.valueOf(id));
         user.setVocation(vocation);
         user.setHeadUrl(headUrl);
@@ -106,7 +105,7 @@ public class UserController {
 
             System.out.println("控制层操作成功");
             return ResponseResult.success(user);
-        }else {
+        } else {
             System.out.println("控制层操作失败");
             return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
         }

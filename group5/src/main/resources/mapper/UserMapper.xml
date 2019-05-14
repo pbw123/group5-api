@@ -92,7 +92,7 @@
       <if test="password!=null">password,</if>
       <if test="userName!=null">user_name,</if>
       <if test="identity!=null">identity,</if>
-      <if test="userAddress!=null">user_address,</if>
+      <if test="unitAddress!=null">unit_address,</if>
       <if test="regitsterTime!=null">regitster_time,</if>
       <if test="isForbidden!=null">is_forbidden</if>
     </trim>
@@ -103,7 +103,7 @@
       <if test="password!=null">#{password},</if>
       <if test="userName!=null">#{userName},</if>
       <if test="identity!=null">#{identity},</if>
-      <if test="userAddress!=null">#{userAddress},</if>
+      <if test="unitAddress!=null">#{unitAddress},</if>
       <if test="regitsterTime!=null">#{regitsterTime},</if>
       <if test="isForbidden!=null">#{isForbidden}</if>
     </trim>
