@@ -1,10 +1,8 @@
 package cn.niit.group5.serviceImp;
 
-import cn.niit.group5.entity.Question;
 import cn.niit.group5.entity.User;
 import cn.niit.group5.entity.dto.UserCode;
 import cn.niit.group5.entity.dto.UserDTO;
-import cn.niit.group5.mapper.QuestionMapper;
 import cn.niit.group5.mapper.UserMapper;
 import cn.niit.group5.service.UserService;
 import cn.niit.group5.util.*;
@@ -12,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service

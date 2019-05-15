@@ -1,12 +1,13 @@
 package cn.niit.group5.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Reply implements Serializable {
     private Integer id;
 
-    private String content;
 
+    private String content;
     private Integer userId;
 
     private Integer questionId;
@@ -18,6 +19,16 @@ public class Reply implements Serializable {
     private Byte isDelete;
 
     private User user;
+
+    public Date getReplyTime() {
+        return replyTime;
+    }
+
+    public void setReplyTime(Date replyTime) {
+        this.replyTime = replyTime;
+    }
+
+    private Date replyTime;
 
     public User getUser() {
         return user;

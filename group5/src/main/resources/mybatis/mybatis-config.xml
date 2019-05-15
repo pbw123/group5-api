@@ -4,6 +4,7 @@
 <configuration>
     <typeAliases>
         <typeAlias alias="User" type="cn.niit.group5.entity.User"/>
-
+        <typeAlias alias="Question" type="cn.niit.group5.entity.Question"/>
+        <typeAlias alias="Reply" type="cn.niit.group5.entity.Reply"/>
     </typeAliases>
 </configuration>

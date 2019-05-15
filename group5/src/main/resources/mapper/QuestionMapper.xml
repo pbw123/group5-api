@@ -67,4 +67,38 @@
       SELECT u.head_url,u.user_name,u.identity,u.score,u.phone_number,u.user_address
     FROM t_user u WHERE u.id=#{0}
   </select>
+
+  <select id="getQuestionListByUserId" parameterType="int" resultType="question">
+     SELECT q.id,q.content FROM t_question q WHERE q.user_id=#{0}
+  </select>
+
+  <select id="getQuestionDetail" parameterType="int" resultMap="questionRM">
+     SELECT q.*,r.id rid ,r.user_id ruid,r.content rcon,r.reply_time,r.like,u.head_url,u.user_name,u.user_address,u.identity
+ FROM t_question q,t_reply r,t_user u
+  WHERE r.question_id=q.id
+  AND q.user_id=u.id
+  AND q.id=#{0}
+  </select>
+  <resultMap id="questionRM" type="question">
+    <id column="id" property="id"/>
+    <result column="user_id" property="userId"/>
+    <result column="content" property="content"/>
+    <result column="create_time" property="createTime"/>
+    <result column="sort" property="sort"/>
+    <result column="is_exchange_reply" property="isExchangeReply"/>
+    <result column="is_delete" property="isDelete"/>
+    <collection property="replies" ofType="Reply">
+      <id column="rid" property="id"/>
+      <result column="ruid" property="userId"/>
+      <result column="rcon" property="content"/>
+      <result column="reply_time" property="replyTime"/>
+      <result column="like" property="like"/>
+      <association property="user" select="getUserById" column="ruid">
+      </association>
+    </collection>
+  </resultMap>
+<!--  <select id="getUserById" parameterType="int" resultType="user">-->
+<!--  SELECT u.id, u.head_url,u.user_name,u.user_address,u.identity,u.score,u.phone_number FROM t_user u-->
+<!--  where u.id=#{0}-->
+<!--  </select>-->
 </mapper>

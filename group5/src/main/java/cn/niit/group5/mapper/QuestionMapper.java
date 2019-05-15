@@ -18,4 +18,9 @@ public interface QuestionMapper {
     List<Question> selectAllByUserId(int id);
 
     int updateByPrimaryKey(Question record);
+//我的提问列表
+    List<Question>getQuestionListByUserId(int userId);
+//我的问题详情
+Question getQuestionDetail(int question_id);
+
 }

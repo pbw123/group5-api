@@ -123,6 +123,20 @@ public class UserController {
     {
         return  questionMapper.selectAllByUserId(id);
     }
+
+    //我的提问列表
+    @GetMapping(value = "getQuestionList")
+    public List<Question>getQuestionList(int userId)
+    {
+        List<Question> lists = questionMapper.getQuestionListByUserId(userId);
+        return  lists;
+    }
+//    问题详情
+    @GetMapping(value = "getQuestionDetailById")
+    public Question getQuestionDetailById(int question_id)
+    {
+        return questionMapper.getQuestionDetail(question_id);
+    }
 }
 
 
