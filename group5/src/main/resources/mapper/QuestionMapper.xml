@@ -2,36 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.niit.group5.mapper.QuestionMapper" >
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_question
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="cn.niit.group5.entity.Question" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into t_question (user_id, content, create_time, 
-      sort, is_exchange_reply, is_delete
-      )
-    values (#{userId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
-      #{sort,jdbcType=VARCHAR}, #{isExchangeReply,jdbcType=TINYINT}, #{isDelete,jdbcType=TINYINT}
-      )
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="cn.niit.group5.entity.Question" >
-    update t_question
-    set user_id = #{userId,jdbcType=INTEGER},
-      content = #{content,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=DATE},
-      sort = #{sort,jdbcType=VARCHAR},
-      is_exchange_reply = #{isExchangeReply,jdbcType=TINYINT},
-      is_delete = #{isDelete,jdbcType=TINYINT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id, user_id, content, create_time, sort, is_exchange_reply, is_delete
-    from t_question
-    where id = #{id,jdbcType=INTEGER}
-  </select>
   <select id="selectAllByUserId" resultMap="BaseResultMap" parameterType="int" >
    SELECT q.*,r.id rid,r.content rcon,r.user_id ruid,r.question_id,r.exchange_id,r.is_exchange_reply,r.reply_time,r.like,r.is_delete rdel,
      u.head_url,u.user_name,u.identity,u.score,u.phone_number,u.user_address
@@ -97,8 +67,5 @@
       </association>
     </collection>
   </resultMap>
-<!--  <select id="getUserById" parameterType="int" resultType="user">-->
-<!--  SELECT u.id, u.head_url,u.user_name,u.user_address,u.identity,u.score,u.phone_number FROM t_user u-->
-<!--  where u.id=#{0}-->
-<!--  </select>-->
+
 </mapper>

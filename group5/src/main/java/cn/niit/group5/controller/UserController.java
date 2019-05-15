@@ -117,12 +117,12 @@ public class UserController {
     @Autowired
     private QuestionMapper questionMapper;
     //    我的提问
-    @ApiOperation(value = "我的提问",notes = "我的提问一个请求三个页面的数据")
-    @GetMapping(value = "getMyQuestion/{id}")
-    public List<Question> getMyQuestion(@PathVariable int id)
-    {
-        return  questionMapper.selectAllByUserId(id);
-    }
+//    @ApiOperation(value = "我的提问",notes = "我的提问一个请求三个页面的数据")
+//    @GetMapping(value = "getMyQuestion/{id}")
+//    public List<Question> getMyQuestion(@PathVariable int id)
+//    {
+//        return  questionMapper.selectAllByUserId(id);
+//    }
 
     //我的提问列表
     @GetMapping(value = "getQuestionList")
