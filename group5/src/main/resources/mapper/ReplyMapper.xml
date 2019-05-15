@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.ReplyMapper" >
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Reply" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="question_id" property="questionId" jdbcType="INTEGER" />
+    <result column="exchange_id" property="exchangeId" jdbcType="TINYINT" />
+    <result column="like" property="like" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_reply
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.niit.group5.entity.Reply" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_reply (content, user_id, question_id, 
+      exchange_id, `like`, is_delete
+      )
+    values (#{content,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, 
+      #{exchangeId,jdbcType=TINYINT}, #{like,jdbcType=INTEGER}, #{isDelete,jdbcType=TINYINT}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.niit.group5.entity.Reply" >
+    update t_reply
+    set content = #{content,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      question_id = #{questionId,jdbcType=INTEGER},
+      exchange_id = #{exchangeId,jdbcType=TINYINT},
+      `like` = #{like,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, content, user_id, question_id, exchange_id, `like`, is_delete
+    from t_reply
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, content, user_id, question_id, exchange_id, `like`, is_delete
+    from t_reply
+  </select>
+</mapper>

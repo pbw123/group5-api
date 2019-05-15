@@ -1,8 +1,10 @@
 package cn.niit.group5.controller;
 
+import cn.niit.group5.entity.Question;
 import cn.niit.group5.entity.User;
 import cn.niit.group5.entity.dto.UserCode;
 import cn.niit.group5.entity.dto.UserDTO;
+import cn.niit.group5.mapper.QuestionMapper;
 import cn.niit.group5.mapper.UserMapper;
 import cn.niit.group5.serviceImp.UserServiceImp;
 import cn.niit.group5.util.MsgConst;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
@@ -111,6 +114,15 @@ public class UserController {
         }
     }
 
+    @Autowired
+    private QuestionMapper questionMapper;
+    //    我的提问
+    @ApiOperation(value = "我的提问",notes = "我的提问一个请求三个页面的数据")
+    @GetMapping(value = "getMyQuestion/{id}")
+    public List<Question> getMyQuestion(@PathVariable int id)
+    {
+        return  questionMapper.selectAllByUserId(id);
+    }
 }
 
 
