@@ -14,5 +14,5 @@ public interface UserMapper {
     int signUp(User user);
 //    更新我的资料
     int updateMyMsg(User user);
-
+//
 }

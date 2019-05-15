@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.niit.group5.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="regitster_time" property="regitsterTime" jdbcType="DATE" />
+    <result column="sex" property="sex" jdbcType="TINYINT" />
+    <result column="identity" property="identity" jdbcType="INTEGER" />
+    <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+    <result column="unit_name" property="unitName" jdbcType="VARCHAR" />
+    <result column="plant_category" property="plantCategory" jdbcType="INTEGER" />
+    <result column="plant_size" property="plantSize" jdbcType="VARCHAR" />
+    <result column="check_all" property="checkAll" jdbcType="INTEGER" />
+    <result column="check_continuous" property="checkContinuous" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="is_forbidden" property="isForbidden" jdbcType="TINYINT" />
+    <result column="educational" property="educational" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="vocation" property="vocation" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+    <result column="head_url" property="headUrl" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
 
   <select id="getUserByPhoneNumber" resultMap="BaseResultMap" parameterType="String" >
     select  * from t_user where phone_number=#{phoneNumber} and is_delete=0

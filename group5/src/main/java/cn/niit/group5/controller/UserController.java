@@ -1,10 +1,12 @@
 package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.Question;
+import cn.niit.group5.entity.Reply;
 import cn.niit.group5.entity.User;
 import cn.niit.group5.entity.dto.UserCode;
 import cn.niit.group5.entity.dto.UserDTO;
 import cn.niit.group5.mapper.QuestionMapper;
+import cn.niit.group5.mapper.ReplyMapper;
 import cn.niit.group5.mapper.UserMapper;
 import cn.niit.group5.serviceImp.UserServiceImp;
 import cn.niit.group5.util.MsgConst;
@@ -125,6 +127,7 @@ public class UserController {
 //    }
 
     //我的提问列表
+    @ApiOperation(value = "我的提问列表",notes = "根据我的用户id我提出过的所有问题")
     @GetMapping(value = "getQuestionList")
     public List<Question>getQuestionList(int userId)
     {
@@ -132,10 +135,29 @@ public class UserController {
         return  lists;
     }
 //    问题详情
-    @GetMapping(value = "getQuestionDetailById")
-    public Question getQuestionDetailById(int question_id)
+    @ApiOperation(value = "问题详情",notes = "关于提问的问题详情")
+    @GetMapping(value = "getQuestionDetailById/{question_id}")
+    public Question getQuestionDetailById(@PathVariable int question_id)
     {
         return questionMapper.getQuestionDetail(question_id);
+    }
+
+//    根据id查询要添加的用户信息
+    @ApiOperation(value = "详细资料",notes = "根据id请求可添加好友的详细资料")
+    @GetMapping(value = "getAddUserById/{userId}")
+    public User getAddUserById(@PathVariable int userId)
+    {
+        return questionMapper.getUserById(userId);
+    }
+
+    @Autowired
+    private ReplyMapper replyMapper;
+//    我的回答列表
+    @ApiOperation(value = "我的回答",notes = "我的所有回复列表")
+    @GetMapping(value = "getMyReplyById/{userId}")
+    public List<Reply> getMyReplyById(@PathVariable int userId)
+    {
+        return replyMapper.getMyReplyById(userId);
     }
 }
 
