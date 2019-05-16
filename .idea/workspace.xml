@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29385a52-292e-48cc-884f-51a80fd1ffe8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExchangeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExchangeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExchangeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExchangeMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/FeedbackMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/FeedbackMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/group5/src/main/resources/mapper/ExchangeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/resources/mapper/ExchangeMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group5/src/main/resources/mybatis-generator/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/resources/mybatis-generator/generatorConfig.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/group5/target/" />
@@ -39,23 +37,83 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/Exchange.java">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExchangeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="21" column="30" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="30" />
+            <state relative-caret-position="888">
+              <caret line="52" column="36" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#800#801#0" expanded="true" />
+                <element signature="e#855#856#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mybatis-generator/generatorConfig.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="77">
+              <caret line="62" column="39" selection-start-line="62" selection-start-column="39" selection-end-line="62" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/SupplyBuyController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="311">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mapper/SupplyBuyMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="233">
+              <caret line="18" column="24" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/SupplyBuy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-195">
+              <caret line="5" column="22" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="22" />
+              <folding>
+                <element signature="e#2115#2116#0" expanded="true" />
+                <element signature="e#2144#2145#0" expanded="true" />
+                <element signature="e#2185#2186#0" expanded="true" />
+                <element signature="e#2221#2222#0" expanded="true" />
+                <element signature="e#2256#2257#0" expanded="true" />
+                <element signature="e#2290#2291#0" expanded="true" />
+                <element signature="e#2341#2342#0" expanded="true" />
+                <element signature="e#2387#2388#0" expanded="true" />
+                <element signature="e#2419#2420#0" expanded="true" />
+                <element signature="e#2450#2451#0" expanded="true" />
+                <element signature="e#2495#2496#0" expanded="true" />
+                <element signature="e#2535#2536#0" expanded="true" />
+                <element signature="e#2309#2310#0" expanded="true" />
+                <element signature="e#2338#2339#0" expanded="true" />
+                <element signature="e#2379#2380#0" expanded="true" />
+                <element signature="e#2415#2416#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExchangeController.java">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/SupplyBuyMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+            <state relative-caret-position="194">
+              <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#701#702#0" expanded="true" />
-                <element signature="e#756#757#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -65,7 +123,7 @@
         <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ReplyMapper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="264">
-              <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+              <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -76,34 +134,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/QuestionController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-end-line="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mapper/ExchangeMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="39">
-              <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/Reply.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#471#472#0" expanded="true" />
-                <element signature="e#386#387#0" expanded="true" />
-                <element signature="e#418#419#0" expanded="true" />
-                <element signature="e#466#467#0" expanded="true" />
-                <element signature="e#508#509#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="507">
+              <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -112,19 +144,7 @@
         <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExchangeMapper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
-              <caret line="13" column="12" lean-forward="true" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/FeedbackMapper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+              <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -137,15 +157,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="342">
               <caret line="25" selection-start-line="25" selection-end-line="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mapper/ReplyMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="94">
-              <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -183,10 +194,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp.java" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/service/UserService.java" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/SmsUtil.java" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/NewCodeUtil.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/config/WebConfig.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/dto/Code.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/Group5Application.java" />
@@ -233,6 +240,11 @@
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExchangeMapper.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/FeedbackMapper.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExchangeController.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/resources/mybatis-generator/generatorConfig.xml" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/SupplyBuy.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/resources/mapper/SupplyBuyMapper.xml" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/SupplyBuyMapper.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/SupplyBuyController.java" />
       </list>
     </option>
   </component>
@@ -260,11 +272,6 @@
         <path>
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
           <item name="group5" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="group5" type="9519ce18:MavenProjectsStructure$ProjectNode" />
           <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
         </path>
         <path>
@@ -282,7 +289,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="30" />
     <option name="y" value="15" />
     <option name="width" value="1940" />
@@ -364,24 +371,6 @@
               <item name="group5" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="group5" type="462c0819:PsiDirectoryNode" />
-              <item name="serviceImp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="group5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="group5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="group5" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="group5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="group5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -398,20 +387,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mybatis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="group5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="group5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="mybatis-generator" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="group5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="group5" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -569,10 +545,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="152535000" />
+    <option name="totallyTimeSpent" value="156527000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49768874" visible="true" weight="0.26923078" />
@@ -585,7 +561,7 @@
       <window_info anchor="bottom" id="Messages" order="0" weight="0.3266564" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.32973805" />
-      <window_info anchor="bottom" id="Run" order="3" weight="0.51155627" />
+      <window_info anchor="bottom" id="Run" order="3" visible="true" weight="0.16795069" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -653,22 +629,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/../maven/maven_jar/com/aliyun/aliyun-java-sdk-dysmsapi/1.1.0/aliyun-java-sdk-dysmsapi-1.1.0.jar!/com/aliyuncs/dysmsapi/model/v20170525/SendSmsResponse.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/WebConfig.java" />
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/config/SwaggerConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="897">
-          <caret line="31" column="49" selection-start-line="31" selection-start-column="49" selection-end-line="31" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/resources/resources/webjars/springfox-swagger-ui/lang/zh-cn.js" />
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/StringUtil.java" />
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/exceptionhandler/PhoneNullException.java" />
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/exceptionhandler/PassNullException.java" />
@@ -799,11 +759,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/mybatis-generator/generatorConfig.xml" />
-    <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mybatis-generator/generatorConfig.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2161" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/UserServiceImp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7410">
@@ -930,7 +885,7 @@
     <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mapper/ReplyMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="94">
-          <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+          <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -961,7 +916,7 @@
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ReplyMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
-          <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+          <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -971,7 +926,7 @@
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExchangeMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
-          <caret line="13" column="12" lean-forward="true" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -980,19 +935,78 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/QuestionController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-end-line="19" />
+        <state relative-caret-position="507">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExchangeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+        <state relative-caret-position="888">
+          <caret line="52" column="36" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#701#702#0" expanded="true" />
-            <element signature="e#756#757#0" expanded="true" />
+            <element signature="e#800#801#0" expanded="true" />
+            <element signature="e#855#856#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mapper/SupplyBuyMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mybatis-generator/generatorConfig.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="77">
+          <caret line="62" column="39" selection-start-line="62" selection-start-column="39" selection-end-line="62" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/SupplyBuyController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/SupplyBuy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-195">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="22" />
+          <folding>
+            <element signature="e#2115#2116#0" expanded="true" />
+            <element signature="e#2144#2145#0" expanded="true" />
+            <element signature="e#2185#2186#0" expanded="true" />
+            <element signature="e#2221#2222#0" expanded="true" />
+            <element signature="e#2256#2257#0" expanded="true" />
+            <element signature="e#2290#2291#0" expanded="true" />
+            <element signature="e#2341#2342#0" expanded="true" />
+            <element signature="e#2387#2388#0" expanded="true" />
+            <element signature="e#2419#2420#0" expanded="true" />
+            <element signature="e#2450#2451#0" expanded="true" />
+            <element signature="e#2495#2496#0" expanded="true" />
+            <element signature="e#2535#2536#0" expanded="true" />
+            <element signature="e#2309#2310#0" expanded="true" />
+            <element signature="e#2338#2339#0" expanded="true" />
+            <element signature="e#2379#2380#0" expanded="true" />
+            <element signature="e#2415#2416#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/SupplyBuyMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
