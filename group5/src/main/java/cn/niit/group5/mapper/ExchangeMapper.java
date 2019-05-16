@@ -11,4 +11,5 @@ import java.util.List;
 public interface ExchangeMapper {
 
     List<Exchange>getExchangeList(int userId);
+    void insertExchange(Exchange exchange);
 }
