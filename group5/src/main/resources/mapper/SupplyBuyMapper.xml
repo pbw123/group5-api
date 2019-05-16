@@ -19,4 +19,8 @@
     <result column="unit" property="unit" jdbcType="VARCHAR" />
   </resultMap>
 
+  <select id="supplyList" resultType="SupplyBuy">
+      SELECT * FROM t_supply_buy WHERE is_supply_buy=0
+  AND is_delete=0
+  </select>
 </mapper>
