@@ -26,6 +26,14 @@ public class SupplyBuyController {
         return supplyBuyMapper.supplyList();
     }
 
+    @ApiOperation(value = "求购列表",notes = "暂时无法上传和显示图片")
+    @GetMapping(value = "seekList")
+    public List<SupplyBuy> supplyBuyList(){
+        return supplyBuyMapper.seekList();
+    }
+
+
+
     @ApiOperation(value = "发布求购")
     @PostMapping(value = "/insertSeek")
     public ResponseResult insertSeek(
@@ -43,6 +51,7 @@ public class SupplyBuyController {
         supplyBuy.setSellerName(sellerName);
         supplyBuy.setSellerPhone(sellerPhone);
         supplyBuy.setIsSupplyBuy(1);
+        supplyBuy.setCreateTime(new Date());
         supplyBuyMapper.insertSeek(supplyBuy);
         return ResponseResult.success();
     }
@@ -65,7 +74,33 @@ public class SupplyBuyController {
         supplyBuy.setSellerName(sellerName);
         supplyBuy.setSellerPhone(sellerPhone);
         supplyBuy.setIsSupplyBuy(0);
+        supplyBuy.setCreateTime(new Date());
         supplyBuyMapper.insertSupply(supplyBuy);
         return ResponseResult.success();
+    }
+
+    @ApiOperation(value = "供应详情")
+    @GetMapping(value = "/SupplyDetail/{id}")
+    public SupplyBuy getSupplyDetail(
+           @PathVariable int id
+    ){
+        return supplyBuyMapper.getSupplyDetail(id);
+    }
+
+    @ApiOperation(value = "求购详情")
+    @GetMapping(value = "/SeekDetail/{id}")
+    public SupplyBuy getSeekDetail(
+            @PathVariable int id
+    ){
+        return supplyBuyMapper.getSeekDetail(id);
+    }
+
+    @ApiOperation(value = "分类查询")
+    @GetMapping(value = "/getSupplyBySort/{sort}")
+    public ResponseResult getSupplyBySort(
+            @PathVariable String sort
+    ){
+        List<SupplyBuy> supplyBuyList=supplyBuyMapper.getSupplyBySort(sort);
+        return ResponseResult.success(supplyBuyList);
     }
 }

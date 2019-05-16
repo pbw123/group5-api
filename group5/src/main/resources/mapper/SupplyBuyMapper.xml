@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.niit.group5.mapper.SupplyBuyMapper" >
+
   <resultMap id="BaseResultMap" type="cn.niit.group5.entity.SupplyBuy" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
@@ -25,11 +26,34 @@
   AND is_delete=0
   </select>
 
+  <select id="seekList" resultType="SupplyBuy">
+      SELECT * FROM t_supply_buy WHERE is_supply_buy=1
+  AND is_delete=0
+  </select>
+
+  <select id="getSupplyDetail" resultType="SupplyBuy">
+      SELECT * FROM t_supply_buy WHERE id=#{id}
+  AND is_delete=0
+  AND is_supply_buy=0
+  </select>
+  <select id="getSeekDetail" resultType="SupplyBuy">
+      SELECT * FROM t_supply_buy WHERE id=#{id}
+  AND is_delete=0
+  AND is_supply_buy=1
+  </select>
+
+  <select id="getSupplyBySort" resultType="SupplyBuy">
+      SELECT * FROM t_supply_buy WHERE sort=#{sort}
+  AND is_delete=0
+  </select>
+
+  
+
   <insert id="insertSeek" parameterType="cn.niit.group5.entity.SupplyBuy">
-    INSERT INTO t_supply_buy(user_id,sort,title,content,unit,amount,price,seller_name,seller_phone,is_supply_buy) VALUES (#{userId},#{sort},#{title},#{content},#{unit},#{amount},#{price},#{sellerName},#{sellerPhone},#{isSupplyBuy})
+    INSERT INTO t_supply_buy(user_id,sort,title,content,unit,amount,price,seller_name,seller_phone,is_supply_buy,create_time) VALUES (#{userId},#{sort},#{title},#{content},#{unit},#{amount},#{price},#{sellerName},#{sellerPhone},#{isSupplyBuy},#{createTime})
   </insert>
 
   <insert id="insertSupply" parameterType="cn.niit.group5.entity.SupplyBuy">
-    INSERT INTO t_supply_buy(user_id,sort,title,content,unit,amount,price,enterprise,seller_name,seller_phone,is_supply_buy) VALUES (#{userId},#{sort},#{title},#{content},#{unit},#{amount},#{price},#{enterprise},#{sellerName},#{sellerPhone},#{isSupplyBuy})
+    INSERT INTO t_supply_buy(user_id,sort,title,content,unit,amount,price,enterprise,seller_name,seller_phone,is_supply_buy,create_time) VALUES (#{userId},#{sort},#{title},#{content},#{unit},#{amount},#{price},#{enterprise},#{sellerName},#{sellerPhone},#{isSupplyBuy},#{createTime})
   </insert>
 </mapper>
