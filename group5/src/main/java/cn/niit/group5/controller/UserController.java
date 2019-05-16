@@ -1,10 +1,12 @@
 package cn.niit.group5.controller;
 
+import cn.niit.group5.entity.Feedback;
 import cn.niit.group5.entity.Question;
 import cn.niit.group5.entity.Reply;
 import cn.niit.group5.entity.User;
 import cn.niit.group5.entity.dto.UserCode;
 import cn.niit.group5.entity.dto.UserDTO;
+import cn.niit.group5.mapper.FeedbackMapper;
 import cn.niit.group5.mapper.QuestionMapper;
 import cn.niit.group5.mapper.ReplyMapper;
 import cn.niit.group5.mapper.UserMapper;
@@ -158,6 +160,26 @@ public class UserController {
     public List<Reply> getMyReplyById(@PathVariable int userId)
     {
         return replyMapper.getMyReplyById(userId);
+    }
+
+    @Autowired
+    private FeedbackMapper feedbackMapper;
+//    意见反馈
+    @ApiOperation(value = "意见反馈",notes = "传入我的用户id和意见内容")
+    @PostMapping(value = "addFeedback")
+    public ResponseResult addFeedback(@RequestParam(required = true) int myUserId,
+                           @RequestParam(required = true) String content)
+    {
+        Feedback feedback=new Feedback();
+        feedback.setContent(content);
+        feedback.setFeedbackTime(new Date());
+        feedback.setUserId(myUserId);
+        int index = feedbackMapper.insert(feedback);
+        if (index==1)
+        {
+            return new ResponseResult().success();
+        }
+        return new ResponseResult(StatusConst.SUCCESS,MsgConst.FAIL);
     }
 }
 

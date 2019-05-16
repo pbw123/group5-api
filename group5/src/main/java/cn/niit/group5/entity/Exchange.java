@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Question implements Serializable {
+public class Exchange implements Serializable {
     private Integer id;
 
     private Integer userId;
@@ -13,11 +13,11 @@ public class Question implements Serializable {
 
     private Date createTime;
 
-    private String sort;
-
-    private Byte isExchangeReply;
+    private Integer like;
 
     private Byte isDelete;
+
+    private User user;
 
     private List<Reply>replies;
 
@@ -27,6 +27,14 @@ public class Question implements Serializable {
 
     public void setReplies(List<Reply> replies) {
         this.replies = replies;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     private static final long serialVersionUID = 1L;
@@ -52,7 +60,6 @@ public class Question implements Serializable {
     }
 
     public void setContent(String content) {
-
         this.content = content == null ? null : content.trim();
     }
 
@@ -64,20 +71,12 @@ public class Question implements Serializable {
         this.createTime = createTime;
     }
 
-    public String getSort() {
-        return sort;
+    public Integer getLike() {
+        return like;
     }
 
-    public void setSort(String sort) {
-        this.sort = sort == null ? null : sort.trim();
-    }
-
-    public Byte getIsExchangeReply() {
-        return isExchangeReply;
-    }
-
-    public void setIsExchangeReply(Byte isExchangeReply) {
-        this.isExchangeReply = isExchangeReply;
+    public void setLike(Integer like) {
+        this.like = like;
     }
 
     public Byte getIsDelete() {
@@ -98,8 +97,7 @@ public class Question implements Serializable {
         sb.append(", userId=").append(userId);
         sb.append(", content=").append(content);
         sb.append(", createTime=").append(createTime);
-        sb.append(", sort=").append(sort);
-        sb.append(", isExchangeReply=").append(isExchangeReply);
+        sb.append(", like=").append(like);
         sb.append(", isDelete=").append(isDelete);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

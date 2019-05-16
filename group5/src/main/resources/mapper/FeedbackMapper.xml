@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.FeedbackMapper" >
+
+
+  <insert id="insert" parameterType="cn.niit.group5.entity.Feedback" >
+    insert into t_feedback (user_id, feedback_time,content)
+    values (#{userId}, #{feedbackTime},#{content})
+  </insert>
+
+</mapper>

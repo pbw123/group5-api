@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.ExchangeMapper" >
+
+  <select id="getExchangeList" parameterType="int" resultMap="exchangeRM">
+   select q.id, q.content,q.user_id quid,r.question_id,u.id
+  from t_question q,t_user u,t_reply r
+  where q.user_id=u.id
+  and r.is_exchange_reply=0
+  and r.is_delete=0
+  and q.is_delete=0
+  </select>
+  <resultMap id="exchangeRM" type="Exchange">
+    <id column="content" property="content"/>
+    <result property="quid" column="userId"/>
+    <association property="user" select="getUserById" column="quid"/>
+    <collection property="replies" column="id" select="getExchangeReplyNumber">
+    </collection>
+  </resultMap>
+  <select id="getUserById" parameterType="int" resultType="user">
+      SELECT u.head_url,u.user_name,u.identity,u.score,u.phone_number,u.user_address
+    FROM t_user u WHERE u.id=#{0}
+  </select>
+<select id="getExchangeReplyNumber" parameterType="int" resultType="int">
+ SELECT COUNT(question_id) q FROM t_reply
+  WHERE question_id=#{0}
+  </select>
+</mapper>
