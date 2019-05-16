@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface FeedbackMapper {
-
+// 添加一条反馈记录
     int insert(Feedback record);
 
 }

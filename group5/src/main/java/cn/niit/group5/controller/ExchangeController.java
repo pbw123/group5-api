@@ -5,6 +5,7 @@ import cn.niit.group5.entity.Reply;
 import cn.niit.group5.mapper.ExchangeMapper;
 import cn.niit.group5.mapper.ReplyMapper;
 import cn.niit.group5.util.ResponseResult;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/exchange")
+@Api(tags = "交流模块")
 public class ExchangeController {
 
     @Autowired
@@ -20,10 +22,10 @@ public class ExchangeController {
     @Autowired
     private ReplyMapper replyMapper;
 
-    @GetMapping(value = "getExchangeList/{userId}")
-    public List<Exchange>getExchangeListByMyId(@PathVariable int userId)
+    @GetMapping(value = "getExchangeList")
+    public List<Exchange>getExchangeListByMyId()
     {
-        return exchangeMapper.getExchangeList(userId);
+        return exchangeMapper.getExchangeList();
     }
 
 
