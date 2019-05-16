@@ -13,6 +13,7 @@
     INSERT INTO t_reply(content,user_id,question_id,reply_time) VALUES (#{content},#{userId},#{questionId},#{replyTime})
 </insert>
     <insert id="insertComment1" parameterType="cn.niit.group5.entity.Reply">
-        INSERT INTO t_reply(content,user_id,exchange_id,is_exchange_reply,reply_time) VALUES (#{content},#{userId},#{exchangeId},#{1},#{replyTime})
+        INSERT INTO t_reply(content,user_id,exchange_id,reply_time,is_exchange_reply) VALUES
+        (#{content},#{userId},#{exchangeId},#{replyTime},#{isExchangeReply})
     </insert>
 </mapper>
