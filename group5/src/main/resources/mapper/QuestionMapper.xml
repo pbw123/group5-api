@@ -18,7 +18,6 @@
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="DATE" />
     <result column="sort" property="sort" jdbcType="VARCHAR" />
-    <result column="is_exchange_reply" property="isExchangeReply" jdbcType="TINYINT" />
     <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
     <collection property="replies" ofType="cn.niit.group5.entity.Reply" select="getRepliesByQuestionId"
                 column="id">
@@ -33,37 +32,65 @@
     select * from t_reply where question_id=#{0}
   </select>
 
-  <select id="getUserById" parameterType="int" resultType="user">
-      SELECT u.head_url,u.user_name,u.identity,u.score,u.phone_number,u.user_address
+  <select id="getUserById" parameterType="int" resultMap="userRM">
+      SELECT u.id,u.head_url,u.user_name,u.identity,u.score,u.phone_number,u.user_address
     FROM t_user u WHERE u.id=#{0}
   </select>
-
-  <select id="getQuestionListByUserId" parameterType="int" resultType="question">
-     SELECT q.id,q.content FROM t_question q WHERE q.user_id=#{0}
+<resultMap id="userRM" type="User">
+    <id column="id" property="id"/>
+    <result column="head_url" property="headUrl"/>
+    <result column="user_name" property="userName"/>
+    <result column="identity" property="identity"/>
+    <result column="phone_number" property="phoneNumber"/>
+    <result column="user_address" property="userAddress"/>
+    <result column="score" property="score"/>
+</resultMap>
+  <select id="getQuestionListByUserId" parameterType="int" resultMap="questionListRM">
+     SELECT q.* FROM t_question q WHERE q.user_id=#{0}
   </select>
+    <resultMap id="questionListRM" type="question" extends="columnProperty">
+         <association property="replyAmount" column="id" select="getReplyAmount">
+         </association>
+    </resultMap>
+
+    <resultMap id="columnProperty" type="question">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="content" property="content"/>
+        <result column="create_time" property="createTime"/>
+        <result column="sort" property="sort"/>
+        <result column="is_delete" property="isDelete"/>
+    </resultMap>
+
+    <select id="getReplyAmount" resultType="int">
+          SELECT COUNT(question_id) replyAmount FROM t_reply r
+  WHERE r.question_id=#{0}
+  AND r.is_exchange_reply=0
+  AND r.is_delete=0
+    </select>
 
   <select id="getQuestionDetail" parameterType="int" resultMap="questionRM">
-     SELECT q.*,r.id rid ,r.user_id ruid,r.content rcon,r.reply_time,r.like,u.head_url,u.user_name,u.user_address,u.identity
+     SELECT q.*,r.id rid ,r.user_id ruid,r.content rcon,r.reply_time,r.like,
+     u.head_url,u.user_name,u.user_address,u.identity
  FROM t_question q,t_reply r,t_user u
   WHERE r.question_id=q.id
   AND q.user_id=u.id
   AND q.id=#{0}
   </select>
-  <resultMap id="questionRM" type="question">
-    <id column="id" property="id"/>
-    <result column="user_id" property="userId"/>
-    <result column="content" property="content"/>
-    <result column="create_time" property="createTime"/>
-    <result column="sort" property="sort"/>
-    <result column="is_exchange_reply" property="isExchangeReply"/>
-    <result column="is_delete" property="isDelete"/>
-    <collection property="replies" ofType="Reply">
+
+
+  <resultMap id="questionRM" type="question" extends="columnProperty">
+      <collection property="replies" ofType="Reply">
       <id column="rid" property="id"/>
       <result column="ruid" property="userId"/>
       <result column="rcon" property="content"/>
       <result column="reply_time" property="replyTime"/>
       <result column="like" property="like"/>
-      <association property="user" select="getUserById" column="ruid">
+      <association property="user" select="getUserById" column="ruid" javaType="User">
+          <result column="user_name" property="userName"/>
+          <result column="user_address" property="userAddress"/>
+          <result column="identity" property="identity"/>
+          <result column="head_url" property="headUrl"/>
       </association>
     </collection>
   </resultMap>

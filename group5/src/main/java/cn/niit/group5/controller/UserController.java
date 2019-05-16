@@ -129,6 +129,10 @@ public class UserController {
     public List<Question>getQuestionList(int userId)
     {
         List<Question> lists = questionMapper.getQuestionListByUserId(userId);
+//        for (Question ls:lists)
+//        {
+//            System.out.println(ls.toString());
+//        }
         return  lists;
     }
 //    问题详情

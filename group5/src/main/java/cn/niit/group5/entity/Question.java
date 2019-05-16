@@ -15,11 +15,22 @@ public class Question implements Serializable {
 
     private String sort;
 
-    private Byte isExchangeReply;
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
+    }
 
-    private Byte isDelete;
+    private int isDelete;
 
     private List<Reply>replies;
+    private int replyAmount;
+
+    public int getReplyAmount() {
+        return replyAmount;
+    }
+
+    public void setReplyAmount(int replyAmount) {
+        this.replyAmount = replyAmount;
+    }
 
     public List<Reply> getReplies() {
         return replies;
@@ -72,20 +83,8 @@ public class Question implements Serializable {
         this.sort = sort == null ? null : sort.trim();
     }
 
-    public Byte getIsExchangeReply() {
-        return isExchangeReply;
-    }
-
-    public void setIsExchangeReply(Byte isExchangeReply) {
-        this.isExchangeReply = isExchangeReply;
-    }
-
-    public Byte getIsDelete() {
+    public int getIsDelete() {
         return isDelete;
-    }
-
-    public void setIsDelete(Byte isDelete) {
-        this.isDelete = isDelete;
     }
 
     @Override
@@ -99,7 +98,6 @@ public class Question implements Serializable {
         sb.append(", content=").append(content);
         sb.append(", createTime=").append(createTime);
         sb.append(", sort=").append(sort);
-        sb.append(", isExchangeReply=").append(isExchangeReply);
         sb.append(", isDelete=").append(isDelete);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
