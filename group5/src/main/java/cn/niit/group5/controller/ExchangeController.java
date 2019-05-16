@@ -50,6 +50,7 @@ public class ExchangeController {
             @RequestParam(required = true)  byte exchangeId
     ){
         Reply reply=new Reply();
+        reply.setIsExchangeReply(1);
         reply.setUserId(userId);
         reply.setContent(content);
         reply.setExchangeId(exchangeId);
