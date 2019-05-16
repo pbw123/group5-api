@@ -67,5 +67,7 @@
       </association>
     </collection>
   </resultMap>
-
+    <insert id="insertQuestion" parameterType="cn.niit.group5.entity.Question">
+    INSERT INTO t_question(user_id,content,create_time,sort) VALUES (#{userId},#{content},#{createTime},#{sort})
+  </insert>
 </mapper>

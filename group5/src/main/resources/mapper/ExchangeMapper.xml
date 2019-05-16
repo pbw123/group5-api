@@ -25,4 +25,7 @@
  SELECT COUNT(question_id) q FROM t_reply
   WHERE question_id=#{0}
   </select>
+    <insert id="insertExchange" parameterType="cn.niit.group5.entity.Exchange">
+   INSERT INTO t_exchange(user_id,content,create_time) VALUES (#{userId},#{content},#{createTime})
+ </insert>
 </mapper>

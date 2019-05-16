@@ -20,6 +20,16 @@ public class Reply implements Serializable {
 
     private User user;
 
+    private Integer isExchangeReply;
+
+    public Integer getIsExchangeReply() {
+        return isExchangeReply;
+    }
+
+    public void setIsExchangeReply(Integer isExchangeReply) {
+        this.isExchangeReply = isExchangeReply;
+    }
+
     public Date getReplyTime() {
         return replyTime;
     }

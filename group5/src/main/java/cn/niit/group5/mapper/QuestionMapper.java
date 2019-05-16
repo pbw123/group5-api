@@ -24,4 +24,6 @@ public interface QuestionMapper {
     //根据id查询想添加的用户信息
     User getUserById(int userId);
 
+    //    发布一条提问
+    void insertQuestion(Question question);
 }
