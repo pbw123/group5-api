@@ -5,6 +5,7 @@ import cn.niit.group5.entity.Reply;
 import cn.niit.group5.mapper.ExchangeMapper;
 import cn.niit.group5.mapper.ReplyMapper;
 import cn.niit.group5.util.ResponseResult;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +26,12 @@ public class ExchangeController {
     {
         return exchangeMapper.getExchangeList(userId);
     }
-
-
+/*
+*
+* 发布一条交流
+*
+*/
+    @ApiOperation(value = "发表交流")
     @PostMapping(value = "/add")
     public ResponseResult addExchange(
             @RequestParam(required = true) int userId,
@@ -43,6 +48,7 @@ public class ExchangeController {
     /*
      * 发表评论
      * */
+    @ApiOperation(value = "在交流中发表评论")
     @PostMapping(value = "/reply")
     public ResponseResult replyExchange(
             @RequestParam(required = true) int userId,

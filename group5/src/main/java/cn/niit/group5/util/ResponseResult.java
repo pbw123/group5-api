@@ -42,5 +42,6 @@ public class ResponseResult {
     public ResponseResult(int code, String msg) {
         this.code = code;
         this.msg = msg;
+
     }
 }

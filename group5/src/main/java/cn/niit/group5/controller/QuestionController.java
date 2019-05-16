@@ -6,6 +6,7 @@ import cn.niit.group5.mapper.QuestionMapper;
 import cn.niit.group5.mapper.ReplyMapper;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +27,10 @@ public class QuestionController {
 
     /*
      *
-     * 发表提问
+     * 发表一条提问
      *
      */
+    @ApiOperation(value = "发布一条提问")
     @PostMapping(value = "/add")
     public ResponseResult addQuestion(
             @RequestParam(required = true) int userId,
@@ -49,6 +51,7 @@ public class QuestionController {
      * 发表评论
      *
      */
+    @ApiOperation(value = "在提问中发表评论")
     @PostMapping(value = "/reply")
     public ResponseResult replyQuestion(
             @RequestParam(required = true) int userId,
