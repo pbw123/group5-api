@@ -21,10 +21,6 @@
       SELECT u.head_url,u.user_name,u.identity,u.score,u.phone_number,u.user_address
     FROM t_user u WHERE u.id=#{0}
   </select>
-<select id="getExchangeReplyNumber" parameterType="int" resultType="int">
- SELECT COUNT(question_id) q FROM t_reply
-  WHERE question_id=#{0}
-  </select>
     <insert id="insertExchange" parameterType="cn.niit.group5.entity.Exchange">
    INSERT INTO t_exchange(user_id,content,create_time) VALUES (#{userId},#{content},#{createTime})
  </insert>

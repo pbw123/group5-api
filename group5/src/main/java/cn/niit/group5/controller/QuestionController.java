@@ -23,9 +23,9 @@ import java.util.Date;
 @RequestMapping(value = "/api/question")
 public class QuestionController {
     @Autowired
-    QuestionMapper questionMapper;
+    private QuestionMapper questionMapper;
     @Autowired
-    ReplyMapper replyMapper;
+    private ReplyMapper replyMapper;
 
     /*
      *
@@ -71,7 +71,7 @@ public class QuestionController {
     }
 
     @Autowired
-    CollectionMapper collectionMapper;
+    private CollectionMapper collectionMapper;
 
     //  收藏问答
     @ApiOperation(value = "收藏问答")

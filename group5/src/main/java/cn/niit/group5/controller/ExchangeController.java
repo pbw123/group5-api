@@ -18,13 +18,12 @@ import java.util.List;
 @RequestMapping(value = "/api/exchange")
 @Api(tags = "交流模块")
 public class ExchangeController {
-
     @Autowired
     private ExchangeMapper exchangeMapper;
     @Autowired
     private ReplyMapper replyMapper;
     @Autowired
-    CollectionMapper collectionMapper;
+    private CollectionMapper collectionMapper;
 
     @GetMapping(value = "getExchangeList")
     public List<Exchange> getExchangeListByMyId()
