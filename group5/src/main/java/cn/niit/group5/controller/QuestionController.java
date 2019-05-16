@@ -1,7 +1,9 @@
 package cn.niit.group5.controller;
 
+import cn.niit.group5.entity.Collection;
 import cn.niit.group5.entity.Question;
 import cn.niit.group5.entity.Reply;
+import cn.niit.group5.mapper.CollectionMapper;
 import cn.niit.group5.mapper.QuestionMapper;
 import cn.niit.group5.mapper.ReplyMapper;
 import cn.niit.group5.util.ResponseResult;
@@ -66,5 +68,22 @@ public class QuestionController {
         reply.setReplyTime(new Date());
         replyMapper.insertComment(reply);
         return ResponseResult.success(reply.getId());
+    }
+
+    @Autowired
+    CollectionMapper collectionMapper;
+
+    //  收藏问答
+    @ApiOperation(value = "收藏问答")
+    @PostMapping(value = "/collectQuestion")
+    public ResponseResult CollectQuestion(
+            @RequestParam(required = true) int userId,
+            @RequestParam(required = true) int questionId
+    ){
+        Collection collection=new Collection();
+        collection.setUserId(userId);
+        collection.setQuestionId(questionId);
+        collectionMapper.collectQuestion(collection);
+        return ResponseResult.success();
     }
 }

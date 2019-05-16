@@ -1,15 +1,9 @@
 package cn.niit.group5.controller;
 
-import cn.niit.group5.entity.Feedback;
-import cn.niit.group5.entity.Question;
-import cn.niit.group5.entity.Reply;
-import cn.niit.group5.entity.User;
+import cn.niit.group5.entity.*;
 import cn.niit.group5.entity.dto.UserCode;
 import cn.niit.group5.entity.dto.UserDTO;
-import cn.niit.group5.mapper.FeedbackMapper;
-import cn.niit.group5.mapper.QuestionMapper;
-import cn.niit.group5.mapper.ReplyMapper;
-import cn.niit.group5.mapper.UserMapper;
+import cn.niit.group5.mapper.*;
 import cn.niit.group5.serviceImp.UserServiceImp;
 import cn.niit.group5.util.MsgConst;
 import cn.niit.group5.util.RegexUtil;
@@ -33,6 +27,7 @@ public class UserController {
     private UserServiceImp userServiceImp;
     @Autowired
     private UserMapper userMapper;
+
 
     /**
      * 登录
@@ -181,6 +176,7 @@ public class UserController {
         }
         return new ResponseResult(StatusConst.SUCCESS,MsgConst.FAIL);
     }
+
 }
 
 

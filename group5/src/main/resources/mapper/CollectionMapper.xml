@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.CollectionMapper" >
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Collection" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="question_id" property="questionId" jdbcType="INTEGER" />
+    <result column="exchange_id" property="exchangeId" jdbcType="INTEGER" />
+    <result column="news_id" property="newsId" jdbcType="INTEGER" />
+    <result column="video" property="video" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+
+
+<insert id="collectQuestion" parameterType="cn.niit.group5.entity.Collection">
+  INSERT INTO t_collection(user_id,question_id) VALUES (#{userId},#{questionId})
+</insert>
+
+  <insert id="collectExchange" parameterType="cn.niit.group5.entity.Collection">
+  INSERT INTO t_collection(user_id,exchange_id) VALUES (#{userId},#{exchangeId})
+</insert>
+</mapper>

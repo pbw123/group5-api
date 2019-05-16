@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public interface ExchangeMapper {
 //   所有交流文章
-    List<Exchange>getExchangeList();
+    List<Exchange> getExchangeList();
 //    发布一条交流
     void insertExchange(Exchange exchange);
 }

@@ -1,7 +1,9 @@
 package cn.niit.group5.controller;
 
+import cn.niit.group5.entity.Collection;
 import cn.niit.group5.entity.Exchange;
 import cn.niit.group5.entity.Reply;
+import cn.niit.group5.mapper.CollectionMapper;
 import cn.niit.group5.mapper.ExchangeMapper;
 import cn.niit.group5.mapper.ReplyMapper;
 import cn.niit.group5.util.ResponseResult;
@@ -9,7 +11,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Date;
 import java.util.List;
 
@@ -22,9 +23,11 @@ public class ExchangeController {
     private ExchangeMapper exchangeMapper;
     @Autowired
     private ReplyMapper replyMapper;
+    @Autowired
+    CollectionMapper collectionMapper;
 
     @GetMapping(value = "getExchangeList")
-    public List<Exchange>getExchangeListByMyId()
+    public List<Exchange> getExchangeListByMyId()
     {
         return exchangeMapper.getExchangeList();
     }
@@ -65,5 +68,20 @@ public class ExchangeController {
         reply.setReplyTime(new Date());
         replyMapper.insertComment1(reply);
         return ResponseResult.success(reply.getId());
+    }
+
+
+    //  收藏交流
+    @ApiOperation(value = "收藏交流")
+    @PostMapping(value = "/collectExchange")
+    public ResponseResult CollectExchange(
+            @RequestParam(required = true) int userId,
+            @RequestParam(required = true) int exchangeId
+    ){
+        Collection collection=new Collection();
+        collection.setUserId(userId);
+        collection.setExchangeId(exchangeId);
+        collectionMapper.collectExchange(collection);
+        return ResponseResult.success();
     }
 }
