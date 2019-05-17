@@ -22,7 +22,9 @@ public class Question implements Serializable {
     private int isDelete;
 
     private List<Reply>replies;
+
     private int replyAmount;
+
 
     public int getReplyAmount() {
         return replyAmount;

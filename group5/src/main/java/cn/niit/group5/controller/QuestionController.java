@@ -1,8 +1,10 @@
 package cn.niit.group5.controller;
 
+import cn.niit.group5.entity.Attention;
 import cn.niit.group5.entity.Collection;
 import cn.niit.group5.entity.Question;
 import cn.niit.group5.entity.Reply;
+import cn.niit.group5.mapper.AttentionMapper;
 import cn.niit.group5.mapper.CollectionMapper;
 import cn.niit.group5.mapper.QuestionMapper;
 import cn.niit.group5.mapper.ReplyMapper;
@@ -84,6 +86,22 @@ public class QuestionController {
         collection.setUserId(userId);
         collection.setQuestionId(questionId);
         collectionMapper.collectQuestion(collection);
+        return ResponseResult.success();
+    }
+
+    @Autowired
+    private AttentionMapper attentionMapper;
+    //关注提问
+    @ApiOperation(value = "关注提问")
+    @PostMapping(value = "/attentionQuestion")
+    public ResponseResult attentionQuestion(
+            @RequestParam(required = true) int userId,
+            @RequestParam(required = true) int questionId
+    ){
+        Attention attention=new Attention();
+        attention.setUserId(userId);
+//        attention.setQuestionId(questionId);
+        attentionMapper.attentionQuestion(attention);
         return ResponseResult.success();
     }
 }

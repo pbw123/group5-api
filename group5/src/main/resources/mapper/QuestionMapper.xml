@@ -34,7 +34,7 @@
 
   <select id="getUserById" parameterType="int" resultMap="userRM">
       SELECT u.id,u.head_url,u.user_name,u.identity,u.score,u.phone_number,u.user_address
-    FROM t_user u WHERE u.id=#{0}
+    FROM t_user u WHERE u.id=#{id}
   </select>
 <resultMap id="userRM" type="User">
     <id column="id" property="id"/>
