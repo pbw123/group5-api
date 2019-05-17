@@ -1,9 +1,15 @@
 package cn.niit.group5.controller;
 
-import cn.niit.group5.entity.*;
+import cn.niit.group5.entity.Feedback;
+import cn.niit.group5.entity.Question;
+import cn.niit.group5.entity.Reply;
+import cn.niit.group5.entity.User;
 import cn.niit.group5.entity.dto.UserCode;
 import cn.niit.group5.entity.dto.UserDTO;
-import cn.niit.group5.mapper.*;
+import cn.niit.group5.mapper.FeedbackMapper;
+import cn.niit.group5.mapper.QuestionMapper;
+import cn.niit.group5.mapper.ReplyMapper;
+import cn.niit.group5.mapper.UserMapper;
 import cn.niit.group5.serviceImp.UserServiceImp;
 import cn.niit.group5.util.MsgConst;
 import cn.niit.group5.util.RegexUtil;
@@ -17,11 +23,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
-import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
-
 @RestController
 @Api(tags = "用户模块")
-@RequestMapping(value = "/api/user", produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/user")
 public class UserController {
     @Autowired
     private UserServiceImp userServiceImp;
