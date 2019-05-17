@@ -26,4 +26,6 @@ public interface QuestionMapper {
 
     //    发布一条提问
     void insertQuestion(Question question);
+
+
 }

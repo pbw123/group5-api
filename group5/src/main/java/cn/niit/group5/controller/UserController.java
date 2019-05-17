@@ -182,6 +182,17 @@ public class UserController {
         return new ResponseResult(StatusConst.SUCCESS,MsgConst.FAIL);
     }
 
+    @Autowired
+    private AttentionMapper attentionMapper;
+
+    //我的关注列表
+    @ApiOperation(value = "我的关注列表",notes = "根据我的用户id显示出我关注的问题")
+    @GetMapping(value = "/getAttentionByUserId")
+    public List<Attention> getAttentionList(int userId){
+        List<Attention> lists=attentionMapper.getAttentionByUserId(userId);
+        return lists;
+    }
+
 }
 
 

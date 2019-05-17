@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.AttentionMapper" >
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Attention" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="question_id" property="questionId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+
+  <insert id="attentionQuestion" parameterType="cn.niit.group5.entity.Attention">
+    INSERT INTO t_attention(user_id,question_id) VALUES (#{userId},#{questionId})
+  </insert>
+
+  <select id="getAttentionByUserId" parameterType="int" resultMap="attentionsRM">
+     SELECT a.id,a.user_id,a.question_id,q.id qid,q.user_id quid,q.content,q.create_time,q.sort
+     FROM t_attention a,t_question q WHERE a.question_id=q.id AND a.user_id=#{userId}
+  </select>
+
+  <resultMap id="attentionsRM" type="cn.niit.group5.entity.Attention">
+    <id column="id" property="id" />
+    <result column="user_id" property="userId"/>
+    <result column="question_id" property="questionId"/>
+    <association property="question" javaType="Question">
+      <id column="qid" property="id"/>
+      <result column="quid" property="userId"/>
+      <result column="content" property="content"/>
+      <result column="create_time" property="createTime"/>
+      <result column="sort" property="sort"/>
+    </association>
+
+  </resultMap>
+
+
+
+
+</mapper>
