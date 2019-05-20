@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.niit.group5.mapper.ExchangeMapper" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.ExchangeMapper">
 
-  <select id="getExchangeList" resultMap="exchangeRM">
+
+    <select id="getExchangeList" resultMap="exchangeRM">
     SELECT e.id, e.content,e.user_id euid,e.create_time,e.like
   FROM t_exchange e,t_user u
   WHERE
   e.user_id=u.id
   AND e.is_delete=0
   </select>
-  <resultMap id="exchangeRM" type="Exchange">
-    <id column="id" property="id"/>
-    <result property="euid" column="userId"/>
-    <association property="user" select="cn.niit.group5.mapper.QuestionMapper.getUserById" column="euid"/>
-    <association property="replyAmount" column="id" select="getReplyAmount">
-    </association>
-  </resultMap>
-  <select id="getReplyAmount" resultType="int">
- SELECT COUNT(exchange_id) replyAmount FROM t_reply r
+
+    <resultMap id="exchangeRM" type="Exchange">
+        <id column="id" property="id"/>
+        <result column="euid" property="userId"/>
+        <association property="user" select="cn.niit.group5.mapper.QuestionMapper.getUserById"
+                     column="euid">
+        </association>
+        <association property="replyAmount" column="id" select="getExchangeReplyNumber">
+        </association>
+    </resultMap>
+    <select id="getExchangeReplyNumber" resultType="int">
+          SELECT COUNT(exchange_id) replyAmount FROM t_reply r
   WHERE r.exchange_id=#{0}
   AND r.is_exchange_reply=1
   AND r.is_delete=0
-
     </select>
+
     <insert id="insertExchange" parameterType="cn.niit.group5.entity.Exchange">
    INSERT INTO t_exchange(user_id,content,create_time) VALUES (#{userId},#{content},#{createTime})
  </insert>
