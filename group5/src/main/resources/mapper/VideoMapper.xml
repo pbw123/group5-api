@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.VideoMapper" >
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Video" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="video_title" property="videoTitle" jdbcType="VARCHAR" />
+    <result column="relation_module" property="relationModule" jdbcType="INTEGER" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
+    <result column="video_sort" property="videoSort" jdbcType="INTEGER" />
+    <result column="read_number" property="readNumber" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="review_state" property="reviewState" jdbcType="INTEGER" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="selectVideo" parameterType="cn.niit.group5.entity.Video" resultMap="BaseResultMap">
+    SELECT * FROM t_video WHERE is_delete=0
+  </select>
+
+</mapper>

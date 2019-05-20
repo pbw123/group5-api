@@ -12,4 +12,5 @@ public interface ExchangeMapper {
     List<Exchange> getExchangeList();
 //    发布一条交流
     void insertExchange(Exchange exchange);
+
 }

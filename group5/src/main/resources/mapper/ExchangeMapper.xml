@@ -3,24 +3,26 @@
 <mapper namespace="cn.niit.group5.mapper.ExchangeMapper" >
 
   <select id="getExchangeList" resultMap="exchangeRM">
-   select e.id, e.content,e.user_id euid,r.question_id,u.id
-  from t_exchange e,t_user u,t_reply r
-  where e.user_id=u.id
-  and r.is_exchange_reply=0
-  and r.is_delete=0
-  and e.is_delete=0
+    SELECT e.id, e.content,e.user_id euid,e.create_time,e.like
+  FROM t_exchange e,t_user u
+  WHERE
+  e.user_id=u.id
+  AND e.is_delete=0
   </select>
   <resultMap id="exchangeRM" type="Exchange">
-    <id column="content" property="content"/>
+    <id column="id" property="id"/>
     <result property="euid" column="userId"/>
-    <association property="user" select="getUserById" column="euid"/>
-    <collection property="replies" column="id" select="getExchangeReplyNumber">
-    </collection>
+    <association property="user" select="cn.niit.group5.mapper.QuestionMapper.getUserById" column="euid"/>
+    <association property="replyAmount" column="id" select="getReplyAmount">
+    </association>
   </resultMap>
-  <select id="getUserById" parameterType="int" resultType="user">
-      SELECT u.head_url,u.user_name,u.identity,u.score,u.phone_number,u.user_address
-    FROM t_user u WHERE u.id=#{0}
-  </select>
+  <select id="getReplyAmount" resultType="int">
+ SELECT COUNT(exchange_id) replyAmount FROM t_reply r
+  WHERE r.exchange_id=#{0}
+  AND r.is_exchange_reply=1
+  AND r.is_delete=0
+
+    </select>
     <insert id="insertExchange" parameterType="cn.niit.group5.entity.Exchange">
    INSERT INTO t_exchange(user_id,content,create_time) VALUES (#{userId},#{content},#{createTime})
  </insert>

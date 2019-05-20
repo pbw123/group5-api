@@ -2,8 +2,11 @@ package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.News;
 import cn.niit.group5.entity.TechnologySort;
+import cn.niit.group5.entity.Video;
 import cn.niit.group5.mapper.NewsMapper;
 import cn.niit.group5.mapper.TechnologySortMapper;
+import cn.niit.group5.mapper.VideoMapper;
+import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,8 @@ public class NewsController {
     private NewsMapper newsMapper;
     @Autowired
     private TechnologySortMapper  technologySortMapper;
+    @Autowired
+    private VideoMapper videoMapper;
 
     @ApiOperation(value = "港城要闻",notes = "港城要闻的资讯")
     @GetMapping(value = "yaowen")
@@ -46,14 +51,27 @@ public class NewsController {
 
     @ApiOperation(value = "基层风采中的农技人员",notes = "点击基层风采中的农技人员发起这个请求")
     @GetMapping(value = "personnelNews")
-    public List<News> personnelNews()
-    {
+    public List<News> personnelNews() {
         return newsMapper.selectAllBySortId(4);
     }
+
     @ApiOperation(value = "农业科技",notes = "点击农业科技发起这个请求")
     @GetMapping(value = "farmingTechnologySort")
     public List<TechnologySort> farmingTechnologySort()
     {
         return technologySortMapper.selectAll();
+    }
+
+    @ApiOperation(value ="头条" )
+    @GetMapping(value = "/selectLeadNews")
+    public List<News> selectLeadNews(){
+        return newsMapper.selectAllBySortId(5);
+    }
+
+    @ApiOperation(value ="视频" )
+    @GetMapping(value = "/selectVideo")
+    public ResponseResult selectVideo(){
+    List<Video> list=videoMapper.selectVideo();
+    return ResponseResult.success(list);
     }
 }

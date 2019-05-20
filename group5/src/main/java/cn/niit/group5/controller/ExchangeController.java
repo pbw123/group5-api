@@ -25,6 +25,7 @@ public class ExchangeController {
     @Autowired
     private CollectionMapper collectionMapper;
 
+    @ApiOperation(value = "所有交流文章")
     @GetMapping(value = "getExchangeList")
     public List<Exchange> getExchangeListByMyId()
     {

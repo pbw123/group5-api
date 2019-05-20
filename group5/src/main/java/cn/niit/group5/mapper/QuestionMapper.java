@@ -15,6 +15,8 @@ public interface QuestionMapper {
     //    根据用户id查询我的所有提问
     List<Question> selectAllByUserId(int id);
 
+    //所有的提问
+    List<Question> getQuestionList();
 
     //我的提问列表
     List<Question> getQuestionListByUserId(int userId);

@@ -32,19 +32,11 @@
     select * from t_reply where question_id=#{0}
   </select>
 
-  <select id="getUserById" parameterType="int" resultMap="userRM">
+  <select id="getUserById" parameterType="int" resultMap="cn.niit.group5.mapper.UserMapper.BaseResultMap">
       SELECT u.id,u.head_url,u.user_name,u.identity,u.score,u.phone_number,u.user_address
     FROM t_user u WHERE u.id=#{id}
   </select>
-<resultMap id="userRM" type="User">
-    <id column="id" property="id"/>
-    <result column="head_url" property="headUrl"/>
-    <result column="user_name" property="userName"/>
-    <result column="identity" property="identity"/>
-    <result column="phone_number" property="phoneNumber"/>
-    <result column="user_address" property="userAddress"/>
-    <result column="score" property="score"/>
-</resultMap>
+
   <select id="getQuestionListByUserId" parameterType="int" resultMap="questionListRM">
      SELECT q.* FROM t_question q WHERE q.user_id=#{0}
   </select>
@@ -97,5 +89,6 @@
     <insert id="insertQuestion" parameterType="cn.niit.group5.entity.Question" useGeneratedKeys ="true" keyProperty = "id" keyColumn = "id">
     INSERT INTO t_question(user_id,content,create_time,sort) VALUES (#{userId},#{content},#{createTime},#{sort})
   </insert>
+
 
 </mapper>

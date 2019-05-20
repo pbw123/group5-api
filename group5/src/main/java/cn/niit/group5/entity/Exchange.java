@@ -21,6 +21,16 @@ public class Exchange implements Serializable {
 
     private List<Reply>replies;
 
+    private int replyAmount;
+
+    public int getReplyAmount() {
+        return replyAmount;
+    }
+
+    public void setReplyAmount(int replyAmount) {
+        this.replyAmount = replyAmount;
+    }
+
     public List<Reply> getReplies() {
         return replies;
     }
