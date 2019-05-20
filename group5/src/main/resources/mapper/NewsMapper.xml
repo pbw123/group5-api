@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.NewsMapper" >
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.News" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="read_number" property="readNumber" jdbcType="INTEGER" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="news_sort_id" property="newsSortId" jdbcType="INTEGER" />
+    <result column="animal_sort_id" property="animalSortId" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="review_status" property="reviewStatus" jdbcType="INTEGER" />
+    <result column="is_top" property="isTop" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+</mapper>
