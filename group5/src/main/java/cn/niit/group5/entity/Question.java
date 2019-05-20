@@ -25,6 +25,17 @@ public class Question implements Serializable {
 
     private int replyAmount;
 
+    private List<Img> imgs;
+
+    public List<Img> getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(List<Img> imgs) {
+        this.imgs = imgs;
+    }
+
+
 
     public int getReplyAmount() {
         return replyAmount;

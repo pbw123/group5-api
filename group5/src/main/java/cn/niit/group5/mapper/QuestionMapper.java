@@ -3,6 +3,7 @@ package cn.niit.group5.mapper;
 import cn.niit.group5.entity.Question;
 import cn.niit.group5.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,6 +24,11 @@ public interface QuestionMapper {
 
     //根据id查询想添加的用户信息
     User getUserById(int userId);
+
+
+
+    //返回自己自增长的主键字段值
+   // @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
 
     //    发布一条提问
     void insertQuestion(Question question);

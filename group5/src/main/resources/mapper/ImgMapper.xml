@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.ImgMapper" >
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Img" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="is_judge" property="isJudge" jdbcType="INTEGER" />
+    <result column="question_id" property="questionId" jdbcType="INTEGER" />
+    <result column="exchange_id" property="exchangeId" jdbcType="INTEGER" />
+    <result column="img_url" property="imgUrl" jdbcType="LONGVARCHAR" />
+  </resultMap>
+ <insert id="insertQuestionImg" parameterType="cn.niit.group5.entity.Img">
+   INSERT INTO t_img(is_judge,question_id,img_url) VALUES (#{isJudge},#{questionId},#{imgUrl})
+ </insert>
+</mapper>

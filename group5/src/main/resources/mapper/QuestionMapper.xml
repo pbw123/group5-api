@@ -94,7 +94,8 @@
       </association>
     </collection>
   </resultMap>
-    <insert id="insertQuestion" parameterType="cn.niit.group5.entity.Question">
+    <insert id="insertQuestion" parameterType="cn.niit.group5.entity.Question" useGeneratedKeys ="true" keyProperty = "id" keyColumn = "id">
     INSERT INTO t_question(user_id,content,create_time,sort) VALUES (#{userId},#{content},#{createTime},#{sort})
   </insert>
+
 </mapper>
