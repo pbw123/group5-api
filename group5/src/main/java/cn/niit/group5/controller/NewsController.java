@@ -1,8 +1,10 @@
 package cn.niit.group5.controller;
 
+import cn.niit.group5.entity.Animal;
 import cn.niit.group5.entity.News;
 import cn.niit.group5.entity.TechnologySort;
 import cn.niit.group5.entity.Video;
+import cn.niit.group5.mapper.AnimalMapper;
 import cn.niit.group5.mapper.NewsMapper;
 import cn.niit.group5.mapper.TechnologySortMapper;
 import cn.niit.group5.mapper.VideoMapper;
@@ -11,6 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -74,4 +77,20 @@ public class NewsController {
     List<Video> list=videoMapper.selectVideo();
     return ResponseResult.success(list);
     }
+
+    @Autowired
+    private AnimalMapper animalMapper;
+        @ApiOperation(value = "知识库的畜禽品种库")
+    @GetMapping(value = "getAnimalKindList")
+    public List<Animal>getAnimalKindList()
+        {
+            return animalMapper.selectAllAnimal();
+        }
+
+        @ApiOperation(value = "根据畜禽查看相关资讯文章",notes = "需要传入畜禽种类的id")
+        @GetMapping(value = "getNewsListByAnimalId/{id}")
+    public List<News>getNewsListByAnimalId(@PathVariable int id)
+        {
+            return animalMapper.AnimalNews(id);
+        }
 }

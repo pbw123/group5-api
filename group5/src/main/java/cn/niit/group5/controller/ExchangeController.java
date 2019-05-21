@@ -7,11 +7,14 @@ import cn.niit.group5.mapper.CollectionMapper;
 import cn.niit.group5.mapper.ExchangeMapper;
 import cn.niit.group5.mapper.ImgMapper;
 import cn.niit.group5.mapper.ReplyMapper;
+import cn.niit.group5.util.MsgConst;
 import cn.niit.group5.util.ResponseResult;
-import io.swagger.annotations.ApiOperation;
+import cn.niit.group5.util.StatusConst;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Date;
 import java.util.List;
 
@@ -97,6 +100,18 @@ public class ExchangeController {
          public List<Exchange>getMyExchangeList(@PathVariable int userId)
         {
             return exchangeMapper.getExchangeListByUserId(userId);
+        }
+
+        @ApiOperation(value = "删除我的交流文章",notes = "需要传入该交流文章的id")
+        @GetMapping(value = "deleteExchange/{exchangeId}")
+         public ResponseResult deleteExchange(@PathVariable int exchangeId)
+        {
+            if (exchangeMapper.deleteMyExchange(exchangeId)==1)
+            {
+                return new  ResponseResult(StatusConst.SUCCESS, MsgConst.SUCCESS);
+            }else {
+                return new ResponseResult(StatusConst.ERROR, MsgConst.FAIL);
+            }
         }
 
 }

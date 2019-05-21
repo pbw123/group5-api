@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.AnimalMapper" >
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Animal" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sort_name" property="sortName" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+  </resultMap>
+</mapper>
