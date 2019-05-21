@@ -19,4 +19,6 @@ public interface CollectionMapper {
     List<Collection> getCollectExchangeById(int userId);
     //通过用户id遍历收藏的资讯
     List<Collection> getCollectNewsById(int userId);
+    //通过用户id遍历收藏的视频
+    List<Collection> getCollectVideoById(int userId);
 }

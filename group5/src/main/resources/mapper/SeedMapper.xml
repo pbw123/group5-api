@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.SeedMapper" >
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Seed" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="crop_name" property="cropName" jdbcType="VARCHAR" />
+    <result column="kind" property="kind" jdbcType="VARCHAR" />
+    <result column="review_time" property="reviewTime" jdbcType="VARCHAR" />
+    <result column="is_transgenic" property="isTransgenic" jdbcType="VARCHAR" />
+    <result column="is_exit" property="isExit" jdbcType="VARCHAR" />
+    <result column="agency" property="agency" jdbcType="VARCHAR" />
+    <result column="unit_name" property="unitName" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="feature" property="feature" jdbcType="VARCHAR" />
+    <result column="output" property="output" jdbcType="VARCHAR" />
+    <result column="foster" property="foster" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+  </resultMap>
+
+  <select id="getCropNameList" resultMap="BaseResultMap">
+    SELECT id,crop_name
+     FROM t_seed WHERE is_delete=0
+  </select>
+
+  <select id="getSeedByCropName" resultMap="BaseResultMap" parameterType="String">
+    SELECT * FROM t_seed WHERE is_delete=0 AND crop_name=#{cropName}
+  </select>
+
+</mapper>

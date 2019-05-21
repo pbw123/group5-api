@@ -17,8 +17,6 @@ public class Collection implements Serializable {
 
     private Byte status;
 
-    private int replyAmount;
-
     private Question question;
 
     private Exchange exchange;
@@ -26,6 +24,16 @@ public class Collection implements Serializable {
     private News news;
 
     private User user;
+
+    private Video videos;
+
+    public Video getVideos() {
+        return videos;
+    }
+
+    public void setVideos(Video videos) {
+        this.videos = videos;
+    }
 
     public News getNews() {
         return news;
@@ -60,13 +68,7 @@ public class Collection implements Serializable {
 
 
 
-    public int getReplyAmount() {
-        return replyAmount;
-    }
 
-    public void setReplyAmount(int replyAmount) {
-        this.replyAmount = replyAmount;
-    }
     public Integer getId() {
         return id;
     }

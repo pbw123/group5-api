@@ -213,6 +213,32 @@ public class UserController {
       List<Collection>  collectionList = collectionMapper.getCollectNewsById(userId);
       return collectionList;
     }
+    //我的收藏-视频
+    @ApiOperation(value = "我的收藏-视频",notes = "根据我的用户id显示出我收藏的视频")
+    @GetMapping(value = "/getCollectVideoById")
+    public List<Collection> getCollectVideo(int userId) {
+      List<Collection>  collectionList = collectionMapper.getCollectVideoById(userId);
+      return collectionList;
+    }
+
+    @Autowired
+    private SupplyBuyMapper supplyBuyMapper;
+
+    //我的供应
+    @ApiOperation(value = "我的供应",notes = "根据我的用户id显示出我的供应列表")
+    @GetMapping(value = "/getSupplyById")
+    public List<SupplyBuy> getSupply(int userId){
+        List<SupplyBuy> supplyBuyList=supplyBuyMapper.getSupplyById(userId);
+        return  supplyBuyList;
+    }
+
+    //我的求购
+    @ApiOperation(value = "我的求购",notes = "根据我的用户id显示出我的求购列表")
+    @GetMapping(value = "/getSeekById")
+    public List<SupplyBuy> getSeek(int userId){
+        List<SupplyBuy> supplyBuyList=supplyBuyMapper.getSeekById(userId);
+        return  supplyBuyList;
+    }
 }
 
 

@@ -30,4 +30,9 @@ public interface SupplyBuyMapper {
     //分类查询
     List<SupplyBuy> getSupplyBySort(String sort);
 
+    //我的供应
+    List<SupplyBuy> getSupplyById(int userId);
+
+    //我的求购
+    List<SupplyBuy> getSeekById(int userId);
 }

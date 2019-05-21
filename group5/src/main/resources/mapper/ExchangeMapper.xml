@@ -31,6 +31,7 @@
         <association property="replyAmount" column="id" select="getExchangeReplyNumber">
         </association>
     </resultMap>
+
     <select id="getExchangeReplyNumber" resultType="int">
           SELECT COUNT(exchange_id) replyAmount FROM t_reply r
   WHERE r.exchange_id=#{0}
