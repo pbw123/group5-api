@@ -92,4 +92,11 @@ public class ExchangeController {
         collectionMapper.collectExchange(collection);
         return ResponseResult.success();
     }
+        @ApiOperation(value = "我的交流",notes = "我的交流列表,传入我的用户id")
+        @GetMapping(value = "getMyExchangeList/{userId}")
+         public List<Exchange>getMyExchangeList(@PathVariable int userId)
+        {
+            return exchangeMapper.getExchangeListByUserId(userId);
+        }
+
 }
