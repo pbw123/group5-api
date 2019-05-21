@@ -3,6 +3,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.niit.group5.mapper.ExchangeMapper">
 
+    <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Exchange">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="like" jdbcType="INTEGER" property="like"/>
+        <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
+
+
     <select id="getExchangeList" resultMap="exchangeRM">
     SELECT e.id, e.content,e.user_id euid,e.create_time,e.like
   FROM t_exchange e,t_user u
@@ -29,4 +39,12 @@
     <insert id="insertExchange" parameterType="cn.niit.group5.entity.Exchange">
    INSERT INTO t_exchange(user_id,content,create_time) VALUES (#{userId},#{content},#{createTime})
  </insert>
+
+
+    <select id="getExchangeListByUserId" parameterType="int" resultMap="exchangeRM">
+     SELECT e.id,e.user_id euid,e.content,e.like,e.create_time
+      FROM t_exchange e
+      WHERE e.user_id=#{0}
+     and is_delete=0
+  </select>
 </mapper>
