@@ -15,5 +15,9 @@
         <typeAlias alias="Reply" type="cn.niit.group5.entity.Reply"/>
         <typeAlias alias="Exchange" type="cn.niit.group5.entity.Exchange"/>
         <typeAlias alias="SupplyBuy" type="cn.niit.group5.entity.SupplyBuy"/>
+        <typeAlias alias="News" type="cn.niit.group5.entity.News"/>
+<!--        <typeAlias alias="Collection" type="cn.niit.group5.entity.Collection"/>-->
     </typeAliases>
+
+
 </configuration>

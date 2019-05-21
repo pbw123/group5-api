@@ -26,7 +26,6 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-
     /**
      * 登录
      */
@@ -191,6 +190,29 @@ public class UserController {
         return lists;
     }
 
+    @Autowired
+    private CollectionMapper collectionMapper;
+    //我的收藏-问答
+    @ApiOperation(value = "我的收藏-问答",notes = "根据我的用户id显示出我收藏的问答")
+    @GetMapping(value = "/getCollectQuestionById")
+    public List<Collection> getCollectQuestion(int userId){
+        List<Collection> collectionList=collectionMapper.getCollectQuestionById(userId);
+        return collectionList;
+    }
+    //我的收藏-交流
+    @ApiOperation(value = "我的收藏-交流",notes = "根据我的用户id显示出我收藏的交流")
+    @GetMapping(value = "/getCollectExchangeById")
+    public List<Collection> getCollectExchange(int userId){
+        List<Collection> collectionList=collectionMapper.getCollectExchangeById(userId);
+        return collectionList;
+    }
+    //我的收藏-资讯
+    @ApiOperation(value = "我的收藏-资讯",notes = "根据我的用户id显示出我收藏的资讯")
+    @GetMapping(value = "/getCollectNewsById")
+    public List<Collection> getCollectNews(int userId) {
+      List<Collection>  collectionList = collectionMapper.getCollectNewsById(userId);
+      return collectionList;
+    }
 }
 
 

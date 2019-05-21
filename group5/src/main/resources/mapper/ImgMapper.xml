@@ -11,4 +11,12 @@
  <insert id="insertQuestionImg" parameterType="cn.niit.group5.entity.Img">
    INSERT INTO t_img(is_judge,question_id,img_url) VALUES (#{isJudge},#{questionId},#{imgUrl})
  </insert>
+
+    <select id="selectImgByQuestionId" parameterType="int" resultMap="BaseResultMap">
+        SELECT id,question_id,img_url FROM t_img WHERE question_id=#{questionId}
+    </select>
+
+    <select id="selectImgByExchangeId" parameterType="int" resultMap="BaseResultMap">
+        SELECT id,exchange_id,img_url FROM t_img WHERE exchange_id=#{exchangeId}
+    </select>
 </mapper>

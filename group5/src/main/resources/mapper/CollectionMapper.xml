@@ -19,4 +19,97 @@
   <insert id="collectExchange" parameterType="cn.niit.group5.entity.Collection">
   INSERT INTO t_collection(user_id,exchange_id) VALUES (#{userId},#{exchangeId})
 </insert>
+
+  <select id="getCollectQuestionById"  parameterType="int"  resultMap="collectionRM">
+    SELECT c.id,c.user_id,c.question_id,q.id qid,q.user_id quid,q.content,q.create_time,q.sort,
+	u.id uid,u.user_name,u.user_address,u.identity FROM t_collection c,t_question q,t_user u
+	WHERE c.user_id=#{userId}
+	AND q.user_id=u.id
+	AND c.question_id=q.id
+  </select>
+
+  <resultMap id="collectionRM" type="cn.niit.group5.entity.Collection">
+    <id column="id" property="id"/>
+   <result column="user_id" property="userId"/>
+    <result column="question_id" property="questionId"/>
+
+    <association property="replyAmount" column="id" select="getQuestionReplyNumber">
+    </association>
+    <association property="question" javaType="Question">
+      <id column="qid" property="id"/>
+      <result column="quid" property="userId"/>
+      <result column="content" property="content"/>
+      <result column="create_time" property="createTime"/>
+      <result column="sort" property="sort"/>
+    </association>
+    <association property="user" javaType="User">
+      <id column="uid" property="id"/>
+      <result column="user_name" property="userName"/>
+      <result column="user_address" property="userAddress"/>
+      <result column="identity" property="identity"/>
+    </association>
+  </resultMap>
+  <select id="getQuestionReplyNumber" resultType="int">
+    SELECT COUNT(question_id) replyAmount FROM t_reply r
+  WHERE r.question_id=#{0}
+  AND r.is_exchange_reply=0
+  AND r.is_delete=0
+  </select>
+
+  <select id="getCollectExchangeById" resultMap="CollectionRM" parameterType="int">
+    SELECT c.id,c.user_id,c.exchange_id,e.id eid,e.user_id euid,e.content,e.create_time,e.like,
+	u.id uid,u.user_name,u.user_address,u.identity
+	FROM t_collection c,t_exchange e,t_user u
+	WHERE c.user_id=#{userId}
+	AND e.user_id=u.id
+	AND c.exchange_id=e.id
+  </select>
+  <resultMap id="CollectionRM" type="cn.niit.group5.entity.Collection">
+    <id column="id" property="id"/>
+    <result column="user_id" property="userId"/>
+    <result column="exchange_id" property="exchangeId"/>
+    <association property="exchange" javaType="Exchange">
+      <id column="eid" property="id"/>
+      <result column="euid" property="userId"/>
+      <result column="content" property="content"/>
+      <result column="create_time" property="createTime"/>
+      <result column="like" property="like"/>
+    </association>
+    <association property="user" javaType="User">
+      <id column="uid" property="id"/>
+      <result column="user_name" property="userName"/>
+      <result column="user_address" property="userAddress"/>
+      <result column="identity" property="identity"/>
+    </association>
+    <association property="replyAmount" column="id" select="getExchangeReplyNumber">
+    </association>
+  </resultMap>
+  <select id="getExchangeReplyNumber" resultType="int">
+    SELECT COUNT(exchange_id) replyAmount FROM t_reply r
+  WHERE r.exchange_id=#{0}
+  AND r.is_exchange_reply=1
+  AND r.is_delete=0
+  </select>
+
+  <select id="getCollectNewsById" parameterType="int" resultMap="Collection1RM">
+    SELECT c.id,c.user_id,c.news_id,n.id nid,n.title,n.content,n.create_time,n.read_number
+    FROM t_collection c,t_news n
+    WHERE c.user_id=#{userId}
+    AND c.news_id=n.id
+    AND n.is_delete=0
+  </select>
+  <resultMap id="Collection1RM" type="cn.niit.group5.entity.Collection">
+    <id column="id" property="id"/>
+    <result column="user_id" property="userId"/>
+    <result column="news_id" property="newsId"/>
+    <association property="news" javaType="News">
+      <id column="nid" property="id"/>
+      <result column="title" property="title"/>
+      <result column="content" property="content"/>
+      <result column="create_time" property="createTime"/>
+      <result column="read_number" property="readNumber"/>
+    </association>
+  </resultMap>
+
+
 </mapper>

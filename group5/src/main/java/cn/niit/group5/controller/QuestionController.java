@@ -1,13 +1,7 @@
 package cn.niit.group5.controller;
 
-import cn.niit.group5.entity.Attention;
-import cn.niit.group5.entity.Collection;
-import cn.niit.group5.entity.Question;
-import cn.niit.group5.entity.Reply;
-import cn.niit.group5.mapper.AttentionMapper;
-import cn.niit.group5.mapper.CollectionMapper;
-import cn.niit.group5.mapper.QuestionMapper;
-import cn.niit.group5.mapper.ReplyMapper;
+import cn.niit.group5.entity.*;
+import cn.niit.group5.mapper.*;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.List;
 
 
 @RestController
@@ -28,6 +23,8 @@ public class QuestionController {
     private QuestionMapper questionMapper;
     @Autowired
     private ReplyMapper replyMapper;
+    @Autowired
+    private ImgMapper imgMapper;
 
     /*
      *
@@ -105,5 +102,13 @@ public class QuestionController {
         return ResponseResult.success();
     }
 
-
+    @ApiOperation(value = "所有提问")
+    @PostMapping(value = "/getQuestionList")
+    public List<Question> getQuestionList(){
+        List<Question> questionLists= questionMapper.getQuestionList();
+        for (Question question:questionLists){
+            question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
+        }
+        return questionLists;
+        }
 }

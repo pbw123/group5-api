@@ -17,10 +17,13 @@
      FROM t_attention a,t_question q WHERE a.question_id=q.id AND a.user_id=#{userId}
   </select>
 
+
+
   <resultMap id="attentionsRM" type="cn.niit.group5.entity.Attention">
     <id column="id" property="id" />
     <result column="user_id" property="userId"/>
     <result column="question_id" property="questionId"/>
+
     <association property="question" javaType="Question">
       <id column="qid" property="id"/>
       <result column="quid" property="userId"/>

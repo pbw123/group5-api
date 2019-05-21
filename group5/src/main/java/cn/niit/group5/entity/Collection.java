@@ -17,8 +17,56 @@ public class Collection implements Serializable {
 
     private Byte status;
 
+    private int replyAmount;
+
+    private Question question;
+
+    private Exchange exchange;
+
+    private News news;
+
+    private User user;
+
+    public News getNews() {
+        return news;
+    }
+
+    public void setNews(News news) {
+        this.news = news;
+    }
+    public Exchange getExchange() {
+        return exchange;
+    }
+
+    public void setExchange(Exchange exchange) {
+        this.exchange = exchange;
+    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
     private static final long serialVersionUID = 1L;
 
+
+
+    public int getReplyAmount() {
+        return replyAmount;
+    }
+
+    public void setReplyAmount(int replyAmount) {
+        this.replyAmount = replyAmount;
+    }
     public Integer getId() {
         return id;
     }

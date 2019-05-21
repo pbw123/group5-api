@@ -5,6 +5,7 @@ import cn.niit.group5.entity.Exchange;
 import cn.niit.group5.entity.Reply;
 import cn.niit.group5.mapper.CollectionMapper;
 import cn.niit.group5.mapper.ExchangeMapper;
+import cn.niit.group5.mapper.ImgMapper;
 import cn.niit.group5.mapper.ReplyMapper;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.ApiOperation;
@@ -24,13 +25,19 @@ public class ExchangeController {
     private ReplyMapper replyMapper;
     @Autowired
     private CollectionMapper collectionMapper;
+    @Autowired
+    private ImgMapper imgMapper;
 
 
     @ApiOperation(value = "所有交流列表")
     @GetMapping(value = "getExchangeList")
     public List<Exchange> getExchangeListByMyId()
     {
-        return exchangeMapper.getExchangeList();
+        List<Exchange> exchangeList=exchangeMapper.getExchangeList();
+        for (Exchange exchange:exchangeList){
+            exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
+        }
+       return exchangeList;
     }
 /*
 *

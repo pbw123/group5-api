@@ -3,7 +3,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.niit.group5.mapper.ExchangeMapper">
 
-
     <select id="getExchangeList" resultMap="exchangeRM">
     SELECT e.id, e.content,e.user_id euid,e.create_time,e.like
   FROM t_exchange e,t_user u
@@ -11,6 +10,7 @@
   e.user_id=u.id
   AND e.is_delete=0
   </select>
+
 
     <resultMap id="exchangeRM" type="Exchange">
         <id column="id" property="id"/>

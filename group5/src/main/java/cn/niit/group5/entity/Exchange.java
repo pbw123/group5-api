@@ -19,10 +19,20 @@ public class Exchange implements Serializable {
 
     private User user;
 
+    private List<Img> imgs;
+
     private List<Reply>replies;
 
     private int replyAmount;
 
+
+    public List<Img> getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(List<Img> imgs) {
+        this.imgs = imgs;
+    }
     public int getReplyAmount() {
         return replyAmount;
     }
