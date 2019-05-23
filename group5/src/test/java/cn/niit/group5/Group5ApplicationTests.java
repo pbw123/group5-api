@@ -40,4 +40,11 @@ public class Group5ApplicationTests {
         myReplys.forEach((reply) -> System.out.println(reply+"===="));
 
     }
+
+    @Test
+    public void getModuleTest()
+    {
+        Module module = moduleMapper.getModuleById(1);
+        System.out.println(module.getName()+"=====页面");
+    }
 }

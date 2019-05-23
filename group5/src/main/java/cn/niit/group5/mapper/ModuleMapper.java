@@ -9,4 +9,7 @@ import java.util.List;
 @Component
 public interface ModuleMapper {
     List<Module>getIndexModule(Integer id);
+
+
+    Module getModuleById(Integer id);
 }

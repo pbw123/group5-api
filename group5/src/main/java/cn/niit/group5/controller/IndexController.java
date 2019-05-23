@@ -1,23 +1,15 @@
 package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.FarmerApply;
-import cn.niit.group5.entity.News;
-import cn.niit.group5.entity.NewsModule;
+import cn.niit.group5.entity.Module;
 import cn.niit.group5.mapper.FarmerApplyMapper;
-import cn.niit.group5.mapper.NewsMapper;
+import cn.niit.group5.mapper.ModuleMapper;
 import cn.niit.group5.mapper.NewsModuleMapper;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import cn.niit.group5.entity.Module;
-import cn.niit.group5.mapper.ModuleMapper;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 
@@ -38,6 +30,15 @@ public class IndexController {
     public List<Module> selectModule(@PathVariable int id){
         return  moduleMapper.getIndexModule(id);
     }
+
+    @ApiOperation(value = "点击九宫格都需要调用的接口",notes = "传入该模块功能的id")
+    @GetMapping(value = "getModuleDetails/{id}")
+    public ResponseResult getModuleDetails(@PathVariable Integer id)
+    {
+        Module module = moduleMapper.getModuleById(id);
+        return new ResponseResult(id,module.getName()+"页面");
+    }
+
 
     @ApiOperation(value ="云上智农添加申报信息")
     @PostMapping(value = "/insertApplyMessage")

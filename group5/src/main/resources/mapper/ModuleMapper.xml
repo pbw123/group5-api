@@ -17,4 +17,8 @@
  AND ma.address_id=a.id
  AND a.id=#{0}
   </select>
+    
+    <select id="getModuleById" parameterType="Integer" resultMap="BaseResultMap">
+         SELECT m.name FROM t_module m WHERE m.id=#{0}
+    </select>
 </mapper>
