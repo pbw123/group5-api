@@ -33,7 +33,7 @@
   </select>
 
     <select id="getUserById" parameterType="int" resultMap="cn.niit.group5.mapper.UserMapper.BaseResultMap">
-      SELECT u.id,u.head_url,u.user_name,u.identity,u.score,u.phone_number,u.user_address
+      SELECT u.*
     FROM t_user u WHERE u.id=#{id}
   </select>
 

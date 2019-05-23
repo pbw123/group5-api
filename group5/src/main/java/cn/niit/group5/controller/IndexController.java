@@ -1,17 +1,12 @@
 package cn.niit.group5.controller;
 
 
-import cn.niit.group5.entity.News;
-import cn.niit.group5.entity.NewsModule;
-import cn.niit.group5.mapper.NewsMapper;
-import cn.niit.group5.mapper.NewsModuleMapper;
-import cn.niit.group5.util.ResponseResult;
+import cn.niit.group5.entity.Module;
+import cn.niit.group5.mapper.ModuleMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,13 +16,12 @@ import java.util.List;
 public class IndexController {
 
     @Autowired
-    private NewsModuleMapper newsModuleMapper;
+    private ModuleMapper moduleMapper;
 
-    @ApiOperation(value = "首页九宫格遍历")
-    @GetMapping(value = "/selectModule")
-    public ResponseResult selectModule(){
-        List<NewsModule> list=newsModuleMapper.selectModule();
-        return ResponseResult.success(list);
+    @ApiOperation(value = "首页九宫格",notes = "选择的地区不同，看的的九宫格就不一样，所以要传入地区的id,默认江苏")
+    @GetMapping(value = "selectModule/{id}")
+    public List<Module> selectModule(@PathVariable int id){
+        return  moduleMapper.getIndexModule(id);
     }
 
 
