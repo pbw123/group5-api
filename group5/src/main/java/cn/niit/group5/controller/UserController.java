@@ -62,18 +62,23 @@ public class UserController {
                                  @RequestParam(required = true) String password,
                                  @RequestParam(required = true) String userName,
                                  String identity, String unitAddress) {
-        if (!RegexUtil.passRegex(password)) {
+
+        User user = userMapper.getUserByPhoneNumber(phoneNumber);
+        if (user!=null)
+        {
+            return ResponseResult.error(StatusConst.MOBILE_EXIST,MsgConst.MOBILE_EXIST);
+        }else if (!RegexUtil.passRegex(password)) {
             return new ResponseResult(StatusConst.PASSWORD_VALIDATOR,
                     MsgConst.PASSWORD_VALIDATOR);
         } else {
-            User user = new User();
-            user.setPhoneNumber(phoneNumber);
-            user.setPassword(password);
-            user.setUserName(userName);
-            user.setIdentity(identity);
-            user.setUnitAddress(unitAddress);
-            user.setRegitsterTime(new Date());
-            int index = userMapper.signUp(user);
+            User user2 = new User();
+            user2.setPhoneNumber(phoneNumber);
+            user2.setPassword(password);
+            user2.setUserName(userName);
+            user2.setIdentity(identity);
+            user2.setUnitAddress(unitAddress);
+            user2.setRegitsterTime(new Date());
+            int index = userMapper.signUp(user2);
             if (index == 1) {
                 return new ResponseResult(StatusConst.SUCCESS, MsgConst.SUCCESS);
             } else {

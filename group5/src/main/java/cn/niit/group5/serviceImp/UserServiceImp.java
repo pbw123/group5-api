@@ -86,8 +86,8 @@ public class UserServiceImp implements UserService {
             return new ResponseResult(StatusConst.VERIFYCODE_NUll,MsgConst.VERIFYCODE_NULL_ERROR);
         }
         else {
-            User user = userMapper.getUserByPhoneNumber(userCode.getPhoneNumber());
-            if (user==null)
+            User users = userMapper.getUserByPhoneNumber(userCode.getPhoneNumber());
+            if (users==null)
             {
                 int status = plogin(userCode.getPhoneNumber(), userCode.getCode());
                 if (status == StatusConst.SUCCESS) {
@@ -134,7 +134,7 @@ public class UserServiceImp implements UserService {
                     MsgConst.PHONE_NUMBER_VALIDATOR);
         }
         else {
-            User user = userMapper.getUserByPhoneNumber(userCode.getPhoneNumber());
+           User user = userMapper.getUserByPhoneNumber(userCode.getPhoneNumber());
             if (user!=null)
             {
                 return ResponseResult.error(StatusConst.MOBILE_EXIST,MsgConst.MOBILE_EXIST);
@@ -144,7 +144,6 @@ public class UserServiceImp implements UserService {
 //            验证码发送成功
                     return ResponseResult.success();
                 } else {
-
 //                验证码错误
                     return ResponseResult.error(StatusConst.VERIFYCODE_ERROR, MsgConst.SEND_VERIFYCODE_ERROR);
                 }
