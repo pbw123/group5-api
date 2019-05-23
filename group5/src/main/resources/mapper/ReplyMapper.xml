@@ -3,12 +3,30 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.niit.group5.mapper.ReplyMapper">
 
-    <select id="getMyReplyById" parameterType="int" resultType="reply">
-   select r.content,r.id,r.reply_time,u.head_url,u.user_name,q.id qid,q.content qcon
- from t_reply r,t_user u,t_question q
- where r.question_id=q.id
- and r.user_id=#{0}
+    <select id="getMyReplyById" parameterType="int" resultMap="myReplyRM">
+  SELECT r.id,r.content,r.reply_time,r.user_id ruid,r.question_id rqid
+ FROM t_reply r,t_user u,t_question q
+ WHERE
+ r.user_id=#{0}
+ AND r.question_id=q.id
+ AND r.user_id=u.id
+ AND r.is_delete=0
+
 </select>
+   <resultMap id="myReplyRM" type="reply">
+       <id column="id" property="id"/>
+       <result column="content" property="content"/>
+       <result column="reply_time" property="replyTime"/>
+       <result column="ruid" property="userId"/>
+       <result column="rqid" property="questionId"/>
+       <association property="user" select="cn.niit.group5.mapper.QuestionMapper.getUserById"
+                    column="ruid">
+       </association>
+       <association property="question" column="rqid"
+                    select="cn.niit.group5.mapper.QuestionMapper.getQuestionDetail"/>
+   </resultMap>
+
+
     <insert id="insertComment" parameterType="cn.niit.group5.entity.Reply">
     INSERT INTO t_reply(content,user_id,question_id,reply_time) VALUES (#{content},#{userId},#{questionId},#{replyTime})
 </insert>

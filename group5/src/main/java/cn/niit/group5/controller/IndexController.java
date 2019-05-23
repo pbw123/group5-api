@@ -1,6 +1,5 @@
 package cn.niit.group5.controller;
 
-
 import cn.niit.group5.entity.FarmerApply;
 import cn.niit.group5.entity.News;
 import cn.niit.group5.entity.NewsModule;
@@ -15,6 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import cn.niit.group5.entity.Module;
+import cn.niit.group5.mapper.ModuleMapper;
+import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -27,12 +30,13 @@ public class IndexController {
     private NewsModuleMapper newsModuleMapper;
     @Autowired
     private FarmerApplyMapper farmerApplyMapper;
+    @Autowired
+    private ModuleMapper moduleMapper;
 
-    @ApiOperation(value = "首页九宫格遍历")
-    @GetMapping(value = "/selectModule")
-    public ResponseResult selectModule(){
-        List<NewsModule> list=newsModuleMapper.selectModule();
-        return ResponseResult.success(list);
+    @ApiOperation(value = "首页九宫格",notes = "选择的地区不同，看的的九宫格就不一样，所以要传入地区的id,默认江苏")
+    @GetMapping(value = "selectModule/{id}")
+    public List<Module> selectModule(@PathVariable int id){
+        return  moduleMapper.getIndexModule(id);
     }
 
     @ApiOperation(value ="云上智农添加申报信息")

@@ -88,11 +88,11 @@ public class UserController {
      */
     @ApiOperation(value = "我的资料", notes = "修改我的资料并保存")
     @PostMapping(value = "updateMyMsg")
-    public ResponseResult updateMyMsg(@RequestParam(required = true) String id, String vocation,
+    public ResponseResult updateMyMsg(@RequestParam(required = true)  Integer id, String vocation,
                                       String headUrl, String userName, String unitName,
                                       String identity, String educational, String email, String sex) {
         User user = new User();
-        user.setId(Integer.valueOf(id));
+        user.setId(id);
         user.setVocation(vocation);
         user.setHeadUrl(headUrl);
         user.setUserName(userName);
@@ -140,9 +140,9 @@ public class UserController {
     }
 
 //    根据id查询要添加的用户信息
-    @ApiOperation(value = "详细资料",notes = "根据id请求可添加好友的详细资料")
-    @GetMapping(value = "getAddUserById/{userId}")
-    public User getAddUserById(@PathVariable int userId)
+    @ApiOperation(value = "我的详细资料/其他用户的资料",notes = "传入用户id查看用户详细资料")
+    @GetMapping(value = "getUserMsgById/{userId}")
+    public User getUserMsgById(@PathVariable Integer userId)
     {
         return questionMapper.getUserById(userId);
     }
@@ -174,7 +174,7 @@ public class UserController {
         {
             return new ResponseResult().success();
         }
-        return new ResponseResult(StatusConst.SUCCESS,MsgConst.FAIL);
+        return new ResponseResult(StatusConst.ERROR,MsgConst.FAIL);
     }
 
     @Autowired

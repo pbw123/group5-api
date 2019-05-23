@@ -3,7 +3,6 @@ package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.Pest;
 import cn.niit.group5.mapper.PestMapper;
-import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

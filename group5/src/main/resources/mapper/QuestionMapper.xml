@@ -33,7 +33,8 @@
   </select>
 
     <select id="getUserById" parameterType="int" resultMap="cn.niit.group5.mapper.UserMapper.BaseResultMap">
-      SELECT *  FROM t_user u WHERE u.id=#{id}
+      SELECT u.*
+    FROM t_user u WHERE u.id=#{id}
   </select>
 
     <select id="getQuestionListByUserId" parameterType="int" resultMap="questionListRM">

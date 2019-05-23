@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.ModuleMapper" >
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Module" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+  </resultMap>
+    <select id="getIndexModule" parameterType="Integer"
+            resultMap="BaseResultMap">
+    SELECT a.address,m.*
+  FROM t_module m,t_module_address ma ,t_address a
+ WHERE
+ ma.module_id=m.id
+ AND ma.address_id=a.id
+ AND a.id=#{0}
+  </select>
+</mapper>

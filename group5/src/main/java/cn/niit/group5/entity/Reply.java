@@ -20,6 +20,19 @@ public class Reply implements Serializable {
 
     private User user;
 
+    private Question question;
+
+
+    private Date replyTime;
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
     private Integer isExchangeReply;
 
     public Integer getIsExchangeReply() {
@@ -38,7 +51,7 @@ public class Reply implements Serializable {
         this.replyTime = replyTime;
     }
 
-    private Date replyTime;
+
 
     public User getUser() {
         return user;
