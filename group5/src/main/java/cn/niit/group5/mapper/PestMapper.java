@@ -13,5 +13,5 @@ import java.util.List;
         //遍历名称、内容
         List<Pest> getPestList();
         //通过id获取详情
-    Pest getPestDetailById(int id);
+         Pest getPestDetailById(int id);
 }

@@ -20,6 +20,14 @@
   INSERT INTO t_collection(user_id,exchange_id) VALUES (#{userId},#{exchangeId})
 </insert>
 
+  <insert id="collectNews" parameterType="cn.niit.group5.entity.Collection">
+    INSERT INTO t_collection(user_id,news_id) VALUES (#{userId},#{newsId})
+  </insert>
+
+  <insert id="collectVideo" parameterType="cn.niit.group5.entity.Collection">
+    INSERT INTO t_collection(user_id,video) VALUES (#{userId},#{video})
+  </insert>
+
   <select id="getCollectQuestionById"  parameterType="int"  resultMap="collectionRM">
     SELECT c.id,c.user_id,c.question_id,q.id qid,q.user_id quid,q.content,q.create_time,q.sort,
 	u.id uid,u.user_name,u.user_address,u.identity FROM t_collection c,t_question q,t_user u
@@ -119,5 +127,6 @@ AND v.is_delete=0
       <result column="read_number" property="readNumber"/>
     </association>
   </resultMap>
+
 
 </mapper>

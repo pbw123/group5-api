@@ -13,6 +13,8 @@ public interface NewsMapper {
     @Select("SELECT * FROM t_news WHERE news_sort_id=#{0} AND is_delete=0")
     List<News> selectAllBySortId(int sortId);
 
-
+//动态
+    @Select("SELECT * FROM t_news WHERE is_delete=0 order by create_time desc ")
+    List<News> getNewsList();
 
 }

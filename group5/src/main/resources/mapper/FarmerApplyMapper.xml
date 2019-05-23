@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.TFarmerApplyMapper" >
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.FarmerApply" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="identity_number" property="identityNumber" jdbcType="VARCHAR" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="job_address" property="jobAddress" jdbcType="VARCHAR" />
+    <result column="job_size" property="jobSize" jdbcType="VARCHAR" />
+    <result column="age_limit" property="ageLimit" jdbcType="INTEGER" />
+    <result column="size_unit" property="sizeUnit" jdbcType="VARCHAR" />
+    <result column="user_sort" property="userSort" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+  </resultMap>
+<insert id="insertApplyMessage" parameterType="cn.niit.group5.entity.FarmerApply">
+  INSERT INTO t_farmer_apply(user_name,sex,identity_number,phone_number,education,job,job_address,job_size,age_limit,size_unit,
+  user_sort,state) VALUES (#{userName},#{sex},#{identityNumber},#{phoneNumber},#{education},#{job}
+  #{jobAddress},#{jobSize},#{ageLimit},#{sizeUnit},#{userSort},#{state}
+  )
+</insert>
+</mapper>

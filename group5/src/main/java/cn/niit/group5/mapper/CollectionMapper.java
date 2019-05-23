@@ -13,6 +13,10 @@ public interface CollectionMapper {
     void collectQuestion(Collection collection);
     //收藏交流
     void collectExchange(Collection collection);
+    //收藏资讯
+    void collectNews(Collection collection);
+    //收藏视频
+    void collectVideo(Collection collection);
     //通过用户id遍历收藏的问答
     List<Collection> getCollectQuestionById(int userId);
     //通过用户id遍历收藏的交流

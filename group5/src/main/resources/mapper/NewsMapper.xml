@@ -16,5 +16,4 @@
     <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
-
 </mapper>

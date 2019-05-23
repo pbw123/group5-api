@@ -1,21 +1,12 @@
 package cn.niit.group5.controller;
 
-import cn.niit.group5.entity.Animal;
-import cn.niit.group5.entity.News;
-import cn.niit.group5.entity.TechnologySort;
-import cn.niit.group5.entity.Video;
-import cn.niit.group5.mapper.AnimalMapper;
-import cn.niit.group5.mapper.NewsMapper;
-import cn.niit.group5.mapper.TechnologySortMapper;
-import cn.niit.group5.mapper.VideoMapper;
+import cn.niit.group5.entity.*;
+import cn.niit.group5.mapper.*;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +21,8 @@ public class NewsController {
     private TechnologySortMapper  technologySortMapper;
     @Autowired
     private VideoMapper videoMapper;
+    @Autowired
+    private CollectionMapper collectionMapper;
 
     @ApiOperation(value = "港城要闻",notes = "港城要闻的资讯")
     @GetMapping(value = "yaowen")
@@ -88,9 +81,43 @@ public class NewsController {
         }
 
         @ApiOperation(value = "根据畜禽查看相关资讯文章",notes = "需要传入畜禽种类的id")
-        @GetMapping(value = "getNewsListByAnimalId/{id}")
+        @GetMapping(value = "getNewsLis`qtByAnimalId/{id}")
     public List<News>getNewsListByAnimalId(@PathVariable int id)
         {
             return animalMapper.AnimalNews(id);
         }
+
+    @ApiOperation(value = "收藏资讯")
+    @PostMapping(value = "collectNews")
+    public ResponseResult collectNews(
+            @RequestParam(required = true) Integer userId,
+            @RequestParam(required = true) Integer newsId
+    ){
+        Collection collection=new Collection();
+        collection.setUserId(userId);
+        collection.setNewsId(newsId);
+        collectionMapper.collectNews(collection);
+        return ResponseResult.success();
+    }
+
+    @ApiOperation(value = "收藏视频")
+    @PostMapping(value = "collectVideo")
+    public ResponseResult collectVideo(
+            @RequestParam(required = true) Integer userId,
+            @RequestParam(required = true) Integer video
+    ){
+        Collection collection=new Collection();
+        collection.setUserId(userId);
+        collection.setVideo(video);
+        collectionMapper.collectVideo(collection);
+        return ResponseResult.success();
+    }
+
+    @ApiOperation(value = "动态")
+    @PostMapping(value = "getNewsList")
+    public List<News> getNews(){
+            return newsMapper.getNewsList();
+    }
+
+
 }

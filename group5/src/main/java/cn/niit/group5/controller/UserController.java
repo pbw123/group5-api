@@ -101,7 +101,6 @@ public class UserController {
         user.setSex(sex);
         user.setEmail(email);
         if (userServiceImp.updateMyDocument(user) == StatusConst.SUCCESS) {
-
             System.out.println("控制层操作成功");
             return ResponseResult.success(user);
         } else {
@@ -109,7 +108,6 @@ public class UserController {
             return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
         }
     }
-
     @Autowired
     private QuestionMapper questionMapper;
     //    我的提问
@@ -151,13 +149,12 @@ public class UserController {
     @Autowired
     private ReplyMapper replyMapper;
 //    我的回答列表
-    @ApiOperation(value = "我的回答",notes = "我的所有回复列表")
+    @ApiOperation(value = "我的回答",notes ="我的所有回复列表")
     @GetMapping(value = "getMyReplyById/{userId}")
     public List<Reply> getMyReplyById(@PathVariable int userId)
     {
         return replyMapper.getMyReplyById(userId);
     }
-
 
     @Autowired
     private FeedbackMapper feedbackMapper;
