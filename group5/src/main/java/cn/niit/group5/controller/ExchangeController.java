@@ -99,7 +99,11 @@ public class ExchangeController {
         @GetMapping(value = "getMyExchangeList/{userId}")
          public List<Exchange>getMyExchangeList(@PathVariable int userId)
         {
-            return exchangeMapper.getExchangeListByUserId(userId);
+            List<Exchange> exchangeList=exchangeMapper.getExchangeListByUserId(userId);
+            for(Exchange exchange:exchangeList){
+                exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
+            }
+            return exchangeList;
         }
 
         @ApiOperation(value = "删除我的交流文章",notes = "需要传入该交流文章的id")

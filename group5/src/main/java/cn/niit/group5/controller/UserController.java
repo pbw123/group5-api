@@ -118,16 +118,17 @@ public class UserController {
 //        return  questionMapper.selectAllByUserId(id);
 //    }
 
+    @Autowired
+    private ImgMapper imgMapper;
     //我的提问列表
     @ApiOperation(value = "我的提问列表",notes = "根据我的用户id我提出过的所有问题")
     @GetMapping(value = "getQuestionList")
     public List<Question>getQuestionList(int userId)
     {
         List<Question> lists = questionMapper.getQuestionListByUserId(userId);
-//        for (Question ls:lists)
-//        {
-//            System.out.println(ls.toString());
-//        }
+        for(Question question:lists){
+            question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
+        }
         return  lists;
     }
 //    问题详情

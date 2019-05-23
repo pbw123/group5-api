@@ -17,6 +17,7 @@
         <typeAlias alias="SupplyBuy" type="cn.niit.group5.entity.SupplyBuy"/>
         <typeAlias alias="News" type="cn.niit.group5.entity.News"/>
         <typeAlias alias="Video" type="cn.niit.group5.entity.Video"/>
+        <typeAlias alias="Address" type="cn.niit.group5.entity.Address"/>
 <!--        <typeAlias alias="Collection" type="cn.niit.group5.entity.Collection"/>-->
     </typeAliases>
 
