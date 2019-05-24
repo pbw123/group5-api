@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.ExpertMapper" >
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Expert" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="expert_name" property="expertName" jdbcType="VARCHAR" />
+    <result column="unit_name" property="unitName" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="resume" property="resume" jdbcType="VARCHAR" />
+    <result column="expert_grade" property="expertGrade" jdbcType="INTEGER" />
+    <result column="expert_sort" property="expertSort" jdbcType="INTEGER" />
+    <result column="job_title" property="jobTitle" jdbcType="VARCHAR" />
+    <result column="check_all" property="checkAll" jdbcType="INTEGER" />
+    <result column="phone_number" property="phoneNumber" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="getExpertDetail" parameterType="int" resultMap="BaseResultMap">
+    SELECT * FROM t_expert WHERE id=#{id} AND is_delete=0
+  </select>
+</mapper>

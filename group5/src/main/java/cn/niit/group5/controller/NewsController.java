@@ -59,10 +59,13 @@ public class NewsController {
     }
 
     @ApiOperation(value ="头条" )
-    @GetMapping(value = "/selectLeadNews")
-    public List<News> selectLeadNews(){
-        return newsMapper.selectAllBySortId(5);
+    @GetMapping(value = "/getHotNews")
+    public List<News> getHotNews(
+            @PathVariable Integer addressId
+    ){
+        return newsMapper.getHotNews(addressId);
     }
+
 
     @ApiOperation(value ="视频" )
     @GetMapping(value = "/selectVideo")
@@ -73,7 +76,8 @@ public class NewsController {
 
     @Autowired
     private AnimalMapper animalMapper;
-        @ApiOperation(value = "知识库的畜禽品种库")
+
+    @ApiOperation(value = "知识库的畜禽品种库")
     @GetMapping(value = "getAnimalKindList")
     public List<Animal>getAnimalKindList()
         {
@@ -114,10 +118,10 @@ public class NewsController {
     }
 
     @ApiOperation(value = "动态")
-    @PostMapping(value = "getNewsList")
-    public List<News> getNews(){
-            return newsMapper.getNewsList();
+    @PostMapping(value = "getNewsList/{addressId}")
+    public List<News> getNews(
+            @PathVariable Integer addressId
+    ){
+            return newsMapper.getNewsList(addressId);
     }
-
-
 }

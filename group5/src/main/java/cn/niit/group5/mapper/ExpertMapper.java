@@ -1,13 +1,11 @@
 package cn.niit.group5.mapper;
 
-import cn.niit.group5.entity.TechnologySort;
+import cn.niit.group5.entity.Expert;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 @Mapper
 @Component
-public interface TechnologySortMapper {
-    List<TechnologySort> selectAll();
-
+public interface ExpertMapper {
+Expert getExpertDetail(int id);
 }

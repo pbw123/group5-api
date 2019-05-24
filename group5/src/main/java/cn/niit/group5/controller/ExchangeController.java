@@ -81,7 +81,6 @@ public class ExchangeController {
         return ResponseResult.success(reply.getId());
     }
 
-
     //  收藏交流
     @ApiOperation(value = "收藏交流")
     @PostMapping(value = "/collectExchange")
@@ -97,7 +96,7 @@ public class ExchangeController {
     }
         @ApiOperation(value = "我的交流",notes = "我的交流列表,传入我的用户id")
         @GetMapping(value = "getMyExchangeList/{userId}")
-         public List<Exchange>getMyExchangeList(@PathVariable int userId)
+         public List<Exchange>getMyExchangeList(@PathVariable Integer userId)
         {
             List<Exchange> exchangeList=exchangeMapper.getExchangeListByUserId(userId);
             for(Exchange exchange:exchangeList){

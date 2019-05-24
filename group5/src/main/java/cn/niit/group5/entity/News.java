@@ -8,13 +8,19 @@ public class News implements Serializable {
 
     private String title;
 
+    private Integer addressId;
+
     private Date createTime;
+
+    private String iconUrl;
 
     private Integer readNumber;
 
     private String source;
 
     private String author;
+
+    private Integer technologyId;
 
     private Integer newsSortId;
 
@@ -48,12 +54,28 @@ public class News implements Serializable {
         this.title = title == null ? null : title.trim();
     }
 
+    public Integer getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl == null ? null : iconUrl.trim();
     }
 
     public Integer getReadNumber() {
@@ -78,6 +100,14 @@ public class News implements Serializable {
 
     public void setAuthor(String author) {
         this.author = author == null ? null : author.trim();
+    }
+
+    public Integer getTechnologyId() {
+        return technologyId;
+    }
+
+    public void setTechnologyId(Integer technologyId) {
+        this.technologyId = technologyId;
     }
 
     public Integer getNewsSortId() {
@@ -144,10 +174,13 @@ public class News implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", title=").append(title);
+        sb.append(", addressId=").append(addressId);
         sb.append(", createTime=").append(createTime);
+        sb.append(", iconUrl=").append(iconUrl);
         sb.append(", readNumber=").append(readNumber);
         sb.append(", source=").append(source);
         sb.append(", author=").append(author);
+        sb.append(", technologyId=").append(technologyId);
         sb.append(", newsSortId=").append(newsSortId);
         sb.append(", animalSortId=").append(animalSortId);
         sb.append(", state=").append(state);
