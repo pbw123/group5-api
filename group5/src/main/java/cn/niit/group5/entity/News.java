@@ -30,6 +30,16 @@ public class News implements Serializable {
 
     private String content;
 
+    private Integer technologyId;
+
+    public Integer getTechnologyId() {
+        return technologyId;
+    }
+
+    public void setTechnologyId(Integer technologyId) {
+        this.technologyId = technologyId;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {

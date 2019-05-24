@@ -58,6 +58,17 @@ public class NewsController {
         return technologySortMapper.selectAll();
     }
 
+
+    @ApiOperation(value = "农业科技中根据分类查询资讯",notes = "要传入该分类的id")
+    @GetMapping(value = "getNewsBySortId/{id}")
+    public ResponseResult getNewsBySortId(@PathVariable("id") Integer id)
+    {
+            List<News> news = technologySortMapper.getNewsBySortId(id);
+            return ResponseResult.success(news);
+    }
+
+
+
     @ApiOperation(value ="头条" )
     @GetMapping(value = "/selectLeadNews")
     public List<News> selectLeadNews(){
@@ -80,8 +91,8 @@ public class NewsController {
             return animalMapper.selectAllAnimal();
         }
 
-        @ApiOperation(value = "根据畜禽查看相关资讯文章",notes = "需要传入畜禽种类的id")
-        @GetMapping(value = "getNewsLis`qtByAnimalId/{id}")
+        @ApiOperation(value = "知识库中的畜禽品种库中根据畜禽查看相关资讯文章",notes = "需要传入畜禽种类的id")
+        @GetMapping(value = "getNewsListByAnimalId/{id}")
     public List<News>getNewsListByAnimalId(@PathVariable int id)
         {
             return animalMapper.AnimalNews(id);
@@ -113,11 +124,7 @@ public class NewsController {
         return ResponseResult.success();
     }
 
-    @ApiOperation(value = "动态")
-    @PostMapping(value = "getNewsList")
-    public List<News> getNews(){
-            return newsMapper.getNewsList();
-    }
+
 
 
 }

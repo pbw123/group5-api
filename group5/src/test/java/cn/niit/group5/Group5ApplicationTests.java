@@ -1,9 +1,9 @@
 package cn.niit.group5;
 
-import cn.niit.group5.entity.Module;
-import cn.niit.group5.entity.Reply;
+import cn.niit.group5.entity.*;
 import cn.niit.group5.mapper.ModuleMapper;
 import cn.niit.group5.mapper.ReplyMapper;
+import cn.niit.group5.mapper.TechnologySortMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +46,48 @@ public class Group5ApplicationTests {
     {
         Module module = moduleMapper.getModuleById(1);
         System.out.println(module.getName()+"=====页面");
+    }
+
+    @Autowired
+    private TechnologySortMapper technologySortMapper;
+    @Test
+    public void getNewsByTechnologySortIdTest()
+    {
+        List<News> news = technologySortMapper.getNewsBySortId(1);
+        news.forEach(news1 -> System.out.println(news1));
+    }
+
+   @Test
+    public void getNewsByAddress()
+   {
+       Address address=new Address();
+       address.setId(18);
+       List<News> indexByAddress = moduleMapper.getIndexDynamic(address);
+       indexByAddress.forEach(news -> System.out.println(news));
+   }
+   @Test
+    public void getTopNewsTest()
+   {
+       Address address=new Address();
+       address.setId(18);
+       List<News> indexByAddress = moduleMapper.getTopNews(address);
+       indexByAddress.forEach(news -> System.out.println(news));
+   }
+
+  @Test
+    public void getHotQuestionTest()
+    {
+        Address address=new Address();
+        address.setId(18);
+        Question question=moduleMapper.getIndexHotQuestion(address);
+        System.out.println(question.toString());
+    }
+  @Test
+    public void getHotExchangeTest()
+    {
+        Address address=new Address();
+        address.setId(1);
+        Exchange exchange=moduleMapper.getIndexHotExchange(address);
+        System.out.println(exchange.toString());
     }
 }

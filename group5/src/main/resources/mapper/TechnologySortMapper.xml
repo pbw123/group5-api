@@ -11,4 +11,9 @@
     select id, `name`, icon
     from t_technology_sort
   </select>
+
+  <select id="getNewsBySortId" parameterType="Integer"
+          resultMap="cn.niit.group5.mapper.NewsMapper.BaseResultMap">
+ SELECT * FROM t_news WHERE technology_id=#{0}
+  </select>
 </mapper>

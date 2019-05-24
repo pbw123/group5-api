@@ -8,6 +8,7 @@
     <result column="read_number" property="readNumber" jdbcType="INTEGER" />
     <result column="source" property="source" jdbcType="VARCHAR" />
     <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="technology_id" property="technologyId" jdbcType="VARCHAR" />
     <result column="news_sort_id" property="newsSortId" jdbcType="INTEGER" />
     <result column="animal_sort_id" property="animalSortId" jdbcType="INTEGER" />
     <result column="state" property="state" jdbcType="INTEGER" />
