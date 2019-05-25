@@ -36,6 +36,7 @@ public class News implements Serializable {
 
     private String content;
 
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {

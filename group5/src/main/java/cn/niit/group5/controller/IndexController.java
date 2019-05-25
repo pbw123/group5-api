@@ -2,6 +2,8 @@ package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.*;
 import cn.niit.group5.mapper.*;
+import cn.niit.group5.mapper.FarmerApplyMapper;
+import cn.niit.group5.mapper.ModuleMapper;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,16 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/index")
 @Api(tags = "首页模块")
 public class IndexController {
-    @Autowired
-    private NewsModuleMapper newsModuleMapper;
     @Autowired
     private FarmerApplyMapper farmerApplyMapper;
     @Autowired
@@ -74,16 +72,52 @@ public class IndexController {
     ){
         Index index=new Index();
         List<Module> moduleList=moduleMapper.getIndexModule(id);
-        List<News> newsList=newsMapper.getHotNews(id);
-        List<News> newsList1=newsMapper.getNewsList(id);
+        Address address=new Address();
+        address.setId(id);
+        List<News> newsList=moduleMapper.getTopNews(address);
+        List<News> newsList1=moduleMapper.getIndexDynamic(address);
+        Question question=moduleMapper.getIndexHotQuestion(address);
+        Exchange exchange=moduleMapper.getIndexHotExchange(address);
         List<Video> videoList=videoMapper.selectVideo();
         index.setId(id);
         index.setModules(moduleList);
-        index.setHotNews(newsList);
         index.setVideos(videoList);
-        index.setTrends(newsList1);
+        index.setTopNews(newsList);
+        index.setIndexDynamic(newsList1);
+        index.setIndexHotQuestion(question);
+        index.setIndexHotExchange(exchange);
     return ResponseResult.success(index);
 
-
     }
+    @ApiOperation(value = "首页动态资讯",notes = "因地区不同，展现的动态资讯就不一样，传入该地区的id")
+     @GetMapping(value = "getIndexDynamic/{id}")
+    public ResponseResult getIndexDynamic(@PathVariable(value = "id") Integer id)
+     {
+         Address address=new Address();
+         address.setId(id);
+         List<News> indexModule = moduleMapper.getIndexDynamic(address);
+         return ResponseResult.success(indexModule);
+     }
+    @ApiOperation(value = "首页头条",notes = "因地区不同，展现的头条就不一样，传入该地区的id,根据资讯发布时间和阅读量降序排列")
+     @GetMapping(value = "getIndexTopNews/{id}")
+    public ResponseResult getIndexTopNews(@PathVariable(value = "id") Integer id)
+     {
+         Address address=new Address();
+         address.setId(id);
+         List<News> indexModule = moduleMapper.getTopNews(address);
+         return ResponseResult.success(indexModule);
+     }
+    @ApiOperation(value = "首页热点",notes = "因地区不同，展现的热点就不一样，传入该地区的id，根据提问和交流的发布时间和回复数量进行降序排列")
+     @GetMapping(value = "getIndexHotNews/{id}")
+    public ResponseResult getIndexHotNews(@PathVariable(value = "id") Integer id)
+     {
+         Address address=new Address();
+         address.setId(id);
+         Question hotQuestion = moduleMapper.getIndexHotQuestion(address);
+         Exchange hotExchange = moduleMapper.getIndexHotExchange(address);
+         List lists=new ArrayList();
+         lists.add(hotQuestion);
+         lists.add(hotExchange);
+         return ResponseResult.success(lists);
+     }
 }

@@ -15,6 +15,16 @@ public class Question implements Serializable {
 
     private String sort;
 
+    private Integer addressId;
+
+    public Integer getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
+    }
+
     public void setIsDelete(int isDelete) {
         this.isDelete = isDelete;
     }

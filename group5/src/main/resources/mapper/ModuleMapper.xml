@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.niit.group5.mapper.ModuleMapper" >
-  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Module" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="icon" property="icon" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
-  </resultMap>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.ModuleMapper">
+    <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Module">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+    </resultMap>
     <select id="getIndexModule" parameterType="Integer"
             resultMap="BaseResultMap">
     SELECT a.address,m.*
@@ -17,8 +18,42 @@
  AND ma.address_id=a.id
  AND a.id=#{0}
   </select>
-    
+
     <select id="getModuleById" parameterType="Integer" resultMap="BaseResultMap">
          SELECT m.name FROM t_module m WHERE m.id=#{0}
     </select>
+
+    <select id="getIndexDynamic" parameterType="cn.niit.group5.entity.Address"
+            resultMap="cn.niit.group5.mapper.NewsMapper.BaseResultMap">
+        SELECT * FROM t_news
+        WHERE is_delete=0
+        <if test="id lt 18 ">and address_id=#{id}</if>
+        order by create_time desc
+    </select>
+    <select id="getTopNews" parameterType="cn.niit.group5.entity.Address"
+            resultMap="cn.niit.group5.mapper.NewsMapper.BaseResultMap">
+        SELECT * FROM t_news WHERE is_delete=0
+        <if test="id lt 18 ">and address_id=#{id}</if>
+        ORDER BY create_time DESC, read_number DESC
+    </select>
+    <select id="getIndexHotQuestion" parameterType="cn.niit.group5.entity.Address"
+            resultType="Question">
+        SELECT q.*,COUNT(r.question_id) as replyNumber FROM t_reply r,t_question q
+        WHERE r.question_id=q.id
+        <if test="id lt 18 ">AND q.address_id=#{id}</if>
+        GROUP BY r.question_id
+        ORDER BY q.create_time DESC, COUNT(r.question_id) DESC
+        LIMIT 1
+    </select>
+    <select id="getIndexHotExchange" parameterType="cn.niit.group5.entity.Address"
+            resultType="cn.niit.group5.entity.Exchange">
+         SELECT e.*,COUNT(r.exchange_id)AS replyAmount FROM t_reply r,t_exchange e
+ WHERE r.exchange_id=e.id
+        <if test="id lt 18 ">AND e.address_id=#{id}</if>
+ GROUP BY r.exchange_id
+ ORDER BY e.create_time DESC, COUNT(r.exchange_id) DESC
+ LIMIT 1
+    </select>
+
+
 </mapper>

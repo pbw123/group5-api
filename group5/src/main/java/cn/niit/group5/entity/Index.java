@@ -6,17 +6,42 @@ import java.util.List;
 public class Index implements Serializable {
     private  Integer id;
     private List<Module> modules;
-    private List<News>  HotNews;
-    private List<News> Trends;
+    private List<News>  TopNews;
+    private List<News> IndexDynamic;
     private List<Video> videos;
+    private Question IndexHotQuestion;
+    private Exchange IndexHotExchange;
 
-
-    public List<News> getTrends() {
-        return Trends;
+    public List<News> getTopNews() {
+        return TopNews;
     }
 
-    public void setTrends(List<News> trends) {
-        Trends = trends;
+    public void setTopNews(List<News> topNews) {
+        TopNews = topNews;
+    }
+
+    public List<News> getIndexDynamic() {
+        return IndexDynamic;
+    }
+
+    public void setIndexDynamic(List<News> indexDynamic) {
+        IndexDynamic = indexDynamic;
+    }
+
+    public Question getIndexHotQuestion() {
+        return IndexHotQuestion;
+    }
+
+    public void setIndexHotQuestion(Question indexHotQuestion) {
+        IndexHotQuestion = indexHotQuestion;
+    }
+
+    public Exchange getIndexHotExchange() {
+        return IndexHotExchange;
+    }
+
+    public void setIndexHotExchange(Exchange indexHotExchange) {
+        IndexHotExchange = indexHotExchange;
     }
     public Integer getId() {
         return id;
@@ -32,14 +57,6 @@ public class Index implements Serializable {
 
     public void setModules(List<Module> modules) {
         this.modules = modules;
-    }
-
-    public List<News> getHotNews() {
-        return HotNews;
-    }
-
-    public void setHotNews(List<News> hotNews) {
-        HotNews = hotNews;
     }
 
     public List<Video> getVideos() {

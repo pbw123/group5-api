@@ -56,7 +56,7 @@ public class ExpertController {
     @GetMapping(value = "getIndustrySystem")
     public ResponseResult getIndustrySystem(){
        List<IndustrySystem> industrySystems =industrySystemMapper.getIndustrySystem();
-        return ResponseResult.success(industrySystems);
+        return   ResponseResult.success(industrySystems);
     }
 
     @ApiOperation(value = "获取一个体系类别的专家")
