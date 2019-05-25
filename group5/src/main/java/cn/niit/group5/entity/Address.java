@@ -1,7 +1,6 @@
 package cn.niit.group5.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Address implements Serializable {
     private Integer id;
@@ -10,59 +9,9 @@ public class Address implements Serializable {
 
     private Integer isDelete;
 
-    private Module module;
-
-    private ModuleAddress moduleAddress;
-
-
-    private List<Module> modules;
-
-
-
-    private List<News>  HotNews;
-
-
-
-    private List<Video> videos;
 
     private static final long serialVersionUID = 1L;
-    public List<News> getHotNews() {
-        return HotNews;
-    }
 
-    public void setHotNews(List<News> hotNews) {
-        HotNews = hotNews;
-    }  public List<Video> getVideos() {
-        return videos;
-    }
-
-    public void setVideos(List<Video> videos) {
-        this.videos = videos;
-    }
-    public List<Module> getModules() {
-        return modules;
-    }
-
-    public void setModules(List<Module> modules) {
-        this.modules = modules;
-    }
-
-
-    public Module getModule() {
-        return module;
-    }
-
-    public void setModule(Module module) {
-        this.module = module;
-    }
-
-    public ModuleAddress getModuleAddress() {
-        return moduleAddress;
-    }
-
-    public void setModuleAddress(ModuleAddress moduleAddress) {
-        this.moduleAddress = moduleAddress;
-    }
     public Integer getId() {
         return id;
     }

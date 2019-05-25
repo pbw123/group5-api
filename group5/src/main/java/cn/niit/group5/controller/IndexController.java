@@ -1,10 +1,7 @@
 package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.*;
-import cn.niit.group5.mapper.FarmerApplyMapper;
-import cn.niit.group5.mapper.ModuleMapper;
-import cn.niit.group5.mapper.NewsMapper;
-import cn.niit.group5.mapper.VideoMapper;
+import cn.niit.group5.mapper.*;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -104,5 +101,16 @@ public class IndexController {
          List<News> indexModule = moduleMapper.getTopNews(address);
          return ResponseResult.success(indexModule);
      }
+
+//     左上角选择地区
+    @Autowired
+   private AddressMapper addressMapper;
+    @ApiOperation(value = "首页左上角地区列表",notes = "下拉列表的数据由接口返回，客户端遍历出来，而非客户端写死")
+    @GetMapping(value = "getAddressList")
+    public ResponseResult getAddressList()
+    {
+        List<Address> addressList = addressMapper.getAddressList();
+        return ResponseResult.success(addressList);
+    }
 
 }

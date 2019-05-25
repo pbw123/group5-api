@@ -122,5 +122,13 @@ public class NewsController {
         List<News> topicNewsList = topicMapper.getNewsByTopicId(id);
         return  ResponseResult.success(topicNewsList);
     }
+  @ApiOperation(value = "首页顶部的搜索",notes ="资讯的搜索" )
+  @GetMapping(value = "searchNews")
+    public ResponseResult searchNews(String keyword)
+    {
+        List<News> newsList = newsMapper.getNewsBySearch(keyword);
+        return  ResponseResult.success(newsList);
+    }
+
 
 }
