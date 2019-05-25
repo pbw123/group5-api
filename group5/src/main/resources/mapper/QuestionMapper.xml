@@ -39,6 +39,7 @@
 
     <select id="getQuestionListByUserId" parameterType="Integer" resultMap="questionListRM">
      SELECT q.* FROM t_question q WHERE q.user_id=#{0}
+     and q.is_delete=0
   </select>
     <resultMap id="questionListRM" type="question" extends="columnProperty">
         <association property="replyAmount" column="id" select="getReplyAmount">

@@ -106,10 +106,10 @@ public class ExchangeController {
         }
 
         @ApiOperation(value = "删除我的交流文章",notes = "需要传入该交流文章的id")
-        @GetMapping(value = "deleteExchange/{exchangeId}")
-         public ResponseResult deleteExchange(@PathVariable int exchangeId)
+        @GetMapping(value = "deleteExchange/{id}")
+         public ResponseResult deleteExchange(@PathVariable Integer id)
         {
-            if (exchangeMapper.deleteMyExchange(exchangeId)==1)
+            if (exchangeMapper.deleteMyExchange(id)==1)
             {
                 return new  ResponseResult(StatusConst.SUCCESS, MsgConst.SUCCESS);
             }else {

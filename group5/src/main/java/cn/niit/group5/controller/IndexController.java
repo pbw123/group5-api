@@ -1,17 +1,16 @@
 package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.*;
-import cn.niit.group5.mapper.*;
 import cn.niit.group5.mapper.FarmerApplyMapper;
 import cn.niit.group5.mapper.ModuleMapper;
+import cn.niit.group5.mapper.NewsMapper;
+import cn.niit.group5.mapper.VideoMapper;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,11 +27,11 @@ public class IndexController {
     private VideoMapper videoMapper;
 
 
-    @ApiOperation(value = "首页九宫格",notes = "选择的地区不同，看的的九宫格就不一样，所以要传入地区的id,默认江苏")
-    @GetMapping(value = "selectModule/{id}")
-    public List<Module> selectModule(@PathVariable int id){
-        return  moduleMapper.getIndexModule(id);
-    }
+//    @ApiOperation(value = "首页九宫格",notes = "选择的地区不同，看的的九宫格就不一样，所以要传入地区的id,默认江苏")
+//    @GetMapping(value = "selectModule/{id}")
+//    public List<Module> selectModule(@PathVariable Integer id){
+//        return  moduleMapper.getIndexModule(id);
+//    }
 
     @ApiOperation(value = "点击九宫格都需要调用的接口",notes = "传入该模块功能的id")
     @GetMapping(value = "getModuleDetails/{id}")
@@ -67,9 +66,7 @@ public class IndexController {
     }
     @ApiOperation(value ="首页信息")
     @GetMapping(value = "/getIndexMessage/{id}")
-    public ResponseResult getIndexMessage(
-            @PathVariable Integer id
-    ){
+    public ResponseResult getIndexMessage(@PathVariable Integer id){
         Index index=new Index();
         List<Module> moduleList=moduleMapper.getIndexModule(id);
         Address address=new Address();
@@ -107,17 +104,5 @@ public class IndexController {
          List<News> indexModule = moduleMapper.getTopNews(address);
          return ResponseResult.success(indexModule);
      }
-    @ApiOperation(value = "首页热点",notes = "因地区不同，展现的热点就不一样，传入该地区的id，根据提问和交流的发布时间和回复数量进行降序排列")
-     @GetMapping(value = "getIndexHotNews/{id}")
-    public ResponseResult getIndexHotNews(@PathVariable(value = "id") Integer id)
-     {
-         Address address=new Address();
-         address.setId(id);
-         Question hotQuestion = moduleMapper.getIndexHotQuestion(address);
-         Exchange hotExchange = moduleMapper.getIndexHotExchange(address);
-         List lists=new ArrayList();
-         lists.add(hotQuestion);
-         lists.add(hotExchange);
-         return ResponseResult.success(lists);
-     }
+
 }

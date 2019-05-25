@@ -139,10 +139,10 @@ public class UserController {
     }
 
     //    问题详情
-    @ApiOperation(value = "问题详情", notes = "关于提问的问题详情")
-    @GetMapping(value = "getQuestionDetailById/{question_id}")
-    public Question getQuestionDetailById(@PathVariable int question_id) {
-        return questionMapper.getQuestionDetail(question_id);
+    @ApiOperation(value = "问题详情", notes = "关于提问的问题详情,传入该问题的id")
+    @GetMapping(value = "getQuestionDetailById/{id}")
+    public Question getQuestionDetailById(@PathVariable Integer id) {
+        return questionMapper.getQuestionDetail(id);
     }
 
     //    根据id查询要添加的用户信息

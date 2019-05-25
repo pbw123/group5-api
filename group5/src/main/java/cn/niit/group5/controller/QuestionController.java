@@ -32,7 +32,7 @@ public class QuestionController {
     @ApiOperation(value = "发布一条提问")
     @PostMapping(value = "/add")
     public ResponseResult addQuestion(
-            @RequestParam(required = true) int userId,
+            @RequestParam(required = true) Integer userId,
             @RequestParam(required = true) String content,
             String sort
     ) {
@@ -53,9 +53,9 @@ public class QuestionController {
     @ApiOperation(value = "在提问中发表评论")
     @PostMapping(value = "/reply")
     public ResponseResult replyQuestion(
-            @RequestParam(required = true) int userId,
+            @RequestParam(required = true) Integer userId,
             @RequestParam(required = true) String content,
-            @RequestParam(required = true) int questionId
+            @RequestParam(required = true) Integer questionId
 
     ) {
         Reply reply = new Reply();
@@ -73,10 +73,8 @@ public class QuestionController {
     //  收藏问答
     @ApiOperation(value = "收藏问答")
     @PostMapping(value = "/collectQuestion")
-    public ResponseResult CollectQuestion(
-            @RequestParam(required = true) int userId,
-            @RequestParam(required = true) int questionId
-    ) {
+    public ResponseResult CollectQuestion(@RequestParam(required = true) Integer userId,
+                                          @RequestParam(required = true) Integer questionId) {
         Collection collection = new Collection();
         collection.setUserId(userId);
         collection.setQuestionId(questionId);
@@ -90,10 +88,8 @@ public class QuestionController {
     //关注提问
     @ApiOperation(value = "关注提问")
     @PostMapping(value = "/attentionQuestion")
-    public ResponseResult attentionQuestion(
-            @RequestParam(required = true) int userId,
-            @RequestParam(required = true) int questionId
-    ) {
+    public ResponseResult attentionQuestion(@RequestParam(required = true) Integer userId,
+                                            @RequestParam(required = true) Integer id) {
         Attention attention = new Attention();
         attention.setUserId(userId);
 //        attention.setQuestionId(questionId);
@@ -112,9 +108,9 @@ public class QuestionController {
     }
 
     @ApiOperation(value = "删除‘我的提问'的问题", notes = "需要传入该问题的id")
-    @GetMapping(value = "deleteMyQuestion/{questionId}")
-    public ResponseResult deleteMyQuestion(@PathVariable int questionId) {
-        if (questionMapper.deleteMyQuestion(questionId) == 1) {
+    @GetMapping(value = "deleteMyQuestion/{id}")
+    public ResponseResult deleteMyQuestion(@PathVariable Integer id) {
+        if (questionMapper.deleteMyQuestion(id) == 1) {
             return new ResponseResult(StatusConst.SUCCESS, MsgConst.SUCCESS);
         }
         return new ResponseResult(StatusConst.ERROR, MsgConst.FAIL);
