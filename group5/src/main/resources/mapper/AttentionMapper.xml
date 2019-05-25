@@ -12,7 +12,7 @@
     INSERT INTO t_attention(user_id,question_id) VALUES (#{userId},#{questionId})
   </insert>
 
-  <select id="getAttentionByUserId" parameterType="int" resultMap="attentionsRM">
+  <select id="getAttentionByUserId" parameterType="Integer" resultMap="attentionsRM">
      SELECT a.id,a.user_id,a.question_id,q.id qid,q.user_id quid,q.content,q.create_time,q.sort
      FROM t_attention a,t_question q WHERE a.question_id=q.id AND a.user_id=#{userId}
   </select>

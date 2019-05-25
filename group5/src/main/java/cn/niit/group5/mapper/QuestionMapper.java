@@ -30,9 +30,6 @@ public interface QuestionMapper {
     //    发布一条提问
     void insertQuestion(Question question);
 
-
-
-
     //删除我的交流文章
     @Update("UPDATE  t_question SET is_delete=1 WHERE id=#{0}")
     int deleteMyQuestion(int questionId);

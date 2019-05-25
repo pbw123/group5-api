@@ -21,4 +21,6 @@ public interface ModuleMapper {
 //    热点
     Question getIndexHotQuestion(Address address);
     Exchange getIndexHotExchange(Address address);
+
+
 }

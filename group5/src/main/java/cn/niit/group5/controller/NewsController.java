@@ -23,6 +23,8 @@ public class NewsController {
     private VideoMapper videoMapper;
     @Autowired
     private CollectionMapper collectionMapper;
+    @Autowired
+    private CommodityMapper commodityMapper;
 
     @ApiOperation(value = "港城要闻",notes = "港城要闻的资讯")
     @GetMapping(value = "yaowen")
@@ -117,5 +119,12 @@ public class NewsController {
         return ResponseResult.success();
     }
 
-
+    @ApiOperation(value = "品牌农资中通过分类sort_id遍历出相应资讯")
+    @GetMapping(value = "getCommdityBysortId/{sortId}")
+    public ResponseResult getCommdityBysortId(
+            @PathVariable Integer sortId
+    ){
+        List<Commodity> commodityList=commodityMapper.getCommdityBysortId(sortId);
+        return ResponseResult.success(commodityList);
+    }
 }

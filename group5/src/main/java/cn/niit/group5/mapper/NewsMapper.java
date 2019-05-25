@@ -14,5 +14,6 @@ public interface NewsMapper {
     @Select("SELECT * FROM t_news WHERE  is_delete=0")
     List<News> selectAllBySortId(int sortId);
 
+//
 
 }

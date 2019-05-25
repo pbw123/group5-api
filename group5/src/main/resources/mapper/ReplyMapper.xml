@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.niit.group5.mapper.ReplyMapper">
 
-    <select id="getMyReplyById" parameterType="int" resultMap="myReplyRM">
+    <select id="getMyReplyById" parameterType="Integer" resultMap="myReplyRM">
   SELECT r.id,r.content,r.reply_time,r.user_id ruid,r.question_id rqid
  FROM t_reply r,t_user u,t_question q
  WHERE

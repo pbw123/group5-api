@@ -28,7 +28,7 @@
     INSERT INTO t_collection(user_id,video) VALUES (#{userId},#{video})
   </insert>
 
-  <select id="getCollectQuestionById"  parameterType="int"  resultMap="collectionRM">
+  <select id="getCollectQuestionById"  parameterType="Integer"  resultMap="collectionRM">
     SELECT c.id,c.user_id,c.question_id,q.id qid,q.user_id quid,q.content,q.create_time,q.sort,
 	u.id uid,u.user_name,u.user_address,u.identity FROM t_collection c,t_question q,t_user u
 	WHERE c.user_id=#{userId}
@@ -60,7 +60,7 @@
 
   </resultMap>
 
-  <select id="getCollectExchangeById" resultMap="CollectionRM" parameterType="int">
+  <select id="getCollectExchangeById" resultMap="CollectionRM" parameterType="Integer">
     SELECT c.id,c.user_id,c.exchange_id,e.id eid,e.user_id euid,e.content,e.create_time,e.like,
 	u.id uid,u.user_name,u.user_address,u.identity
 	FROM t_collection c,t_exchange e,t_user u
@@ -89,7 +89,7 @@
     </association>
   </resultMap>
 
-  <select id="getCollectNewsById" parameterType="int" resultMap="Collection1RM">
+  <select id="getCollectNewsById" parameterType="Integer" resultMap="Collection1RM">
     SELECT c.id,c.user_id,c.news_id,n.id nid,n.title,n.content,n.create_time,n.read_number
     FROM t_collection c,t_news n
     WHERE c.user_id=#{userId}
@@ -108,7 +108,7 @@
       <result column="read_number" property="readNumber"/>
     </association>
   </resultMap>
-  <select id="getCollectVideoById" parameterType="int" resultMap="Collection2RM">
+  <select id="getCollectVideoById" parameterType="Integer" resultMap="Collection2RM">
     SELECT c.id,c.user_id,c.video,v.id vid,v.video_title,v.img_url,v.video_url,v.read_number
 FROM t_collection c,t_video v
 WHERE c.user_id=#{userId}

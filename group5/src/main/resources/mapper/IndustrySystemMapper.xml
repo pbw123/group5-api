@@ -8,7 +8,7 @@
     <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
     <result column="icon" property="icon" jdbcType="LONGVARCHAR" />
   </resultMap>
-<select id="getIndustrySystem"  resultMap="BaseResultMap" parameterType="int">
+<select id="getIndustrySystem"  resultMap="BaseResultMap" parameterType="Integer">
   SELECT * FROM t_industry_system
 </select>
 </mapper>

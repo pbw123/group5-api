@@ -32,7 +32,7 @@
         </association>
     </resultMap>
 
-    <select id="getExchangeReplyNumber" resultType="int">
+    <select id="getExchangeReplyNumber" resultType="Integer">
           SELECT COUNT(exchange_id) replyAmount FROM t_reply r
   WHERE r.exchange_id=#{0}
   AND r.is_exchange_reply=1
@@ -44,7 +44,7 @@
  </insert>
 
 
-    <select id="getExchangeListByUserId" parameterType="int" resultMap="exchangeRM">
+    <select id="getExchangeListByUserId" parameterType="Integer" resultMap="exchangeRM">
      SELECT e.id,e.user_id euid,e.content,e.like,e.create_time
       FROM t_exchange e
       WHERE e.user_id=#{0}

@@ -32,12 +32,12 @@
     select * from t_reply where question_id=#{0}
   </select>
 
-    <select id="getUserById" parameterType="int" resultMap="cn.niit.group5.mapper.UserMapper.BaseResultMap">
+    <select id="getUserById" parameterType="Integer" resultMap="cn.niit.group5.mapper.UserMapper.BaseResultMap">
       SELECT u.*
     FROM t_user u WHERE u.id=#{id}
   </select>
 
-    <select id="getQuestionListByUserId" parameterType="int" resultMap="questionListRM">
+    <select id="getQuestionListByUserId" parameterType="Integer" resultMap="questionListRM">
      SELECT q.* FROM t_question q WHERE q.user_id=#{0}
   </select>
     <resultMap id="questionListRM" type="question" extends="columnProperty">
