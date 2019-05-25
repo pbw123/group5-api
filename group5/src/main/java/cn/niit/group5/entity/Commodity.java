@@ -1,6 +1,7 @@
 package cn.niit.group5.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Commodity implements Serializable {
     private Integer id;
@@ -19,8 +20,28 @@ public class Commodity implements Serializable {
 
     private String detail;
 
-    private static final long serialVersionUID = 1L;
+    private List<Commodity> commodities;
 
+
+
+    private List<EnterpriseRecommend> enterpriseRecommends;
+
+    private static final long serialVersionUID = 1L;
+    public List<Commodity> getCommodities() {
+        return commodities;
+    }
+
+    public void setCommodities(List<Commodity> commodities) {
+        this.commodities = commodities;
+    }
+
+    public List<EnterpriseRecommend> getEnterpriseRecommends() {
+        return enterpriseRecommends;
+    }
+
+    public void setEnterpriseRecommends(List<EnterpriseRecommend> enterpriseRecommends) {
+        this.enterpriseRecommends = enterpriseRecommends;
+    }
     public Integer getId() {
         return id;
     }

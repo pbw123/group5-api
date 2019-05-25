@@ -10,11 +10,6 @@ import java.util.List;
 @Component
 public interface NewsMapper {
 //根据分类查询农资
-
-    @Select("SELECT * FROM t_news WHERE  is_delete=0")
-    List<News> selectAllBySortId(int sortId);
-
-//
     @Select("SELECT * FROM t_news WHERE  is_delete=0 and news_sort_id=#{0}")
     List<News> selectAllBySortId(Integer sortId);
 
