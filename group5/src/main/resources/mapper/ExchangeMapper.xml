@@ -44,7 +44,7 @@
  </insert>
 
 
-    <select id="getExchangeListByUserId" parameterType="int" resultMap="exchangeRM">
+    <select id="getExchangeListByUserId" parameterType="Integer" resultMap="exchangeRM">
      SELECT e.id,e.user_id euid,e.content,e.like,e.create_time
       FROM t_exchange e
       WHERE e.user_id=#{0}

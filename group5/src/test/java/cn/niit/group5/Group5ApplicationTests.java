@@ -4,6 +4,7 @@ import cn.niit.group5.entity.*;
 import cn.niit.group5.mapper.ModuleMapper;
 import cn.niit.group5.mapper.ReplyMapper;
 import cn.niit.group5.mapper.TechnologySortMapper;
+import cn.niit.group5.mapper.TopicMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,5 +90,20 @@ public class Group5ApplicationTests {
         address.setId(1);
         Exchange exchange=moduleMapper.getIndexHotExchange(address);
         System.out.println(exchange.toString());
+    }
+
+    @Autowired
+    private TopicMapper topicMapper;
+  @Test
+    public void getTopicTest()
+    {
+        List<Topic> topics = topicMapper.getTopicList();
+       topics.forEach(news -> System.out.println(news));
+    }
+  @Test
+    public void getTopicNewsTest()
+    {
+        List<News> topics = topicMapper.getNewsByTopicId(1);
+       topics.forEach(news -> System.out.println(news));
     }
 }

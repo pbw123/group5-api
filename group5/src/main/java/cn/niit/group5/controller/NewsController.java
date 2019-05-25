@@ -24,34 +24,15 @@ public class NewsController {
     @Autowired
     private CollectionMapper collectionMapper;
 
-    @ApiOperation(value = "港城要闻",notes = "港城要闻的资讯")
-    @GetMapping(value = "yaowen")
-    public List<News> yaoWenNews()
+    @ApiOperation(value = "港城要闻/动态等资讯调用此接口",notes = "要传入此模块的id或者客户端定义一个id值")
+    @GetMapping(value = "getNewsListById/{id}")
+    public List<News> getNewsListById(@PathVariable Integer id)
     {
-        return newsMapper.selectAllBySortId(1);
+        return newsMapper.selectAllBySortId(id);
     }
 
-    @ApiOperation(value = "基层风采/职业农民",notes = "点击基层风采和职业农民都是这个请求")
-    @GetMapping(value = "basicNews")
-    public List<News> basicNews()
-    {
-        return newsMapper.selectAllBySortId(2);
-    }
 
-    @ApiOperation(value = "基层风采中的示范基地",notes = "点击基层风采中的示范基地发起这个请求")
-    @GetMapping(value = "demonstrateNews")
-    public List<News> demonstrateNews()
-    {
-        return newsMapper.selectAllBySortId(3);
-    }
-
-    @ApiOperation(value = "基层风采中的农技人员",notes = "点击基层风采中的农技人员发起这个请求")
-    @GetMapping(value = "personnelNews")
-    public List<News> personnelNews() {
-        return newsMapper.selectAllBySortId(4);
-    }
-
-    @ApiOperation(value = "农业科技",notes = "点击农业科技发起这个请求")
+    @ApiOperation(value = "农业科技",notes = "农业科技页面发起此请求")
     @GetMapping(value = "farmingTechnologySort")
     public List<TechnologySort> farmingTechnologySort()
     {
@@ -93,8 +74,7 @@ public class NewsController {
 
     @ApiOperation(value = "收藏资讯")
     @PostMapping(value = "collectNews")
-    public ResponseResult collectNews(
-            @RequestParam(required = true) Integer userId,
+    public ResponseResult collectNews(@RequestParam(required = true) Integer userId,
             @RequestParam(required = true) Integer newsId
     ){
         Collection collection=new Collection();
@@ -106,8 +86,7 @@ public class NewsController {
 
     @ApiOperation(value = "收藏视频")
     @PostMapping(value = "collectVideo")
-    public ResponseResult collectVideo(
-            @RequestParam(required = true) Integer userId,
+    public ResponseResult collectVideo(@RequestParam(required = true) Integer userId,
             @RequestParam(required = true) Integer video
     ){
         Collection collection=new Collection();
@@ -117,5 +96,21 @@ public class NewsController {
         return ResponseResult.success();
     }
 
+    @Autowired
+    private TopicMapper topicMapper;
+    @ApiOperation(value = "专题列表",notes ="无需任何参数" )
+    @GetMapping(value = "getTopicList")
+    public ResponseResult getTopicList()
+    {
+        List<Topic> topicList = topicMapper.getTopicList();
+        return  ResponseResult.success(topicList);
+    }
+  @ApiOperation(value = "每个专题里的资讯列表",notes ="客户端传入该专题的id" )
+  @GetMapping(value = "getTopicNews/{id}")
+    public ResponseResult getTopicNews(@PathVariable Integer id)
+    {
+        List<News> topicNewsList = topicMapper.getNewsByTopicId(id);
+        return  ResponseResult.success(topicNewsList);
+    }
 
 }

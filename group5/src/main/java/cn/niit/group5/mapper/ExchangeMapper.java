@@ -16,11 +16,11 @@ public interface ExchangeMapper {
     void insertExchange(Exchange exchange);
 
 //    我的交流文章
-List<Exchange>getExchangeListByUserId(int myUserId);
+List<Exchange>getExchangeListByUserId(Integer userId);
 
 //删除我的交流文章
     @Update("UPDATE  t_exchange SET is_delete=1 WHERE id=#{0}")
-    int deleteMyExchange(int exchangeId);
+    int deleteMyExchange(Integer exchangeId);
 
 
 }
