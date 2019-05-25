@@ -3,8 +3,10 @@ package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.Expert;
 import cn.niit.group5.entity.ExpertQuestion;
+import cn.niit.group5.entity.IndustrySystem;
 import cn.niit.group5.mapper.ExpertMapper;
 import cn.niit.group5.mapper.ExpertQuestionMapper;
+import cn.niit.group5.mapper.IndustrySystemMapper;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/expert")
@@ -21,6 +24,8 @@ public class ExpertController {
     private ExpertQuestionMapper expertQuestionMapper;
     @Autowired
     private ExpertMapper expertMapper;
+    @Autowired
+    private IndustrySystemMapper industrySystemMapper;
 
     @ApiOperation(value = "咨询专家")
     @PostMapping(value = "insertExpertQuestion")
@@ -39,11 +44,27 @@ public class ExpertController {
     }
 
     @ApiOperation(value = "专家详情")
-    @PostMapping(value = "getExpertDetail/{id}")
+    @GetMapping(value = "getExpertDetail/{id}")
     public  ResponseResult getExpertDetail(
             @PathVariable Integer id
     ){
         Expert expert=expertMapper.getExpertDetail(id);
         return ResponseResult.success(expert);
+    }
+
+    @ApiOperation(value = "获取产业技术体系类别")
+    @GetMapping(value = "getIndustrySystem")
+    public ResponseResult getIndustrySystem(){
+       List<IndustrySystem> industrySystems =industrySystemMapper.getIndustrySystem();
+        return ResponseResult.success(industrySystems);
+    }
+
+    @ApiOperation(value = "获取一个体系类别的专家")
+    @GetMapping(value = "getExpertBySort")
+    public ResponseResult getExpertBySort(
+            @RequestParam(required = true) Integer expertSort
+    ){
+        List<Expert> experts=expertMapper.getExpertBySort(expertSort);
+        return ResponseResult.success(experts);
     }
 }

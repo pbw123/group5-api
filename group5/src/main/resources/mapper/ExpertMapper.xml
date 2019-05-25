@@ -20,4 +20,8 @@
   <select id="getExpertDetail" parameterType="int" resultMap="BaseResultMap">
     SELECT * FROM t_expert WHERE id=#{id} AND is_delete=0
   </select>
+
+  <select id="getExpertBySort" parameterType="int" resultMap="BaseResultMap">
+    SELECT * FROM t_expert e,t_industry_system i WHERE e.expert_sort=i.id AND e.is_delete=0 AND e.expert_sort=#{expertSort}
+  </select>
 </mapper>
