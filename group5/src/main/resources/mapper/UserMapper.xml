@@ -24,7 +24,6 @@
     <result column="head_url" property="headUrl" jdbcType="LONGVARCHAR" />
   </resultMap>
 
-
   <select id="getUserByPhoneNumber" resultMap="BaseResultMap" parameterType="String" >
     select  * from t_user where phone_number=#{phoneNumber} and is_delete=0
   </select>
@@ -40,6 +39,7 @@
       <if test="isForbidden!=null">is_forbidden</if>
     </trim>
   </sql>
+
   <sql id="signUpValues">
     <trim suffixOverrides=",">
       <if test="phoneNumber!=null">#{phoneNumber},</if>
@@ -51,6 +51,7 @@
       <if test="isForbidden!=null">#{isForbidden}</if>
     </trim>
   </sql>
+
   <insert id="signUp" parameterType="cn.niit.group5.entity.User">
     insert into t_user(<include refid="signUpColumns"></include>)
     values (<include refid="signUpValues"></include>)
@@ -71,5 +72,7 @@
     </trim>
     where id=#{id}
   </update>
-
+<update id="updateScore" parameterType="User">
+  UPDATE t_user set score=score+10
+</update>
 </mapper>

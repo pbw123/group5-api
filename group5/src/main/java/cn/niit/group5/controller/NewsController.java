@@ -103,9 +103,35 @@ public class NewsController {
     public ResponseResult getCommdityBysortId(
             @PathVariable Integer sortId
     ){
+        Commodity commodity=new Commodity();
         List<Commodity> commodityList=commodityMapper.getCommdityBysortId(sortId);
-        return ResponseResult.success(commodityList);
+        List<EnterpriseRecommend> enterpriseRecommendList=enterpriseRecommendMapper.getEnterpriseRecommendBySort(sortId);
+        commodity.setCommodities(commodityList);
+        commodity.setEnterpriseRecommends(enterpriseRecommendList);
+        return ResponseResult.success(commodity);
     }
+
+    @Autowired
+    private EnterpriseRecommendMapper enterpriseRecommendMapper;
+    @ApiOperation(value = "通过品牌农资分类sort遍历出企业推荐",notes="传入品牌农资分类sort_id的值")
+    @GetMapping(value = "getEnterpriseRecommendBySort/{sort}")
+    public ResponseResult getEnterpriseRecommendBySort(
+            @PathVariable Integer sort
+    ){
+        List<EnterpriseRecommend> enterpriseRecommendList=enterpriseRecommendMapper.getEnterpriseRecommendBySort(sort);
+        return  ResponseResult.success(enterpriseRecommendList);
+    }
+
+    @ApiOperation(value = "通过企业id获取企业详情",notes="传入企业的id")
+    @GetMapping(value = "getEnterpriseRecommendById/{id}")
+    public ResponseResult getEnterpriseRecommendById(
+            @PathVariable Integer id
+    ){
+        EnterpriseRecommend enterpriseRecommend=enterpriseRecommendMapper.getEnterpriseRecommendById(id);
+        enterpriseRecommend.setId(id);
+        return ResponseResult.success(enterpriseRecommend);
+    }
+
     @Autowired
     private TopicMapper topicMapper;
     @ApiOperation(value = "专题列表",notes ="无需任何参数" )
@@ -122,13 +148,8 @@ public class NewsController {
         List<News> topicNewsList = topicMapper.getNewsByTopicId(id);
         return  ResponseResult.success(topicNewsList);
     }
-  @ApiOperation(value = "首页顶部的搜索",notes ="资讯的搜索" )
-  @GetMapping(value = "searchNews")
-    public ResponseResult searchNews(String keyword)
-    {
-        List<News> newsList = newsMapper.getNewsBySearch(keyword);
-        return  ResponseResult.success(newsList);
-    }
+
+
 
 
 }

@@ -21,7 +21,10 @@ List<Expert>getAgricultureExpert(@Param("sortId") Integer sortId, @Param("gradeI
     @Select("SELECT eq.* FROM t_expert_question eq WHERE eq.expert_id=#{0}")
     List<ExpertQuestion> getExpertQuestionList(Integer id);
 
-////    专家问题详情
-//    List<ExpertQuestion>expertQuestionDetail(Integer id);
+//    专家问题详情
+    List<ExpertQuestion>expertQuestionDetail(Integer id);
 
+//模糊查询专家
+    @Select("SELECT * FROM t_expert WHERE expert_name LIKE concat('%',#{expertName},'%')")
+   List<Expert> getExpertBySearch(String expertName);
 }

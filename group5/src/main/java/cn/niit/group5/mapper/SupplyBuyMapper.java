@@ -2,6 +2,7 @@ package cn.niit.group5.mapper;
 
 import cn.niit.group5.entity.SupplyBuy;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -35,4 +36,9 @@ public interface SupplyBuyMapper {
 
     //我的求购
     List<SupplyBuy> getSeekById(int userId);
+
+    //模糊查询供求
+    @Select("SELECT * FROM t_supply_buy WHERE title LIKE concat('%',#{title},'%')" +
+            " OR content LIKE concat('%',#{title},'%')")
+    List<SupplyBuy> getSupplyBuyBySearch(String title);
 }
