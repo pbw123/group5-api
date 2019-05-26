@@ -17,6 +17,7 @@
        <id column="id" property="id"/>
        <result column="content" property="content"/>
        <result column="reply_time" property="replyTime"/>
+       <result column="question_id" property="questionId"/>
        <result column="ruid" property="userId"/>
        <result column="rqid" property="questionId"/>
        <association property="user" select="cn.niit.group5.mapper.QuestionMapper.getUserById"

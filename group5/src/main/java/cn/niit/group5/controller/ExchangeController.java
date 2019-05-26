@@ -104,6 +104,16 @@ public class ExchangeController {
             }
             return exchangeList;
         }
+    @ApiOperation(value = "交流详情",notes = "传入该交流的id")
+    @GetMapping(value = "/getExchangeDetailById/{id}")
+    public ResponseResult getExchangeDetail(
+            @PathVariable Integer id
+    ){
+        Exchange exchange=exchangeMapper.getExchangeDetailById(id);
+        exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
+        return ResponseResult.success(exchange);
+    }
+
 
         @ApiOperation(value = "删除我的交流文章",notes = "需要传入该交流文章的id")
         @GetMapping(value = "deleteExchange/{id}")

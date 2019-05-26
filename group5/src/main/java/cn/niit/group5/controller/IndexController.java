@@ -1,10 +1,7 @@
 package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.*;
-import cn.niit.group5.mapper.FarmerApplyMapper;
-import cn.niit.group5.mapper.ModuleMapper;
-import cn.niit.group5.mapper.NewsMapper;
-import cn.niit.group5.mapper.VideoMapper;
+import cn.niit.group5.mapper.*;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -105,4 +102,64 @@ public class IndexController {
          return ResponseResult.success(indexModule);
      }
 
+//     左上角选择地区
+    @Autowired
+   private AddressMapper addressMapper;
+    @ApiOperation(value = "首页左上角地区列表",notes = "下拉列表的数据由接口返回，客户端遍历出来，而非客户端写死")
+    @GetMapping(value = "getAddressList")
+    public ResponseResult getAddressList()
+    {
+        List<Address> addressList = addressMapper.getAddressList();
+        return ResponseResult.success(addressList);
+    }
+
+    @ApiOperation(value = "首页顶部的搜索-资讯",notes ="资讯的搜索" )
+    @GetMapping(value = "searchNews")
+    public ResponseResult searchNews(String keyword)
+    {
+        List<News> newsList = newsMapper.getNewsBySearch(keyword);
+        return  ResponseResult.success(newsList);
+    }
+
+    @Autowired
+    private ExchangeMapper exchangeMapper;
+    @ApiOperation(value = "首页顶部的搜索-交流",notes ="搜索含有输入字符的交流" )
+    @GetMapping(value = "/getExchangeBySearch")
+    public ResponseResult getExchangeBySearch(String keyword){
+        List<Exchange> exchangeList=exchangeMapper.getExchangeBySearch(keyword);
+        return ResponseResult.success(exchangeList);
+    }
+
+    @Autowired
+    private QuestionMapper questionMapper;
+    @ApiOperation(value = "首页顶部的搜索-问答",notes ="搜索含有输入字符的提问" )
+    @GetMapping(value = "/getQuestionBySearch")
+    public ResponseResult getQuestionBySearch(String keyword){
+        List<Question> questionList=questionMapper.getQuestionBySearch(keyword);
+        return ResponseResult.success(questionList);
+    }
+
+    @Autowired
+    private ExpertMapper expertMapper;
+    @ApiOperation(value = "首页顶部的搜索-专家",notes ="搜索含有输入字符的专家" )
+    @GetMapping(value = "/getExpertBySearch")
+    public ResponseResult getExpertBySearch(String keyword){
+        List<Expert> expertList=expertMapper.getExpertBySearch(keyword);
+        return ResponseResult.success(expertList);
+    }
+    @ApiOperation(value = "首页顶部的搜索-视频",notes ="搜索含有输入字符的视频" )
+    @GetMapping(value = "/getVideoBySearch")
+    public ResponseResult getVideoBySearch(String keyword){
+        List<Video> videoList=videoMapper.getVideoBySearch(keyword);
+        return ResponseResult.success(videoList);
+    }
+
+    @Autowired
+    private SupplyBuyMapper supplyBuyMapper;
+    @ApiOperation(value = "首页顶部的搜索-供求",notes ="搜索含有输入字符的供求" )
+    @GetMapping(value = "/getSupplyBuyBySearch")
+    public ResponseResult getSupplyBuyBySearch(String keyword){
+        List<SupplyBuy> supplyBuyList=supplyBuyMapper.getSupplyBuyBySearch(keyword);
+        return ResponseResult.success(supplyBuyList);
+    }
 }

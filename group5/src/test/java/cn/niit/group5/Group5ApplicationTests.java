@@ -1,10 +1,7 @@
 package cn.niit.group5;
 
 import cn.niit.group5.entity.*;
-import cn.niit.group5.mapper.ModuleMapper;
-import cn.niit.group5.mapper.ReplyMapper;
-import cn.niit.group5.mapper.TechnologySortMapper;
-import cn.niit.group5.mapper.TopicMapper;
+import cn.niit.group5.mapper.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,5 +102,22 @@ public class Group5ApplicationTests {
     {
         List<News> topics = topicMapper.getNewsByTopicId(1);
        topics.forEach(news -> System.out.println(news));
+    }
+
+    @Autowired
+    private AddressMapper addressMapper;
+  @Test
+    public void getAdressListTest()
+    {
+        List<Address> topics =addressMapper.getAddressList();
+       topics.forEach(news -> System.out.println(news));
+    }
+    @Autowired
+    private  NewsMapper newsMapper;
+  @Test
+    public void getNewsSearchTest()
+    {
+        final List<News> topics = newsMapper.getNewsBySearch("关于");
+        topics.forEach(news -> System.out.println(news));
     }
 }

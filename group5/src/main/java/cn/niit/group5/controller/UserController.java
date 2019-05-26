@@ -142,8 +142,10 @@ public class UserController {
     //    问题详情
     @ApiOperation(value = "问题详情", notes = "关于提问的问题详情,传入该问题的id")
     @GetMapping(value = "getQuestionDetailById/{id}")
-    public Question getQuestionDetailById(@PathVariable Integer id) {
-        return questionMapper.getQuestionDetail(id);
+    public ResponseResult getQuestionDetailById(@PathVariable Integer id) {
+        Question question=questionMapper.getQuestionDetail(id);
+        question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
+        return ResponseResult.success(question);
     }
 
     //    根据id查询要添加的用户信息
