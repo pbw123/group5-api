@@ -120,4 +120,22 @@ public class Group5ApplicationTests {
         final List<News> topics = newsMapper.getNewsBySearch("关于");
         topics.forEach(news -> System.out.println(news));
     }
+
+    @Autowired
+    ExpertMapper expertMapper;
+  @Test
+    public void getExpertTest()
+    {
+        Integer a=null;
+        Integer b=null;
+        final List<Expert> topics = expertMapper.getAgricultureExpert(a,b);
+        topics.forEach(news -> System.out.println(news));
+    }
+  @Test
+    public void getExpertQuestionListTest()
+    {
+
+        List<ExpertQuestion> topics = expertMapper.getExpertQuestionList(1);
+        topics.forEach(news -> System.out.println(news));
+    }
 }

@@ -2,7 +2,7 @@ package cn.niit.group5.entity;
 
 import java.io.Serializable;
 
-public class ExpertGrade implements Serializable {
+public class Grade implements Serializable {
     private Integer id;
 
     private String grade;

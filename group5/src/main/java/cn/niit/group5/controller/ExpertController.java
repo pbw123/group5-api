@@ -8,6 +8,7 @@ import cn.niit.group5.mapper.ExpertMapper;
 import cn.niit.group5.mapper.ExpertQuestionMapper;
 import cn.niit.group5.mapper.IndustrySystemMapper;
 import cn.niit.group5.util.ResponseResult;
+import cn.niit.group5.util.StatusConst;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,23 @@ public class ExpertController {
             @RequestParam(required = true) Integer expertSort
     ){
         List<Expert> experts=expertMapper.getExpertBySort(expertSort);
+        return ResponseResult.success(experts);
+    }
+    @ApiOperation(value = "获取农业专家",notes = "传入分类的id和等级的id,等级客户端指定，1是省级，2是地方级")
+    @GetMapping(value = "getAgricultureExpert")
+    public ResponseResult getAgricultureExpert(@RequestParam(required = true) Integer sortId,
+                                               @RequestParam(required = true) Integer gradeId){
+        if (sortId==null&&gradeId==null)
+        {
+            return ResponseResult.error(StatusConst.ERROR,"哈哈，参数没传过来，看看哪里没写对~-~");
+        }
+        List<Expert> experts=expertMapper.getAgricultureExpert(sortId,gradeId);
+        return ResponseResult.success(experts);
+    }
+    @ApiOperation(value = "获取该专家被别人问的问题",notes = "传入该专家的id")
+    @GetMapping(value = "getExpertQuestionList/{id}")
+    public ResponseResult getExpertQuestionList(@PathVariable Integer id){
+        List<ExpertQuestion> experts=expertMapper.getExpertQuestionList(id);
         return ResponseResult.success(experts);
     }
 }

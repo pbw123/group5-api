@@ -15,7 +15,7 @@ public class Expert implements Serializable {
 
     private String resume;
 
-    private Integer expertGrade;
+    private Integer sysSort;
 
     private Integer expertSort;
 
@@ -30,6 +30,26 @@ public class Expert implements Serializable {
     private Integer isDelete;
 
     private Integer state;
+
+    private String grade;
+
+    private  String sort;
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -81,13 +101,6 @@ public class Expert implements Serializable {
         this.resume = resume == null ? null : resume.trim();
     }
 
-    public Integer getExpertGrade() {
-        return expertGrade;
-    }
-
-    public void setExpertGrade(Integer expertGrade) {
-        this.expertGrade = expertGrade;
-    }
 
     public Integer getExpertSort() {
         return expertSort;
@@ -145,6 +158,14 @@ public class Expert implements Serializable {
         this.state = state;
     }
 
+    public Integer getSysSort() {
+        return sysSort;
+    }
+
+    public void setSysSort(Integer sysSort) {
+        this.sysSort = sysSort;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -157,7 +178,7 @@ public class Expert implements Serializable {
         sb.append(", email=").append(email);
         sb.append(", profession=").append(profession);
         sb.append(", resume=").append(resume);
-        sb.append(", expertGrade=").append(expertGrade);
+        sb.append(", sysSort=").append(sysSort);
         sb.append(", expertSort=").append(expertSort);
         sb.append(", jobTitle=").append(jobTitle);
         sb.append(", checkAll=").append(checkAll);

@@ -1,32 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.niit.group5.mapper.ExpertMapper" >
-  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Expert" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="expert_name" property="expertName" jdbcType="VARCHAR" />
-    <result column="unit_name" property="unitName" jdbcType="VARCHAR" />
-    <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="profession" property="profession" jdbcType="VARCHAR" />
-    <result column="resume" property="resume" jdbcType="VARCHAR" />
-    <result column="expert_grade" property="expertGrade" jdbcType="INTEGER" />
-    <result column="expert_sort" property="expertSort" jdbcType="INTEGER" />
-    <result column="job_title" property="jobTitle" jdbcType="VARCHAR" />
-    <result column="check_all" property="checkAll" jdbcType="INTEGER" />
-    <result column="phone_number" property="phoneNumber" jdbcType="INTEGER" />
-    <result column="score" property="score" jdbcType="INTEGER" />
-    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
-    <result column="state" property="state" jdbcType="INTEGER" />
-  </resultMap>
-  <select id="getExpertDetail" parameterType="Integer" resultMap="BaseResultMap">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.ExpertMapper">
+    <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Expert">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="expert_name" property="expertName" jdbcType="VARCHAR"/>
+        <result column="unit_name" property="unitName" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="profession" property="profession" jdbcType="VARCHAR"/>
+        <result column="resume" property="resume" jdbcType="VARCHAR"/>
+        <result column="sys_sort" property="sysSort" jdbcType="INTEGER"/>
+        <result column="expert_sort" property="expertSort" jdbcType="INTEGER"/>
+        <result column="job_title" property="jobTitle" jdbcType="VARCHAR"/>
+        <result column="check_all" property="checkAll" jdbcType="INTEGER"/>
+        <result column="phone_number" property="phoneNumber" jdbcType="INTEGER"/>
+        <result column="score" property="score" jdbcType="INTEGER"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+        <result column="state" property="state" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="getExpertDetail" parameterType="Integer" resultMap="BaseResultMap">
     SELECT * FROM t_expert
      WHERE id=#{id}
       AND is_delete=0
   </select>
 
-  <select id="getExpertBySort" parameterType="Integer" resultMap="BaseResultMap">
+    <select id="getExpertBySort" parameterType="Integer" resultMap="BaseResultMap">
     SELECT * FROM t_expert e,t_industry_system i
     WHERE e.expert_sort=i.id
     AND e.is_delete=0
     AND e.expert_sort=#{expertSort}
   </select>
+
+    <resultMap id="agricultureRM" type="Expert" extends="BaseResultMap">
+        <result column="grade" property="grade"/>
+        <result column="sort" property="sort"/>
+    </resultMap>
+
+    <select id="getAgricultureExpert" parameterType="Integer" resultMap="agricultureRM">
+        SELECT e.*,g.grade grade,t.name sort
+        FROM t_expert e,t_expert_grade eg,t_grade g,t_technology_sort t
+        WHERE eg.expert_id=e.id
+        AND eg.grade_id=g.id
+        AND e.expert_sort=t.id
+        <if test="sortId!=null">
+            AND e.expert_sort=#{sortId}
+        </if>
+        <if test="gradeId!=null">
+            AND eg.grade_id=#{gradeId}
+        </if>
+    </select>
+    <select id="getIndustryExpert" parameterType="Integer" resultMap="agricultureRM">
+       SELECT e.*,g.grade,i.system_name
+  FROM t_expert e,t_expert_grade eg,t_grade g,t_industry_system i
+   WHERE   eg.grade_id=#{gradeId}
+   AND eg.expert_id=e.id
+   AND eg.grade_id=g.id
+   AND e.sys_sort=i.id
+   AND e.sys_sort=#{sysSort}
+
+    </select>
+
 </mapper>
