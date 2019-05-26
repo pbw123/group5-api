@@ -14,4 +14,7 @@ public interface SeedMapper {
 
     //通过品种名称获取详情
     Seed getSeedByCropName(String cropName);
+
+//    按条件筛选作物品种
+    List<Seed>searchSeed(Seed seed);
 }

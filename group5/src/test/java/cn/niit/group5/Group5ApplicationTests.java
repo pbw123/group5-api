@@ -175,4 +175,25 @@ public class Group5ApplicationTests {
         List<Pest> topics = pestMapper.searchPest(a,b,c);
         topics.forEach(news -> System.out.println(news));
     }
+    @Autowired
+    SeedMapper seedMapper;
+  @Test
+    public void searchSeedTest()
+    {
+        String a=null;
+        String b=null;
+        String c=null;
+        String d="米";
+        String e=null;
+        String f=null;
+        Seed seed=new Seed();
+        seed.setCropName(a);
+        seed.setIsExit(b);
+        seed.setIsTransgenic(c);
+        seed.setKind(d);
+        seed.setNumber(e);
+        seed.setReviewTime(f);
+        List<Seed> seeds = seedMapper.searchSeed(seed);
+        seeds.forEach(news -> System.out.println(news));
+    }
 }
