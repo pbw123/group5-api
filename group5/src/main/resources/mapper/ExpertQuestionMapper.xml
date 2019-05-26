@@ -12,4 +12,25 @@
 <insert id="insertExpertQuestion" parameterType="cn.niit.group5.entity.ExpertQuestion">
   INSERT INTO t_expert_question(user_id,create_time,expert_id,content) VALUES (#{userId},#{createTime},#{expertId},#{content})
 </insert>
+
+  <select id="expertQuestionDetail" parameterType="Integer" resultMap="questionDetailRM">
+    select * from t_expert_question
+    where id=#{0}
+  </select>
+  <resultMap id="questionDetailRM" type="cn.niit.group5.entity.ExpertQuestion">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="expert_id" property="expertId" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <association property="user" column="user_id"
+                 select="cn.niit.group5.mapper.QuestionMapper.getUserById"></association>
+    <collection property="expertReplys" column="expert_id" select="getExpertReplys"></collection>
+  </resultMap>
+
+  <select id="getExpertReplys" parameterType="Integer" resultType="ExpertReply">
+    select * from t_expert_reply
+    where question_id=#{0}
+  </select>
 </mapper>

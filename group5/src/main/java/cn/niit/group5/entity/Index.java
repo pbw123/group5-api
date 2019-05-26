@@ -12,6 +12,7 @@ public class Index implements Serializable {
     private Question IndexHotQuestion;
     private Exchange IndexHotExchange;
 
+
     public List<News> getTopNews() {
         return TopNews;
     }

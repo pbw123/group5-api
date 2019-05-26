@@ -5,7 +5,5 @@ import org.springframework.stereotype.Component;
 
 @Mapper
 @Component
-public interface ExpertReplyMapper {
-
-
+public interface ExpertGradeMapper {
 }

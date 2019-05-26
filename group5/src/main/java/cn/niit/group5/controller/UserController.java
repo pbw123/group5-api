@@ -249,6 +249,14 @@ public class UserController {
         List<SupplyBuy> supplyBuyList = supplyBuyMapper.getSeekById(userId);
         return supplyBuyList;
     }
-}
+
+   @Autowired
+   private ExpertQuestionMapper expertQuestionMapper;
+   @ApiOperation(value = "‘我的提问’中的‘专家提问’",notes = "传入我的用户id")
+    @GetMapping(value = "getMyExpertQuestionList/{id}")
+    public ResponseResult getMyExpertQuestionList(@PathVariable Integer id){
+        List<ExpertQuestion> experts=expertQuestionMapper.getMyExpertQuestionList(id);
+        return ResponseResult.success(experts);
+    }}
 
 

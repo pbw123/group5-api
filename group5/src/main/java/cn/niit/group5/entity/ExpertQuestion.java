@@ -2,6 +2,7 @@ package cn.niit.group5.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class ExpertQuestion implements Serializable {
     private Integer id;
@@ -15,6 +16,26 @@ public class ExpertQuestion implements Serializable {
     private Integer isDelete;
 
     private String content;
+
+    private List<ExpertReply> expertReplys;
+
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<ExpertReply> getExpertReplys() {
+        return expertReplys;
+    }
+
+    public void setExpertReplys(List<ExpertReply> expertReplys) {
+        this.expertReplys = expertReplys;
+    }
 
     private static final long serialVersionUID = 1L;
 

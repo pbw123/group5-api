@@ -138,4 +138,41 @@ public class Group5ApplicationTests {
         List<ExpertQuestion> topics = expertMapper.getExpertQuestionList(1);
         topics.forEach(news -> System.out.println(news));
     }
+
+    @Autowired
+    ExpertQuestionMapper expertQuestionMapper;
+  @Test
+    public void getExpertQuestionDetailTest()
+    {
+
+        List<ExpertQuestion> topics = expertQuestionMapper.expertQuestionDetail(1);
+        topics.forEach(news -> System.out.println(news));
+    }
+  @Test
+    public void getMyExpertQuestionListTest()
+    {
+
+        List<ExpertQuestion> topics = expertQuestionMapper.getMyExpertQuestionList(1);
+        topics.forEach(news -> System.out.println(news));
+    }
+    @Autowired
+    IndustrySystemMapper industrySystemMapper;
+  @Test
+    public void getIndustryExpertListTest()
+    {
+
+        List<ExpertGrade> topics = industrySystemMapper.getIndustryExpertList(2,5);
+        topics.forEach(news -> System.out.println(news));
+    }
+    @Autowired
+    PestMapper pestMapper;
+  @Test
+    public void searchPestTest()
+    {
+        String a=null;
+        String b=null;
+        String c=null;
+        List<Pest> topics = pestMapper.searchPest(a,b,c);
+        topics.forEach(news -> System.out.println(news));
+    }
 }

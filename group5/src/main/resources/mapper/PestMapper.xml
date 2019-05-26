@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.niit.group5.mapper.PestMapper" >
-  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Pest" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="pest_name" property="pestName" jdbcType="VARCHAR" />
-    <result column="breed" property="breed" jdbcType="VARCHAR" />
-    <result column="area" property="area" jdbcType="VARCHAR" />
-    <result column="Introduction" property="introduction" jdbcType="VARCHAR" />
-    <result column="month" property="month" jdbcType="VARCHAR" />
-    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
-    <result column="content" property="content" jdbcType="LONGVARCHAR" />
-  </resultMap>
-<select id="getPestList" resultMap="BaseResultMap">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.PestMapper">
+    <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Pest">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="pest_name" property="pestName" jdbcType="VARCHAR"/>
+        <result column="breed" property="breed" jdbcType="VARCHAR"/>
+        <result column="area" property="area" jdbcType="VARCHAR"/>
+        <result column="Introduction" property="introduction" jdbcType="VARCHAR"/>
+        <result column="month" property="month" jdbcType="VARCHAR"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <select id="getPestList" resultMap="BaseResultMap">
   SELECT pest_name,content FROM t_pest WHERE is_delete=0
 </select>
 
-  <select id="getPestDetailById" resultMap="BaseResultMap">
+    <select id="getPestDetailById" resultMap="BaseResultMap">
     SELECT * FROM t_pest WHERE id=#{id} AND is_delete=0
+  </select>
+
+    <select id="searchPest" parameterType="String" resultMap="BaseResultMap">
+    SELECT p.* FROM t_pest p
+    <if test="breed!=null">
+        WHERE p.breed LIKE CONCAT('%',#{breed},'%')
+    </if>
+    <if test="area!=null">
+        OR p.area LIKE CONCAT('%',#{area},'%')
+    </if>
+    <if test="month!=null">
+        OR p.month LIKE CONCAT('%',#{month},'%')
+    </if>
   </select>
 </mapper>

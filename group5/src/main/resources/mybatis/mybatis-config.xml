@@ -19,6 +19,9 @@
         <typeAlias alias="Video" type="cn.niit.group5.entity.Video"/>
         <typeAlias alias="Address" type="cn.niit.group5.entity.Address"/>
         <typeAlias alias="Expert" type="cn.niit.group5.entity.Expert"/>
+        <typeAlias alias="ExpertQuestion" type="cn.niit.group5.entity.ExpertQuestion"/>
+        <typeAlias alias="ExpertReply" type="cn.niit.group5.entity.ExpertReply"/>
+        <typeAlias alias="ExpertGrade" type="cn.niit.group5.entity.ExpertGrade"/>
 <!--        <typeAlias alias="Collection" type="cn.niit.group5.entity.Collection"/>-->
     </typeAliases>
 
