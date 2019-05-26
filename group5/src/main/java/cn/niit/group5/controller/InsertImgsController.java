@@ -61,7 +61,7 @@ public class InsertImgsController {
     return url.toString();
 }
 
-    @ApiOperation(value = "存储提问内容中的图片地址")
+    @ApiOperation(value = "存储提问内容中的图片地址",notes="传入提问id和图片地址")
     @PostMapping(value = "/insertQuestionImg")
     public ResponseResult insertQuestionImgs(
             @RequestParam("questionId") int questionId,
@@ -72,10 +72,26 @@ public class InsertImgsController {
         //遍历图片List，创建Img对象写入数据库
         for (String imgUrl:imgList) {
             Img img = new Img();
-            img.setIsJudge(0);
             img.setQuestionId(questionId);
             img.setImgUrl(imgUrl);
             imgMapper.insertQuestionImg(img);
+        }
+        return ResponseResult.success();
+    }
+    @ApiOperation(value = "存储交流中的图片地址",notes="传入交流id和图片地址")
+    @PostMapping(value = "/insertExchangeImg")
+    public ResponseResult insertExchangeImgs(
+            @RequestParam("exchangeId") int exchangeId,
+            @RequestParam("imgs") String imgs
+    ){
+        //调用FastJson的序列化工具，将前端传过来的图片数组序列化字符串再反序列化为Java的List对象
+        List<String> imgList = JSONArray.parseArray(imgs, String.class);
+        //遍历图片List，创建Img对象写入数据库
+        for (String imgUrl:imgList) {
+            Img img = new Img();
+            img.setExchangeId(exchangeId);
+            img.setImgUrl(imgUrl);
+            imgMapper.insertExchangeImg(img);
         }
         return ResponseResult.success();
     }

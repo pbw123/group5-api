@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class Img implements Serializable {
     private Integer id;
 
-    private Integer isJudge;
-
     private Integer questionId;
 
     private Integer exchangeId;
+
+    private Integer newsId;
 
     private String imgUrl;
 
@@ -21,14 +21,6 @@ public class Img implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getIsJudge() {
-        return isJudge;
-    }
-
-    public void setIsJudge(Integer isJudge) {
-        this.isJudge = isJudge;
     }
 
     public Integer getQuestionId() {
@@ -47,6 +39,14 @@ public class Img implements Serializable {
         this.exchangeId = exchangeId;
     }
 
+    public Integer getNewsId() {
+        return newsId;
+    }
+
+    public void setNewsId(Integer newsId) {
+        this.newsId = newsId;
+    }
+
     public String getImgUrl() {
         return imgUrl;
     }
@@ -62,9 +62,9 @@ public class Img implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", isJudge=").append(isJudge);
         sb.append(", questionId=").append(questionId);
         sb.append(", exchangeId=").append(exchangeId);
+        sb.append(", newsId=").append(newsId);
         sb.append(", imgUrl=").append(imgUrl);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

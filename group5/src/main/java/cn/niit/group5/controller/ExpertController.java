@@ -78,7 +78,7 @@ public class ExpertController {
         List<Expert> experts = expertMapper.getAgricultureExpert(sortId, gradeId);
         return ResponseResult.success(experts);
     }
-
+    
     @ApiOperation(value = "获取该专家被别人问的问题列表", notes = "传入该专家的id")
     @GetMapping(value = "getExpertQuestionList/{id}")
     public ResponseResult getExpertQuestionList(@PathVariable Integer id) {
