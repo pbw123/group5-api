@@ -1,6 +1,7 @@
 package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.*;
+import cn.niit.group5.entity.dto.ExpertDTO;
 import cn.niit.group5.entity.dto.IndustryDTO;
 import cn.niit.group5.mapper.ExpertMapper;
 import cn.niit.group5.mapper.ExpertQuestionMapper;
@@ -43,13 +44,15 @@ public class ExpertController {
         return ResponseResult.success();
     }
 
-    @ApiOperation(value = "专家详情")
+    @ApiOperation(value = "专家详情/有咨询专家按钮的那个页面",notes = "传入该专家的id/点击专家头像用这个接口")
     @GetMapping(value = "getExpertDetail/{id}")
-    public ResponseResult getExpertDetail(
-            @PathVariable Integer id
-    ) {
+    public ResponseResult getExpertDetail(@PathVariable Integer id) {
         Expert expert = expertMapper.getExpertDetail(id);
-        return ResponseResult.success(expert);
+        List<ExpertQuestion> expertQuestions=expertMapper.getExpertQuestionList(id);
+        ExpertDTO expertDTO=new ExpertDTO();
+        expertDTO.setExpert(expert);
+        expertDTO.setExpertQuestions(expertQuestions);
+        return ResponseResult.success(expertDTO);
     }
 
     @ApiOperation(value = "获取产业技术体系类别")
@@ -107,7 +110,6 @@ public class ExpertController {
         industryDTO.setPostExpertList(postExpertList);
         industryDTO.setBasicExpertList(basicExpertList);
         return ResponseResult.success(industryDTO);
-
     }
 
 }

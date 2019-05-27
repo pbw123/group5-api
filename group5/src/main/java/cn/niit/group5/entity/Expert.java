@@ -35,6 +35,16 @@ public class Expert implements Serializable {
 
     private  String sort;
 
+   private TechnologySort technologySort;
+
+    public TechnologySort getTechnologySort() {
+        return technologySort;
+    }
+
+    public void setTechnologySort(TechnologySort technologySort) {
+        this.technologySort = technologySort;
+    }
+
     public String getGrade() {
         return grade;
     }

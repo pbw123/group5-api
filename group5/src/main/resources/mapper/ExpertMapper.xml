@@ -18,11 +18,18 @@
         <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
         <result column="state" property="state" jdbcType="INTEGER"/>
     </resultMap>
-    <select id="getExpertDetail" parameterType="Integer" resultMap="BaseResultMap">
+    <select id="getExpertDetail" parameterType="Integer" resultMap="expertRM">
     SELECT * FROM t_expert
      WHERE id=#{id}
       AND is_delete=0
   </select>
+    <resultMap id="expertRM" type="expert" extends="BaseResultMap">
+        <association property="technologySort" column="expert_sort" select="getSort"></association>
+    </resultMap>
+    <select id="getSort" resultType="cn.niit.group5.entity.TechnologySort">
+        select * from t_technology_sort
+        where id=#{0}
+    </select>
 
     <select id="getExpertBySort" parameterType="Integer" resultMap="BaseResultMap">
     SELECT * FROM t_expert e,t_industry_system i
