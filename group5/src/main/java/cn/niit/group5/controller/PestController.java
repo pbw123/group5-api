@@ -3,6 +3,7 @@ package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.Pest;
 import cn.niit.group5.mapper.PestMapper;
+import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,11 @@ public class PestController {
     @GetMapping(value = "getPestDetailById/{id}")
     public Pest getPestDetail(@RequestParam(required = true) @PathVariable Integer id){
         return pestMapper.getPestDetailById(id);
+    }
+    @ApiOperation(value = "根据条件筛选植保文章")
+    @PostMapping(value = "searchPest")
+    public ResponseResult searchPest(String breed, String area, String month){
+        List<Pest> pests = pestMapper.searchPest(breed, area, month);
+        return  ResponseResult.success(pests);
     }
 }

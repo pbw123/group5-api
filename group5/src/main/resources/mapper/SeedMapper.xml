@@ -28,4 +28,30 @@
     SELECT * FROM t_seed WHERE is_delete=0 AND crop_name=#{cropName}
   </select>
 
+  <select id="searchSeed" parameterType="Seed" resultMap="BaseResultMap">
+    SELECT s.* FROM t_seed s
+  <trim prefixOverrides="OR">
+    <where>
+    <if test="kind!=null">
+      OR s.kind LIKE CONCAT('%',#{kind},'%')
+    </if>
+    <if test="cropName!=null">
+      OR s.crop_name LIKE CONCAT('%',#{cropName},'%')
+    </if>
+    <if test="number!=null">
+      OR s.number LIKE CONCAT('%',#{number},'%')
+    </if>
+    <if test="reviewTime!=null">
+      OR s.review_time LIKE CONCAT('%',#{reviewTime},'%')
+    </if>
+    <if test="isExit!=null">
+      OR s.is_exit LIKE CONCAT('%',#{isExit},'%')
+    </if>
+    <if test="isTransgenic!=null">
+      OR s.is_transgenic LIKE CONCAT('%',#{isTransgenic},'%')
+    </if>
+    </where>
+  </trim>
+  </select>
+
 </mapper>

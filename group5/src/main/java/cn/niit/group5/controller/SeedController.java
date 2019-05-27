@@ -5,6 +5,7 @@ package cn.niit.group5.controller;
 import cn.niit.group5.entity.Seed;
 import cn.niit.group5.mapper.SeedMapper;
 
+import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,4 +38,20 @@ public class SeedController {
     ){
         return seedMapper.getSeedByCropName(cropName);
     }
+   @ApiOperation(value = "根据条件筛选品种")
+    @PostMapping(value = "searchSeed")
+    public ResponseResult searchSend(String kind,String cropName,String reviewTime,
+                                     String isTransgenic ,String isExit,String number)
+   {
+       Seed seed =new Seed();
+       seed.setReviewTime(reviewTime);
+       seed.setNumber(number);
+       seed.setIsTransgenic(isTransgenic);
+       seed.setKind(kind);
+       seed.setIsExit(isExit);
+       seed.setCropName(cropName);
+       List<Seed> seeds = seedMapper.searchSeed(seed);
+       return ResponseResult.success(seeds);
+   }
+
 }

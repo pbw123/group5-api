@@ -36,6 +36,7 @@ public interface QuestionMapper {
     int deleteMyQuestion(int questionId);
 
     //模糊查询问答
-    @Select("SELECT * FROM t_question WHERE content LIKE concat('%',#{content},'%')")
+    @Select("SELECT * FROM t_question WHERE content LIKE concat('%',#{content},'%') order by " +
+            "creat_time desc")
     List<Question> getQuestionBySearch(String content);
 }
