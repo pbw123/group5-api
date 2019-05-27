@@ -21,6 +21,7 @@
      SELECT q.* FROM t_question q WHERE q.user_id=#{0}
      and q.is_delete=0
   </select>
+
     <resultMap id="questionListRM" type="question" extends="BaseResultMap">
         <association property="replyAmount" column="id" select="getReplyAmount">
         </association>
@@ -62,7 +63,8 @@
 
     <select id="getRepliesByQuestionId" parameterType="Integer"
             resultMap="cn.niit.group5.mapper.ReplyMapper.BaseResultMap">
-  SELECT r.*,u.user_name,u.user_address,u.identity,u.head_url FROM t_reply r,t_user u
+  SELECT r.*,u.user_name,u.user_address,u.identity,u.head_url
+  FROM t_reply r,t_user u
         WHERE r.is_delete=0
         AND r.question_id=#{0}
         AND r.user_id=u.id
