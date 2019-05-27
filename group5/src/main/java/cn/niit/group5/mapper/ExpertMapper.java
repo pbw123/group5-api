@@ -12,6 +12,7 @@ import java.util.List;
 @Mapper
 @Component
 public interface ExpertMapper {
+
 Expert getExpertDetail(int id);
 //分类查找专家
 List<Expert> getExpertBySort(Integer expertSort);
@@ -27,4 +28,6 @@ List<Expert>getAgricultureExpert(@Param("sortId") Integer sortId, @Param("gradeI
 //模糊查询专家
     @Select("SELECT * FROM t_expert WHERE expert_name LIKE concat('%',#{expertName},'%')")
    List<Expert> getExpertBySearch(String expertName);
+
+
 }
