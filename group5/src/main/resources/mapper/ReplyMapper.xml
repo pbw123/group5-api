@@ -12,6 +12,10 @@
     <result column="exchange_id" property="exchangeId" jdbcType="TINYINT" />
     <result column="like" property="like" jdbcType="INTEGER" />
     <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+    <result column="user_address" property="userAddress"/>
+    <result column="user_name" property="userName"/>
+    <result column="head_url" property="headUrl"/>
+    <result column="identity" property="identity"/>
   </resultMap>
     <select id="getMyReplyById" parameterType="Integer" resultMap="myReplyRM">
   SELECT r.id,r.content,r.reply_time,r.user_id ruid,r.question_id rqid

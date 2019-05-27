@@ -65,9 +65,10 @@
 
     <select id="getRepliesByQuestionId" parameterType="Integer"
             resultMap="cn.niit.group5.mapper.ReplyMapper.BaseResultMap">
-   SELECT * FROM t_reply
-        WHERE is_delete=0
-        AND question_id=#{0}
+  SELECT r.*,u.user_name,u.user_address,u.identity,u.head_url FROM t_reply r,t_user u
+        WHERE r.is_delete=0
+        AND r.question_id=#{0}
+        AND r.user_id=u.id
     </select>
 
 
