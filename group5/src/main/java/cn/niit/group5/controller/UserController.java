@@ -91,7 +91,7 @@ public class UserController {
      * 我的资料，一个查询接口(登录或注册成功时已经返回数据了，不再写)
      * 一个更新接口
      */
-    @ApiOperation(value = "我的资料", notes = "修改我的资料并保存")
+    @ApiOperation(value = "更新我的资料", notes = "修改我的资料并保存")
     @PostMapping(value = "updateMyMsg")
     public ResponseResult updateMyMsg(@RequestParam(required = true) Integer id, String vocation,
                                       String headUrl, String userName, String unitName,
@@ -106,6 +106,7 @@ public class UserController {
         user.setUnitName(unitName);
         user.setSex(sex);
         user.setEmail(email);
+        user.setEducational(educational);
         if (userServiceImp.updateMyDocument(user) == StatusConst.SUCCESS) {
             System.out.println("控制层操作成功");
             return ResponseResult.success(user);
@@ -131,12 +132,12 @@ public class UserController {
     //我的提问列表
     @ApiOperation(value = "我的提问列表", notes = "根据我的用户id我提出过的所有问题")
     @GetMapping(value = "getQuestionList")
-    public List<Question> getQuestionList(int userId) {
+    public ResponseResult getQuestionList(int userId) {
         List<Question> lists = questionMapper.getQuestionListByUserId(userId);
         for (Question question : lists) {
             question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
         }
-        return lists;
+        return ResponseResult.success(lists);
     }
 
     //    问题详情
@@ -165,8 +166,9 @@ public class UserController {
     //    我的回答列表
     @ApiOperation(value = "我的回答", notes = "我的所有回复列表")
     @GetMapping(value = "getMyReplyById/{userId}")
-    public List<Reply> getMyReplyById(@PathVariable int userId) {
-        return replyMapper.getMyReplyById(userId);
+    public ResponseResult getMyReplyById(@PathVariable int userId) {
+        List<Reply> replies = replyMapper.getMyReplyById(userId);
+        return ResponseResult.success(replies);
     }
 
     @Autowired
@@ -194,9 +196,9 @@ public class UserController {
     //我的关注列表
     @ApiOperation(value = "我的关注列表", notes = "根据我的用户id显示出我关注的问题")
     @GetMapping(value = "/getAttentionByUserId")
-    public List<Attention> getAttentionList(int userId) {
+    public ResponseResult getAttentionList(int userId) {
         List<Attention> lists = attentionMapper.getAttentionByUserId(userId);
-        return lists;
+        return ResponseResult.success(lists);
     }
 
     @Autowired
@@ -205,33 +207,33 @@ public class UserController {
     //我的收藏-问答
     @ApiOperation(value = "我的收藏-问答", notes = "根据我的用户id显示出我收藏的问答")
     @GetMapping(value = "/getCollectQuestionById")
-    public List<Collection> getCollectQuestion(int userId) {
+    public ResponseResult getCollectQuestion(int userId) {
         List<Collection> collectionList = collectionMapper.getCollectQuestionById(userId);
-        return collectionList;
+        return ResponseResult.success(collectionList);
     }
 
     //我的收藏-交流
     @ApiOperation(value = "我的收藏-交流", notes = "根据我的用户id显示出我收藏的交流")
     @GetMapping(value = "/getCollectExchangeById")
-    public List<Collection> getCollectExchange(int userId) {
+    public ResponseResult getCollectExchange(int userId) {
         List<Collection> collectionList = collectionMapper.getCollectExchangeById(userId);
-        return collectionList;
+        return ResponseResult.success(collectionList);
     }
 
     //我的收藏-资讯
     @ApiOperation(value = "我的收藏-资讯", notes = "根据我的用户id显示出我收藏的资讯")
     @GetMapping(value = "/getCollectNewsById")
-    public List<Collection> getCollectNews(int userId) {
+    public ResponseResult getCollectNews(int userId) {
         List<Collection> collectionList = collectionMapper.getCollectNewsById(userId);
-        return collectionList;
+        return ResponseResult.success(collectionList);
     }
 
     //我的收藏-视频
     @ApiOperation(value = "我的收藏-视频", notes = "根据我的用户id显示出我收藏的视频")
     @GetMapping(value = "/getCollectVideoById")
-    public List<Collection> getCollectVideo(int userId) {
+    public ResponseResult getCollectVideo(int userId) {
         List<Collection> collectionList = collectionMapper.getCollectVideoById(userId);
-        return collectionList;
+        return ResponseResult.success(collectionList);
     }
 
     @Autowired
@@ -240,17 +242,17 @@ public class UserController {
     //我的供应
     @ApiOperation(value = "我的供应", notes = "根据我的用户id显示出我的供应列表")
     @GetMapping(value = "/getSupplyById")
-    public List<SupplyBuy> getSupply(int userId) {
+    public ResponseResult getSupply(int userId) {
         List<SupplyBuy> supplyBuyList = supplyBuyMapper.getSupplyById(userId);
-        return supplyBuyList;
+        return ResponseResult.success(supplyBuyList);
     }
 
     //我的求购
     @ApiOperation(value = "我的求购", notes = "根据我的用户id显示出我的求购列表")
     @GetMapping(value = "/getSeekById")
-    public List<SupplyBuy> getSeek(int userId) {
+    public ResponseResult getSeek(int userId) {
         List<SupplyBuy> supplyBuyList = supplyBuyMapper.getSeekById(userId);
-        return supplyBuyList;
+        return ResponseResult.success(supplyBuyList);
     }
 
    @Autowired

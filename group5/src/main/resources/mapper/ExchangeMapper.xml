@@ -18,6 +18,5 @@
                          select="getUserById" column="ruid"></association>
         </collection>
     </resultMap>
-
-
+    
 </mapper>

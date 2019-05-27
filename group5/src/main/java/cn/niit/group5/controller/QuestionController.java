@@ -1,11 +1,13 @@
 package cn.niit.group5.controller;
 
-import cn.niit.group5.entity.*;
+import cn.niit.group5.entity.Attention;
+import cn.niit.group5.entity.Collection;
+import cn.niit.group5.entity.Question;
+import cn.niit.group5.entity.Reply;
 import cn.niit.group5.mapper.*;
 import cn.niit.group5.util.MsgConst;
 import cn.niit.group5.util.ResponseResult;
 import cn.niit.group5.util.StatusConst;
-import cn.niit.group5.util.StringUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,13 +102,12 @@ public class QuestionController {
 
     @ApiOperation(value = "所有提问")
     @PostMapping(value = "/getQuestionList")
-    public List<Question> getQuestionList() {
+    public ResponseResult getQuestionList() {
         List<Question> questionLists = questionMapper.getQuestionList();
         for (Question question : questionLists) {
             question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
-
         }
-        return questionLists;
+        return ResponseResult.success(questionLists);
     }
 
     @ApiOperation(value = "删除‘我的提问'的问题", notes = "需要传入该问题的id")

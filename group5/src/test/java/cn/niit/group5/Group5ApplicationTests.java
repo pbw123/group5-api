@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -204,4 +205,36 @@ public class Group5ApplicationTests {
         System.out.println(expertDetail.toString());
     }
 
+    @Autowired
+    QuestionMapper questionMapper;
+
+    @Test
+    public void getQuestionDetailTest() {
+        Question questionDetail = questionMapper.getQuestionDetail(1);
+        System.out.println(questionDetail.toString());
+    }
+
+    @Test
+    public void getAllQuestionListTest()
+    {
+        List<Question> questionList = questionMapper.getQuestionList();
+        questionList.forEach(question -> System.out.println(question));
+    }
+    @Test
+    public void getUserByIdTest()
+    {
+        User user = questionMapper.getUserById(1);
+        System.out.println(user.toString());
+    }
+
+    @Test
+    public void getInsertQuestion()
+    {
+        Question question=new Question();
+        question.setContent("先生何许人也");
+        question.setUserId(1);
+        question.setCreateTime(new Date());
+        questionMapper.insertQuestion(question);
+
+    }
 }

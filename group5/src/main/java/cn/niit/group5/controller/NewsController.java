@@ -28,19 +28,20 @@ public class NewsController {
 
     @ApiOperation(value = "港城要闻/动态等资讯调用此接口",notes = "要传入此模块的id或者客户端定义一个id值")
     @GetMapping(value = "getNewsListById/{id}")
-    public List<News> getNewsListById(@PathVariable Integer id)
+    public ResponseResult getNewsListById(@PathVariable Integer id)
     {
-        return newsMapper.selectAllBySortId(id);
+        List<News> news = newsMapper.selectAllBySortId(id);
+        return ResponseResult.success(news);
     }
 
 
     @ApiOperation(value = "农业科技",notes = "农业科技页面发起此请求")
     @GetMapping(value = "farmingTechnologySort")
-    public List<TechnologySort> farmingTechnologySort()
+    public ResponseResult farmingTechnologySort()
     {
-        return technologySortMapper.selectAll();
+        List<TechnologySort> technologySortList = technologySortMapper.selectAll();
+        return ResponseResult.success(technologySortList);
     }
-
 
     @ApiOperation(value = "农业科技中根据分类查询资讯",notes = "要传入该分类的id")
     @GetMapping(value = "getNewsBySortId/{id}")
@@ -62,16 +63,18 @@ public class NewsController {
 
     @ApiOperation(value = "知识库的畜禽品种库")
     @GetMapping(value = "getAnimalKindList")
-    public List<Animal>getAnimalKindList()
+    public ResponseResult getAnimalKindList()
         {
-            return animalMapper.selectAllAnimal();
+            List<Animal> animals = animalMapper.selectAllAnimal();
+            return ResponseResult.success(animals);
         }
 
         @ApiOperation(value = "知识库中的畜禽品种库中根据畜禽查看相关资讯文章",notes = "需要传入畜禽种类的id")
         @GetMapping(value = "getNewsListByAnimalId/{id}")
-    public List<News>getNewsListByAnimalId(@PathVariable int id)
+    public ResponseResult getNewsListByAnimalId(@PathVariable int id)
         {
-            return animalMapper.AnimalNews(id);
+            List<News> news = animalMapper.AnimalNews(id);
+          return   ResponseResult.success(news);
         }
 
     @ApiOperation(value = "收藏资讯")
@@ -148,8 +151,4 @@ public class NewsController {
         List<News> topicNewsList = topicMapper.getNewsByTopicId(id);
         return  ResponseResult.success(topicNewsList);
     }
-
-
-
-
 }

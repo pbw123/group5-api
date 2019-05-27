@@ -2,15 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.niit.group5.mapper.ReplyMapper">
-    <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Reply" >
-        <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="content" property="content" jdbcType="VARCHAR" />
-        <result column="user_id" property="userId" jdbcType="INTEGER" />
-        <result column="question_id" property="questionId" jdbcType="INTEGER" />
-        <result column="exchange_id" property="exchangeId" jdbcType="TINYINT" />
-        <result column="like" property="like" jdbcType="INTEGER" />
-        <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
-    </resultMap>
+
+
+
+<resultMap id="BaseResultMap" type="cn.niit.group5.entity.Reply" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="question_id" property="questionId" jdbcType="INTEGER" />
+    <result column="exchange_id" property="exchangeId" jdbcType="TINYINT" />
+    <result column="like" property="like" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+    <result column="user_address" property="userAddress"/>
+    <result column="user_name" property="userName"/>
+    <result column="head_url" property="headUrl"/>
+    <result column="identity" property="identity"/>
+  </resultMap>
     <select id="getMyReplyById" parameterType="Integer" resultMap="myReplyRM">
   SELECT r.id,r.content,r.reply_time,r.user_id ruid,r.question_id rqid
  FROM t_reply r,t_user u,t_question q

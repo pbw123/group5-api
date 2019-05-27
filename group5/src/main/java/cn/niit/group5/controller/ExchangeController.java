@@ -34,14 +34,14 @@ public class ExchangeController {
 
     @ApiOperation(value = "所有交流列表")
     @GetMapping(value = "getExchangeList")
-    public List<Exchange> getExchangeListByMyId()
+    public ResponseResult getExchangeListByMyId()
     {
         List<Exchange> exchangeList=exchangeMapper.getExchangeList();
 
         for (Exchange exchange:exchangeList){
             exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
         }
-       return exchangeList;
+       return ResponseResult.success(exchangeList);
     }
 /*
 *
@@ -97,13 +97,13 @@ public class ExchangeController {
     }
         @ApiOperation(value = "我的交流",notes = "我的交流列表,传入我的用户id")
         @GetMapping(value = "getMyExchangeList/{userId}")
-         public List<Exchange>getMyExchangeList(@PathVariable Integer userId)
+         public ResponseResult getMyExchangeList(@PathVariable Integer userId)
         {
             List<Exchange> exchangeList=exchangeMapper.getExchangeListByUserId(userId);
             for(Exchange exchange:exchangeList){
                 exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
             }
-            return exchangeList;
+            return ResponseResult.success(exchangeList);
         }
     @ApiOperation(value = "交流详情",notes = "传入该交流的id")
     @GetMapping(value = "/getExchangeDetailById/{id}")

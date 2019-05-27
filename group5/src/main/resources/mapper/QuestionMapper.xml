@@ -1,39 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.niit.group5.mapper.QuestionMapper" >
 
-    <select id="selectAllByUserId" resultMap="BaseResultMap" parameterType="int" >
-   SELECT q.*,r.id rid,r.content rcon,r.user_id ruid,r.question_id,r.exchange_id,r.is_exchange_reply,r.reply_time,r.like,r.is_delete rdel,
-     u.head_url,u.user_name,u.identity,u.score,u.phone_number,u.user_address
-    FROM t_question q ,t_reply r,t_user u WHERE
-    q.user_id=#{0}
-    AND q.id=r.question_id
-     AND q.is_delete=0
-     AND r.is_delete=0
-    AND r.user_id=u.id
-     AND r.is_exchange_reply=0
-  </select>
-    <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Question" >
-        <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="user_id" property="userId" jdbcType="INTEGER" />
-        <result column="content" property="content" jdbcType="VARCHAR" />
-        <result column="create_time" property="createTime" jdbcType="DATE" />
-        <result column="sort" property="sort" jdbcType="VARCHAR" />
-        <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
-        <collection property="replies" ofType="cn.niit.group5.entity.Reply" select="getRepliesByQuestionId"
-                    column="id">
-            <id column="ruid" property="id"/>
-            <result column="rcon" property="content"/>
-            <association property="user" javaType="cn.niit.group5.entity.User"
-                         select="getUserById" column="ruid"></association>
-        </collection>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.QuestionMapper">
+    <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Question">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="sort" property="sort" jdbcType="VARCHAR"/>
+        <result column="is_delete" property="isDelete" jdbcType="TINYINT"/>
     </resultMap>
-    <select id="getRepliesByQuestionId" parameterType="Integer"
-            resultType="cn.niit.group5.entity.Reply">
-    select * from t_reply where question_id=#{0}
-  </select>
-
-    <select id="getUserById" parameterType="Integer" resultMap="cn.niit.group5.mapper.UserMapper.BaseResultMap">
+    <select id="getUserById" parameterType="Integer"
+           resultType="User">
       SELECT u.*
     FROM t_user u WHERE u.id=#{id}
   </select>
@@ -42,22 +21,13 @@
      SELECT q.* FROM t_question q WHERE q.user_id=#{0}
      and q.is_delete=0
   </select>
-    <resultMap id="questionListRM" type="question" extends="columnProperty">
+    <resultMap id="questionListRM" type="question" extends="BaseResultMap">
         <association property="replyAmount" column="id" select="getReplyAmount">
         </association>
     </resultMap>
 
-    <resultMap id="columnProperty" type="question">
-        <id column="id" property="id"/>
-        <result column="user_id" property="userId"/>
-        <result column="content" property="content"/>
-        <result column="create_time" property="createTime"/>
-        <result column="sort" property="sort"/>
-        <result column="is_delete" property="isDelete"/>
-    </resultMap>
 
     <select id="getReplyAmount" resultType="int">
-
           SELECT COUNT(question_id) replyAmount FROM t_reply r
   WHERE r.question_id=#{0}
   AND r.is_exchange_reply=0
@@ -65,64 +35,39 @@
 
     </select>
 
-    <select id="getQuestionDetail" parameterType="int" resultMap="questionRM">
-     SELECT q.*,r.id rid ,r.user_id ruid,r.question_id,r.content rcon,r.reply_time,r.like,
-   u.id uid,u.head_url,u.user_name,u.user_address,u.identity
- FROM t_question q,t_reply r,t_user u
-  WHERE r.question_id=q.id
-  AND q.user_id=u.id
-  AND q.id=#{0}
-  </select>
-
-    <resultMap id="questionRM" type="question" extends="columnProperty">
-        <collection property="replies" ofType="Reply">
-            <id column="rid" property="id"/>
-            <result column="ruid" property="userId"/>
-            <result column="rcon" property="content"/>
-            <result column="question_id" property="questionId"/>
-            <result column="reply_time" property="replyTime"/>
-            <result column="like" property="like"/>
-            <collection property="user" select="getUserById" column="ruid" javaType="User">
-                <id column="ruid" property="id"/>
-                <result column="user_name" property="userName"/>
-                <result column="user_address" property="u serAddress"/>
-                <result column="identity" property="identity"/>
-                <result column="head_url" property="headUrl"/>
-            </collection>
-        </collection>
-        <collection property="user" select="getUserById" column="uid" javaType="User">
-            <id column="uid" property="id"/>
-            <result column="user_name" property="userName"/>
-            <result column="user_address" property="u serAddress"/>
-            <result column="identity" property="identity"/>
-            <result column="head_url" property="headUrl"/>
-        </collection>
-    </resultMap>
-
-
-
-    <insert id="insertQuestion" parameterType="cn.niit.group5.entity.Question" useGeneratedKeys ="true" keyProperty = "id" keyColumn = "id">
+    <insert id="insertQuestion" parameterType="cn.niit.group5.entity.Question"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
     INSERT INTO t_question(user_id,content,create_time,sort) VALUES (#{userId},#{content},#{createTime},#{sort})
   </insert>
 
 
-    <select id="getQuestionList" resultMap="QuestionRM">
-        SELECT q.id,q.user_id quid,q.content,q.create_time,q.sort
-        FROM t_question q,t_user u
-        WHERE q.user_id=u.id
-        AND q.is_delete=0
+    <select id="getQuestionList" resultMap="questionRM">
+        SELECT q.*
+        FROM t_question q
+        WHERE q.is_delete=0
     </select>
-
-    <resultMap id="QuestionRM" type="Question">
-        <id property="id" column="id"/>
-        <result property="userId" column="quid"/>
-        <association property="user" select="cn.niit.group5.mapper.QuestionMapper.getUserById"
-                     column="quid">
+  <select id="getQuestionDetail" parameterType="Integer" resultMap="questionRM">
+    SELECT q.id ,q.content,q.create_time,q.user_id,q.sort
+ FROM t_question q
+  WHERE q.id=#{0}
+  </select>
+    <resultMap id="questionRM" type="Question" extends="BaseResultMap">
+        <association property="user" select="getUserById" column="user_id">
         </association>
-
         <association property="replyAmount" column="id" select="getQuestionReplyNumber">
         </association>
+        <collection property="replies"  select="getRepliesByQuestionId" column="id">
+        </collection>
     </resultMap>
+
+    <select id="getRepliesByQuestionId" parameterType="Integer"
+            resultMap="cn.niit.group5.mapper.ReplyMapper.BaseResultMap">
+  SELECT r.*,u.user_name,u.user_address,u.identity,u.head_url FROM t_reply r,t_user u
+        WHERE r.is_delete=0
+        AND r.question_id=#{0}
+        AND r.user_id=u.id
+    </select>
+
 
     <select id="getQuestionReplyNumber" resultType="int">
         SELECT COUNT(question_id) replyAmount FROM t_reply r
