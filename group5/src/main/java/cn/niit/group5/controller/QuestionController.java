@@ -90,10 +90,10 @@ public class QuestionController {
     @ApiOperation(value = "关注提问")
     @PostMapping(value = "/attentionQuestion")
     public ResponseResult attentionQuestion(@RequestParam(required = true) Integer userId,
-                                            @RequestParam(required = true) Integer id) {
+                                            @RequestParam(required = true) Integer questionId) {
         Attention attention = new Attention();
         attention.setUserId(userId);
-//        attention.setQuestionId(questionId);
+        attention.setQuestionId(questionId);
         attentionMapper.attentionQuestion(attention);
         return ResponseResult.success();
     }

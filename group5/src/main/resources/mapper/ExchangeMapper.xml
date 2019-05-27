@@ -10,89 +10,14 @@
         <result column="like" jdbcType="INTEGER" property="like"/>
         <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
-    </resultMap>
-
-    <select id="getExchangeDetailById" parameterType="Integer" resultMap="exchangeRM1">
-SELECT e.*,r.id rid ,r.user_id ruid,r.exchange_id,r.content rcon,r.reply_time,r.like,
-   u.id uid,u.head_url,u.user_name,u.user_address,u.identity
- FROM t_exchange e,t_reply r,t_user u
-  WHERE r.exchange_id=e.id
-  AND e.user_id=u.id
-  AND e.id=#{0}
-    </select>
-    <select id="getRepliesByQuestionId" parameterType="Integer"
-            resultType="cn.niit.group5.entity.Reply">
-    select * from t_reply where exchange_id=#{0}
-  </select>
-    <resultMap id="exchangeRM1" type="exchange" extends="columnProperty">
-        <collection property="replies" ofType="Reply">
-            <id column="rid" property="id"/>
-            <result column="ruid" property="userId"/>
+        <collection property="replies" ofType="cn.niit.group5.entity.Reply" select="getRepliesByQuestionId"
+                    column="id">
+            <id column="ruid" property="id"/>
             <result column="rcon" property="content"/>
-            <result column="exchange_id" property="exchangeId"/>
-            <result column="reply_time" property="replyTime"/>
-            <result column="like" property="like"/>
-            <collection property="user" select="cn.niit.group5.mapper.QuestionMapper.getUserById" column="ruid" javaType="User">
-                <id column="ruid" property="id"/>
-                <result column="user_name" property="userName"/>
-                <result column="user_address" property="u serAddress"/>
-                <result column="identity" property="identity"/>
-                <result column="head_url" property="headUrl"/>
-            </collection>
-        </collection>
-        <collection property="user" select="cn.niit.group5.mapper.QuestionMapper.getUserById" column="uid" javaType="User">
-            <id column="uid" property="id"/>
-            <result column="user_name" property="userName"/>
-            <result column="user_address" property="u serAddress"/>
-            <result column="identity" property="identity"/>
-            <result column="head_url" property="headUrl"/>
+            <association property="user" javaType="cn.niit.group5.entity.User"
+                         select="getUserById" column="ruid"></association>
         </collection>
     </resultMap>
 
-    <resultMap id="columnProperty" type="exchange">
-        <id column="id" property="id"/>
-        <result column="user_id" property="userId"/>
-        <result column="content" property="content"/>
-        <result column="create_time" property="createTime"/>
-        <result column="is_delete" property="isDelete"/>
-    </resultMap>
 
-
-    <select id="getExchangeList" resultMap="exchangeRM">
-    SELECT e.id, e.content,e.user_id euid,e.create_time,e.like
-  FROM t_exchange e,t_user u
-  WHERE
-  e.user_id=u.id
-  AND e.is_delete=0
-  </select>
-
-
-    <resultMap id="exchangeRM" type="Exchange">
-        <id column="id" property="id"/>
-        <result column="euid" property="userId"/>
-        <association property="user" select="cn.niit.group5.mapper.QuestionMapper.getUserById"
-                     column="euid">
-        </association>
-        <association property="replyAmount" column="id" select="getExchangeReplyNumber">
-        </association>
-    </resultMap>
-
-    <select id="getExchangeReplyNumber" resultType="Integer">
-          SELECT COUNT(exchange_id) replyAmount FROM t_reply r
-  WHERE r.exchange_id=#{0}
-  AND r.is_exchange_reply=1
-  AND r.is_delete=0
-    </select>
-
-    <insert id="insertExchange" parameterType="cn.niit.group5.entity.Exchange">
-   INSERT INTO t_exchange(user_id,content,create_time) VALUES (#{userId},#{content},#{createTime})
- </insert>
-
-
-    <select id="getExchangeListByUserId" parameterType="Integer" resultMap="exchangeRM">
-     SELECT e.id,e.user_id euid,e.content,e.like,e.create_time
-      FROM t_exchange e
-      WHERE e.user_id=#{0}
-     and is_delete=0
-  </select>
 </mapper>

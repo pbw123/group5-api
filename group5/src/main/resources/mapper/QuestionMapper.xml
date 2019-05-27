@@ -8,7 +8,8 @@
     FROM t_question q ,t_reply r,t_user u WHERE
     q.user_id=#{0}
     AND q.id=r.question_id
-     AND q.is_delete=0 AND r.is_delete=0
+     AND q.is_delete=0
+     AND r.is_delete=0
     AND r.user_id=u.id
      AND r.is_exchange_reply=0
   </select>
