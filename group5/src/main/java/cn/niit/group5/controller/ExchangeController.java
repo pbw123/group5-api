@@ -7,9 +7,7 @@ import cn.niit.group5.mapper.CollectionMapper;
 import cn.niit.group5.mapper.ExchangeMapper;
 import cn.niit.group5.mapper.ImgMapper;
 import cn.niit.group5.mapper.ReplyMapper;
-import cn.niit.group5.util.MsgConst;
-import cn.niit.group5.util.ResponseResult;
-import cn.niit.group5.util.StatusConst;
+import cn.niit.group5.util.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/exchange")
-@Api(tags = "交流模块")
+@Client
+@Api(tags = "3.交流模块")
 public class ExchangeController {
     @Autowired
     private ExchangeMapper exchangeMapper;

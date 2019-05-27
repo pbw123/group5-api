@@ -1,5 +1,7 @@
 package cn.niit.group5.config;
 
+import cn.niit.group5.util.Client;
+import cn.niit.group5.util.Manager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -18,12 +20,19 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.SWAGGER_2).groupName("客户端")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("cn.niit.group5.controller"))
+                .apis(RequestHandlerSelectors.withClassAnnotation(Client.class))
                 .paths(PathSelectors.any())
                 .build();
+    }
+
+    @Bean
+    public Docket createTeacherDocket() {
+        return new Docket(DocumentationType.SWAGGER_2).groupName("后台").apiInfo(apiInfo()).select()
+                .apis(RequestHandlerSelectors.withClassAnnotation(Manager.class))
+                .paths(PathSelectors.any()).build();
     }
 
     private ApiInfo apiInfo() {

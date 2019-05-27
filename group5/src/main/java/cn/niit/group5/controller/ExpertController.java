@@ -7,6 +7,7 @@ import cn.niit.group5.mapper.ExpertMapper;
 import cn.niit.group5.mapper.ExpertQuestionMapper;
 import cn.niit.group5.mapper.IndustrySystemMapper;
 import cn.niit.group5.serviceImp.IndustryServerImp;
+import cn.niit.group5.util.Client;
 import cn.niit.group5.util.ResponseResult;
 import cn.niit.group5.util.StatusConst;
 import io.swagger.annotations.Api;
@@ -19,7 +20,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/expert")
-@Api(tags = "专家模块")
+@Api(tags = "9.专家模块")
+@Client
 public class ExpertController {
     @Autowired
     private ExpertQuestionMapper expertQuestionMapper;

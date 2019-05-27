@@ -3,9 +3,11 @@ package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.Img;
 import cn.niit.group5.mapper.ImgMapper;
+import cn.niit.group5.util.Client;
 import cn.niit.group5.util.ResponseResult;
 import com.alibaba.fastjson.JSONArray;
 import com.aliyun.oss.OSSClient;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +24,9 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@Api(tags = "A.上传图片")
 @RequestMapping(value = "/api")
+@Client
 public class InsertImgsController {
 
    @Autowired

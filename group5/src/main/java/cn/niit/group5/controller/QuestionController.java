@@ -5,6 +5,7 @@ import cn.niit.group5.entity.Collection;
 import cn.niit.group5.entity.Question;
 import cn.niit.group5.entity.Reply;
 import cn.niit.group5.mapper.*;
+import cn.niit.group5.util.Client;
 import cn.niit.group5.util.MsgConst;
 import cn.niit.group5.util.ResponseResult;
 import cn.niit.group5.util.StatusConst;
@@ -17,8 +18,9 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@Api(tags = "快速提问")
+@Api(tags = "2.快速提问")
 @RequestMapping(value = "/api/question")
+@Client
 public class QuestionController {
     @Autowired
     private QuestionMapper questionMapper;

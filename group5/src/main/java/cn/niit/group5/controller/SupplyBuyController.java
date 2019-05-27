@@ -2,6 +2,7 @@ package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.SupplyBuy;
 import cn.niit.group5.mapper.SupplyBuyMapper;
+import cn.niit.group5.util.Client;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,8 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
-@Api(tags = "供求模块")
+@Api(tags = "8.供求模块")
 @RestController
+@Client
 @RequestMapping(value = "/api/supply")
 public class SupplyBuyController {
 

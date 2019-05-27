@@ -2,6 +2,7 @@ package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.*;
 import cn.niit.group5.mapper.*;
+import cn.niit.group5.util.Client;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,7 +13,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/index")
-@Api(tags = "首页模块")
+@Api(tags = "4.首页模块")
+@Client
 public class IndexController {
     @Autowired
     private FarmerApplyMapper farmerApplyMapper;

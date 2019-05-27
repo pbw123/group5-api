@@ -5,6 +5,7 @@ package cn.niit.group5.controller;
 import cn.niit.group5.entity.Seed;
 import cn.niit.group5.mapper.SeedMapper;
 
+import cn.niit.group5.util.Client;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@Api(tags = "作物品种模块")
+@Api(tags = "7.作物品种模块")
+@Client
 @RequestMapping(value = "/api/seed")
-
 public class SeedController {
     @Autowired
     private SeedMapper seedMapper;

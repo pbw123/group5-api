@@ -5,10 +5,7 @@ import cn.niit.group5.entity.dto.UserCode;
 import cn.niit.group5.entity.dto.UserDTO;
 import cn.niit.group5.mapper.*;
 import cn.niit.group5.serviceImp.UserServiceImp;
-import cn.niit.group5.util.MsgConst;
-import cn.niit.group5.util.RegexUtil;
-import cn.niit.group5.util.ResponseResult;
-import cn.niit.group5.util.StatusConst;
+import cn.niit.group5.util.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +15,9 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@Api(tags = "用户模块")
+@Api(tags = "1.用户模块")
 @RequestMapping(value = "/api/user")
+@Client
 public class UserController {
     @Autowired
     private UserServiceImp userServiceImp;
@@ -91,6 +89,7 @@ public class UserController {
      * 我的资料，一个查询接口(登录或注册成功时已经返回数据了，不再写)
      * 一个更新接口
      */
+
     @ApiOperation(value = "更新我的资料", notes = "修改我的资料并保存")
     @PostMapping(value = "updateMyMsg")
     public ResponseResult updateMyMsg(@RequestParam(required = true) Integer id, String vocation,

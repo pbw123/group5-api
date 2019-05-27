@@ -3,6 +3,7 @@ package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.Pest;
 import cn.niit.group5.mapper.PestMapper;
+import cn.niit.group5.util.Client;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,7 +14,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/pest")
-@Api(tags = "植保库模块")
+@Api(tags = "6.植保库模块")
+@Client
 public class PestController {
     @Autowired
     private PestMapper pestMapper;
