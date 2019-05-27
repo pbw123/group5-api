@@ -20,14 +20,16 @@ public class PestController {
 
     @ApiOperation(value = "遍历植保库名称、内容")
     @GetMapping(value = "/getPestList")
-    public List<Pest> getPest(){
-        return pestMapper.getPestList();
+    public ResponseResult getPest(){
+        List<Pest> pestList = pestMapper.getPestList();
+        return ResponseResult.success(pestList);
     }
 
     @ApiOperation(value = "通过植保库id获取详情")
     @GetMapping(value = "getPestDetailById/{id}")
-    public Pest getPestDetail(@RequestParam(required = true) @PathVariable Integer id){
-        return pestMapper.getPestDetailById(id);
+    public ResponseResult getPestDetail(@RequestParam(required = true) @PathVariable Integer id){
+        Pest pest = pestMapper.getPestDetailById(id);
+        return ResponseResult.success(pest);
     }
     @ApiOperation(value = "根据条件筛选植保文章")
     @PostMapping(value = "searchPest")

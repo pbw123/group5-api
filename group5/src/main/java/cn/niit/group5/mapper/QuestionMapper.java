@@ -13,8 +13,6 @@ import java.util.List;
 @Component
 public interface QuestionMapper {
 
-    //    根据用户id查询我的所有提问
-    List<Question> selectAllByUserId(int id);
 
     //所有的提问
     List<Question> getQuestionList();
@@ -22,8 +20,8 @@ public interface QuestionMapper {
     //我的提问列表
     List<Question> getQuestionListByUserId(int userId);
 
-    //我的问题详情
-    Question getQuestionDetail(int question_id);
+    //问题详情
+    Question getQuestionDetail(Integer question_id);
 
     //根据id查询想添加的用户信息
     User getUserById(int userId);

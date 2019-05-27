@@ -21,18 +21,18 @@ public class SupplyBuyController {
 
     @ApiOperation(value = "供应列表",notes = "暂时无法上传和显示图片")
     @GetMapping(value = "supplyList")
-    public List<SupplyBuy> supplyBuysList()
+    public ResponseResult supplyBuysList()
     {
-        return supplyBuyMapper.supplyList();
+        List<SupplyBuy> supplyBuyList = supplyBuyMapper.supplyList();
+        return ResponseResult.success(supplyBuyList);
     }
 
     @ApiOperation(value = "求购列表",notes = "暂时无法上传和显示图片")
     @GetMapping(value = "seekList")
-    public List<SupplyBuy> supplyBuyList(){
-        return supplyBuyMapper.seekList();
+    public ResponseResult supplyBuyList(){
+        List<SupplyBuy> supplyBuyList = supplyBuyMapper.seekList();
+        return ResponseResult.success(supplyBuyList);
     }
-
-
 
     @ApiOperation(value = "发布求购")
     @PostMapping(value = "/insertSeek")
@@ -81,18 +81,20 @@ public class SupplyBuyController {
 
     @ApiOperation(value = "供应详情")
     @GetMapping(value = "/SupplyDetail/{id}")
-    public SupplyBuy getSupplyDetail(
+    public ResponseResult getSupplyDetail(
            @PathVariable int id
     ){
-        return supplyBuyMapper.getSupplyDetail(id);
+        SupplyBuy supplyDetail = supplyBuyMapper.getSupplyDetail(id);
+        return ResponseResult.success(supplyDetail);
     }
 
     @ApiOperation(value = "求购详情")
     @GetMapping(value = "/SeekDetail/{id}")
-    public SupplyBuy getSeekDetail(
+    public ResponseResult getSeekDetail(
             @PathVariable int id
     ){
-        return supplyBuyMapper.getSeekDetail(id);
+        SupplyBuy supplyBuy = supplyBuyMapper.getSeekDetail(id);
+        return ResponseResult.success(supplyBuy);
     }
 
     @ApiOperation(value = "分类查询")

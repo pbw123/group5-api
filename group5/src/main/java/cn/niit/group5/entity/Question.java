@@ -17,6 +17,8 @@ public class Question implements Serializable {
 
     private Integer addressId;
 
+    private List<Reply>replies;
+
     public Integer getAddressId() {
         return addressId;
     }
@@ -31,7 +33,6 @@ public class Question implements Serializable {
 
     private int isDelete;
 
-    private List<Reply>replies;
 
     private int replyAmount;
 

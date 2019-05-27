@@ -26,17 +26,18 @@ public class SeedController {
 
     @ApiOperation(value = "遍历品种名称")
     @PostMapping(value = "/getCropNameList")
-    public List<Seed> getCropNameList(){
+    public ResponseResult getCropNameList(){
         List<Seed> seedList=seedMapper.getCropNameList();
-        return seedList;
+        return ResponseResult.success(seedList);
     }
 
     @ApiOperation(value = "通过品种名称获取详情")
     @PostMapping(value = "/getSeedByCropName/{cropName}")
-    public Seed getSeedByCropName(
+    public ResponseResult getSeedByCropName(
             @PathVariable String cropName
     ){
-        return seedMapper.getSeedByCropName(cropName);
+        Seed seed= seedMapper.getSeedByCropName(cropName);
+        return ResponseResult.success(seed);
     }
    @ApiOperation(value = "根据条件筛选品种")
     @PostMapping(value = "searchSeed")
@@ -53,5 +54,4 @@ public class SeedController {
        List<Seed> seeds = seedMapper.searchSeed(seed);
        return ResponseResult.success(seeds);
    }
-
 }
