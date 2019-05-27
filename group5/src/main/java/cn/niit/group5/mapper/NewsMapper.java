@@ -14,7 +14,7 @@ public interface NewsMapper {
     List<News> selectAllBySortId(Integer sortId);
 //模糊查询资讯
     @Select(" SELECT * FROM t_news WHERE title LIKE concat('%',#{title},'%') " +
-            "OR content LIKE concat('%',#{title},'%')"
+            "OR content LIKE concat('%',#{title},'%') order by create_time desc"
           )
     List<News> getNewsBySearch(String title);
 

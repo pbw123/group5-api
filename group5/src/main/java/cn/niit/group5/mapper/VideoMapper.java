@@ -12,6 +12,6 @@ import java.util.List;
 public interface VideoMapper {
  List<Video> selectVideo();
  //模糊查询视频
- @Select("SELECT * FROM t_video WHERE video_title LIKE concat('%',#{videoTitle},'%')")
+ @Select("SELECT * FROM t_video WHERE video_title LIKE concat('%',#{videoTitle},'%') order by create_time desc")
  List<Video> getVideoBySearch(String title);
 }

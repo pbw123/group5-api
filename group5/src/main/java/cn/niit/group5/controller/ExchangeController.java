@@ -37,6 +37,7 @@ public class ExchangeController {
     public List<Exchange> getExchangeListByMyId()
     {
         List<Exchange> exchangeList=exchangeMapper.getExchangeList();
+
         for (Exchange exchange:exchangeList){
             exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
         }

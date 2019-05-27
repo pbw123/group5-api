@@ -25,7 +25,7 @@ Exchange getExchangeDetailById(Integer id);
     int deleteMyExchange(Integer exchangeId);
 
     //模糊查询交流
-    @Select("SELECT * FROM t_exchange WHERE content LIKE concat('%',#{content},'%')")
+    @Select("SELECT * FROM t_exchange WHERE content LIKE concat('%',#{content},'%') order by create_time desc")
     List<Exchange> getExchangeBySearch(String content);
 
 

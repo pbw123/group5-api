@@ -39,6 +39,6 @@ public interface SupplyBuyMapper {
 
     //模糊查询供求
     @Select("SELECT * FROM t_supply_buy WHERE title LIKE concat('%',#{title},'%')" +
-            " OR content LIKE concat('%',#{title},'%')")
+            " OR content LIKE concat('%',#{title},'%') order by create_time desc")
     List<SupplyBuy> getSupplyBuyBySearch(String title);
 }
