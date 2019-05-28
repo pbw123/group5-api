@@ -29,13 +29,15 @@ public interface CollectionMapper {
     //通过用户id遍历收藏的视频
     List<Collection> getCollectVideoById(int userId);
 //  根据用户id和文章id来查询是否有这篇文章
-   @Select("select * from t_collection where user_id=#{userId} and question_id=#{questionId}")
+   @Select("select * from t_collection where user_id=#{userId} and news_id=#{newsId}")
      Collection getCollectionById(@Param("userId")Integer userId,
-                                        @Param("questionId") Integer questionId);
+                                        @Param("newsId") Integer questionId);
 
 
     @Insert("INSERT INTO t_collection(user_id,news_id) VALUES (#{userId},#{newsId})")
     int addNewsCollect(@Param("userId") Integer userId,@Param("newsId") Integer newsId);
+
+   int isNoCollect(@Param("id")Integer id,@Param("status")Integer status);
 
 
 

@@ -15,7 +15,7 @@ public class Collection implements Serializable {
 
     private Integer video;
 
-    private Byte status;
+    private Integer status;
 
     private Question question;
 
@@ -117,11 +117,11 @@ public class Collection implements Serializable {
         this.video = video;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

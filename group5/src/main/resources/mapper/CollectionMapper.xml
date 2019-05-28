@@ -8,7 +8,7 @@
     <result column="exchange_id" property="exchangeId" jdbcType="INTEGER" />
     <result column="news_id" property="newsId" jdbcType="INTEGER" />
     <result column="video" property="video" jdbcType="INTEGER" />
-    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
 
 
@@ -128,5 +128,13 @@ AND v.is_delete=0
     </association>
   </resultMap>
 
+  <update id="isNoCollect" parameterType="Integer">
+    update t_collection
+    <trim prefix="set" >
+     <if test="status lt 1">status=1</if>
+     <if test="status gt 0">status=0</if>
+    </trim>
+    where id=#{id}
+  </update>
 
 </mapper>

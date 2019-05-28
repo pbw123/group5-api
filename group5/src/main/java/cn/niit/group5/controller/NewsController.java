@@ -86,8 +86,12 @@ public class NewsController {
         if(collection==null)
         {
             collectionMapper.addNewsCollect(userId,newsId);
-
         }
+        Integer state = status = collection.getStatus();
+        if(state==0)
+//        {
+//            collectionMapper.
+//        }
 
         collection.setUserId(userId);
         collection.setNewsId(newsId);
