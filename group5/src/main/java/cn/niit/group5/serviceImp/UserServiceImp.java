@@ -31,7 +31,7 @@ public class UserServiceImp implements UserService {
              if (user.getPassword().equals(userDTO.getPassword()))
              {
 //                 登录成功
-                 userMapper.updateScore();
+//                 userMapper.addScore(user.getId(),10);
                  return StatusConst.SUCCESS;
              }else {
 //                 密码不正确

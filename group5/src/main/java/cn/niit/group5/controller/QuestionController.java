@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -44,10 +44,10 @@ public class QuestionController {
         Question question = new Question();
         question.setUserId(userId);
         question.setContent(content);
-        question.setCreateTime(new Date());
+        question.setCreateTime(new Timestamp(System.currentTimeMillis()));
         question.setSort(sort);
         questionMapper.insertQuestion(question);
-        return ResponseResult.success(question.getId());
+        return ResponseResult.success();
     }
 
     /*
@@ -67,9 +67,9 @@ public class QuestionController {
         reply.setUserId(userId);
         reply.setContent(content);
         reply.setQuestionId(questionId);
-        reply.setReplyTime(new Date());
+        reply.setReplyTime(new Timestamp(System.currentTimeMillis()));
         replyMapper.insertComment(reply);
-        return ResponseResult.success(reply.getId());
+        return ResponseResult.success();
     }
 
     @Autowired

@@ -1,7 +1,7 @@
 package cn.niit.group5.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Reply implements Serializable {
     private Integer id;
@@ -62,7 +62,17 @@ public class Reply implements Serializable {
 
     private String identity;
 
-    private Date replyTime;
+    private Timestamp replyTime;
+
+   private String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public Question getQuestion() {
         return question;
@@ -82,15 +92,13 @@ public class Reply implements Serializable {
         this.isExchangeReply = isExchangeReply;
     }
 
-    public Date getReplyTime() {
+    public Timestamp getReplyTime() {
         return replyTime;
     }
 
-    public void setReplyTime(Date replyTime) {
+    public void setReplyTime(Timestamp replyTime) {
         this.replyTime = replyTime;
     }
-
-
 
     public User getUser() {
         return user;
@@ -160,19 +168,23 @@ public class Reply implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", content=").append(content);
-        sb.append(", userId=").append(userId);
-        sb.append(", questionId=").append(questionId);
-        sb.append(", exchangeId=").append(exchangeId);
-        sb.append(", like=").append(like);
-        sb.append(", isDelete=").append(isDelete);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "Reply{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", userId=" + userId +
+                ", questionId=" + questionId +
+                ", exchangeId=" + exchangeId +
+                ", like=" + like +
+                ", isDelete=" + isDelete +
+                ", user=" + user +
+                ", question=" + question +
+                ", userName='" + userName + '\'' +
+                ", headUrl='" + headUrl + '\'' +
+                ", userAddress='" + userAddress + '\'' +
+                ", identity='" + identity + '\'' +
+                ", replyTime=" + replyTime +
+                ", time='" + time + '\'' +
+                ", isExchangeReply=" + isExchangeReply +
+                '}';
     }
 }

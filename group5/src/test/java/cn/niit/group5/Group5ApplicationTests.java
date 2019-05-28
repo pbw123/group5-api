@@ -2,12 +2,14 @@ package cn.niit.group5;
 
 import cn.niit.group5.entity.*;
 import cn.niit.group5.mapper.*;
+import cn.niit.group5.util.StringUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -144,8 +146,8 @@ public class Group5ApplicationTests {
     @Test
     public void getExpertQuestionDetailTest() {
 
-        List<ExpertQuestion> topics = expertQuestionMapper.expertQuestionDetail(1);
-        topics.forEach(news -> System.out.println(news));
+        ExpertQuestion topics = expertQuestionMapper.expertQuestionDetail(1);
+        System.out.println(topics.toString());
     }
 
     @Test
@@ -233,8 +235,79 @@ public class Group5ApplicationTests {
         Question question=new Question();
         question.setContent("先生何许人也");
         question.setUserId(1);
-        question.setCreateTime(new Date());
+        question.setCreateTime(new Timestamp(System.currentTimeMillis()));
         questionMapper.insertQuestion(question);
 
+    }
+    @Autowired
+    UserMapper userMapper;
+    @Test
+    public void setStatusTest()
+    {
+        int index = userMapper.setStatus(1, 1);
+        System.out.println("成功禁用");
+    }
+    @Test
+    public void addScoreTest()
+    {
+        Integer id=1;
+        Integer number=null;
+        if (number==null||number.equals(""))
+            number=0;
+        int index = userMapper.addScore(id,number);
+
+        User user = questionMapper.getUserById(id);
+        System.out.println("添加了" + number + "积分，目前的用户积分为：" + user.getScore());
+    }
+
+    @Test
+    public  void getDateTest()
+    {
+        System.out.println(new Date()+"+++++++++++++++");
+        String date = StringUtil.getDateString(new Date());
+        User user = questionMapper.getUserById(1);
+        Date regitsterTime = user.getRegitsterTime();
+        System.out.println(regitsterTime+"++++++++++++=========");
+        String dateString = StringUtil.getDateString(regitsterTime);
+        user.setTime(dateString);
+
+        System.out.println(date+"===========");
+        System.out.println(user.getTime()+"__-----------");
+        user.setRegitsterTime(new Timestamp(System.currentTimeMillis()));
+        System.out.println(user.getRegitsterTime()+"kkkkkkkkkkkkkkkkk");
+        String time = StringUtil.getDateString(user.getRegitsterTime());
+        System.out.println(time+"哈哈=======");
+    }
+
+    @Autowired
+    CollectionMapper collectionMapper;
+    @Test
+    public void getCollectionTest()
+    {
+        Integer userId=1;
+        Integer questionId=1;
+        Collection collection = collectionMapper.getCollectionById(userId, questionId);
+        System.out.println(collection.toString());
+    }
+    @Test
+    public void addCollectionTest()
+    {
+        Integer userId=1;
+        Integer newsId=13;
+        int index = collectionMapper.addNewsCollect(userId, newsId);
+        System.out.println(index+"===========");
+    }
+    @Autowired
+    ExchangeMapper exchangeMapper;
+    @Test
+    public void exchangeListTest()
+    {
+        Exchange exchangeDetailById = exchangeMapper.getExchangeDetailById(1);
+        List<Reply> replies = exchangeDetailById.getReplies();
+        for (Reply reply:replies)
+        {
+            reply.setTime(StringUtil.getDateString(reply.getReplyTime()));
+        }
+        replies.forEach(reply -> System.out.println(reply));
     }
 }

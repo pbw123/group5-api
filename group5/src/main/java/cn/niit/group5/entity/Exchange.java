@@ -1,7 +1,7 @@
 package cn.niit.group5.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Exchange implements Serializable {
@@ -11,7 +11,9 @@ public class Exchange implements Serializable {
 
     private String content;
 
-    private Date createTime;
+    private Timestamp createTime;
+
+    private String time;
 
     private Integer like;
 
@@ -25,6 +27,13 @@ public class Exchange implements Serializable {
 
     private int replyAmount;
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public List<Img> getImgs() {
         return imgs;
@@ -83,11 +92,11 @@ public class Exchange implements Serializable {
         this.content = content == null ? null : content.trim();
     }
 
-    public Date getCreateTime() {
+    public Timestamp getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
     }
 

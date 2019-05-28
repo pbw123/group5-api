@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -75,7 +76,7 @@ public class UserController {
             user2.setUserName(userName);
             user2.setIdentity(identity);
             user2.setUnitAddress(unitAddress);
-            user2.setRegitsterTime(new Date());
+            user2.setRegitsterTime(new Timestamp(System.currentTimeMillis()));
             int index = userMapper.signUp(user2);
             if (index == 1) {
                 return new ResponseResult(StatusConst.SUCCESS, MsgConst.SUCCESS);
@@ -135,6 +136,8 @@ public class UserController {
         List<Question> lists = questionMapper.getQuestionListByUserId(userId);
         for (Question question : lists) {
             question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
+            String time = StringUtil.getDateString(question.getCreateTime());
+            question.setTime(time);
         }
         return ResponseResult.success(lists);
     }
@@ -144,7 +147,13 @@ public class UserController {
     @GetMapping(value = "getQuestionDetailById/{id}")
     public ResponseResult getQuestionDetailById(@PathVariable Integer id) {
         Question question=questionMapper.getQuestionDetail(id);
+        question.setTime(StringUtil.getDateString(question.getCreateTime()));
         question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
+        List<Reply> replies = question.getReplies();
+        for (Reply reply:replies)
+        {
+            reply.setTime(StringUtil.getDateString(reply.getReplyTime()));
+        }
         return ResponseResult.success(question);
     }
 
@@ -153,8 +162,12 @@ public class UserController {
     @GetMapping(value = "getUserMsgById/{userId}")
     public ResponseResult getUserMsgById(@PathVariable Integer userId) {
         User user = questionMapper.getUserById(userId);
-        if (user != null)
+        if (user != null) {
+            Timestamp regitsterTime = user.getRegitsterTime();
+            String time= StringUtil.getDateString(regitsterTime);
+           user.setTime(time);
             return ResponseResult.success(user);
+        }
         else
             return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
     }
@@ -261,6 +274,26 @@ public class UserController {
     public ResponseResult getMyExpertQuestionList(@PathVariable Integer id){
         List<ExpertQuestion> experts=expertQuestionMapper.getMyExpertQuestionList(id);
         return ResponseResult.success(experts);
-    }}
+    }
+
+    @ApiOperation(value = "添加积分",notes = "传入用户的id和添加的积分数")
+    @PostMapping(value = "addScore")
+    public ResponseResult addMySocre(@RequestParam(required = true) Integer id,
+                                     @RequestParam(required = true) Integer number)
+    {
+
+        if (id==null||number==null)
+        {
+            return ResponseResult.error(StatusConst.ERROR,MsgConst.Param_NULL);
+        }
+        int index = userMapper.addScore(id, number);
+        System.out.println(index);
+        if (index==1)
+            return  ResponseResult.success();
+        else
+            return ResponseResult.error(StatusConst.ERROR,MsgConst.FAIL);
+    }
+
+}
 
 

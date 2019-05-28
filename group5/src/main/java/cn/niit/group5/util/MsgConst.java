@@ -17,4 +17,6 @@ public class MsgConst {
     public static final String PASSWORD_NULL_="密码不能为空";
     public static final String PASSWORD_VALIDATOR="密码长度不能小于6位且只能含英文和数字";
     public static final String FAIL="操作失败";
+    public static final String Param_NULL="哈哈，参数为空了，没传参过来";
+
 }

@@ -78,13 +78,17 @@ public class NewsController {
             List<News> news = animalMapper.AnimalNews(id);
           return   ResponseResult.success(news);
         }
-
     @ApiOperation(value = "收藏资讯")
     @PostMapping(value = "collectNews")
     public ResponseResult collectNews(@RequestParam(required = true) Integer userId,
-            @RequestParam(required = true) Integer newsId
-    ){
-        Collection collection=new Collection();
+            @RequestParam(required = true) Integer newsId,Integer status){
+        Collection collection = collectionMapper.getCollectionById(userId, newsId);
+        if(collection==null)
+        {
+            collectionMapper.addNewsCollect(userId,newsId);
+
+        }
+
         collection.setUserId(userId);
         collection.setNewsId(newsId);
         collectionMapper.collectNews(collection);

@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -56,7 +56,8 @@ public class ExchangeController {
         Exchange exchange=new Exchange();
         exchange.setUserId(userId);
         exchange.setContent(content);
-        exchange.setCreateTime(new Date());
+        exchange.setCreateTime(new Timestamp(System.currentTimeMillis()));
+
         exchangeMapper.insertExchange(exchange);
         return ResponseResult.success(exchange.getId());
     }
@@ -76,9 +77,9 @@ public class ExchangeController {
         reply.setUserId(userId);
         reply.setContent(content);
         reply.setExchangeId(exchangeId);
-        reply.setReplyTime(new Date());
+        reply.setReplyTime(new Timestamp(System.currentTimeMillis()));
         replyMapper.insertComment1(reply);
-        return ResponseResult.success(reply.getId());
+        return ResponseResult.success();
     }
 
     //  收藏交流
@@ -101,6 +102,7 @@ public class ExchangeController {
             List<Exchange> exchangeList=exchangeMapper.getExchangeListByUserId(userId);
             for(Exchange exchange:exchangeList){
                 exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
+                exchange.setTime(StringUtil.getDateString(exchange.getCreateTime()));
             }
             return ResponseResult.success(exchangeList);
         }
@@ -111,6 +113,12 @@ public class ExchangeController {
     ){
         Exchange exchange=exchangeMapper.getExchangeDetailById(id);
         exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
+        exchange.setTime(StringUtil.getDateString(exchange.getCreateTime()));
+        List<Reply> replies = exchange.getReplies();
+        for (Reply reply:replies)
+        {
+            reply.setTime(StringUtil.getDateString(reply.getReplyTime()));
+        }
         return ResponseResult.success(exchange);
     }
 

@@ -17,6 +17,7 @@
     <result column="user_name" property="userName"/>
     <result column="head_url" property="headUrl"/>
     <result column="identity" property="identity"/>
+    <result column="reply_time" property="replyTime" jdbcType="TIMESTAMP" />
   </resultMap>
     <select id="getMyReplyById" parameterType="Integer" resultMap="myReplyRM">
   SELECT r.id,r.content,r.reply_time,r.user_id ruid,r.question_id rqid

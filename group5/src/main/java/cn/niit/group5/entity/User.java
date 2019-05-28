@@ -1,7 +1,7 @@
 package cn.niit.group5.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class User implements Serializable {
     private Integer id;
@@ -12,7 +12,17 @@ public class User implements Serializable {
 
     private String password;
 
-    private Date regitsterTime;
+    private Timestamp regitsterTime;
+
+    private String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     private String sex;
 
@@ -59,6 +69,14 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public void setRegitsterTime(Timestamp regitsterTime) {
+        this.regitsterTime = regitsterTime;
+    }
+
+    public Timestamp getRegitsterTime() {
+        return regitsterTime;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -99,13 +117,8 @@ public class User implements Serializable {
         this.password = password == null ? null : password.trim();
     }
 
-    public Date getRegitsterTime() {
-        return regitsterTime;
-    }
 
-    public void setRegitsterTime(Date regitsterTime) {
-        this.regitsterTime = regitsterTime;
-    }
+
 
     public String getSex() {
         return sex;

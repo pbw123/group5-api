@@ -1,7 +1,7 @@
 package cn.niit.group5.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class ExpertQuestion implements Serializable {
@@ -9,7 +9,9 @@ public class ExpertQuestion implements Serializable {
 
     private Integer userId;
 
-    private Date createTime;
+    private Timestamp createTime;
+
+    private String time;
 
     private Integer expertId;
 
@@ -55,11 +57,11 @@ public class ExpertQuestion implements Serializable {
         this.userId = userId;
     }
 
-    public Date getCreateTime() {
+    public Timestamp getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
     }
 
@@ -85,6 +87,14 @@ public class ExpertQuestion implements Serializable {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     @Override

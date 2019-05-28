@@ -2,6 +2,7 @@ package cn.niit.group5.mapper;
 
 import cn.niit.group5.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 @Mapper
@@ -16,5 +17,7 @@ public interface UserMapper {
     int updateMyMsg(User user);
 
     //更新我的积分
-    void updateScore();
+    int addScore(@Param("id")Integer userId,@Param("number")Integer number);
+//是否禁用/启用用户
+    int setStatus(@Param("isForbidden") Integer isForbidden,@Param("id")Integer id);
 }

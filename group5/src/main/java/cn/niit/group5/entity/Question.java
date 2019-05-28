@@ -1,7 +1,9 @@
 package cn.niit.group5.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Question implements Serializable {
@@ -10,14 +12,24 @@ public class Question implements Serializable {
     private Integer userId;
 
     private String content;
+    @ApiModelProperty(hidden = true)
+    private Timestamp createTime;
 
-    private Date createTime;
+    private String time;
 
     private String sort;
 
     private Integer addressId;
 
-    private List<Reply>replies;
+    private List<Reply> replies;
+
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
 
     public Integer getAddressId() {
         return addressId;
@@ -33,13 +45,11 @@ public class Question implements Serializable {
 
     private int isDelete;
 
-
     private int replyAmount;
 
     private User user;
 
     private List<Img> imgs;
-
 
     public User getUser() {
         return user;
@@ -56,8 +66,6 @@ public class Question implements Serializable {
     public void setImgs(List<Img> imgs) {
         this.imgs = imgs;
     }
-
-
 
     public int getReplyAmount() {
         return replyAmount;
@@ -102,20 +110,20 @@ public class Question implements Serializable {
         this.content = content == null ? null : content.trim();
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
     public String getSort() {
         return sort;
     }
 
     public void setSort(String sort) {
         this.sort = sort == null ? null : sort.trim();
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public int getIsDelete() {

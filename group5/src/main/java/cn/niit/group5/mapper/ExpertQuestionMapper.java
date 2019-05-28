@@ -13,7 +13,7 @@ public interface ExpertQuestionMapper {
    void insertExpertQuestion(ExpertQuestion expertQuestion);
 
    //    专家问题详情
-   List<ExpertQuestion> expertQuestionDetail(Integer id);
+   ExpertQuestion expertQuestionDetail(Integer id);
 
 //   我向专家提问的问题列表
    @Select("SELECT * FROM t_expert_question WHERE user_id=#{0}")

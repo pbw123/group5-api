@@ -10,12 +10,13 @@ import cn.niit.group5.serviceImp.IndustryServerImp;
 import cn.niit.group5.util.Client;
 import cn.niit.group5.util.ResponseResult;
 import cn.niit.group5.util.StatusConst;
+import cn.niit.group5.util.StringUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -41,7 +42,7 @@ public class ExpertController {
         expertQuestion.setUserId(userId);
         expertQuestion.setExpertId(expertId);
         expertQuestion.setContent(content);
-        expertQuestion.setCreateTime(new Date());
+        expertQuestion.setCreateTime(new Timestamp(System.currentTimeMillis()));
         expertQuestionMapper.insertExpertQuestion(expertQuestion);
         return ResponseResult.success();
     }
@@ -94,7 +95,12 @@ public class ExpertController {
     @ApiOperation(value = "专家问题详情", notes = "传入该专家的id")
     @GetMapping(value = "getExpertQuestionDetail/{id}")
     public ResponseResult getExpertQuestionDetail(@PathVariable Integer id) {
-        List<ExpertQuestion> experts = expertQuestionMapper.expertQuestionDetail(id);
+        ExpertQuestion experts = expertQuestionMapper.expertQuestionDetail(id);
+        List<ExpertReply> expertReplys = experts.getExpertReplys();
+        for (ExpertReply reply:expertReplys)
+        {
+            reply.setTime(StringUtil.getDateString(reply.getCreateTime()));
+        }
         return ResponseResult.success(experts);
     }
 
