@@ -70,7 +70,6 @@
     <select id="getExchangeReplyNumber" resultType="Integer">
           SELECT COUNT(exchange_id) replyAmount FROM t_reply r
   WHERE r.exchange_id=#{0}
-  AND r.is_exchange_reply=1
   AND r.is_delete=0
     </select>
 

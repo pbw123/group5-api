@@ -12,7 +12,7 @@
         <result column="is_delete" property="isDelete" jdbcType="TINYINT"/>
     </resultMap>
     <select id="getUserById" parameterType="Integer"
-           resultType="User">
+           resultMap="cn.niit.group5.mapper.UserMapper.BaseResultMap">
       SELECT u.*
     FROM t_user u WHERE u.id=#{id}
   </select>
@@ -28,12 +28,10 @@
     </resultMap>
 
 
-    <select id="getReplyAmount" resultType="int">
+    <select id="getReplyAmount" resultType="Integer">
           SELECT COUNT(question_id) replyAmount FROM t_reply r
   WHERE r.question_id=#{0}
-  AND r.is_exchange_reply=0
   AND r.is_delete=0
-
     </select>
 
     <insert id="insertQuestion" parameterType="cn.niit.group5.entity.Question"
@@ -74,7 +72,6 @@
     <select id="getQuestionReplyNumber" resultType="int">
         SELECT COUNT(question_id) replyAmount FROM t_reply r
         WHERE r.question_id=#{0}
-        AND r.is_exchange_reply=0
         AND r.is_delete=0
     </select>
 

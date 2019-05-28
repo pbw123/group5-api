@@ -20,7 +20,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2).groupName("客户端")
+        return new Docket(DocumentationType.SWAGGER_2).groupName("流沙-客户端")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(Client.class))
@@ -30,7 +30,7 @@ public class SwaggerConfig {
 
     @Bean
     public Docket createTeacherDocket() {
-        return new Docket(DocumentationType.SWAGGER_2).groupName("后台").apiInfo(apiInfo()).select()
+        return new Docket(DocumentationType.SWAGGER_2).groupName("纵横").apiInfo(apiInfo()).select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(Manager.class))
                 .paths(PathSelectors.any()).build();
     }
