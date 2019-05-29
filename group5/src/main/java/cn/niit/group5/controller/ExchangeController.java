@@ -39,6 +39,7 @@ public class ExchangeController {
 
         for (Exchange exchange:exchangeList){
             exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
+            exchange.setTime(StringUtil.getDateString(exchange.getCreateTime()));
         }
        return ResponseResult.success(exchangeList);
     }

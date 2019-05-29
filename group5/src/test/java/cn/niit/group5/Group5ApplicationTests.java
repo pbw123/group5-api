@@ -1,7 +1,10 @@
 package cn.niit.group5;
 
 import cn.niit.group5.entity.*;
+import cn.niit.group5.entity.dto.UserDTO;
 import cn.niit.group5.mapper.*;
+import cn.niit.group5.serviceImp.UserServiceImp;
+import cn.niit.group5.util.ResponseResult;
 import cn.niit.group5.util.StringUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -228,7 +231,16 @@ public class Group5ApplicationTests {
         User user = questionMapper.getUserById(1);
         System.out.println(user.toString());
     }
-
+    @Test
+    public void userSignIn() {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setPhoneNumber("17805136692");
+        userDTO.setPassword("JAVA22");
+        System.out.println(userDTO.toString());
+        User user = userMapper.getUserByPhoneNumber("17805136692");
+        System.out.println(user.toString());
+//        userMapper.getUserById(1);
+    }
     @Test
     public void getInsertQuestion()
     {
@@ -241,11 +253,27 @@ public class Group5ApplicationTests {
     }
     @Autowired
     UserMapper userMapper;
+//    禁用启用用户
     @Test
     public void setStatusTest()
     {
-        int index = userMapper.setStatus(1, 1);
-        System.out.println("成功禁用");
+        Integer status;
+        Integer id=1;
+        User user = questionMapper.getUserById(id);
+         status = user.getStatus();
+         if (status==0)
+         {
+             System.out.println("0为启用状态"+status);
+             int index = userMapper.setStatus(id,status);
+             System.out.println(index+"+++++++");
+             System.out.println("status =0==  1为禁用状态"+questionMapper.getUserById(id).getStatus());
+         }else
+         {
+             int index = userMapper.setStatus(id,status);
+
+             System.out.println("1为禁用状态"+questionMapper.getUserById(id).getStatus());
+         }
+
     }
     @Test
     public void addScoreTest()
@@ -311,28 +339,39 @@ public class Group5ApplicationTests {
         replies.forEach(reply -> System.out.println(reply));
     }
 
+//    @Test
+//    public void updateStatusTest()
+//    {
+//        Integer userId=1;
+//        Integer newsId=13;
+//        Collection collection = collectionMapper.getCollectionById(userId, newsId);
+//        Integer id = collection.getId();
+//        System.out.println(id+"++++++++");
+//        if(collection.getStatus()==0)
+//        {
+//            System.out.println("原来状态"+collection.getStatus()+"未关注");
+//            int noCollect = collectionMapper.isNoCollect(id, 0);
+//            System.out.println(noCollect+"===============");
+//            collection = collectionMapper.getCollectionById(userId, newsId);
+//            System.out.println("现在的状态"+collection.getStatus()+"关注成功");
+//        }else
+//        {
+//            System.out.println("原来状态"+collection.getStatus()+"已关注");
+//            int noCollect = collectionMapper.isNoCollect(id, 1);
+//            System.out.println(noCollect+"=============");
+//            collection = collectionMapper.getCollectionById(userId, newsId);
+//            System.out.println("现在的状态"+collection.getStatus()+"取消关注成功");
+//        }
+//    }
+    @Autowired
+    UserServiceImp userServiceImp;
     @Test
-    public void updateStatusTest()
+    public void setUserStatusServiceImpTest()
     {
-        Integer userId=1;
-        Integer newsId=13;
-        Collection collection = collectionMapper.getCollectionById(userId, newsId);
-        Integer id = collection.getId();
-        System.out.println(id+"++++++++");
-        if(collection.getStatus()==0)
-        {
-            System.out.println("原来状态"+collection.getStatus()+"未关注");
-            int noCollect = collectionMapper.isNoCollect(id, 0);
-            System.out.println(noCollect+"===============");
-            collection = collectionMapper.getCollectionById(userId, newsId);
-            System.out.println("现在的状态"+collection.getStatus()+"关注成功");
-        }else
-        {
-            System.out.println("原来状态"+collection.getStatus()+"已关注");
-            int noCollect = collectionMapper.isNoCollect(id, 1);
-            System.out.println(noCollect+"=============");
-            collection = collectionMapper.getCollectionById(userId, newsId);
-            System.out.println("现在的状态"+collection.getStatus()+"取消关注成功");
-        }
+        Integer id=1;
+        ResponseResult responseResult = userServiceImp.setUserStatus(1);
+        System.out.println(responseResult.toString());
     }
+
+
 }

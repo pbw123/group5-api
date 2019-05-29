@@ -82,7 +82,7 @@ public class NewsController {
 
         @Autowired
         private CollectionServiceImp collectionServiceImp;
-    @ApiOperation(value = "收藏资讯")
+    @ApiOperation(value = "收藏资讯",notes = "传入用户id和该资讯文章的id")
     @PostMapping(value = "collectNews")
     public ResponseResult collectNews(@RequestParam(required = true) Integer userId,
             @RequestParam(required = true) Integer newsId)

@@ -1,16 +1,20 @@
 package cn.niit.group5.serviceImp;
 
 import cn.niit.group5.entity.User;
+import cn.niit.group5.entity.dto.CollectDTO;
 import cn.niit.group5.entity.dto.UserCode;
 import cn.niit.group5.entity.dto.UserDTO;
+import cn.niit.group5.mapper.QuestionMapper;
 import cn.niit.group5.mapper.UserMapper;
 import cn.niit.group5.service.UserService;
 import cn.niit.group5.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -26,7 +30,7 @@ public class UserServiceImp implements UserService {
          User user=userMapper.getUserByPhoneNumber(userDTO.getPhoneNumber());
          if (user!=null)
          {
-             if (user.getIsForbidden()==0)
+             if (user.getStatus()==0)
              {
              if (user.getPassword().equals(userDTO.getPassword()))
              {
@@ -201,6 +205,58 @@ public class UserServiceImp implements UserService {
         System.out.println("业务层操作失败");
         return StatusConst.ERROR;
     }
+    @Autowired
+    QuestionMapper questionMapper;
+//        启用/禁用用户
+    public ResponseResult setUserStatus(Integer userId)
+    {
+        Integer status;
+        User user = questionMapper.getUserById(userId);
+        status = user.getStatus();
+        CollectDTO collectDTO=new CollectDTO();
+        if (status==0)
+        {
+            int index = userMapper.setStatus(userId, status);
+            if (index==1)
+            {
+                collectDTO.setStatus(questionMapper.getUserById(userId).getStatus());
+                collectDTO.setMsg("已禁用");
+                return  ResponseResult.success(collectDTO);
+            }
+            return ResponseResult.error(StatusConst.ERROR,MsgConst.FAIL);
+        }else
+        {
+            int index = userMapper.setStatus(userId, status);
+            if (index==1)
+            {
+                status = questionMapper.getUserById(userId).getStatus();
+                System.out.println(status);
+                collectDTO.setStatus(status);
+                collectDTO.setMsg("已启用");
+                return ResponseResult.success(collectDTO);
+            }
+                return ResponseResult.error(StatusConst.ERROR,MsgConst.FAIL);
+        }
+    }
 
+    public ResponseResult addUserRear(String userName,String sex,String headUrl,String phoneNumber,
+                                  String email,String identity,String userAddress)
+    {
+        User user = new User();
+        user.setRegitsterTime(new Timestamp(System.currentTimeMillis()));
+        user.setUserName(userName);
+        user.setHeadUrl(headUrl);
+        user.setPhoneNumber(phoneNumber);
+        user.setSex(sex);
+        user.setIdentity(identity);
+        user.setUserAddress(userAddress);
+        user.setEmail(email);
+        user.setRegitsterTime(new Timestamp(System.currentTimeMillis()));
+        int index = userMapper.addUser(user);
+        if (index==1)
+            return ResponseResult.success();
+        else
+            return ResponseResult.error(StatusConst.ERROR,MsgConst.FAIL);
+    }
 
 }

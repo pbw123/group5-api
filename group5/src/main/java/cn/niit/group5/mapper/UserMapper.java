@@ -3,6 +3,7 @@ package cn.niit.group5.mapper;
 import cn.niit.group5.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 @Mapper
@@ -10,7 +11,10 @@ import org.springframework.stereotype.Component;
 public interface UserMapper {
 
     //根据手机号码查询用户
-    User getUserByPhoneNumber(String phoneNumber);
+    User getUserByPhoneNumber(@Param("phoneNumber") String phoneNumber);
+//
+    @Select("select * from t_user where id=#{id}")
+    User getUserById(@Param("id") Integer id);
     //注册
     int signUp(User user);
     //更新我的资料
@@ -19,5 +23,7 @@ public interface UserMapper {
     //更新我的积分
     int addScore(@Param("id")Integer userId,@Param("number")Integer number);
 //是否禁用/启用用户
-    int setStatus(@Param("isForbidden") Integer isForbidden,@Param("id")Integer id);
+    int setStatus(@Param("id")Integer id,@Param("status") Integer status);
+//    添加用户
+     int addUser(User user);
 }

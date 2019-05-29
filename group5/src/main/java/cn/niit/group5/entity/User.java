@@ -53,7 +53,7 @@ public class User implements Serializable {
     private Integer score;
 
     //    是否禁用
-    private Byte isForbidden;
+    private Integer status;
 
     //    学历/教育背景
     private String educational;
@@ -193,13 +193,7 @@ public class User implements Serializable {
         this.score = score;
     }
 
-    public Byte getIsForbidden() {
-        return isForbidden;
-    }
 
-    public void setIsForbidden(Byte isForbidden) {
-        this.isForbidden = isForbidden;
-    }
 
     public String getEducational() {
         return educational;
@@ -241,34 +235,39 @@ public class User implements Serializable {
         this.headUrl = headUrl == null ? null : headUrl.trim();
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", phoneNumber=").append(phoneNumber);
-        sb.append(", userName=").append(userName);
-        sb.append(", password=").append(password);
-        sb.append(", regitsterTime=").append(regitsterTime);
-        sb.append(", sex=").append(sex);
-        sb.append(", identity=").append(identity);
-        sb.append(", userAddress=").append(userAddress);
-        sb.append(", unitName=").append(unitName);
-        sb.append(", plantCategory=").append(plantCategory);
-        sb.append(", plantSize=").append(plantSize);
-        sb.append(", checkAll=").append(checkAll);
-        sb.append(", checkContinuous=").append(checkContinuous);
-        sb.append(", score=").append(score);
-        sb.append(", isForbidden=").append(isForbidden);
-        sb.append(", educational=").append(educational);
-        sb.append(", email=").append(email);
-        sb.append(", vocation=").append(vocation);
-        sb.append(", isDelete=").append(isDelete);
-        sb.append(", headUrl=").append(headUrl);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "User{" +
+                "id=" + id +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", regitsterTime=" + regitsterTime +
+                ", time='" + time + '\'' +
+                ", sex='" + sex + '\'' +
+                ", identity='" + identity + '\'' +
+                ", userAddress='" + userAddress + '\'' +
+                ", unitAddress='" + unitAddress + '\'' +
+                ", unitName='" + unitName + '\'' +
+                ", plantCategory='" + plantCategory + '\'' +
+                ", plantSize='" + plantSize + '\'' +
+                ", checkAll=" + checkAll +
+                ", checkContinuous=" + checkContinuous +
+                ", score=" + score +
+                ", status=" + status +
+                ", educational='" + educational + '\'' +
+                ", email='" + email + '\'' +
+                ", vocation='" + vocation + '\'' +
+                ", isDelete=" + isDelete +
+                ", headUrl='" + headUrl + '\'' +
+                '}';
     }
 }

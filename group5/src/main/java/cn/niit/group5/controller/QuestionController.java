@@ -5,10 +5,7 @@ import cn.niit.group5.entity.Collection;
 import cn.niit.group5.entity.Question;
 import cn.niit.group5.entity.Reply;
 import cn.niit.group5.mapper.*;
-import cn.niit.group5.util.Client;
-import cn.niit.group5.util.MsgConst;
-import cn.niit.group5.util.ResponseResult;
-import cn.niit.group5.util.StatusConst;
+import cn.niit.group5.util.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,6 +105,7 @@ public class QuestionController {
         List<Question> questionLists = questionMapper.getQuestionList();
         for (Question question : questionLists) {
             question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
+            question.setTime(StringUtil.getDateString(question.getCreateTime()));
         }
         return ResponseResult.success(questionLists);
     }

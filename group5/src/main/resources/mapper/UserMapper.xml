@@ -17,12 +17,12 @@
         <result column="check_all" property="checkAll" jdbcType="INTEGER"/>
         <result column="check_continuous" property="checkContinuous" jdbcType="INTEGER"/>
         <result column="score" property="score" jdbcType="INTEGER"/>
-        <result column="is_forbidden" property="isForbidden" jdbcType="TINYINT"/>
         <result column="educational" property="educational" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
         <result column="vocation" property="vocation" jdbcType="VARCHAR"/>
         <result column="is_delete" property="isDelete" jdbcType="TINYINT"/>
         <result column="head_url" property="headUrl" jdbcType="LONGVARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER" />
     </resultMap>
 
     <select id="getUserByPhoneNumber" resultMap="BaseResultMap" parameterType="String">
@@ -49,7 +49,7 @@
             <if test="identity!=null">#{identity},</if>
             <if test="unitAddress!=null">#{unitAddress},</if>
             <if test="regitsterTime!=null">#{regitsterTime},</if>
-            <if test="isForbidden!=null">#{isForbidden}</if>
+            <if test="status!=null">#{isForbidden}</if>
         </trim>
     </sql>
 
@@ -79,11 +79,11 @@
     <update id="setStatus" parameterType="Integer">
         UPDATE t_user
         <trim prefix="set">
-            <if test="isForbidden lt 1">
-                is_forbidden=1
+            <if test="status lt 1">
+                status=1
             </if>
-            <if test="isForbidden gt 0">
-                is_forbidden=0
+            <if test="status gt 0">
+                status=0
             </if>
         </trim>
         WHERE id=#{id}
@@ -94,4 +94,9 @@
   set score=score+#{number}
   where id=#{id}
 </update>
+
+    <insert id="addUser" parameterType="User">
+        INSERT INTO  t_user(user_name,sex,head_url,phone_number,email,identity,user_address,regitster_time)
+VALUES(#{userName},#{sex},#{headUrl},#{phoneNumber},#{email},#{identity},#{userAddress},#{regitsterTime})
+    </insert>
 </mapper>
