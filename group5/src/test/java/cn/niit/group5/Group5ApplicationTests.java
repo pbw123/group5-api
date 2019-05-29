@@ -315,20 +315,24 @@ public class Group5ApplicationTests {
     public void updateStatusTest()
     {
         Integer userId=1;
-        Integer status=1;
         Integer newsId=13;
         Collection collection = collectionMapper.getCollectionById(userId, newsId);
         Integer id = collection.getId();
         System.out.println(id+"++++++++");
         if(collection.getStatus()==0)
         {
-            System.out.println("原来的状态"+collection.getStatus()+"未关注");
+            System.out.println("原来状态"+collection.getStatus()+"未关注");
+            int noCollect = collectionMapper.isNoCollect(id, 0);
+            System.out.println(noCollect+"===============");
+            collection = collectionMapper.getCollectionById(userId, newsId);
+            System.out.println("现在的状态"+collection.getStatus()+"关注成功");
         }else
         {
-            int noCollect = collectionMapper.isNoCollect(id, status);
-            System.out.println(noCollect+"+++++++++");
-            Collection collection2 = collectionMapper.getCollectionById(userId, newsId);
-            System.out.println("现在的状态"+collection2.getStatus()+"已关注");
+            System.out.println("原来状态"+collection.getStatus()+"已关注");
+            int noCollect = collectionMapper.isNoCollect(id, 1);
+            System.out.println(noCollect+"=============");
+            collection = collectionMapper.getCollectionById(userId, newsId);
+            System.out.println("现在的状态"+collection.getStatus()+"取消关注成功");
         }
     }
 }

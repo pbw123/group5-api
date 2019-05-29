@@ -2,6 +2,7 @@ package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.*;
 import cn.niit.group5.mapper.*;
+import cn.niit.group5.serviceImp.CollectionServiceImp;
 import cn.niit.group5.util.Client;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
@@ -78,25 +79,15 @@ public class NewsController {
             List<News> news = animalMapper.AnimalNews(id);
           return   ResponseResult.success(news);
         }
+
+        @Autowired
+        private CollectionServiceImp collectionServiceImp;
     @ApiOperation(value = "收藏资讯")
     @PostMapping(value = "collectNews")
     public ResponseResult collectNews(@RequestParam(required = true) Integer userId,
-            @RequestParam(required = true) Integer newsId,Integer status){
-        Collection collection = collectionMapper.getCollectionById(userId, newsId);
-        if(collection==null)
-        {
-            collectionMapper.addNewsCollect(userId,newsId);
-        }
-        Integer state = status = collection.getStatus();
-        if(state==0)
-//        {
-//            collectionMapper.
-//        }
-
-        collection.setUserId(userId);
-        collection.setNewsId(newsId);
-        collectionMapper.collectNews(collection);
-        return ResponseResult.success();
+            @RequestParam(required = true) Integer newsId)
+    {
+        return  collectionServiceImp.collectNewsOrNo(userId, newsId);
     }
 
     @ApiOperation(value = "收藏视频")
