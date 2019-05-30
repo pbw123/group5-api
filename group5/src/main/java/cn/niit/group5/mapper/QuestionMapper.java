@@ -29,7 +29,7 @@ public interface QuestionMapper {
     //    发布一条提问
     void insertQuestion(Question question);
 
-    //删除我的交流文章
+    //删除我的提问文章
     @Update("UPDATE  t_question SET is_delete=1 WHERE id=#{0}")
     int deleteMyQuestion(int questionId);
 
@@ -37,4 +37,7 @@ public interface QuestionMapper {
     @Select("SELECT * FROM t_question WHERE content LIKE concat('%',#{content},'%') order by " +
             "creat_time desc")
     List<Question> getQuestionBySearch(String content);
+
+//后台修改问题
+   int updateQuestion(Question question);
 }

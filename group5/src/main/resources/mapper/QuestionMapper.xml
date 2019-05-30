@@ -10,6 +10,7 @@
         <result column="create_time" property="createTime" jdbcType="DATE"/>
         <result column="sort" property="sort" jdbcType="VARCHAR"/>
         <result column="is_delete" property="isDelete" jdbcType="TINYINT"/>
+        <result column="img" property="img"/>
     </resultMap>
     <select id="getUserById" parameterType="Integer"
            resultMap="cn.niit.group5.mapper.UserMapper.BaseResultMap">
@@ -36,7 +37,8 @@
 
     <insert id="insertQuestion" parameterType="cn.niit.group5.entity.Question"
             useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-    INSERT INTO t_question(user_id,content,create_time,sort) VALUES (#{userId},#{content},#{createTime},#{sort})
+    INSERT INTO t_question(user_id,content,create_time,sort,img) VALUES
+    (#{userId},#{content},#{createTime},#{sort},#{img})
   </insert>
 
 
@@ -75,4 +77,12 @@
         AND r.is_delete=0
     </select>
 
+    <update id="updateQuestion" parameterType="Question">
+        update t_question
+        <trim prefix="set" suffixOverrides=",">
+            <if test="content!=null">content=#{content},</if>
+            <if test="createTime!=null">create_time=#{createTime}</if>
+        </trim>
+        where id=#{id}
+    </update>
 </mapper>

@@ -10,6 +10,7 @@
         <result column="like" jdbcType="INTEGER" property="like"/>
         <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+        <result column="img" jdbcType="LONGVARCHAR" property="img" />
     </resultMap>
     <select id="getUserById" parameterType="Integer"
             resultType="User">
@@ -74,7 +75,8 @@
     </select>
 
     <insert id="insertExchange" parameterType="cn.niit.group5.entity.Exchange">
-   INSERT INTO t_exchange(user_id,content,create_time) VALUES (#{userId},#{content},#{createTime})
+   INSERT INTO t_exchange(user_id,content,create_time,img) VALUES
+   (#{userId},#{content},#{createTime},#{img})
  </insert>
 
 

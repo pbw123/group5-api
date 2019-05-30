@@ -5,14 +5,16 @@ import cn.niit.group5.mapper.QuestionMapper;
 import cn.niit.group5.serviceImp.UserServiceImp;
 import cn.niit.group5.util.Manager;
 import cn.niit.group5.util.ResponseResult;
+import cn.niit.group5.util.UploadImg;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping(value = "/rear/user")
-@Api(tags = "后端-用户模块")
+@Api(tags = "1.后台-用户管理")
 @Manager
 public class UserControllerRear {
 
@@ -36,11 +38,13 @@ public class UserControllerRear {
     }
     @ApiOperation(value = "添加一个用户")
     @PostMapping(value = "addUser")
-    public ResponseResult addUser(String userName,String sex,String headUrl,String phoneNumber,
-                                  String email,String identity,String userAddress)
+    public ResponseResult addUser(String userName, String sex, String phoneNumber,
+                                  String email, String identity, String userAddress,
+                                  MultipartFile file)
     {
-        ResponseResult responseResult = userServiceImp.addUserRear(userName, sex, headUrl,
-                phoneNumber, email, identity, userAddress);
+        String f = UploadImg.ossUpload(file);
+        ResponseResult responseResult = userServiceImp.addUserRear(userName, sex,
+                phoneNumber, email, identity, userAddress,f);
         return responseResult;
 
     }

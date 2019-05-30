@@ -5,11 +5,13 @@ import cn.niit.group5.entity.Collection;
 import cn.niit.group5.entity.Question;
 import cn.niit.group5.entity.Reply;
 import cn.niit.group5.mapper.*;
+import cn.niit.group5.serviceImp.ExchangeServiceImp;
 import cn.niit.group5.util.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -36,13 +38,19 @@ public class QuestionController {
     public ResponseResult addQuestion(
             @RequestParam(required = true) Integer userId,
             @RequestParam(required = true) String content,
-            String sort
-    ) {
+            String sort, MultipartFile file
+            ) {
         Question question = new Question();
         question.setUserId(userId);
         question.setContent(content);
         question.setCreateTime(new Timestamp(System.currentTimeMillis()));
         question.setSort(sort);
+
+        if (file!=null)
+        {
+            String img=UploadImg.ossUpload(file);
+            question.setImg(img);
+        }
         questionMapper.insertQuestion(question);
         return ResponseResult.success();
     }
@@ -117,5 +125,14 @@ public class QuestionController {
             return new ResponseResult(StatusConst.SUCCESS, MsgConst.SUCCESS);
         }
         return new ResponseResult(StatusConst.ERROR, MsgConst.FAIL);
+    }
+
+    @Autowired
+    private ExchangeServiceImp exchangeServiceImp;
+    @ApiOperation(value = "后台-更新我的问答")
+    @PostMapping(value = "updateQuestion")
+    public ResponseResult updateQuestion(String content,String createTime)
+    {
+        return exchangeServiceImp.updateQuestion(content,createTime);
     }
 }

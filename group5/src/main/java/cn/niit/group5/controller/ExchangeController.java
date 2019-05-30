@@ -12,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -51,16 +52,21 @@ public class ExchangeController {
     @ApiOperation(value = "发表交流")
     @PostMapping(value = "/add")
     public ResponseResult addExchange(
-            @RequestParam(required = true) int userId,
-            @RequestParam(required = true) String content
+            @RequestParam(required = true) Integer userId,
+            @RequestParam(required = true) String content,
+            MultipartFile file
     ){
         Exchange exchange=new Exchange();
         exchange.setUserId(userId);
         exchange.setContent(content);
         exchange.setCreateTime(new Timestamp(System.currentTimeMillis()));
-
+        if (file!=null)
+        {
+            String imgUrl = UploadImg.ossUpload(file);
+            exchange.setImg(imgUrl);
+        }
         exchangeMapper.insertExchange(exchange);
-        return ResponseResult.success(exchange.getId());
+        return ResponseResult.success();
     }
 
     /*

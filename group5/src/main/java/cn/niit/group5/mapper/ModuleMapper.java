@@ -1,7 +1,9 @@
 package cn.niit.group5.mapper;
 
 import cn.niit.group5.entity.*;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,6 +23,10 @@ public interface ModuleMapper {
 //    热点
     Question getIndexHotQuestion(Address address);
     Exchange getIndexHotExchange(Address address);
-
-
+//后台-九宫格列表
+    @Select("select * from t_module")
+    List<Module>getAllModuleList();
+//后台-添加九宫格
+    @Insert("INSERT INTO t_module(name,icon) VALUES(#{name},#{icon})")
+    int addModule(Module module);
 }

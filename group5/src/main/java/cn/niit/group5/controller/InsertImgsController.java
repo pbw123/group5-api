@@ -32,8 +32,8 @@ public class InsertImgsController {
    @Autowired
     ImgMapper imgMapper;
 
-   @ApiOperation(value = "图片上传至阿里云OSS，生成图片地址")
-@PostMapping(value = "/img/insetImg")
+//   @ApiOperation(value = "图片上传至阿里云OSS，生成图片地址")
+//@PostMapping(value = "/img/insetImg")
         public String ossUpload(@RequestParam("file") MultipartFile sourceFile) {
     String endpoint = "http://oss-cn-shanghai.aliyuncs.com";
     String accessKeyId = "LTAIZsuAeD3qGFzf";

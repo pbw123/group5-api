@@ -5,6 +5,7 @@ import cn.niit.group5.entity.ExpertQuestion;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -28,6 +29,12 @@ List<Expert>getAgricultureExpert(@Param("sortId") Integer sortId, @Param("gradeI
 //模糊查询专家
     @Select("SELECT * FROM t_expert WHERE expert_name LIKE concat('%',#{expertName},'%')")
    List<Expert> getExpertBySearch(String expertName);
+//删除专家问答
+    @Update("UPDATE t_expert_question SET is_delete=1 WHERE id=#{0}")
+    int delExpertQuestion(Integer id);
+//    修改专家问答的内容
+    @Update("update t_expert_question set content=#{content} where id=#{id}")
+    int updateExpertQuestion(@Param("content")String content,@Param("id")Integer id);
 
 
 }

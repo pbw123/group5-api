@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -61,7 +62,7 @@ public class UserController {
     public ResponseResult signUp(@RequestParam(required = true) String phoneNumber,
                                  @RequestParam(required = true) String password,
                                  @RequestParam(required = true) String userName,
-                                 String identity, String unitAddress) {
+                                 String identity, String userAddress,MultipartFile file) {
 
         User user = userMapper.getUserByPhoneNumber(phoneNumber);
         if (user != null) {
@@ -75,8 +76,13 @@ public class UserController {
             user2.setPassword(password);
             user2.setUserName(userName);
             user2.setIdentity(identity);
-            user2.setUnitAddress(unitAddress);
+            user2.setUnitAddress(userAddress);
             user2.setRegitsterTime(new Timestamp(System.currentTimeMillis()));
+            if (file!=null)
+            {
+                String head = UploadImg.ossUpload(file);
+                user2.setHeadUrl(head);
+            }
             int index = userMapper.signUp(user2);
             if (index == 1) {
                 return new ResponseResult(StatusConst.SUCCESS, MsgConst.SUCCESS);
@@ -96,17 +102,21 @@ public class UserController {
     public ResponseResult updateMyMsg(@RequestParam(required = true) Integer id, String vocation,
                                       String headUrl, String userName, String unitName,
                                       String identity, String educational, String email,
-                                      String sex) {
+                                      String sex, MultipartFile file) {
         User user = new User();
         user.setId(id);
         user.setVocation(vocation);
-        user.setHeadUrl(headUrl);
         user.setUserName(userName);
         user.setIdentity(identity);
         user.setUnitName(unitName);
         user.setSex(sex);
         user.setEmail(email);
         user.setEducational(educational);
+        if (file!=null)
+        {
+            String f = UploadImg.ossUpload(file);
+            user.setHeadUrl(f);
+        }
         if (userServiceImp.updateMyDocument(user) == StatusConst.SUCCESS) {
             System.out.println("控制层操作成功");
             return ResponseResult.success(user);

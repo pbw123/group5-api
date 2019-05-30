@@ -11,7 +11,6 @@ import cn.niit.group5.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -239,8 +238,8 @@ public class UserServiceImp implements UserService {
         }
     }
 
-    public ResponseResult addUserRear(String userName,String sex,String headUrl,String phoneNumber,
-                                  String email,String identity,String userAddress)
+    public ResponseResult addUserRear(String userName,String sex,String phoneNumber,
+                                  String email,String identity,String userAddress,String headUrl)
     {
         User user = new User();
         user.setRegitsterTime(new Timestamp(System.currentTimeMillis()));
