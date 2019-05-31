@@ -14,7 +14,7 @@ public class Commodity implements Serializable {
 
     private Integer readNumber;
 
-    private Integer phonenumber;
+    private String phoneNumber;
 
     private Integer isDelete;
 
@@ -22,11 +22,38 @@ public class Commodity implements Serializable {
 
     private List<Commodity> commodities;
 
+    private Integer currPage;
+    private Integer pageSize;
+    private String keyword;
 
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public Integer getCurrPage() {
+        return currPage;
+    }
+
+    public void setCurrPage(Integer currPage) {
+        this.currPage = currPage;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
 
     private List<EnterpriseRecommend> enterpriseRecommends;
 
     private static final long serialVersionUID = 1L;
+
     public List<Commodity> getCommodities() {
         return commodities;
     }
@@ -42,6 +69,7 @@ public class Commodity implements Serializable {
     public void setEnterpriseRecommends(List<EnterpriseRecommend> enterpriseRecommends) {
         this.enterpriseRecommends = enterpriseRecommends;
     }
+
     public Integer getId() {
         return id;
     }
@@ -78,16 +106,16 @@ public class Commodity implements Serializable {
         return readNumber;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public void setReadNumber(Integer readNumber) {
         this.readNumber = readNumber;
-    }
-
-    public Integer getPhonenumber() {
-        return phonenumber;
-    }
-
-    public void setPhonenumber(Integer phonenumber) {
-        this.phonenumber = phonenumber;
     }
 
     public Integer getIsDelete() {
@@ -117,7 +145,7 @@ public class Commodity implements Serializable {
         sb.append(", sortId=").append(sortId);
         sb.append(", source=").append(source);
         sb.append(", readNumber=").append(readNumber);
-        sb.append(", phonenumber=").append(phonenumber);
+        sb.append(", phoneNumber=").append(phoneNumber);
         sb.append(", isDelete=").append(isDelete);
         sb.append(", detail=").append(detail);
         sb.append(", serialVersionUID=").append(serialVersionUID);

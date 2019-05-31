@@ -9,13 +9,43 @@ public class EnterpriseRecommend implements Serializable {
 
     private String enterpriseName;
 
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     private Integer isDelete;
 
     private String enterpriseProfile;
 
     private String imgUrl;
+
+    private Integer count;
+
+    private Integer currPage;
+
+    private Integer pageSize;
+
+    public Integer getCurrPage() {
+        return currPage;
+    }
+
+    public void setCurrPage(Integer currPage) {
+        this.currPage = currPage;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -43,11 +73,11 @@ public class EnterpriseRecommend implements Serializable {
         this.enterpriseName = enterpriseName == null ? null : enterpriseName.trim();
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

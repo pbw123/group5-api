@@ -7,11 +7,55 @@
     <result column="sort_id" property="sortId" jdbcType="INTEGER" />
     <result column="source" property="source" jdbcType="VARCHAR" />
     <result column="read_number" property="readNumber" jdbcType="INTEGER" />
-    <result column="phoneNumber" property="phonenumber" jdbcType="INTEGER" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
     <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
     <result column="detail" property="detail" jdbcType="LONGVARCHAR" />
   </resultMap>
 <select id="getCommdityBysortId" parameterType="Integer" resultMap="BaseResultMap">
   SELECT * FROM t_commodity WHERE sort_id=#{0} AND is_delete=0
 </select>
+  <select id="selectAllCommodity" resultMap="BaseResultMap" parameterType="Commodity" >
+    select id, title, sort_id, `source`, read_number, phoneNumber, is_delete, detail
+    from t_commodity
+    where  is_delete=0
+    limit #{currPage},#{pageSize}
+  </select>
+
+  <update id="delCommodity" parameterType="Integer">
+    update t_commodity
+    set is_delete=1
+    where id=#{0}
+  </update>
+
+  <update id="updateCommodity" parameterType="cn.niit.group5.entity.Commodity" >
+    update t_commodity
+    set title = #{title,jdbcType=VARCHAR},
+      sort_id = #{sortId,jdbcType=INTEGER},
+      `source` = #{source,jdbcType=VARCHAR},
+      read_number = #{readNumber,jdbcType=INTEGER},
+      phoneNumber = #{phonenumber,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      detail = #{detail,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="addCommodity" parameterType="cn.niit.group5.entity.Commodity" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_commodity (title, sort_id, `source`,
+    read_number, phone_number, is_delete,
+    detail)
+    values (#{title,jdbcType=VARCHAR}, #{sortId,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR},
+    #{readNumber,jdbcType=INTEGER}, #{phoneNumber,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER},
+    #{detail,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <select id="searchCommodity" parameterType="Commodity">
+SELECT * FROM t_commodity
+ WHERE title LIKE concat('%',#{keyword},'%')
+ or source like concat('%',#{keyword},'%')
+ or phone_number like concat('%',#{keyword},'%')
+ limit #{currPage},#{pageSize}
+  </select>
 </mapper>

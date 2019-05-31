@@ -35,4 +35,6 @@ public interface NewsMapper {
 
     //    修改农资分类
     int updateTechnoSort(TechnologySort technologySort);
+
+//
 }

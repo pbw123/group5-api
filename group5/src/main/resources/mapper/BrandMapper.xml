@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.BrandMapper" >
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Brand" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="delBrandById" parameterType="java.lang.Integer" >
+    update t_brand set is_delete=1
+    where id=#{0}
+  </delete>
+  <insert id="insert" parameterType="cn.niit.group5.entity.Brand" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_brand (`name`, `type`)
+    values (#{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateBrand" parameterType="cn.niit.group5.entity.Brand" >
+    update t_brand
+    set `name` = #{name,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="Brand" >
+    select id, `name`, `type`
+    from t_brand
+    where name like  concat('%',#{name},'%')
+    limit #{currPage},#{pageSize}
+  </select>
+  <select id="selectAllBrand" resultMap="BaseResultMap" parameterType="Integer" >
+    select id, `name`, `type`
+    from t_brand
+    limit #{currPage},#{pageSize}
+  </select>
+</mapper>

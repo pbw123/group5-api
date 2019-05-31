@@ -1,19 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.niit.group5.mapper.EnterpriseRecommendMapper" >
-  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.EnterpriseRecommend" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="sort" property="sort" jdbcType="INTEGER" />
-    <result column="enterprise_name" property="enterpriseName" jdbcType="VARCHAR" />
-    <result column="phone_number" property="phoneNumber" jdbcType="INTEGER" />
-    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
-    <result column="enterprise_profile" property="enterpriseProfile" jdbcType="LONGVARCHAR" />
-    <result column="img_url" property="imgUrl" jdbcType="LONGVARCHAR" />
-  </resultMap>
-<select id="getEnterpriseRecommendBySort" parameterType="Integer" resultMap="BaseResultMap">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.EnterpriseRecommendMapper">
+    <resultMap id="BaseResultMap" type="cn.niit.group5.entity.EnterpriseRecommend">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="enterprise_name" property="enterpriseName" jdbcType="VARCHAR"/>
+        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="enterprise_profile" property="enterpriseProfile" jdbcType="LONGVARCHAR"/>
+        <result column="img_url" property="imgUrl" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <select id="getEnterpriseRecommendBySort" parameterType="Integer" resultMap="BaseResultMap">
   SELECT * FROM t_enterprise_recommend WHERE  is_delete=0 AND sort=#{sort}
 </select>
-  <select id="getEnterpriseRecommendById" parameterType="Integer" resultMap="BaseResultMap">
+    <select id="getEnterpriseRecommendById" parameterType="Integer" resultMap="BaseResultMap">
     SELECT * FROM t_enterprise_recommend WHERE is_delete=0 AND id=#{id}
   </select>
-</mapper>
+
+    <select id="getAllEnterprise" parameterType="EnterpriseRecommend" resultMap="BaseResultMap">
+        SELECT e.*,b.name FROM
+       t_enterprise_recommend e,t_brand b
+    WHERE e.is_delete=0
+    AND e.sort=b.id
+    limit #{currPage},#{pageSize}
+  </select>
+
+    <select id="searchEnterpriseBySort" parameterType="Integer" resultMap="BaseResultMap">
+      SELECT * FROM
+       t_enterprise_recommend
+    WHERE is_delete=0
+    and sort=#{sort}
+    limit #{currPage},#{pageSize}
+  </select>
+
+    <update id="delEnterprise" parameterType="Integer">
+        update t_enterprise_recommend
+        set is_delete=1
+        where id=#{0}
+    </update>
+
+    <update id="updateEnterprise" parameterType="EnterpriseRecommend">
+    update t_enterprise_recommend
+    set enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      `count` = #{count,jdbcType=INTEGER},
+      phone_number = #{phoneNumber,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      enterprise_profile = #{enterpriseProfile,jdbcType=LONGVARCHAR},
+      img_url = #{imgUrl,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="searchEnterprise" parameterType="EnterpriseRecommend">
+         SELECT * FROM t_enterprise_recommend WHERE enterprise_name LIKE
+         concat('%',#{enterpriseName},'%')
+         OR phone_number LIKE concat('%',#{phoneNumber},'%')
+         limit #{currPage},#{pageSize}
+    </select>
+
+    <insert id="addEnterprise" parameterType="EnterpriseRecommend">
+          insert into t_enterprise_recommend (enterprise_name, sort, `count`,
+      phone_number, is_delete, enterprise_profile,
+      img_url)
+    values (#{enterpriseName,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{count,jdbcType=INTEGER},
+      #{phoneNumber,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, #{enterpriseProfile,jdbcType=LONGVARCHAR},
+      #{imgUrl,jdbcType=LONGVARCHAR})
+  </insert>
+</insert>
+        </mapper>

@@ -32,6 +32,9 @@
         <typeAlias alias="module" type="cn.niit.group5.entity.Module"/>
         <typeAlias alias="videoSort" type="cn.niit.group5.entity.VideoSort"/>
         <typeAlias alias="VideoExhibition" type="cn.niit.group5.entity.VideoExhibition"/>
+        <typeAlias alias="Brand" type="cn.niit.group5.entity.Brand"/>
+        <typeAlias alias="EnterpriseRecommend" type="cn.niit.group5.entity.EnterpriseRecommend"/>
+        <typeAlias alias="Commodity" type="cn.niit.group5.entity.Commodity"/>
     </typeAliases>
 
 
