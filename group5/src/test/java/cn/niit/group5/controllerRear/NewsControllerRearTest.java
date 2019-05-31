@@ -9,8 +9,8 @@ public class NewsControllerRearTest extends BasicTest {
 @Autowired
 NewsControllerRear newsControllerRear;
     @Test
-    public void getAllModule() {
-        ResponseResult allModule = newsControllerRear.getAllModule();
+    public void getAllModule(Integer currPage,Integer pageSize) {
+        ResponseResult allModule = newsControllerRear.getAllModule(currPage,pageSize);
         System.out.println(allModule.toString());
     }
 }

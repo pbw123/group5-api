@@ -8,7 +8,7 @@
         <result column="address_id" property="addressId" jdbcType="INTEGER"/>
         <result column="topic_id" property="topicId" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="icon_url" property="iconUrl" jdbcType="VARCHAR"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
         <result column="read_number" property="readNumber" jdbcType="INTEGER"/>
         <result column="source" property="source" jdbcType="VARCHAR"/>
         <result column="author" property="author" jdbcType="VARCHAR"/>

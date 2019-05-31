@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.VideoExhibitionMapper" >
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.VideoExhibition" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="exhibition_id" property="exhibitionId" jdbcType="INTEGER" />
+    <result column="video_id" property="videoId" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteOrNo" parameterType="Integer" >
+    update t_exhibition set is_delete=#{0}
+    where id=#{1}
+  </delete>
+  <insert id="insert" parameterType="cn.niit.group5.entity.VideoExhibition" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_video_exhibition (exhibition_id, video_id, is_delete
+      )
+    values (#{exhibitionId,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.niit.group5.entity.VideoExhibition" >
+    update t_video_exhibition
+    set exhibition_id = #{exhibitionId,jdbcType=INTEGER},
+      video_id = #{videoId,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectHasOrNo" resultMap="BaseResultMap" parameterType="VideoExhibition" >
+    select id, exhibition_id, video_id, is_delete
+    from t_video_exhibition
+    where exhibition_id=#{exhibitionId}
+    and video_id=#{videoId}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, exhibition_id, video_id, is_delete
+    from t_video_exhibition
+  </select>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.ExhibitionMapper" >
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Exhibition" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="img" property="img" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <update id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    update t_exhibition set is_delete=0
+    where id=#{0}
+  </update>
+  <insert id="insert" parameterType="cn.niit.group5.entity.Exhibition" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_exhibition (title, `state`, is_delete, 
+      img)
+    values (#{title,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
+      #{img,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.niit.group5.entity.Exhibition" >
+    update t_exhibition
+    set title = #{title,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, title, `state`, is_delete, img
+    from t_exhibition
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="Integer">
+    select id, title, `state`, is_delete, img
+    from t_exhibition
+    where is_delete=0
+    limit #{currPage},#{pageSize}
+  </select>
+</mapper>

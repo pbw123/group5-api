@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="video_title" property="videoTitle" jdbcType="VARCHAR" />
     <result column="relation_module" property="relationModule" jdbcType="INTEGER" />
-    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
     <result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
     <result column="video_sort" property="videoSort" jdbcType="INTEGER" />
     <result column="read_number" property="readNumber" jdbcType="INTEGER" />
@@ -18,5 +18,32 @@
   <select id="selectVideo" parameterType="cn.niit.group5.entity.Video" resultMap="BaseResultMap">
     SELECT * FROM t_video WHERE is_delete=0
   </select>
+  <select id="selectAllVideo" parameterType="cn.niit.group5.entity.Video" resultMap="BaseResultMap">
+    SELECT * FROM t_video WHERE is_delete=0
+    limit #{currPage},#{pageSize}
+  </select>
 
+  <insert id="addVideo" parameterType="video">
+    insert into t_video (video_title,create_time,relation_module,img,video_url)
+    values (#{title},#{createTime},#{relation_module},#{img},#{video_url})
+  </insert>
+
+  <update id="updateVideoTitle" parameterType="cn.niit.group5.entity.Video">
+    update t_video
+    set video_title = #{videoTitle,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+<select id="getVideoBySort" parameterType="video" resultMap="BaseResultMap">
+  select * from t_video
+  where video_sort=#{sort}
+   and is_delete=0
+   limit #{currPage},#{pageSize}
+</select>
+<select id="getVideoByReview" parameterType="video" resultMap="BaseResultMap">
+  select * from t_video
+  where review_state=#{reviewState}
+   and is_delete=0
+   limit #{currPage},#{pageSize}
+</select>
 </mapper>

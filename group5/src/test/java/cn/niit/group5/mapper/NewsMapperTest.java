@@ -14,7 +14,11 @@ public class NewsMapperTest extends  BasicTest{
     @Test
     public void getNewsByReviewTest()
     {
-        List<News> news = newsMapper.getNewsByReview(1);
+        News n = new News();
+        n.setCurrPage(7);
+        n.setCurrPage(1);
+        n.setReviewStatus(0);
+        List<News> news = newsMapper.getNewsByReview(n);
         news.forEach(news1 -> System.out.println(news1.toString()));
     }
     @Autowired

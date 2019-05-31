@@ -38,16 +38,20 @@ public class NewsServiceImp {
     @Autowired
     private NewsMapper newsMapper;
 
-    public ResponseResult getNewsByReview(Integer reviewStatus) {
-        List<News> news = newsMapper.getNewsByReview(reviewStatus);
-        return ResponseResult.success(news);
+    public ResponseResult getNewsByReview(Integer reviewStatus,Integer currPage,Integer pageSize) {
+        News news=new News();
+        news.setReviewStatus(reviewStatus);
+        news.setCurrPage(currPage);
+        news.setPageSize(pageSize);
+        List<News> newsList = newsMapper.getNewsByReview(news);
+        return ResponseResult.success(newsList);
     }
 
     @Autowired
     private ModuleMapper moduleMapper;
 
-    public ResponseResult getAllModule() {
-        List<Module> allModuleList = moduleMapper.getAllModuleList();
+    public ResponseResult getAllModule(Integer currPage,Integer pageSize) {
+        List<Module> allModuleList = moduleMapper.getAllModuleList(currPage,pageSize);
         return ResponseResult.success(allModuleList);
     }
 
@@ -100,4 +104,15 @@ public class NewsServiceImp {
             return StatusConst.ERROR;
     }
 
+    public Integer updateModule(Integer id,String name,MultipartFile file)
+    {
+        Module module = new Module();
+        module.setId(id);
+        module.setName(name);
+        if (file!=null) {
+            String s = UploadImg.ossUpload(file);
+            module.setIcon(s);
+        }
+       return moduleMapper.updateModule(module);
+    }
 }

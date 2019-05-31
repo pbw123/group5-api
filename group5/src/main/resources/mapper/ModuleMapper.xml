@@ -55,5 +55,14 @@
  LIMIT 1
     </select>
 
+<update id="updateModule" parameterType="module">
+    update t_module
+    <trim prefix="set" suffixOverrides=",">
+        <if test="name!=null">name=#{name},</if>
+        <if test="icon!=null">icon=#{icon}</if>
+
+    </trim>
+    where id=#{id}
+</update>
 
 </mapper>

@@ -85,18 +85,18 @@ public class IndexController {
     return ResponseResult.success(index);
 
     }
-    @ApiOperation(value = "首页动态资讯",notes = "因地区不同，展现的动态资讯就不一样，传入该地区的id")
-     @GetMapping(value = "getIndexDynamic/{id}")
-    public ResponseResult getIndexDynamic(@PathVariable(value = "id") Integer id)
+//    @ApiOperation(value = "首页动态资讯",notes = "因地区不同，展现的动态资讯就不一样，传入该地区的id")
+//     @GetMapping(value = "getIndexDynamic/{id}")
+    public ResponseResult getIndexDynamic(Integer id)
      {
          Address address=new Address();
          address.setId(id);
          List<News> indexModule = moduleMapper.getIndexDynamic(address);
          return ResponseResult.success(indexModule);
      }
-    @ApiOperation(value = "首页头条",notes = "因地区不同，展现的头条就不一样，传入该地区的id,根据资讯发布时间和阅读量降序排列")
-     @GetMapping(value = "getIndexTopNews/{id}")
-    public ResponseResult getIndexTopNews(@PathVariable(value = "id") Integer id)
+//    @ApiOperation(value = "首页头条",notes = "因地区不同，展现的头条就不一样，传入该地区的id,根据资讯发布时间和阅读量降序排列")
+//     @GetMapping(value = "getIndexTopNews/{id}")
+    public ResponseResult getIndexTopNews(Integer id)
      {
          Address address=new Address();
          address.setId(id);

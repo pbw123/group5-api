@@ -32,14 +32,14 @@ public class InsertImgsController {
    @Autowired
     ImgMapper imgMapper;
 
-//   @ApiOperation(value = "图片上传至阿里云OSS，生成图片地址")
-//@PostMapping(value = "/img/insetImg")
+    @ApiOperation(value = "图片上传至阿里云OSS，生成图片地址")
+    @PostMapping(value = "/img/insetImg")
         public String ossUpload(@RequestParam("file") MultipartFile sourceFile) {
     String endpoint = "http://oss-cn-shanghai.aliyuncs.com";
-    String accessKeyId = "LTAIZsuAeD3qGFzf";
-    String accessKeySecret = "RiwVnBS3AHXCKuQKV53CGM9GFC7B1u";
-    String bucketName = "niit-jay";
-    String filedir = "avatar/";
+    String accessKeyId = "LTAIelFvJkV74tTC";
+    String accessKeySecret = "PumKvfJwNZPO8F2WHfg8lwgjKhKjLL";
+    String bucketName = "save-pan";
+    String filedir = "img/";
     // 获取文件名
     String fileName = sourceFile.getOriginalFilename();
     // 获取文件后缀
@@ -65,8 +65,8 @@ public class InsertImgsController {
     return url.toString();
 }
 
-    @ApiOperation(value = "存储提问内容中的图片地址",notes="传入提问id和图片地址")
-    @PostMapping(value = "/insertQuestionImg")
+//    @ApiOperation(value = "存储提问内容中的图片地址",notes="传入提问id和图片地址")
+//    @PostMapping(value = "/insertQuestionImg")
     public ResponseResult insertQuestionImgs(
             @RequestParam("questionId") int questionId,
             @RequestParam("imgs") String imgs
@@ -82,8 +82,8 @@ public class InsertImgsController {
         }
         return ResponseResult.success();
     }
-    @ApiOperation(value = "存储交流中的图片地址",notes="传入交流id和图片地址")
-    @PostMapping(value = "/insertExchangeImg")
+//    @ApiOperation(value = "存储交流中的图片地址",notes="传入交流id和图片地址")
+//    @PostMapping(value = "/insertExchangeImg")
     public ResponseResult insertExchangeImgs(
             @RequestParam("exchangeId") int exchangeId,
             @RequestParam("imgs") String imgs

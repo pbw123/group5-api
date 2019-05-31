@@ -28,9 +28,10 @@
         <typeAlias alias="ExpertReply" type="cn.niit.group5.entity.ExpertReply"/>
         <typeAlias alias="ExpertGrade" type="cn.niit.group5.entity.ExpertGrade"/>
         <typeAlias alias="Seed" type="cn.niit.group5.entity.Seed"/>
-        <typeAlias alias="Seed" type="cn.niit.group5.entity.Seed"/>
         <typeAlias alias="Advertise" type="cn.niit.group5.entity.Advertise"/>
-<!--        <typeAlias alias="Collection" type="cn.niit.group5.entity.Collection"/>-->
+        <typeAlias alias="module" type="cn.niit.group5.entity.Module"/>
+        <typeAlias alias="videoSort" type="cn.niit.group5.entity.VideoSort"/>
+        <typeAlias alias="VideoExhibition" type="cn.niit.group5.entity.VideoExhibition"/>
     </typeAliases>
 
 

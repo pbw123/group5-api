@@ -12,7 +12,7 @@ public class News implements Serializable {
 
     private Date createTime;
 
-    private String iconUrl;
+    private String icon;
 
     private Integer readNumber;
 
@@ -37,6 +37,26 @@ public class News implements Serializable {
     private String content;
 
     private Integer topicId;
+
+    private Integer currPage;
+
+    private Integer pageSize;
+
+    public Integer getCurrPage() {
+        return currPage;
+    }
+
+    public void setCurrPage(Integer currPage) {
+        this.currPage = currPage;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
 
     public Integer getTopicId() {
         return topicId;
@@ -80,12 +100,12 @@ public class News implements Serializable {
         this.createTime = createTime;
     }
 
-    public String getIconUrl() {
-        return iconUrl;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setIconUrl(String iconUrl) {
-        this.iconUrl = iconUrl == null ? null : iconUrl.trim();
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public Integer getReadNumber() {
@@ -186,7 +206,7 @@ public class News implements Serializable {
         sb.append(", title=").append(title);
         sb.append(", addressId=").append(addressId);
         sb.append(", createTime=").append(createTime);
-        sb.append(", iconUrl=").append(iconUrl);
+        sb.append(", icon=").append(icon);
         sb.append(", readNumber=").append(readNumber);
         sb.append(", source=").append(source);
         sb.append(", author=").append(author);

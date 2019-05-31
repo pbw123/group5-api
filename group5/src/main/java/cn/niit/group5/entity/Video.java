@@ -10,7 +10,7 @@ public class Video implements Serializable {
 
     private Integer relationModule;
 
-    private String imgUrl;
+    private String img;
 
     private String videoUrl;
 
@@ -27,6 +27,28 @@ public class Video implements Serializable {
     private Date createTime;
 
     private Integer isDelete;
+
+   private Integer pageSize;
+
+   private Integer currPage;
+
+
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Integer getCurrPage() {
+        return currPage;
+    }
+
+    public void setCurrPage(Integer currPage) {
+        this.currPage = currPage;
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -54,12 +76,12 @@ public class Video implements Serializable {
         this.relationModule = relationModule;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getImg() {
+        return img;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl == null ? null : imgUrl.trim();
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getVideoUrl() {
@@ -135,7 +157,7 @@ public class Video implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", videoTitle=").append(videoTitle);
         sb.append(", relationModule=").append(relationModule);
-        sb.append(", imgUrl=").append(imgUrl);
+        sb.append(", img=").append(img);
         sb.append(", videoUrl=").append(videoUrl);
         sb.append(", videoSort=").append(videoSort);
         sb.append(", readNumber=").append(readNumber);

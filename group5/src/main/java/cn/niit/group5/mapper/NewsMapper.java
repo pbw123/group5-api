@@ -21,8 +21,9 @@ public interface NewsMapper {
     List<News> getNewsBySearch(String title);
 
     //    根据审核状态选择资讯
-    @Select("select * from t_news where review_status=#{reviewStatus}")
-    List<News> getNewsByReview(@Param("reviewStatus") Integer reviewStatus);
+    @Select("select * from t_news where review_status=#{reviewStatus} limit #{currPage}," +
+            "#{pageSize}")
+    List<News> getNewsByReview(News news);
 
     //删除问答
     @Update("UPDATE t_reply SET is_delete=1 WHERE id=#{0}")

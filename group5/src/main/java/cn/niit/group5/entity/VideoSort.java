@@ -2,28 +2,16 @@ package cn.niit.group5.entity;
 
 import java.io.Serializable;
 
-public class Module implements Serializable {
+public class VideoSort implements Serializable {
     private Integer id;
 
-    private String name;
-
-    private String icon;
-
-    private Integer status;
+    private String sortName;
 
     private Integer isDelete;
 
-   private Integer currPage;
+    private Integer currPage;
 
-   private Integer pageSize;
-
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
-    }
+    private Integer pageSize;
 
     public Integer getCurrPage() {
         return currPage;
@@ -31,6 +19,14 @@ public class Module implements Serializable {
 
     public void setCurrPage(Integer currPage) {
         this.currPage = currPage;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 
     private static final long serialVersionUID = 1L;
@@ -43,28 +39,12 @@ public class Module implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getSortName() {
+        return sortName;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon == null ? null : icon.trim();
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setSortName(String sortName) {
+        this.sortName = sortName == null ? null : sortName.trim();
     }
 
     public Integer getIsDelete() {
@@ -82,9 +62,7 @@ public class Module implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", icon=").append(icon);
-        sb.append(", status=").append(status);
+        sb.append(", sortName=").append(sortName);
         sb.append(", isDelete=").append(isDelete);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
