@@ -8,9 +8,10 @@
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_word
-    where id = #{id,jdbcType=INTEGER}
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    update t_word
+    set is_delete=1
+    where id=#{0}
   </delete>
   <insert id="insert" parameterType="cn.niit.group5.entity.Word" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
@@ -21,7 +22,7 @@
     values (#{name,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
       #{isDelete,jdbcType=INTEGER})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="cn.niit.group5.entity.Word" >
+  <update id="updateWord" parameterType="cn.niit.group5.entity.Word" >
     update t_word
     set `name` = #{name,jdbcType=VARCHAR},
       `count` = #{count,jdbcType=INTEGER},
@@ -29,7 +30,7 @@
       is_delete = #{isDelete,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select id, `name`, `count`, `status`, is_delete
     from t_word
     where id = #{id,jdbcType=INTEGER}
@@ -38,6 +39,18 @@
     select id, `name`, `count`, `status`, is_delete
     from t_word
     where is_delete=0
+    limit #{index},#{pageSize}
+  </select>
+  
+  <update id="disableWord" parameterType="Integer">
+    update t_word
+    set status=#{status}
+    where id=#{id}
+  </update>
+
+  <select id="searchByName" parameterType="map">
+    select * from t_word
+    where name like concat('%',#{name},'%')
     limit #{index},#{pageSize}
   </select>
 </mapper>
