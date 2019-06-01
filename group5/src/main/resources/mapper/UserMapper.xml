@@ -9,7 +9,7 @@
         <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="regitster_time" property="regitsterTime" jdbcType="DATE"/>
         <result column="sex" property="sex" jdbcType="TINYINT"/>
-        <result column="identity" property="identity" jdbcType="INTEGER"/>
+<!--        <result column="identity" property="identity" jdbcType="VARCHAR"/>-->
         <result column="user_address" property="userAddress" jdbcType="VARCHAR"/>
         <result column="unit_name" property="unitName" jdbcType="VARCHAR"/>
         <result column="plant_category" property="plantCategory" jdbcType="INTEGER"/>
@@ -99,4 +99,9 @@
         INSERT INTO  t_user(user_name,sex,head_url,phone_number,email,identity,user_address,regitster_time)
 VALUES(#{userName},#{sex},#{headUrl},#{phoneNumber},#{email},#{identity},#{userAddress},#{regitsterTime})
     </insert>
+
+    <select id="getUserListByLog" resultType="cn.niit.group5.entity.User"  >
+        select * from t_user
+    </select>
+
 </mapper>

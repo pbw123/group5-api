@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.TypesMapper" >
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Types" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+  </resultMap>
+  <delete id="delType" parameterType="java.lang.Integer" >
+    update t_types
+    set is_delete=1
+    where id={0}
+  </delete>
+  <insert id="insert" parameterType="cn.niit.group5.entity.Types" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_types (type_name, is_delete)
+    values (#{typeName,jdbcType=VARCHAR}, #{isDelete,jdbcType=TINYINT})
+  </insert>
+  <update id="updateType" parameterType="cn.niit.group5.entity.Types" >
+    update t_types
+    set type_name = #{typeName,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, type_name, is_delete
+    from t_types
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="map">
+    select id, type_name, is_delete
+    from t_types
+    where is_delete=0
+    limit #{index},#{pageSize}
+  </select>
+</mapper>

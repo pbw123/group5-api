@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Mapper
 @Component
 public interface UserMapper {
@@ -26,4 +28,6 @@ public interface UserMapper {
     int setStatus(@Param("id")Integer id,@Param("status") Integer status);
 //    添加用户
      int addUser(User user);
+
+List<User> getUserListByLog();
 }

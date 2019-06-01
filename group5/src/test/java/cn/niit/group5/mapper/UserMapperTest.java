@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class UserMapperTest extends BasicTest {
     @Autowired
@@ -26,5 +27,13 @@ public class UserMapperTest extends BasicTest {
             System.out.println(user.toString());
         else
             System.out.println("添加失败");
+    }
+@Test
+    public void getUserByIdTest()
+    {
+//        User userById = userMapper.getUserById(1);
+//        System.out.println(userById.toString());
+        List<User> userListByLog = userMapper.getUserListByLog();
+        userListByLog.forEach(user -> System.out.println(user));
     }
 }

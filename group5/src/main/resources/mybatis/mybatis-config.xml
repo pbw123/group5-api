@@ -35,6 +35,8 @@
         <typeAlias alias="Brand" type="cn.niit.group5.entity.Brand"/>
         <typeAlias alias="EnterpriseRecommend" type="cn.niit.group5.entity.EnterpriseRecommend"/>
         <typeAlias alias="Commodity" type="cn.niit.group5.entity.Commodity"/>
+        <typeAlias alias="Feedback" type="cn.niit.group5.entity.Feedback"/>
+        <typeAlias alias="Types" type="cn.niit.group5.entity.Types"/>
     </typeAliases>
 
 

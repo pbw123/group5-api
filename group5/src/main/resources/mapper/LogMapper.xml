@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.LogMapper">
+    <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Log">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="types_id" property="typesId" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="report_address" property="reportAddress" jdbcType="VARCHAR"/>
+        <result column="people" property="people" jdbcType="VARCHAR"/>
+        <result column="report_time" property="reportTime" jdbcType="DATE"/>
+        <result column="is_delete" property="isDelete" jdbcType="TINYINT"/>
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+        <result column="img_url" property="imgUrl" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="cn.niit.group5.entity.Log">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_log (user_id, types_id, title,
+        report_address, report_time, is_delete,
+        content, img_url)
+        values (#{userId,jdbcType=INTEGER}, #{typesId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+        #{reportAddress,jdbcType=VARCHAR}, #{reportTime,jdbcType=DATE},
+        #{isDelete,jdbcType=TINYINT},
+        #{content,jdbcType=LONGVARCHAR}, #{imgUrl,jdbcType=LONGVARCHAR})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="cn.niit.group5.entity.Log">
+    update t_log
+    set user_id = #{userId,jdbcType=INTEGER},
+      types_id = #{typesId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      report_address = #{reportAddress,jdbcType=VARCHAR},
+      report_time = #{reportTime,jdbcType=DATE},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      content = #{content,jdbcType=LONGVARCHAR},
+      img_url = #{imgUrl,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select l.*,u.user_name,u.people,t.type_name
+    from t_log l,t_user u,t_types t
+    where l.user_id=u.id
+    and l.type_id=t.id
+    and l.id=#{0}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="map">
+  select l.*,u.user_name,u.people,t.type_name
+    from t_log l,t_user u,t_types t
+    where l.user_id=u.id
+    and l.type_id=t.id
+    and l.is_delete=0
+    limit #{index},#{pageSize}
+  </select>
+
+    <select id="getUserListByLog" resultMap="userRM" parameterType="User">
+        select u.id,u.user_name,u.user_address,u.phone_number from t_user u
+        where u.is_delete=0
+        and u.identity like concat('%',#{identity},'%')
+        <if test="userName!=null">
+            and u.user_name like concat('%',#{userName},'%')
+        </if>
+        limit #{currPage},#{pageSize}
+    </select>
+    <resultMap id="userRM" type="user" extends="cn.niit.group5.mapper.UserMapper.BaseResultMap">
+        <association property="number" column="id" select="selNumber"></association>
+    </resultMap>
+    <select id="selNumber" parameterType="Integer" resultMap="BaseResultMap">
+       SELECT COUNT(user_id) number FROM t_log l
+  WHERE l.user_id=#{0}
+  AND l.is_delete=0
+  </select>
+    <select id="getAll" resultType="cn.niit.group5.entity.User">
+        select * from t_user
+    </select>
+
+    <select id="searchLogs" parameterType="map">
+        SELECT t.type_name,l.*
+        FROM t_log l,t_user u,t_types t
+        WHERE u.is_delete=0
+        AND l.is_delete=0
+        AND t.is_delete=0
+        AND u.id=l.user_id
+        <if test="keyword!=null and keyword!=''">
+            AND CONCAT(u.user_name,l.title) LIKE '%' #{keyword} '%'
+        </if>
+        <if test="type!=null">
+            AND t.type_name LIKE CONCAT('%',#{type},'%')
+        </if>
+        limit #{index},#{pageSize}
+    </select>
+</mapper>

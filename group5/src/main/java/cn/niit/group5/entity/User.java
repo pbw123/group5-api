@@ -16,6 +16,25 @@ public class User implements Serializable {
 
     private String time;
 
+    private Integer currPage;
+    private  Integer pageSize;
+
+    public Integer getCurrPage() {
+        return currPage;
+    }
+
+    public void setCurrPage(Integer currPage) {
+        this.currPage = currPage;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
     public String getTime() {
         return time;
     }
@@ -66,6 +85,16 @@ public class User implements Serializable {
     private Byte isDelete;
 
     private String headUrl;
+
+   private Integer number;
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
 
     private static final long serialVersionUID = 1L;
 
