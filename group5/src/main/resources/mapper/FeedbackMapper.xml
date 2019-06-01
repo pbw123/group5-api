@@ -2,10 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.niit.group5.mapper.FeedbackMapper" >
 
-
+  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.Feedback" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="feedback_time" property="feedbackTime" jdbcType="DATE" />
+    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
   <insert id="insert" parameterType="cn.niit.group5.entity.Feedback" >
     insert into t_feedback (user_id, feedback_time,content)
     values (#{userId}, #{feedbackTime},#{content})
   </insert>
 
+  <select id="getAllFeedBack" parameterType="Integer" resultMap="BaseResultMap">
+    select u.user_name,u.phone_number,f.*
+    from t_feedback f,t_user u
+    where f.is_delete=0
+    and f.user_id=u.id
+    limit #{currPage},#{pageSize}
+  </select>
+
+  <update id="updateFeedback" parameterType="cn.niit.group5.entity.Feedback" >
+    update t_feedback
+    set user_id = #{userId,jdbcType=INTEGER},
+      feedback_time = #{feedbackTime,jdbcType=DATE},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+     select u.user_name,u.phone_number,f.*
+    from t_feedback f,t_user u
+    where f.is_delete=0
+    and f.user_id=u.id
+    and f.id=#{0}
+  </select>
+
+  <update id="delFeedback" parameterType="Integer">
+    update t_feedback
+    set is_delete=1
+    where id=#{0}
+  </update>
+  <select id="searchFeedback" parameterType="Feedback" resultMap="BaseResultMap">
+    SELECT * FROM t_feedback WHERE content LIKE concat('%',#{content},'%')
+    limit #{currPage},#{pageSize}
+  </select>
 </mapper>
