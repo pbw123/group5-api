@@ -68,5 +68,4 @@
       #{phoneNumber,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, #{enterpriseProfile,jdbcType=LONGVARCHAR},
       #{imgUrl,jdbcType=LONGVARCHAR})
   </insert>
-</insert>
-        </mapper>
+</mapper>

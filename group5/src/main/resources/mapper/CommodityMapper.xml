@@ -53,9 +53,19 @@
 
   <select id="searchCommodity" parameterType="Commodity">
 SELECT * FROM t_commodity
- WHERE title LIKE concat('%',#{keyword},'%')
+ WHERE is_delete=0
+ and  title LIKE concat('%',#{keyword},'%')
  or source like concat('%',#{keyword},'%')
  or phone_number like concat('%',#{keyword},'%')
  limit #{currPage},#{pageSize}
+  </select>
+  <select id="searchBySortSource" parameterType="Commodity">
+    SELECT * FROM t_commodity
+    WHERE is_delete=0
+    <trim prefixOverrides="and">
+      <if test="sort!=null">and sort LIKE concat('%',#{sort},'%')</if>
+      <if test="source!=null">and source like concat('%',#{source},'%')</if>
+    </trim>
+    limit #{currPage},#{pageSize}
   </select>
 </mapper>

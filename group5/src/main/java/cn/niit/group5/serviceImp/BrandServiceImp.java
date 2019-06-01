@@ -207,4 +207,16 @@ public class BrandServiceImp {
         List<Commodity> commodities = brandMapper.searchCommodity(commodity);
         return  ResponseResult.success(commodities);
     }
+
+    public ResponseResult searchBySortSource(Integer sort,String source,Integer currPage,
+                                             Integer pageSize)
+    {
+        Commodity commodity = new Commodity();
+        commodity.setCurrPage(currPage);
+        commodity.setPageSize(pageSize);
+        commodity.setSortId(sort);
+        commodity.setSource(source);
+        List<Commodity> commodities = brandMapper.searchBySortSource(commodity);
+        return  ResponseResult.success(commodities);
+    }
 }

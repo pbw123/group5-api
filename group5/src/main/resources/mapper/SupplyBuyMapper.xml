@@ -26,6 +26,12 @@
       SELECT * FROM t_supply_buy WHERE is_supply_buy=0
   AND is_delete=0
   </select>
+  <select id="getAllSupplyOrBuyList" resultType="SupplyBuy" parameterType="SupplyBuy">
+      SELECT * FROM t_supply_buy
+      WHERE is_supply_buy=#{state}
+  AND is_delete=0
+  limit #{currPage},#{pageSize}
+  </select>
 
   <select id="seekList" resultType="SupplyBuy">
       SELECT * FROM t_supply_buy WHERE is_supply_buy=1
@@ -63,4 +69,10 @@
   <select id="getSeekById" resultType="SupplyBuy">
     SELECT * FROM t_supply_buy WHERE is_supply_buy=1 AND is_delete=0 AND user_id=#{userId}
   </select>
+
+  <update id="delSupplyOrBuy" parameterType="Integer">
+    update t_supply_buy
+    set is_delete=1
+    where id=#{id}
+  </update>
 </mapper>

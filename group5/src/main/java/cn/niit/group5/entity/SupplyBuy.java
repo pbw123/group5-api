@@ -36,6 +36,29 @@ public class SupplyBuy implements Serializable {
 
     private Integer isDelete;
 
+
+   private  Integer currPage;
+
+   private Integer pageSize;
+
+
+
+    public Integer getCurrPage() {
+        return currPage;
+    }
+
+    public void setCurrPage(Integer currPage) {
+        this.currPage = currPage;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {

@@ -2,6 +2,7 @@ package cn.niit.group5.mapper;
 
 import cn.niit.group5.entity.Brand;
 import cn.niit.group5.entity.Commodity;
+import cn.niit.group5.entity.SupplyBuy;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -36,4 +37,9 @@ public interface BrandMapper {
 
     //    搜索农资
     List<Commodity> searchCommodity(Commodity commodity);
+
+    //    据分类和企业名称搜索农资
+    List<Commodity> searchBySortSource(Commodity commodity);
+
+
 }

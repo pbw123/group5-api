@@ -2,6 +2,7 @@ package cn.niit.group5.mapper;
 
 import cn.niit.group5.entity.SupplyBuy;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,7 @@ public interface SupplyBuyMapper {
     void insertSeek(SupplyBuy supplyBuy);
 
     //供应详情
-   SupplyBuy getSupplyDetail(int id);
+    SupplyBuy getSupplyDetail(int id);
 
     //求购详情
     SupplyBuy getSeekDetail(int id);
@@ -41,4 +42,10 @@ public interface SupplyBuyMapper {
     @Select("SELECT * FROM t_supply_buy WHERE title LIKE concat('%',#{title},'%')" +
             " OR content LIKE concat('%',#{title},'%') order by create_time desc")
     List<SupplyBuy> getSupplyBuyBySearch(String title);
+
+    //    获取所有的供应或求购
+    List<SupplyBuy>getAllSupplyOrBuyList(SupplyBuy supplyBuy);
+
+    //    删除供应或者求购
+    int delSupplyOrBuy(@Param("id") Integer id);
 }

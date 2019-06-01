@@ -124,4 +124,12 @@ public class BrandController {
                                           @RequestParam(defaultValue = "10") Integer pageSize) {
         return brandServiceImp.searchCommodity(keyword, currPage, pageSize);
     }
+
+    @ApiOperation(value = "据分类和企业名搜索农资")
+    @PostMapping(value = "searchBySortSource")
+    public ResponseResult searchBySortSource(Integer sort, String source,
+                                             @RequestParam(defaultValue = "1") Integer currPage,
+                                             @RequestParam(defaultValue = "10") Integer pageSize) {
+        return brandServiceImp.searchBySortSource(sort, source, currPage, pageSize);
+    }
 }
