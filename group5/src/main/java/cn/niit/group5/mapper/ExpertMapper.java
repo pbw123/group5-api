@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 @Component
@@ -35,6 +36,22 @@ List<Expert>getAgricultureExpert(@Param("sortId") Integer sortId, @Param("gradeI
 //    修改专家问答的内容
     @Update("update t_expert_question set content=#{content} where id=#{id}")
     int updateExpertQuestion(@Param("content")String content,@Param("id")Integer id);
+//所有专家列表
+    List<Expert>selectAll(Map<Object,Object>map);
 
+//    添加专家
+    int addExpert(Expert expert);
+
+//    修改专家
+    int updateExpert(Expert expert);
+
+//    改变专家状态
+    int updateStatus(Map<Object,Object>map);
+
+//    据id查询专爱
+    Expert selectById(Integer id);
+
+//    搜索专家
+    List<Expert>search(Map<Object,Object>map);
 
 }

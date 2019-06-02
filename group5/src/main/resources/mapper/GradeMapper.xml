@@ -7,7 +7,36 @@
     <result column="sort" property="sort" jdbcType="VARCHAR" />
     <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
   </resultMap>
-
-
-
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    update t_grade
+    set is_delete=1
+    where id=#{0}
+  </delete>
+  <insert id="insert" parameterType="cn.niit.group5.entity.Grade" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_grade (grade, sort, is_delete
+      )
+    values (#{grade,jdbcType=VARCHAR}, #{sort,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.niit.group5.entity.Grade" >
+    update t_grade
+    set grade = #{grade,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, grade, sort, is_delete
+    from t_grade
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="map" >
+    select id, grade, sort, is_delete
+    from t_grade
+    where is_delete=0
+    limit #{index},#{pageSize}
+  </select>
 </mapper>

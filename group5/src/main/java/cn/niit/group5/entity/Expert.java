@@ -23,7 +23,7 @@ public class Expert implements Serializable {
 
     private Integer checkAll;
 
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     private Integer score;
 
@@ -36,6 +36,26 @@ public class Expert implements Serializable {
     private  String sort;
 
    private TechnologySort technologySort;
+
+   private String headImg;
+
+   private String sortName;
+
+    public String getSortName() {
+        return sortName;
+    }
+
+    public void setSortName(String sortName) {
+        this.sortName = sortName;
+    }
+
+    public String getHeadImg() {
+        return headImg;
+    }
+
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
+    }
 
     public TechnologySort getTechnologySort() {
         return technologySort;
@@ -136,11 +156,11 @@ public class Expert implements Serializable {
         this.checkAll = checkAll;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

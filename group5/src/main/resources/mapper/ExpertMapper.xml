@@ -13,10 +13,12 @@
         <result column="expert_sort" property="expertSort" jdbcType="INTEGER"/>
         <result column="job_title" property="jobTitle" jdbcType="VARCHAR"/>
         <result column="check_all" property="checkAll" jdbcType="INTEGER"/>
-        <result column="phone_number" property="phoneNumber" jdbcType="INTEGER"/>
+        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR"/>
         <result column="score" property="score" jdbcType="INTEGER"/>
         <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
         <result column="state" property="state" jdbcType="INTEGER"/>
+        <result column="grade" jdbcType="VARCHAR" property="grade"/>
+        <result column="sortName" jdbcType="VARCHAR" property="sortName"/>
     </resultMap>
     <select id="getExpertDetail" parameterType="Integer" resultMap="expertRM">
     SELECT * FROM t_expert
@@ -67,6 +69,81 @@
 
     </select>
 
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="map">
+    select id, expert_name, unit_name, email, profession, resume, sys_sort, expert_sort,
+    job_title, check_all, phone_number, score, is_delete, `state`, head_img
+    from t_expert
+    where is_delete=0
+    limit #{index},#{pageSize}
+  </select>
 
+    <insert id="insert" parameterType="cn.niit.group5.entity.Expert">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_expert (expert_name, unit_name, email,
+        profession, resume, sys_sort,
+        expert_sort, job_title, check_all,
+        phone_number, score, is_delete,
+        `state`, head_img)
+        values (#{expertName,jdbcType=VARCHAR}, #{unitName,jdbcType=VARCHAR},
+        #{email,jdbcType=VARCHAR},
+        #{profession,jdbcType=VARCHAR}, #{resume,jdbcType=VARCHAR}, #{sysSort,jdbcType=INTEGER},
+        #{expertSort,jdbcType=INTEGER}, #{jobTitle,jdbcType=VARCHAR}, #{checkAll,jdbcType=INTEGER},
+        #{phoneNumber,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER},
+        #{state,jdbcType=INTEGER}, #{headImg,jdbcType=LONGVARCHAR})
+    </insert>
+
+    <update id="updateExpert" parameterType="cn.niit.group5.entity.Expert">
+    update t_expert
+    set expert_name = #{expertName,jdbcType=VARCHAR},
+      unit_name = #{unitName,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      resume = #{resume,jdbcType=VARCHAR},
+      sys_sort = #{sysSort,jdbcType=INTEGER},
+      expert_sort = #{expertSort,jdbcType=INTEGER},
+      job_title = #{jobTitle,jdbcType=VARCHAR},
+      check_all = #{checkAll,jdbcType=INTEGER},
+      phone_number = #{phoneNumber,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      `state` = #{state,jdbcType=INTEGER},
+      head_img = #{headImg,jdbcType=LONGVARCHAR},
+      grade=#{grade}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <update id="updateStatus" parameterType="map">
+    update t_expert
+    set state=#{state}
+    where id=#{id}
+  </update>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select e.*,t.name sortName
+    from t_expert e,t_technology_sort t
+    where id = #{id,jdbcType=INTEGER}
+    and t.id=expert_sort
+  </select>
+
+    <select id="search" parameterType="map" resultMap="BaseResultMap">
+        select e.*,t.name
+        from t_expert e,t_technology_sort t
+        where t.id=expert_sort
+        <trim>
+            <if test="keyword!=null">
+                and concat(e.expert_name,e.profession) like '%'#{keyword}'%'
+            </if>
+            <if test="grade!=null">
+                and e.grade like concat('%',#{grade},'%')
+            </if>
+            <if test="sortName!=null">
+                and t.name like concat('%',#{sortName},'%')
+            </if>
+        </trim>
+        limit #{index},#{pageSize}
+
+    </select>
 
 </mapper>
