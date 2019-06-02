@@ -6,15 +6,15 @@ import cn.niit.group5.entity.TechnologySort;
 import cn.niit.group5.mapper.ModuleMapper;
 import cn.niit.group5.mapper.NewsMapper;
 import cn.niit.group5.mapper.TechnologySortMapper;
-import cn.niit.group5.util.MsgConst;
-import cn.niit.group5.util.ResponseResult;
-import cn.niit.group5.util.StatusConst;
-import cn.niit.group5.util.UploadImg;
+import cn.niit.group5.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class NewsServiceImp {
@@ -38,8 +38,9 @@ public class NewsServiceImp {
     @Autowired
     private NewsMapper newsMapper;
 
-    public ResponseResult getNewsByReview(Integer reviewStatus,Integer currPage,Integer pageSize) {
-        News news=new News();
+    public ResponseResult getNewsByReview(Integer reviewStatus, Integer currPage,
+                                          Integer pageSize) {
+        News news = new News();
         news.setReviewStatus(reviewStatus);
         news.setCurrPage(currPage);
         news.setPageSize(pageSize);
@@ -50,8 +51,8 @@ public class NewsServiceImp {
     @Autowired
     private ModuleMapper moduleMapper;
 
-    public ResponseResult getAllModule(Integer currPage,Integer pageSize) {
-        List<Module> allModuleList = moduleMapper.getAllModuleList(currPage,pageSize);
+    public ResponseResult getAllModule(Integer currPage, Integer pageSize) {
+        List<Module> allModuleList = moduleMapper.getAllModuleList(currPage, pageSize);
         return ResponseResult.success(allModuleList);
     }
 
@@ -79,40 +80,99 @@ public class NewsServiceImp {
             return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
     }
 
-    public Integer delTechnoSort(Integer id)
-    {
+    public Integer delTechnoSort(Integer id) {
         int i = newsMapper.delTechnoSort(id);
-        if (i==1)
+        if (i == 1)
             return StatusConst.SUCCESS;
         else
             return StatusConst.ERROR;
     }
 
-    public Integer updateTechnoSort(Integer id,String name,MultipartFile icon)
-    {
-        TechnologySort technologySort=new TechnologySort();
+    public Integer updateTechnoSort(Integer id, String name, MultipartFile icon) {
+        TechnologySort technologySort = new TechnologySort();
         technologySort.setName(name);
         technologySort.setId(id);
-        if (icon!=null) {
+        if (icon != null) {
             String file = UploadImg.ossUpload(icon);
             technologySort.setIcon(file);
         }
         int i = newsMapper.updateTechnoSort(technologySort);
+        if (i == 1)
+            return StatusConst.SUCCESS;
+        else
+            return StatusConst.ERROR;
+    }
+
+    public Integer updateModule(Integer id, String name, MultipartFile file) {
+        Module module = new Module();
+        module.setId(id);
+        module.setName(name);
+        if (file != null) {
+            String s = UploadImg.ossUpload(file);
+            module.setIcon(s);
+        }
+        return moduleMapper.updateModule(module);
+    }
+
+
+    public ResponseResult getAllNewsOrSearch(String title, Integer reviewStatus,
+                                             @RequestParam(defaultValue = "1") Integer currPage,
+                                             @RequestParam(defaultValue = "10") Integer pageSize) {
+        Map<Object, Object> map = PageUtil.pageDemo(currPage, pageSize);
+        map.put("title", title);
+        map.put("reviewStatus", reviewStatus);
+        List<News> newsList = newsMapper.selectAll(map);
+        return ResponseResult.success(newsList);
+    }
+
+    public Integer delNews(Integer id) {
+        int i = newsMapper.deleteByPrimaryKey(id);
+        if (i == 1)
+            return StatusConst.SUCCESS;
+        else
+            return StatusConst.ERROR;
+    }
+
+    public ResponseResult getNewsById(Integer id) {
+        News news = newsMapper.selectByPrimaryKey(id);
+        return ResponseResult.success(news);
+    }
+
+    public int updateStatus(Integer id, Integer status) {
+        HashMap<Object, Object> map = new HashMap<>();
+        map.put("status", status);
+        map.put("id", id);
+        int i = newsMapper.updateStatus(map);
         if (i==1)
             return StatusConst.SUCCESS;
         else
             return StatusConst.ERROR;
     }
 
-    public Integer updateModule(Integer id,String name,MultipartFile file)
+    public int updateNews(Integer id,String title,String content)
     {
-        Module module = new Module();
-        module.setId(id);
-        module.setName(name);
-        if (file!=null) {
-            String s = UploadImg.ossUpload(file);
-            module.setIcon(s);
-        }
-       return moduleMapper.updateModule(module);
+        News news = new News();
+        news.setTitle(title);
+        news.setContent(content);
+        int i = newsMapper.updateByPrimaryKey(news);
+        if (i==1)
+            return StatusConst.SUCCESS;
+        else
+            return StatusConst.ERROR;
+    }
+
+    public int addNews(String title,String content,String author,String source,Integer isTop)
+    {
+        News news = new News();
+        news.setContent(content);
+        news.setTitle(title);
+        news.setAuthor(author);
+        news.setSource(source);
+        news.setIsTop(isTop);
+        int insert = newsMapper.insert(news);
+        if (insert==1)
+            return StatusConst.SUCCESS;
+        else
+            return StatusConst.ERROR;
     }
 }

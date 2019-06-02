@@ -78,7 +78,44 @@ public class NewsControllerRear {
     @ApiOperation(value = "修改九宫格")
     @PostMapping(value = "updateModuleById")
     public Integer updateModuleById(Integer id, String name, MultipartFile file) {
-      return   newsServiceImp.updateModule(id, name, file);
+        return newsServiceImp.updateModule(id, name, file);
     }
 
+    @ApiOperation(value = "添加资讯")
+    @PostMapping(value = "addNews")
+    public int addNews(String title, String content, String author, String source, Integer isTop) {
+        return newsServiceImp.addNews(title, content, author, source, isTop);
+    }
+
+    @ApiOperation(value = "删除资讯")
+    @GetMapping(value = "delNews/{id}")
+    public int delNews(@PathVariable Integer id) {
+        return newsServiceImp.delNews(id);
+    }
+
+    @ApiOperation(value = "修改资讯状态")
+    @GetMapping(value = "updateStatus")
+    public int updateStatus(Integer id, Integer status) {
+        return newsServiceImp.updateStatus(id, status);
+    }
+
+    @ApiOperation(value = "据id查资讯")
+    @GetMapping(value = "getNewsById/{id}")
+    public ResponseResult getNewsById(@PathVariable Integer id) {
+        return newsServiceImp.getNewsById(id);
+    }
+
+    @ApiOperation(value = "修改资讯")
+    @PostMapping(value = "updateNews")
+    public int updateNews(Integer id, String title, String content) {
+        return newsServiceImp.updateNews(id, title, content);
+    }
+
+    @ApiOperation(value = "获取所有或搜索所需资讯")
+    @PostMapping(value = "getNewsListOrSearch")
+    public ResponseResult getNewsListOrSearch(@RequestParam(defaultValue = "1") Integer currPage,
+                                              @RequestParam(defaultValue = "10") Integer pageSize,
+                                              String title, Integer reviewStatus) {
+        return newsServiceImp.getAllNewsOrSearch(title, reviewStatus, currPage, pageSize);
+    }
 }

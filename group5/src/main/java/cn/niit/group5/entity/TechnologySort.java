@@ -9,7 +9,16 @@ public class TechnologySort implements Serializable {
 
     private String icon;
 
+    private Integer isDelete;
     private static final long serialVersionUID = 1L;
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
 
     public Integer getId() {
         return id;

@@ -1,35 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.niit.group5.mapper.ExpertGradeMapper" >
-  <resultMap id="BaseResultMap" type="cn.niit.group5.entity.ExpertGrade" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="expert_id" property="expertId" jdbcType="INTEGER" />
-    <result column="grade_id" property="gradeId" jdbcType="INTEGER" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_expert_grade
-    where id = #{id,jdbcType=INTEGER}
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.niit.group5.mapper.ExpertGradeMapper">
+    <resultMap id="BaseResultMap" type="cn.niit.group5.entity.ExpertGrade">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="expert_id" property="expertId" jdbcType="INTEGER"/>
+        <result column="grade_id" property="gradeId" jdbcType="INTEGER"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        update t_expert_grade
+        set is_delete=1
+        where id=#{0}
   </delete>
-  <insert id="insert" parameterType="cn.niit.group5.entity.ExpertGrade" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into t_expert_grade (expert_id, grade_id)
-    values (#{expertId,jdbcType=INTEGER}, #{gradeId,jdbcType=INTEGER})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="cn.niit.group5.entity.ExpertGrade" >
+    <insert id="insert" parameterType="cn.niit.group5.entity.ExpertGrade">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_expert_grade (expert_id, grade_id)
+        values (#{expertId,jdbcType=INTEGER}, #{gradeId,jdbcType=INTEGER})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="cn.niit.group5.entity.ExpertGrade">
     update t_expert_grade
     set expert_id = #{expertId,jdbcType=INTEGER},
       grade_id = #{gradeId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select id, expert_id, grade_id
     from t_expert_grade
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
+    <select id="selectAll" resultMap="BaseResultMap">
     select id, expert_id, grade_id
     from t_expert_grade
   </select>
+
+    <select id="getIndustryExpertList" parameterType="map" resultMap="IndustryRM">
+        SELECT e.id,e.expert_name,e.expert_sort,e.state,e.unit_name,e.sys_sort,g.sys_sort
+     FROM  t_expert_grade eg,t_grade g,t_expert e
+WHERE     eg.expert_id=e.id
+     AND eg.grade_id=g.id
+     and eg.is_delete=0
+  AND   g.sort LIKE '%体系专家%'
+  <if test="gradeName!=null">and g.grade like '%'#{gradeName}'%'</if>
+  limit #{index},#{pageSize}
+  </select>
+
+    <resultMap type="cn.niit.group5.entity.dto.IndustryRearDTO" id="IndustryRM">
+        <result column="id" property="id"/>
+        <result column="expert_name" property="expertName"/>
+        <result column="expert_sort" property="expertSort"/>
+        <result column="state" property="state"/>
+        <result column="unit_name" property="unitName"/>
+        <result column="sys_sort" property="sysSort"/>
+        <result column="grade" property="grade"/>
+        <association property="sortName" column="id" select="getSortName"/>
+    </resultMap>
+    <select id="getSortName" parameterType="Integer"
+            resultMap="cn.niit.group5.mapper.TechnologySortMapper.BaseResultMap">
+            select `name`
+    from t_technology_sort
+    where id = #{0}
+    </select>
 </mapper>

@@ -17,4 +17,13 @@ public interface TechnologySortMapper {
 //添加农业科技分类
     @Insert("INSERT INTO t_technology_sort(name,icon) VALUES(#{name},#{icon})")
     int addSortTechno(@Param("name") String name,@Param("icon")String icon);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(TechnologySort record);
+
+    TechnologySort selectByPrimaryKey(Integer id);
+
+
+    int updateByPrimaryKey(TechnologySort record);
 }

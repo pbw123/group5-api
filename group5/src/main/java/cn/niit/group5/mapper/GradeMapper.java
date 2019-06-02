@@ -18,4 +18,7 @@ public interface GradeMapper {
     List<Grade> selectAll(Map<Object,Object>map);
 
     int updateByPrimaryKey(Grade record);
+
+//    搜索等级
+    List<Grade>searchGrade(Map<Object,Object>map);
 }

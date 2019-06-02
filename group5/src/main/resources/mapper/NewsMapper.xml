@@ -30,4 +30,66 @@
     </trim>
     WHERE id=#{id}
   </update>
+
+    <insert id="insert" parameterType="cn.niit.group5.entity.News" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_news (title, address_id, create_time,
+        read_number, `source`, author,
+        technology_id, news_sort_id, animal_sort_id,
+        topic_id, `state`, review_status,
+        is_top, is_delete, content,
+        icon)
+        values (#{title,jdbcType=VARCHAR}, #{addressId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+        #{readNumber,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
+        #{technologyId,jdbcType=INTEGER}, #{newsSortId,jdbcType=INTEGER}, #{animalSortId,jdbcType=INTEGER},
+        #{topicId,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{reviewStatus,jdbcType=INTEGER},
+        #{isTop,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR},
+        #{icon,jdbcType=LONGVARCHAR})
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="cn.niit.group5.entity.News" >
+    update t_news
+    set title = #{title,jdbcType=VARCHAR},
+      address_id = #{addressId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      read_number = #{readNumber,jdbcType=INTEGER},
+      `source` = #{source,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      technology_id = #{technologyId,jdbcType=INTEGER},
+      news_sort_id = #{newsSortId,jdbcType=INTEGER},
+      animal_sort_id = #{animalSortId,jdbcType=INTEGER},
+      topic_id = #{topicId,jdbcType=INTEGER},
+      `state` = #{state,jdbcType=INTEGER},
+      review_status = #{reviewStatus,jdbcType=INTEGER},
+      is_top = #{isTop,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR},
+      icon = #{icon,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, title, address_id, create_time, read_number, `source`, author, technology_id,
+    news_sort_id, animal_sort_id, topic_id, `state`, review_status, is_top, is_delete,
+    content, icon
+    from t_news
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="map">
+    select id, title, address_id, create_time, read_number, `source`, author, technology_id,
+    news_sort_id, animal_sort_id, topic_id, `state`, review_status, is_top, is_delete,
+    content, icon
+    from t_news
+    where is_delete=0
+    <if test="title!=null">and title like '%'#{title}'%'</if>
+    <if test="reviewStatus!=null">and title like '%'#{reviewStatus}'%'</if>
+    limit #{index},#{pageSize}
+  </select>
+
+    <update id="updateStatus" parameterType="map">
+        update t_news
+        set status=#{status}
+        where id=#{id}
+    </update>
 </mapper>

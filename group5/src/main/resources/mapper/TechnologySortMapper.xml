@@ -5,6 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
   </resultMap>
 
   <select id="selectAll" resultMap="BaseResultMap" >
@@ -15,5 +16,32 @@
   <select id="getNewsBySortId" parameterType="Integer"
           resultMap="cn.niit.group5.mapper.NewsMapper.BaseResultMap">
  SELECT * FROM t_news WHERE technology_id=#{0}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    update t_technology_sort
+    set is_delete=1
+    where id=#{0}
+  </delete>
+  <insert id="insert" parameterType="cn.niit.group5.entity.TechnologySort" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_technology_sort (`name`, is_delete, icon
+    )
+    values (#{name,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, #{icon,jdbcType=LONGVARCHAR}
+    )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.niit.group5.entity.TechnologySort" >
+    update t_technology_sort
+    set `name` = #{name,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, `name`, is_delete, icon
+    from t_technology_sort
+    where id = #{id,jdbcType=INTEGER}
   </select>
 </mapper>

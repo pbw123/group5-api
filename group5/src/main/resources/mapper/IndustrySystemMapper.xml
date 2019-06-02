@@ -28,4 +28,38 @@ AND   eg.grade_id=g.id
         <result column="resume" property="resume"/>
         <result column="grade" property="grade"/>
     </resultMap>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        update t_industry_system
+        set is_delete=1
+        where id=#{0}
+  </delete>
+    <insert id="insert" parameterType="cn.niit.group5.entity.IndustrySystem" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_industry_system (system_name, `state`, is_delete,
+        icon)
+        values (#{systemName,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER},
+        #{icon,jdbcType=LONGVARCHAR})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="cn.niit.group5.entity.IndustrySystem" >
+    update t_industry_system
+    set system_name = #{systemName,jdbcType=VARCHAR},
+      `state` = #{state,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, system_name, `state`, is_delete, icon
+    from t_industry_system
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="map">
+    select id, system_name, `state`, is_delete, icon
+    from t_industry_system
+    where is_delete=0
+    limit #{index},#{pageSize}
+  </select>
 </mapper>

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 @Component
@@ -17,4 +18,13 @@ public interface IndustrySystemMapper {
     List<ExpertGrade>getIndustryExpertList(@Param("sysSortId")Integer sysSortId,
                                            @Param("gradeId")Integer gradeId);
 
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(IndustrySystem record);
+
+    IndustrySystem selectByPrimaryKey(Integer id);
+
+    List<IndustrySystem> selectAll(Map<Object,Object>map);
+
+    int updateByPrimaryKey(IndustrySystem record);
 }

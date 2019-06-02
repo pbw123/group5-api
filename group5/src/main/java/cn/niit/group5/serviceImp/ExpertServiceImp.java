@@ -1,9 +1,7 @@
 package cn.niit.group5.serviceImp;
 
-import cn.niit.group5.entity.Expert;
-import cn.niit.group5.entity.Grade;
-import cn.niit.group5.mapper.ExpertMapper;
-import cn.niit.group5.mapper.GradeMapper;
+import cn.niit.group5.entity.*;
+import cn.niit.group5.mapper.*;
 import cn.niit.group5.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -125,4 +123,144 @@ public class ExpertServiceImp {
         else
             return StatusConst.ERROR;
     }
+
+    public ResponseResult getGradeById(Integer id) {
+        Grade grade = gradeMapper.selectByPrimaryKey(id);
+        return ResponseResult.success(grade);
+    }
+
+    public Integer addGrade(String name, String sort) {
+        Grade grade = new Grade();
+        grade.setGrade(name);
+        grade.setSort(sort);
+        int insert = gradeMapper.insert(grade);
+        if (insert == 1)
+            return StatusConst.SUCCESS;
+        else
+            return StatusConst.ERROR;
+    }
+
+    public Integer updateGrade(Integer id, String name, String sort) {
+        Grade grade = new Grade();
+        grade.setSort(sort);
+        grade.setGrade(name);
+        grade.setId(id);
+        int i = gradeMapper.updateByPrimaryKey(grade);
+        if (i == 1)
+            return StatusConst.SUCCESS;
+        else
+            return StatusConst.ERROR;
+    }
+
+    public ResponseResult searchGrade(String keyword, Integer currPage, Integer pageSize) {
+        Map<Object, Object> map = PageUtil.pageDemo(currPage, pageSize);
+        map.put("keyword", keyword);
+        List<Grade> grades = gradeMapper.searchGrade(map);
+        return ResponseResult.success(grades);
+    }
+
+    @Autowired
+    private TechnologySortMapper technologySortMapper;
+
+    public Integer addSort(String name, String icon) {
+        TechnologySort technologySort = new TechnologySort();
+        technologySort.setIcon(icon);
+        technologySort.setName(name);
+        int insert = technologySortMapper.insert(technologySort);
+        if (insert == 1)
+            return StatusConst.SUCCESS;
+        else
+            return StatusConst.ERROR;
+    }
+
+    public Integer removeSort(Integer id) {
+        int i = technologySortMapper.deleteByPrimaryKey(id);
+        if (i == 1)
+            return StatusConst.SUCCESS;
+        else
+            return StatusConst.ERROR;
+    }
+
+    public Integer updateById(Integer id, String name, String icon) {
+        TechnologySort technologySort = new TechnologySort();
+        technologySort.setIcon(icon);
+        technologySort.setId(id);
+        technologySort.setName(name);
+        int i = technologySortMapper.updateByPrimaryKey(technologySort);
+        if (i == 1)
+            return StatusConst.SUCCESS;
+        else
+            return StatusConst.ERROR;
+    }
+
+    public ResponseResult getSortById(Integer id) {
+        TechnologySort technologySort = technologySortMapper.selectByPrimaryKey(id);
+        return ResponseResult.success(technologySort);
+    }
+
+    @Autowired
+    private IndustrySystemMapper industrySystemMapper;
+
+    public ResponseResult getSystemList(Integer currPage, Integer pageSize) {
+        Map<Object, Object> map = PageUtil.pageDemo(currPage, pageSize);
+        List<IndustrySystem> list = industrySystemMapper.selectAll(map);
+        return ResponseResult.success(list);
+    }
+
+    public ResponseResult getSystemById(Integer id) {
+        IndustrySystem system = industrySystemMapper.selectByPrimaryKey(id);
+        return ResponseResult.success(system);
+    }
+
+    public Integer removeSys(Integer id) {
+        int i = industrySystemMapper.deleteByPrimaryKey(id);
+        if (i == 1)
+            return StatusConst.SUCCESS;
+        else
+            return StatusConst.ERROR;
+    }
+
+    public Integer updateSys(Integer id, String name, String icon) {
+        IndustrySystem system = new IndustrySystem();
+        system.setIcon(icon);
+        system.setSystemName(name);
+        system.setId(id);
+        int i = industrySystemMapper.updateByPrimaryKey(system);
+        if (i == 1)
+            return StatusConst.SUCCESS;
+        else
+            return StatusConst.ERROR;
+    }
+
+    public Integer addSys(String name, String icon) {
+        IndustrySystem system = new IndustrySystem();
+        system.setSystemName(name);
+        system.setIcon(icon);
+        int insert = industrySystemMapper.insert(system);
+        if (insert == 1)
+            return StatusConst.SUCCESS;
+        else
+            return StatusConst.ERROR;
+    }
+
+    @Autowired
+    private ExpertGradeMapper expertGradeMapper;
+
+    public ResponseResult getIndustryExpertList(String gradeName, Integer currPage,
+                                                Integer pageSize) {
+        Map<Object, Object> map = PageUtil.pageDemo(currPage, pageSize);
+        map.put("gradeName", gradeName);
+        List<ExpertGrade> list = expertGradeMapper.getIndustryExpertList(map);
+        return ResponseResult.success(list);
+    }
+
+    public Integer delSysExpert(Integer id)
+    {
+        int i = expertGradeMapper.deleteByPrimaryKey(id);
+        if (i==1)
+            return StatusConst.SUCCESS;
+        else
+            return StatusConst.ERROR;
+    }
+
 }

@@ -39,4 +39,11 @@
     where is_delete=0
     limit #{index},#{pageSize}
   </select>
+
+      <select id="searchGrade" parameterType="map" resultMap="BaseResultMap">
+           SELECT * FROM t_grade
+    WHERE CONCAT(grade,sort) LIKE '%'#{keyword}'%'
+    and is_delete=0
+    limit #{index},#{pageSize}
+      </select>
 </mapper>
