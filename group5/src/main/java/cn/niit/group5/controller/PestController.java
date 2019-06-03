@@ -28,8 +28,8 @@ public class PestController {
     }
 
     @ApiOperation(value = "通过植保库id获取详情")
-    @GetMapping(value = "getPestDetailById/{id}")
-    public ResponseResult getPestDetail(@RequestParam(required = true) @PathVariable Integer id){
+    @GetMapping(value = "getPestDetailById")
+    public ResponseResult getPestDetail(@RequestParam(required = true) Integer id){
         Pest pest = pestMapper.getPestDetailById(id);
         return ResponseResult.success(pest);
     }

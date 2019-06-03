@@ -48,8 +48,8 @@ public class ExpertController {
     }
 
     @ApiOperation(value = "专家详情/有咨询专家按钮的那个页面",notes = "传入该专家的id/点击专家头像用这个接口")
-    @GetMapping(value = "getExpertDetail/{id}")
-    public ResponseResult getExpertDetail(@PathVariable Integer id) {
+    @GetMapping(value = "getExpertDetail")
+    public ResponseResult getExpertDetail(Integer id) {
         Expert expert = expertMapper.getExpertDetail(id);
         List<ExpertQuestion> expertQuestions=expertMapper.getExpertQuestionList(id);
         ExpertDTO expertDTO=new ExpertDTO();
@@ -86,15 +86,15 @@ public class ExpertController {
     }
 
     @ApiOperation(value = "获取该专家被别人问的问题列表", notes = "传入该专家的id")
-    @GetMapping(value = "getExpertQuestionList/{id}")
-    public ResponseResult getExpertQuestionList(@PathVariable Integer id) {
+    @GetMapping(value = "getExpertQuestionList")
+    public ResponseResult getExpertQuestionList(Integer id) {
         List<ExpertQuestion> experts = expertMapper.getExpertQuestionList(id);
         return ResponseResult.success(experts);
     }
 
     @ApiOperation(value = "专家问题详情", notes = "传入该专家的id")
-    @GetMapping(value = "getExpertQuestionDetail/{id}")
-    public ResponseResult getExpertQuestionDetail(@PathVariable Integer id) {
+    @GetMapping(value = "getExpertQuestionDetail")
+    public ResponseResult getExpertQuestionDetail(Integer id) {
         ExpertQuestion experts = expertQuestionMapper.expertQuestionDetail(id);
         List<ExpertReply> expertReplys = experts.getExpertReplys();
         for (ExpertReply reply:expertReplys)
@@ -108,8 +108,8 @@ public class ExpertController {
     private IndustryServerImp industryServerImp;
 
     @ApiOperation(value = "产业技术体系中的专家列表", notes = "传入该体系的id")
-    @GetMapping(value = "getIndustryExpertList/{id}")
-    public ResponseResult getIndustryExpertList(@PathVariable Integer id) {
+    @GetMapping(value = "getIndustryExpertList")
+    public ResponseResult getIndustryExpertList(Integer id) {
         List<ExpertGrade> chiefExpertList = industryServerImp.getChiefExpertList(id);
         List<ExpertGrade> postExpertList = industryServerImp.getPostExpertList(id);
         List<ExpertGrade> basicExpertList = industryServerImp.getBasicExpertList(id);

@@ -33,8 +33,8 @@ public class IndexController {
 //    }
 
     @ApiOperation(value = "点击九宫格都需要调用的接口",notes = "传入该模块功能的id")
-    @GetMapping(value = "getModuleDetails/{id}")
-    public ResponseResult getModuleDetails(@PathVariable Integer id)
+    @GetMapping(value = "getModuleDetails")
+    public ResponseResult getModuleDetails(Integer id)
     {
         Module module = moduleMapper.getModuleById(id);
         return new ResponseResult(id,module.getName()+"页面");
@@ -64,8 +64,8 @@ public class IndexController {
       return ResponseResult.success();
     }
     @ApiOperation(value ="首页信息")
-    @GetMapping(value = "/getIndexMessage/{id}")
-    public ResponseResult getIndexMessage(@PathVariable Integer id){
+    @GetMapping(value = "/getIndexMessage")
+    public ResponseResult getIndexMessage(Integer id){
         Index index=new Index();
         List<Module> moduleList=moduleMapper.getIndexModule(id);
         Address address=new Address();

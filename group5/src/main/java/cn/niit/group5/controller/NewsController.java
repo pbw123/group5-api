@@ -30,8 +30,8 @@ public class NewsController {
     private CommodityMapper commodityMapper;
 
     @ApiOperation(value = "港城要闻/动态等资讯调用此接口",notes = "要传入此模块的id或者客户端定义一个id值")
-    @GetMapping(value = "getNewsListById/{id}")
-    public ResponseResult getNewsListById(@PathVariable Integer id)
+    @GetMapping(value = "getNewsListById")
+    public ResponseResult getNewsListById(Integer id)
     {
         List<News> news = newsMapper.selectAllBySortId(id);
         return ResponseResult.success(news);
@@ -47,8 +47,8 @@ public class NewsController {
     }
 
     @ApiOperation(value = "农业科技中根据分类查询资讯",notes = "要传入该分类的id")
-    @GetMapping(value = "getNewsBySortId/{id}")
-    public ResponseResult getNewsBySortId(@PathVariable("id") Integer id)
+    @GetMapping(value = "getNewsBySortId")
+    public ResponseResult getNewsBySortId(Integer id)
     {
             List<News> news = technologySortMapper.getNewsBySortId(id);
             return ResponseResult.success(news);
@@ -73,8 +73,8 @@ public class NewsController {
         }
 
         @ApiOperation(value = "知识库中的畜禽品种库中根据畜禽查看相关资讯文章",notes = "需要传入畜禽种类的id")
-        @GetMapping(value = "getNewsListByAnimalId/{id}")
-    public ResponseResult getNewsListByAnimalId(@PathVariable int id)
+        @GetMapping(value = "getNewsListByAnimalId")
+    public ResponseResult getNewsListByAnimalId(int id)
         {
             List<News> news = animalMapper.AnimalNews(id);
           return   ResponseResult.success(news);
@@ -103,9 +103,9 @@ public class NewsController {
     }
 
     @ApiOperation(value = "品牌农资中通过分类sort_id遍历出相应资讯")
-    @GetMapping(value = "getCommdityBysortId/{sortId}")
+    @GetMapping(value = "getCommdityBysortId")
     public ResponseResult getCommdityBysortId(
-            @PathVariable Integer sortId
+            Integer sortId
     ){
         Commodity commodity=new Commodity();
         List<Commodity> commodityList=commodityMapper.getCommdityBysortId(sortId);
@@ -118,18 +118,18 @@ public class NewsController {
     @Autowired
     private EnterpriseRecommendMapper enterpriseRecommendMapper;
     @ApiOperation(value = "通过品牌农资分类sort遍历出企业推荐",notes="传入品牌农资分类sort_id的值")
-    @GetMapping(value = "getEnterpriseRecommendBySort/{sort}")
+    @GetMapping(value = "getEnterpriseRecommendBySort")
     public ResponseResult getEnterpriseRecommendBySort(
-            @PathVariable Integer sort
+           Integer sort
     ){
         List<EnterpriseRecommend> enterpriseRecommendList=enterpriseRecommendMapper.getEnterpriseRecommendBySort(sort);
         return  ResponseResult.success(enterpriseRecommendList);
     }
 
     @ApiOperation(value = "通过企业id获取企业详情",notes="传入企业的id")
-    @GetMapping(value = "getEnterpriseRecommendById/{id}")
+    @GetMapping(value = "getEnterpriseRecommendById")
     public ResponseResult getEnterpriseRecommendById(
-            @PathVariable Integer id
+            Integer id
     ){
         EnterpriseRecommend enterpriseRecommend=enterpriseRecommendMapper.getEnterpriseRecommendById(id);
         enterpriseRecommend.setId(id);
@@ -146,8 +146,8 @@ public class NewsController {
         return  ResponseResult.success(topicList);
     }
   @ApiOperation(value = "每个专题里的资讯列表",notes ="客户端传入该专题的id" )
-  @GetMapping(value = "getTopicNews/{id}")
-    public ResponseResult getTopicNews(@PathVariable Integer id)
+  @GetMapping(value = "getTopicNews")
+    public ResponseResult getTopicNews(Integer id)
     {
         List<News> topicNewsList = topicMapper.getNewsByTopicId(id);
         return  ResponseResult.success(topicNewsList);

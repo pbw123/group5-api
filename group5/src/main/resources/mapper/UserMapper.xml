@@ -38,6 +38,7 @@
             <if test="userAddress!=null">user_address,</if>
             <if test="regitsterTime!=null">regitster_time,</if>
             <if test="status!=null">status</if>
+            <if test="headUrl!=null">head_url</if>
         </trim>
     </sql>
 
@@ -50,6 +51,7 @@
             <if test="userAddress!=null">#{userAddress},</if>
             <if test="regitsterTime!=null">#{regitsterTime},</if>
             <if test="status!=null">#{status}</if>
+            <if test="headUrl!=null">#{headUrl}</if>
         </trim>
     </sql>
 

@@ -43,9 +43,10 @@
 
 
     <select id="getQuestionList" resultMap="questionRM">
-        SELECT q.*
+     SELECT q.*
         FROM t_question q
         WHERE q.is_delete=0
+        ORDER BY create_time DESC
     </select>
   <select id="getQuestionDetail" parameterType="Integer" resultMap="questionRM">
     SELECT q.id ,q.content,q.create_time,q.user_id,q.sort
@@ -68,6 +69,7 @@
         WHERE r.is_delete=0
         AND r.question_id=#{0}
         AND r.user_id=u.id
+                ORDER BY reply_time DESC
     </select>
 
 

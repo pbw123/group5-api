@@ -1,6 +1,5 @@
 package cn.niit.group5.controller;
 
-import cn.niit.group5.entity.SupplyBuy;
 import cn.niit.group5.mapper.SupplyBuyMapper;
 import cn.niit.group5.serviceImp.SupplyBuyServiceImp;
 import cn.niit.group5.util.Client;
@@ -9,9 +8,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
-import java.util.List;
 
 @Api(tags = "8.供求模块")
 @RestController
@@ -25,15 +21,13 @@ public class SupplyBuyController {
     @ApiOperation(value = "供应列表", notes = "暂时无法上传和显示图片")
     @GetMapping(value = "supplyList")
     public ResponseResult supplyBuysList() {
-        List<SupplyBuy> supplyBuyList = supplyBuyMapper.supplyList();
-        return ResponseResult.success(supplyBuyList);
+        return supplyBuyServiceImp.buyList();
     }
 
     @ApiOperation(value = "求购列表", notes = "暂时无法上传和显示图片")
     @GetMapping(value = "seekList")
     public ResponseResult supplyBuyList() {
-        List<SupplyBuy> supplyBuyList = supplyBuyMapper.seekList();
-        return ResponseResult.success(supplyBuyList);
+        return supplyBuyServiceImp.buyList();
     }
 
     @ApiOperation(value = "发布求购")
@@ -41,73 +35,39 @@ public class SupplyBuyController {
     public ResponseResult insertSeek(
             @RequestParam(required = true) int userId,
             String sort, String title, String content, String unit, int amount, int price,
-            String sellerName, String sellerPhone
-    ) {
-        SupplyBuy supplyBuy = new SupplyBuy();
-        supplyBuy.setUserId(userId);
-        supplyBuy.setSort(sort);
-        supplyBuy.setTitle(title);
-        supplyBuy.setContent(content);
-        supplyBuy.setUnit(unit);
-        supplyBuy.setAmount(amount);
-        supplyBuy.setPrice(price);
-        supplyBuy.setSellerName(sellerName);
-        supplyBuy.setSellerPhone(sellerPhone);
-        supplyBuy.setIsSupplyBuy(1);
-        supplyBuy.setCreateTime(new Date());
-        supplyBuyMapper.insertSeek(supplyBuy);
-        return ResponseResult.success();
+            String sellerName, String sellerPhone) {
+        return supplyBuyServiceImp.addSeek(userId, sort, title, content, unit, amount, price,
+                sellerName,
+                sellerPhone);
     }
 
     @ApiOperation(value = "发布供应")
     @PostMapping(value = "/insertSupply")
-    public ResponseResult insertSuppy(
+    public int insertSupply(
             @RequestParam(required = true) int userId,
             String sort, String title, String content, String unit, int amount, int price,
-            String enterprise, String sellerName, String sellerPhone
-    ) {
-        SupplyBuy supplyBuy = new SupplyBuy();
-        supplyBuy.setUserId(userId);
-        supplyBuy.setSort(sort);
-        supplyBuy.setTitle(title);
-        supplyBuy.setContent(content);
-        supplyBuy.setUnit(unit);
-        supplyBuy.setAmount(amount);
-        supplyBuy.setPrice(price);
-        supplyBuy.setEnterprise(enterprise);
-        supplyBuy.setSellerName(sellerName);
-        supplyBuy.setSellerPhone(sellerPhone);
-        supplyBuy.setIsSupplyBuy(0);
-        supplyBuy.setCreateTime(new Date());
-        supplyBuyMapper.insertSupply(supplyBuy);
-        return ResponseResult.success();
+            String enterprise, String sellerName, String sellerPhone) {
+        return supplyBuyServiceImp.addSuppy(userId, sort, title, content, unit, amount, price,
+                enterprise, sellerName,
+                sellerPhone);
     }
 
     @ApiOperation(value = "供应详情")
-    @GetMapping(value = "/SupplyDetail/{id}")
-    public ResponseResult getSupplyDetail(
-            @PathVariable int id
-    ) {
-        SupplyBuy supplyDetail = supplyBuyMapper.getSupplyDetail(id);
-        return ResponseResult.success(supplyDetail);
+    @GetMapping(value = "/SupplyDetail")
+    public ResponseResult getSupplyDetail(int id) {
+        return supplyBuyServiceImp.getDetail(id);
     }
 
     @ApiOperation(value = "求购详情")
-    @GetMapping(value = "/SeekDetail/{id}")
-    public ResponseResult getSeekDetail(
-            @PathVariable int id
-    ) {
-        SupplyBuy supplyBuy = supplyBuyMapper.getSeekDetail(id);
-        return ResponseResult.success(supplyBuy);
+    @GetMapping(value = "/SeekDetail")
+    public ResponseResult getSeekDetail(int id) {
+        return supplyBuyServiceImp.seekDetail(id);
     }
 
     @ApiOperation(value = "分类查询")
-    @GetMapping(value = "/getSupplyBySort/{sort}")
-    public ResponseResult getSupplyBySort(
-            @PathVariable String sort
-    ) {
-        List<SupplyBuy> supplyBuyList = supplyBuyMapper.getSupplyBySort(sort);
-        return ResponseResult.success(supplyBuyList);
+    @GetMapping(value = "/getSupplyBySort")
+    public ResponseResult getSupplyBySort(String sort) {
+        return supplyBuyServiceImp.getBySort(sort);
     }
 
     @Autowired

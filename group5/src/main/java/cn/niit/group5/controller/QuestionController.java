@@ -114,13 +114,23 @@ public class QuestionController {
         for (Question question : questionLists) {
             question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
             question.setTime(StringUtil.getDateString(question.getCreateTime()));
+            List<Reply> replies = question.getReplies();
+              if (replies!=null)
+              {
+                  for (Reply reply:replies)
+                  {
+                      String time = StringUtil.getDateString(reply.getReplyTime());
+                      if (time!=null)
+                      reply.setTime(time);
+                  }
+              }
         }
         return ResponseResult.success(questionLists);
     }
 
     @ApiOperation(value = "删除‘我的提问'的问题", notes = "需要传入该问题的id")
-    @GetMapping(value = "deleteMyQuestion/{id}")
-    public ResponseResult deleteMyQuestion(@PathVariable Integer id) {
+    @GetMapping(value = "deleteMyQuestion")
+    public ResponseResult deleteMyQuestion(Integer id) {
         if (questionMapper.deleteMyQuestion(id) == 1) {
             return new ResponseResult(StatusConst.SUCCESS, MsgConst.SUCCESS);
         }

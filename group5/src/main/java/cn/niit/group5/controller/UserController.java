@@ -82,8 +82,11 @@ public class UserController {
             {
                 String head = UploadImg.ossUpload(file);
                 user2.setHeadUrl(head);
+                System.out.println(head+"====================");
             }
+            System.out.println(user2.toString());
             int index = userMapper.signUp(user2);
+//            Integer index=1;
             if (index == 1) {
                 return new ResponseResult(StatusConst.SUCCESS, MsgConst.SUCCESS);
             } else {
@@ -154,8 +157,8 @@ public class UserController {
 
     //    问题详情
     @ApiOperation(value = "问题详情", notes = "关于提问的问题详情,传入该问题的id")
-    @GetMapping(value = "getQuestionDetailById/{id}")
-    public ResponseResult getQuestionDetailById(@PathVariable Integer id) {
+    @GetMapping(value = "getQuestionDetailById")
+    public ResponseResult getQuestionDetailById(Integer id) {
         Question question=questionMapper.getQuestionDetail(id);
         question.setTime(StringUtil.getDateString(question.getCreateTime()));
         question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
@@ -169,8 +172,8 @@ public class UserController {
 
     //    根据id查询要添加的用户信息
     @ApiOperation(value = "我的详细资料/其他用户的资料", notes = "传入用户id查看用户详细资料")
-    @GetMapping(value = "getUserMsgById/{userId}")
-    public ResponseResult getUserMsgById(@PathVariable Integer userId) {
+    @GetMapping(value = "getUserMsgById")
+    public ResponseResult getUserMsgById(Integer userId) {
         User user = questionMapper.getUserById(userId);
         if (user != null) {
             Timestamp regitsterTime = user.getRegitsterTime();
@@ -187,8 +190,8 @@ public class UserController {
 
     //    我的回答列表
     @ApiOperation(value = "我的回答", notes = "我的所有回复列表")
-    @GetMapping(value = "getMyReplyById/{userId}")
-    public ResponseResult getMyReplyById(@PathVariable int userId) {
+    @GetMapping(value = "getMyReplyById")
+    public ResponseResult getMyReplyById(int userId) {
         List<Reply> replies = replyMapper.getMyReplyById(userId);
         return ResponseResult.success(replies);
     }
@@ -280,8 +283,8 @@ public class UserController {
    @Autowired
    private ExpertQuestionMapper expertQuestionMapper;
    @ApiOperation(value = "‘我的提问’中的‘专家提问’",notes = "传入我的用户id")
-    @GetMapping(value = "getMyExpertQuestionList/{id}")
-    public ResponseResult getMyExpertQuestionList(@PathVariable Integer id){
+    @GetMapping(value = "getMyExpertQuestionList")
+    public ResponseResult getMyExpertQuestionList(Integer id){
         List<ExpertQuestion> experts=expertQuestionMapper.getMyExpertQuestionList(id);
         return ResponseResult.success(experts);
     }

@@ -18,10 +18,10 @@ public interface SupplyBuyMapper {
     List<SupplyBuy> seekList();
 
     //发表一则供应
-    void insertSupply(SupplyBuy supplyBuy);
+    int insertSupply(SupplyBuy supplyBuy);
 
     //发表一则求购
-    void insertSeek(SupplyBuy supplyBuy);
+    int insertSeek(SupplyBuy supplyBuy);
 
     //供应详情
     SupplyBuy getSupplyDetail(int id);

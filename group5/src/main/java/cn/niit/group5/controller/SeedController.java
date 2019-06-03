@@ -4,13 +4,11 @@ package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.Seed;
 import cn.niit.group5.mapper.SeedMapper;
-
 import cn.niit.group5.util.Client;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,9 +31,8 @@ public class SeedController {
     }
 
     @ApiOperation(value = "通过品种名称获取详情")
-    @PostMapping(value = "/getSeedByCropName/{cropName}")
-    public ResponseResult getSeedByCropName(
-            @PathVariable String cropName
+    @PostMapping(value = "/getSeedByCropName")
+    public ResponseResult getSeedByCropName(String cropName
     ){
         Seed seed= seedMapper.getSeedByCropName(cropName);
         return ResponseResult.success(seed);

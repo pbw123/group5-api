@@ -10,7 +10,7 @@
         <result column="like" jdbcType="INTEGER" property="like"/>
         <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
-        <result column="img" jdbcType="LONGVARCHAR" property="img" />
+        <result column="img" jdbcType="LONGVARCHAR" property="img"/>
     </resultMap>
     <select id="getUserById" parameterType="Integer"
             resultType="User">
@@ -29,10 +29,9 @@
         </association>
         <association property="replyAmount" column="id" select="getExchangeReplyNumber">
         </association>
-        <collection property="replies"  select="getRepliesByExchangeId" column="id">
+        <collection property="replies" select="getRepliesByExchangeId" column="id">
         </collection>
     </resultMap>
-
 
 
     <resultMap id="columnProperty" type="exchange">
@@ -50,6 +49,7 @@
   WHERE
   e.user_id=u.id
   AND e.is_delete=0
+     ORDER BY create_time DESC
   </select>
     <select id="getRepliesByExchangeId" parameterType="Integer"
             resultMap="cn.niit.group5.mapper.ReplyMapper.BaseResultMap">
@@ -58,6 +58,7 @@
         WHERE r.is_delete=0
         AND r.exchange_id=#{0}
         AND r.user_id=u.id
+                ORDER BY reply_time DESC
     </select>
 
     <resultMap id="exchangeRM" type="Exchange">
@@ -66,9 +67,11 @@
         <association property="user" select="cn.niit.group5.mapper.QuestionMapper.getUserById"
                      column="euid">
         </association>
+        <association property="replyAmount" column="id" select="getExchangeReplyNumber">
+        </association>
     </resultMap>
 
-    <select id="getExchangeReplyNumber" resultType="Integer">
+    <select id="getExchangeReplyNumber" resultType="Integer" parameterType="Integer">
           SELECT COUNT(exchange_id) replyAmount FROM t_reply r
   WHERE r.exchange_id=#{0}
   AND r.is_delete=0
@@ -85,5 +88,6 @@
       FROM t_exchange e
       WHERE e.user_id=#{0}
      and is_delete=0
+      ORDER BY create_time DESC
   </select>
 </mapper>

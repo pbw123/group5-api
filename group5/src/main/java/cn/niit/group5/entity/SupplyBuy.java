@@ -1,6 +1,7 @@
 package cn.niit.group5.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class SupplyBuy implements Serializable {
@@ -22,7 +23,7 @@ public class SupplyBuy implements Serializable {
 
     private String enterprise;
 
-    private Date limitTime;
+    private Timestamp limitTime;
 
     private String sellerName;
 
@@ -32,7 +33,7 @@ public class SupplyBuy implements Serializable {
 
     private Integer isSupplyBuy;
 
-    private Date createTime;
+    private Timestamp createTime;
 
     private Integer isDelete;
 
@@ -41,7 +42,24 @@ public class SupplyBuy implements Serializable {
 
    private Integer pageSize;
 
+private String time;
+private String endTime;
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
 
     public Integer getCurrPage() {
         return currPage;
@@ -137,8 +155,12 @@ public class SupplyBuy implements Serializable {
         return limitTime;
     }
 
-    public void setLimitTime(Date limitTime) {
+    public void setLimitTime(Timestamp limitTime) {
         this.limitTime = limitTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
     }
 
     public String getSellerName() {
@@ -177,9 +199,6 @@ public class SupplyBuy implements Serializable {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 
     public Integer getIsDelete() {
         return isDelete;
@@ -191,28 +210,27 @@ public class SupplyBuy implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", userId=").append(userId);
-        sb.append(", sort=").append(sort);
-        sb.append(", title=").append(title);
-        sb.append(", content=").append(content);
-        sb.append(", unit=").append(unit);
-        sb.append(", amount=").append(amount);
-        sb.append(", price=").append(price);
-        sb.append(", enterprise=").append(enterprise);
-        sb.append(", limitTime=").append(limitTime);
-        sb.append(", sellerName=").append(sellerName);
-        sb.append(", sellerPhone=").append(sellerPhone);
-        sb.append(", status=").append(status);
-        sb.append(", isSupplyBuy=").append(isSupplyBuy);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", isDelete=").append(isDelete);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "SupplyBuy{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", sort='" + sort + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", unit='" + unit + '\'' +
+                ", amount=" + amount +
+                ", price=" + price +
+                ", enterprise='" + enterprise + '\'' +
+                ", limitTime=" + limitTime +
+                ", sellerName='" + sellerName + '\'' +
+                ", sellerPhone='" + sellerPhone + '\'' +
+                ", status=" + status +
+                ", isSupplyBuy=" + isSupplyBuy +
+                ", createTime=" + createTime +
+                ", isDelete=" + isDelete +
+                ", currPage=" + currPage +
+                ", pageSize=" + pageSize +
+                ", time='" + time + '\'' +
+                ", endTime='" + endTime + '\'' +
+                '}';
     }
 }

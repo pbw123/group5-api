@@ -10,6 +10,7 @@ import java.util.List;
 public class UserMapperTest extends BasicTest {
     @Autowired
     UserMapper userMapper;
+
     @Test
     public void addUserTest() {
         User user = new User();
@@ -23,17 +24,32 @@ public class UserMapperTest extends BasicTest {
         user.setEmail("2342@qq.com");
         user.setRegitsterTime(new Timestamp(System.currentTimeMillis()));
         int index = userMapper.addUser(user);
-        if (index==1)
+        if (index == 1)
             System.out.println(user.toString());
         else
             System.out.println("添加失败");
     }
-@Test
-    public void getUserByIdTest()
-    {
+
+    @Test
+    public void getUserByIdTest() {
 //        User userById = userMapper.getUserById(1);
 //        System.out.println(userById.toString());
         List<User> userListByLog = userMapper.getUserListByLog();
         userListByLog.forEach(user -> System.out.println(user));
     }
+
+    @Autowired
+    SupplyBuyMapper supplyBuyMapper;
+//    @Test
+//    public void  getSeeKDetailTest(
+//    ) {
+//        Integer id=1;
+//        SupplyBuy supplyBuy = supplyBuyMapper.getSeekDetail(id);
+//        if (supplyBuy==null)
+//            System.out.println("返回空");
+//        else
+//        supplyBuy.setTime(StringUtil.getDateString(supplyBuy.getCreateTime()));
+//        supplyBuy.setEndTime(StringUtil.getDateString(supplyBuy.getLimitTime()));
+//        System.out.println(supplyBuy.toString());
+//    }
 }

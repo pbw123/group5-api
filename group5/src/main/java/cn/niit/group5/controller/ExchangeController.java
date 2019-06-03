@@ -41,6 +41,16 @@ public class ExchangeController {
         for (Exchange exchange:exchangeList){
             exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
             exchange.setTime(StringUtil.getDateString(exchange.getCreateTime()));
+            List<Reply> replies = exchange.getReplies();
+           if (replies!=null)
+           {
+               for (Reply reply:replies)
+               {
+                   String time = StringUtil.getDateString(reply.getReplyTime());
+                   if (time!=null)
+                   reply.setTime(time);
+               }
+           }
         }
        return ResponseResult.success(exchangeList);
     }
@@ -103,8 +113,8 @@ public class ExchangeController {
         return ResponseResult.success();
     }
         @ApiOperation(value = "我的交流",notes = "我的交流列表,传入我的用户id")
-        @GetMapping(value = "getMyExchangeList/{userId}")
-         public ResponseResult getMyExchangeList(@PathVariable Integer userId)
+        @GetMapping(value = "getMyExchangeList")
+         public ResponseResult getMyExchangeList(Integer userId)
         {
             List<Exchange> exchangeList=exchangeMapper.getExchangeListByUserId(userId);
             for(Exchange exchange:exchangeList){
@@ -114,9 +124,9 @@ public class ExchangeController {
             return ResponseResult.success(exchangeList);
         }
     @ApiOperation(value = "交流详情",notes = "传入该交流的id")
-    @GetMapping(value = "/getExchangeDetailById/{id}")
+    @GetMapping(value = "/getExchangeDetailById")
     public ResponseResult getExchangeDetail(
-            @PathVariable Integer id
+            Integer id
     ){
         Exchange exchange=exchangeMapper.getExchangeDetailById(id);
         exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
@@ -131,8 +141,8 @@ public class ExchangeController {
 
 
         @ApiOperation(value = "删除我的交流文章",notes = "需要传入该交流文章的id")
-        @GetMapping(value = "deleteExchange/{id}")
-         public ResponseResult deleteExchange(@PathVariable Integer id)
+        @GetMapping(value = "deleteExchange")
+         public ResponseResult deleteExchange(Integer id)
         {
             if (exchangeMapper.deleteMyExchange(id)==1)
             {

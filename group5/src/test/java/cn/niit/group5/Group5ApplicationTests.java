@@ -1,7 +1,6 @@
 package cn.niit.group5;
 
 import cn.niit.group5.entity.*;
-import cn.niit.group5.entity.dto.UserDTO;
 import cn.niit.group5.mapper.*;
 import cn.niit.group5.serviceImp.UserServiceImp;
 import cn.niit.group5.util.ResponseResult;
@@ -231,16 +230,16 @@ public class Group5ApplicationTests {
         User user = questionMapper.getUserById(1);
         System.out.println(user.toString());
     }
-    @Test
-    public void userSignIn() {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setPhoneNumber("17805136692");
-        userDTO.setPassword("JAVA22");
-        System.out.println(userDTO.toString());
-        User user = userMapper.getUserByPhoneNumber("17805136692");
-        System.out.println(user.toString());
-//        userMapper.getUserById(1);
-    }
+//    @Test
+//    public void userSignIn() {
+//        UserDTO userDTO = new UserDTO();
+//        userDTO.setPhoneNumber("17805136692");
+//        userDTO.setPassword("JAVA22");
+//        System.out.println(userDTO.toString());
+//        User user = userMapper.getUserByPhoneNumber("17805136692");
+//        System.out.println(user.toString());
+////        userMapper.getUserById(1);
+//    }
     @Test
     public void getInsertQuestion()
     {

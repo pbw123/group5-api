@@ -24,22 +24,22 @@ public class AdvertiseControllerTest extends BasicTest {
     }
     @Autowired
     AdvertiseMapper advertiseMapper;
-    @Test
-    public void ifParamIsNullTest()
-    {
-        String title=null;
-        String content="内容";
-        String time=null;
-        Integer id=1;
-        Advertise advertise=new Advertise();
-//        advertise.setCreateTime(Timestamp.valueOf(time));
-        advertise.setName(title);
-        advertise.setContent(content);
-        advertise.setId(id);
-        int i = advertiseMapper.updateAdvertise(advertise);
-        System.out.println(i);
-
-    }
+//    @Test
+//    public void ifParamIsNullTest()
+//    {
+//        String title=null;
+//        String content="内容";
+//        String time=null;
+//        Integer id=1;
+//        Advertise advertise=new Advertise();
+////        advertise.setCreateTime(Timestamp.valueOf(time));
+//        advertise.setName(title);
+//        advertise.setContent(content);
+//        advertise.setId(id);
+//        int i = advertiseMapper.updateAdvertise(advertise);
+//        System.out.println(i);
+//
+//    }
 
 //    @Test
 //    public void searchByTypeTest()

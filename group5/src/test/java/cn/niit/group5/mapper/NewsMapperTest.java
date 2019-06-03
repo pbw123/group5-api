@@ -1,26 +1,23 @@
 package cn.niit.group5.mapper;
 
 import cn.niit.group5.entity.Module;
-import cn.niit.group5.entity.News;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 public class NewsMapperTest extends  BasicTest{
 
     @Autowired
     NewsMapper newsMapper;
-    @Test
-    public void getNewsByReviewTest()
-    {
-        News n = new News();
-        n.setCurrPage(7);
-        n.setCurrPage(1);
-        n.setReviewStatus(0);
-        List<News> news = newsMapper.getNewsByReview(n);
-        news.forEach(news1 -> System.out.println(news1.toString()));
-    }
+//    @Test
+//    public void getNewsByReviewTest()
+//    {
+//        News n = new News();
+//        n.setCurrPage(7);
+//        n.setCurrPage(1);
+//        n.setReviewStatus(0);
+//        List<News> news = newsMapper.getNewsByReview(n);
+//        news.forEach(news1 -> System.out.println(news1.toString()));
+//    }
     @Autowired
     ModuleMapper moduleMapper;
     @Test

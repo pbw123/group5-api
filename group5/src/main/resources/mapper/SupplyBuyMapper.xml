@@ -43,8 +43,8 @@
   AND is_delete=0
   AND is_supply_buy=0
   </select>
-  <select id="getSeekDetail" resultType="SupplyBuy">
-      SELECT * FROM t_supply_buy WHERE id=#{id}
+  <select id="getSeekDetail" resultType="SupplyBuy" parameterType="Integer">
+      SELECT * FROM t_supply_buy WHERE id=#{0}
   AND is_delete=0
   AND is_supply_buy=1
   </select>
