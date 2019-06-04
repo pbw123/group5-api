@@ -193,6 +193,12 @@ public class UserController {
     @GetMapping(value = "getMyReplyById")
     public ResponseResult getMyReplyById(int userId) {
         List<Reply> replies = replyMapper.getMyReplyById(userId);
+        for (Reply reply:replies)
+        {
+            String time = StringUtil.getDateString(reply.getReplyTime());
+            if (time!=null)
+                reply.setTime(time);
+        }
         return ResponseResult.success(replies);
     }
 

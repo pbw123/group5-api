@@ -19,4 +19,11 @@ public class UserControllerTest extends BasicTest {
         System.out.println(responseResult.toString());
 
     }
+
+    @Test
+    public void myRepliesTest()
+    {
+        ResponseResult responseResult = userController.getMyReplyById(1);
+        System.out.println(responseResult.toString());
+    }
 }
