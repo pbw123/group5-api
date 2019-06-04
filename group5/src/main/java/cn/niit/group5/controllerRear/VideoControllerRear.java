@@ -18,9 +18,9 @@ public class VideoControllerRear {
     private VideoServiceImp videoServiceImp;
 
     @ApiOperation(value = "查询所有视频分类")
-    @GetMapping(value = "getAllVideoSortList/{currPage}/{pageSize}")
-    public ResponseResult getAllVideoSortList(@PathVariable Integer currPage,
-                                              @PathVariable Integer pageSize) {
+    @GetMapping(value = "getAllVideoSortList")
+    public ResponseResult getAllVideoSortList(@RequestParam(defaultValue = "1") Integer currPage,
+                                              @RequestParam(defaultValue = "10") Integer pageSize) {
         return videoServiceImp.getAllVideoSort(currPage, pageSize);
     }
 
@@ -50,9 +50,9 @@ public class VideoControllerRear {
     }
 
     @ApiOperation(value = "所有视频")
-    @GetMapping(value = "getAllVideo/{currPage}/{pageSize}")
-    public ResponseResult getAllVideo(@PathVariable Integer currPage,
-                                      @PathVariable Integer pageSize) {
+    @GetMapping(value = "getAllVideo")
+    public ResponseResult getAllVideo(@RequestParam(defaultValue = "1") Integer currPage,
+                                      @RequestParam(defaultValue = "10") Integer pageSize) {
         return videoServiceImp.getAllVideo(currPage, pageSize);
     }
 
@@ -92,9 +92,9 @@ public class VideoControllerRear {
     }
 
     @ApiOperation(value = "所有展播列表")
-    @GetMapping(value = "getAllExhibition/{currPage}/{pageSize}")
-    public ResponseResult getAllExhibition(@PathVariable Integer currPage,
-                                           @PathVariable Integer pageSize) {
+    @GetMapping(value = "getAllExhibition")
+    public ResponseResult getAllExhibition(@RequestParam(defaultValue = "1") Integer currPage,
+                                           @RequestParam(defaultValue = "10") Integer pageSize) {
         return videoServiceImp.getAllExhibition(currPage, pageSize);
     }
 

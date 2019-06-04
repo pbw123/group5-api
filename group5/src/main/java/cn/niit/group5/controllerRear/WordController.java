@@ -17,9 +17,9 @@ public class WordController {
     private WordServiceImp wordServiceImp;
 
     @ApiOperation(value = "热词列表")
-    @GetMapping(value = "getWordList/{currPage}/{pageSize}")
-    public ResponseResult getWordList(@PathVariable Integer currPage,
-                                      @PathVariable Integer pageSize) {
+    @GetMapping(value = "getWordList")
+    public ResponseResult getWordList(@RequestParam(defaultValue = "1") Integer currPage,
+                                      @RequestParam(defaultValue = "10") Integer pageSize) {
         return wordServiceImp.getAllWord(currPage, pageSize);
     }
 

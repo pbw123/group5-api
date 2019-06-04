@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 @Component
@@ -14,20 +15,28 @@ public interface UserMapper {
 
     //根据手机号码查询用户
     User getUserByPhoneNumber(@Param("phoneNumber") String phoneNumber);
-//
+
+    //
     @Select("select * from t_user where id=#{id}")
     User getUserById(@Param("id") Integer id);
+
     //注册
     int signUp(User user);
+
     //更新我的资料
     int updateMyMsg(User user);
 
     //更新我的积分
-    int addScore(@Param("id")Integer userId,@Param("number")Integer number);
-//是否禁用/启用用户
-    int setStatus(@Param("id")Integer id,@Param("status") Integer status);
-//    添加用户
-     int addUser(User user);
+    int addScore(@Param("id") Integer userId, @Param("number") Integer number);
 
-List<User> getUserListByLog();
+    //是否禁用/启用用户
+    int setStatus(@Param("id") Integer id, @Param("status") Integer status);
+
+    //    添加用户
+    int addUser(User user);
+
+    List<User> getUserListByLog();
+
+    @Select("select * from t_user limit #{index},#{pageSize}")
+    List<User> selectAll(Map<Object,Object> map);
 }

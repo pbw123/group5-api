@@ -1,11 +1,13 @@
 package cn.niit.group5.mapper;
 
 import cn.niit.group5.entity.User;
+import cn.niit.group5.util.PageUtil;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 public class UserMapperTest extends BasicTest {
     @Autowired
@@ -52,4 +54,12 @@ public class UserMapperTest extends BasicTest {
 //        supplyBuy.setEndTime(StringUtil.getDateString(supplyBuy.getLimitTime()));
 //        System.out.println(supplyBuy.toString());
 //    }
+
+    @Test
+    public void getAllUserTest()
+    {
+        Map<Object, Object> map = PageUtil.pageDemo(1, 10);
+        List<User> users = userMapper.selectAll(map);
+        users.forEach(user -> System.out.println(user.toString()));
+    }
 }

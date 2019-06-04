@@ -2,7 +2,6 @@ package cn.niit.group5.mapper;
 
 import cn.niit.group5.entity.News;
 import cn.niit.group5.entity.TechnologySort;
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -34,25 +33,25 @@ public interface NewsMapper {
     int delReplyQuestion(Integer id);
 
     // 删除农资分类
-    @Delete("DELETE FROM t_technology_sort WHERE id=#{0}")
+    @Update("update t_technology_sort set is_delete=1 WHERE id=#{0}")
     int delTechnoSort(Integer id);
 
     //    修改农资分类
     int updateTechnoSort(TechnologySort technologySort);
 
-//
-int deleteByPrimaryKey(Integer id);
+    //
+    int deleteByPrimaryKey(Integer id);
 
     int insert(News record);
 
     News selectByPrimaryKey(Integer id);
 
-    List<News> selectAll(Map<Object,Object> map);
+    List<News> selectAll(Map<Object, Object> map);
 
     int updateByPrimaryKey(News record);
 
-//    改变状态
-    int updateStatus(Map<Object,Object>map);
+    //    改变状态
+    int updateStatus(Map<Object, Object> map);
 
 //
 }

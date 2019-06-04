@@ -190,6 +190,7 @@ public class BrandServiceImp {
         commodity.setTitle(title);
         commodity.setPhoneNumber(phoneNumber);
         commodity.setSource(source);
+        commodity.setSortId(sort);
         commodity.setReadNumber(readNumber);
         int i = brandMapper.addCommodity(commodity);
         if (i==1)

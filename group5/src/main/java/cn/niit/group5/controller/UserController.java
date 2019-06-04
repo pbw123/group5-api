@@ -62,7 +62,7 @@ public class UserController {
     public ResponseResult signUp(@RequestParam(required = true) String phoneNumber,
                                  @RequestParam(required = true) String password,
                                  @RequestParam(required = true) String userName,
-                                 String identity, String userAddress,MultipartFile file) {
+                                 String identity, String userAddress, MultipartFile file) {
 
         User user = userMapper.getUserByPhoneNumber(phoneNumber);
         if (user != null) {
@@ -78,11 +78,10 @@ public class UserController {
             user2.setIdentity(identity);
             user2.setUnitAddress(userAddress);
             user2.setRegitsterTime(new Timestamp(System.currentTimeMillis()));
-            if (file!=null)
-            {
+            if (file != null) {
                 String head = UploadImg.ossUpload(file);
                 user2.setHeadUrl(head);
-                System.out.println(head+"====================");
+                System.out.println(head + "====================");
             }
             System.out.println(user2.toString());
             int index = userMapper.signUp(user2);
@@ -115,8 +114,7 @@ public class UserController {
         user.setSex(sex);
         user.setEmail(email);
         user.setEducational(educational);
-        if (file!=null)
-        {
+        if (file != null) {
             String f = UploadImg.ossUpload(file);
             user.setHeadUrl(f);
         }
@@ -159,12 +157,11 @@ public class UserController {
     @ApiOperation(value = "问题详情", notes = "关于提问的问题详情,传入该问题的id")
     @GetMapping(value = "getQuestionDetailById")
     public ResponseResult getQuestionDetailById(Integer id) {
-        Question question=questionMapper.getQuestionDetail(id);
+        Question question = questionMapper.getQuestionDetail(id);
         question.setTime(StringUtil.getDateString(question.getCreateTime()));
         question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
         List<Reply> replies = question.getReplies();
-        for (Reply reply:replies)
-        {
+        for (Reply reply : replies) {
             reply.setTime(StringUtil.getDateString(reply.getReplyTime()));
         }
         return ResponseResult.success(question);
@@ -177,11 +174,10 @@ public class UserController {
         User user = questionMapper.getUserById(userId);
         if (user != null) {
             Timestamp regitsterTime = user.getRegitsterTime();
-            String time= StringUtil.getDateString(regitsterTime);
-           user.setTime(time);
+            String time = StringUtil.getDateString(regitsterTime);
+            user.setTime(time);
             return ResponseResult.success(user);
-        }
-        else
+        } else
             return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
     }
 
@@ -193,10 +189,9 @@ public class UserController {
     @GetMapping(value = "getMyReplyById")
     public ResponseResult getMyReplyById(int userId) {
         List<Reply> replies = replyMapper.getMyReplyById(userId);
-        for (Reply reply:replies)
-        {
+        for (Reply reply : replies) {
             String time = StringUtil.getDateString(reply.getReplyTime());
-            if (time!=null)
+            if (time != null)
                 reply.setTime(time);
         }
         return ResponseResult.success(replies);
@@ -286,31 +281,37 @@ public class UserController {
         return ResponseResult.success(supplyBuyList);
     }
 
-   @Autowired
-   private ExpertQuestionMapper expertQuestionMapper;
-   @ApiOperation(value = "‘我的提问’中的‘专家提问’",notes = "传入我的用户id")
+    @Autowired
+    private ExpertQuestionMapper expertQuestionMapper;
+
+    @ApiOperation(value = "‘我的提问’中的‘专家提问’", notes = "传入我的用户id")
     @GetMapping(value = "getMyExpertQuestionList")
-    public ResponseResult getMyExpertQuestionList(Integer id){
-        List<ExpertQuestion> experts=expertQuestionMapper.getMyExpertQuestionList(id);
+    public ResponseResult getMyExpertQuestionList(Integer id) {
+        List<ExpertQuestion> experts = expertQuestionMapper.getMyExpertQuestionList(id);
         return ResponseResult.success(experts);
     }
 
-    @ApiOperation(value = "添加积分",notes = "传入用户的id和添加的积分数")
+    @ApiOperation(value = "添加积分", notes = "传入用户的id和添加的积分数")
     @PostMapping(value = "addScore")
-    public ResponseResult addMySocre(@RequestParam(required = true) Integer id,
-                                     @RequestParam(required = true) Integer number)
-    {
+    public ResponseResult addMyScore(@RequestParam(required = true) Integer id,
+                                     @RequestParam(required = true) Integer number) {
 
-        if (id==null||number==null)
-        {
-            return ResponseResult.error(StatusConst.ERROR,MsgConst.Param_NULL);
+        if (id == null || number == null) {
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.Param_NULL);
         }
         int index = userMapper.addScore(id, number);
         System.out.println(index);
-        if (index==1)
-            return  ResponseResult.success();
+        if (index == 1)
+            return ResponseResult.success();
         else
-            return ResponseResult.error(StatusConst.ERROR,MsgConst.FAIL);
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
+    }
+
+    @ApiOperation(value = "后台-查询所有用户")
+    @GetMapping(value = "getAllUser")
+    public ResponseResult getAllUser(@RequestParam(defaultValue = "1") Integer currPage,
+                                     @RequestParam(defaultValue = "10") Integer pageSize) {
+        return userServiceImp.getAllUser(currPage, pageSize);
     }
 
 }

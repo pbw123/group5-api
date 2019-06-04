@@ -4,6 +4,7 @@ import cn.niit.group5.entity.*;
 import cn.niit.group5.mapper.*;
 import cn.niit.group5.serviceImp.CollectionServiceImp;
 import cn.niit.group5.util.Client;
+import cn.niit.group5.util.PageUtil;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/news")
@@ -38,11 +40,13 @@ public class NewsController {
     }
 
 
-    @ApiOperation(value = "农业科技",notes = "农业科技页面发起此请求")
+    @ApiOperation(value = "农业科技",notes = "农业科技页面发起此请求,参数是用来后台分页的，有默认值，客户端不会的可以不带参数，可直接通过路径请求得到数据")
     @GetMapping(value = "farmingTechnologySort")
-    public ResponseResult farmingTechnologySort()
+    public ResponseResult farmingTechnologySort(@RequestParam(defaultValue = "1")Integer currPage,
+                                                @RequestParam(defaultValue = "10")Integer pageSize)
     {
-        List<TechnologySort> technologySortList = technologySortMapper.selectAll();
+        Map<Object, Object> map = PageUtil.pageDemo(currPage, pageSize);
+        List<TechnologySort> technologySortList = technologySortMapper.selectAll(map);
         return ResponseResult.success(technologySortList);
     }
 

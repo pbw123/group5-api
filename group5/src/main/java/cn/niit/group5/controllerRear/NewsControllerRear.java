@@ -59,7 +59,8 @@ public class NewsControllerRear {
     }
 
     @ApiOperation(value = "删除问答评论")
-    public ResponseResult delQuestionReplyById(Integer id) {
+    @GetMapping(value = "delQuestionReplyById/{id}")
+    public ResponseResult delQuestionReplyById(@PathVariable Integer id) {
         return newsServiceImp.delReplyQuestion(id);
     }
 

@@ -14,6 +14,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -26,28 +28,25 @@ public class UserServiceImp implements UserService {
 
     @Override
     public int signIn(UserDTO userDTO) {
-         User user=userMapper.getUserByPhoneNumber(userDTO.getPhoneNumber());
-         if (user!=null)
-         {
-             if (user.getStatus()==0)
-             {
-             if (user.getPassword().equals(userDTO.getPassword()))
-             {
+        User user = userMapper.getUserByPhoneNumber(userDTO.getPhoneNumber());
+        if (user != null) {
+            if (user.getStatus() == 0) {
+                if (user.getPassword().equals(userDTO.getPassword())) {
 //                 登录成功
 //                 userMapper.addScore(user.getId(),10);
-                 return StatusConst.SUCCESS;
-             }else {
+                    return StatusConst.SUCCESS;
+                } else {
 //                 密码不正确
-                 return StatusConst.PASSWORD_ERROR;
-             }
-             }else{
+                    return StatusConst.PASSWORD_ERROR;
+                }
+            } else {
 //                 账号状态异常
-                 return StatusConst.USER_STATUS_ERROR;
-             }
-         }else {
+                return StatusConst.USER_STATUS_ERROR;
+            }
+        } else {
 //         手机号不存在
-             return StatusConst.USER_MOBILE_NOT_FOUND;
-         }
+            return StatusConst.USER_MOBILE_NOT_FOUND;
+        }
     }
 
     @Override
@@ -55,124 +54,109 @@ public class UserServiceImp implements UserService {
         return 0;
     }
 
-//验证验证码
+    //验证验证码
     public int plogin(String phoneNumber, String pcode) throws Exception {
-            String code=(String) rts.opsForValue().get(phoneNumber);
-            System.out.println(code+"----+++++++++++++++++");
-            if (code==null)
-            {
-                return  StatusConst.VERIFYCODE_ERROR;
+        String code = (String) rts.opsForValue().get(phoneNumber);
+        System.out.println(code + "----+++++++++++++++++");
+        if (code == null) {
+            return StatusConst.VERIFYCODE_ERROR;
 
-            }else {
-                if (code.equals(pcode)) {
+        } else {
+            if (code.equals(pcode)) {
 //                验证码正确
-                    return  StatusConst.SUCCESS;
-                } else {
+                return StatusConst.SUCCESS;
+            } else {
 //                验证码错误
-                    System.out.println("验证码错误");
-                    return StatusConst.VERIFYCODE_ERROR;
-                }
+                System.out.println("验证码错误");
+                return StatusConst.VERIFYCODE_ERROR;
             }
+        }
     }
-//    验证码验证
-    public ResponseResult matchVerifySignUp(UserCode userCode) throws Exception {
-        if (userCode.getPhoneNumber()==null)
-        {
-            return new ResponseResult(StatusConst.PHONE_NULL_ERROR,MsgConst.PHONE_NUMBER_NULL);
 
-        }else if (!RegexUtil.phoneNumberRegex(userCode.getPhoneNumber()))
-        {
+    //    验证码验证
+    public ResponseResult matchVerifySignUp(UserCode userCode) throws Exception {
+        if (userCode.getPhoneNumber() == null) {
+            return new ResponseResult(StatusConst.PHONE_NULL_ERROR, MsgConst.PHONE_NUMBER_NULL);
+
+        } else if (!RegexUtil.phoneNumberRegex(userCode.getPhoneNumber())) {
             return new ResponseResult(StatusConst.PHONE_VALIDATOR_ERROR_,
                     MsgConst.PHONE_NUMBER_VALIDATOR);
-        }else if (userCode.getCode()==null)
-        {
+        } else if (userCode.getCode() == null) {
 
-            return new ResponseResult(StatusConst.VERIFYCODE_NUll,MsgConst.VERIFYCODE_NULL_ERROR);
-        }
-        else {
+            return new ResponseResult(StatusConst.VERIFYCODE_NUll, MsgConst.VERIFYCODE_NULL_ERROR);
+        } else {
             User users = userMapper.getUserByPhoneNumber(userCode.getPhoneNumber());
-            if (users==null)
-            {
+            if (users == null) {
                 int status = plogin(userCode.getPhoneNumber(), userCode.getCode());
                 if (status == StatusConst.SUCCESS) {
 //            验证码和手机号匹配得上,返回手机号和验证码
                     return ResponseResult.success(userCode);
                 } else {
 //         验证码错误或失效
-                    return ResponseResult.error(StatusConst.VERIFYCODE_ERROR, MsgConst.VERIFYCODE_ERROR);
+                    return ResponseResult.error(StatusConst.VERIFYCODE_ERROR,
+                            MsgConst.VERIFYCODE_ERROR);
                 }
-            }else {
+            } else {
 //               手机号码已经被注册
-                return ResponseResult.error(StatusConst.MOBILE_EXIST,MsgConst.MOBILE_EXIST);
+                return ResponseResult.error(StatusConst.MOBILE_EXIST, MsgConst.MOBILE_EXIST);
             }
         }
     }
 
-//发送并保存验证码
-    public int saveCode(String phoneNumber)
-    {
+    //发送并保存验证码
+    public int saveCode(String phoneNumber) {
 
-            String newCode = NewCodeUtil.getNewCode();
+        String newCode = NewCodeUtil.getNewCode();
 //            发送
         int send = SMSUtil.send(phoneNumber, newCode);
-        if (send==StatusConst.SUCCESS)
-        {
+        if (send == StatusConst.SUCCESS) {
 //            保存
-            rts.opsForValue().set(phoneNumber,newCode,15, TimeUnit.DAYS);
-            System.out.println(newCode+"+++++++++++++");
-            return  StatusConst.SUCCESS;
+            rts.opsForValue().set(phoneNumber, newCode, 15, TimeUnit.DAYS);
+            System.out.println(newCode + "+++++++++++++");
+            return StatusConst.SUCCESS;
         }
-            return StatusConst.VERIFYCODE_ERROR;
+        return StatusConst.VERIFYCODE_ERROR;
     }
 
-    public ResponseResult sendVerify(UserCode userCode)
-    {
+    public ResponseResult sendVerify(UserCode userCode) {
         //        发送验证码并保存到redis
-        System.out.println(userCode.getPhoneNumber()+"===================");
-        if (userCode.getPhoneNumber()==null)
-        {
-            return   new ResponseResult(StatusConst.PHONE_NULL_ERROR, MsgConst.PHONE_NUMBER_NULL);
-        }else if (!RegexUtil.phoneNumberRegex(userCode.getPhoneNumber()))
-        {
-            return     new ResponseResult(StatusConst.PHONE_VALIDATOR_ERROR_,
+        System.out.println(userCode.getPhoneNumber() + "===================");
+        if (userCode.getPhoneNumber() == null) {
+            return new ResponseResult(StatusConst.PHONE_NULL_ERROR, MsgConst.PHONE_NUMBER_NULL);
+        } else if (!RegexUtil.phoneNumberRegex(userCode.getPhoneNumber())) {
+            return new ResponseResult(StatusConst.PHONE_VALIDATOR_ERROR_,
                     MsgConst.PHONE_NUMBER_VALIDATOR);
-        }
-        else {
-           User user = userMapper.getUserByPhoneNumber(userCode.getPhoneNumber());
-            if (user!=null)
-            {
-                return ResponseResult.error(StatusConst.MOBILE_EXIST,MsgConst.MOBILE_EXIST);
-            }else {
+        } else {
+            User user = userMapper.getUserByPhoneNumber(userCode.getPhoneNumber());
+            if (user != null) {
+                return ResponseResult.error(StatusConst.MOBILE_EXIST, MsgConst.MOBILE_EXIST);
+            } else {
                 int status = saveCode(userCode.getPhoneNumber());
                 if (status == StatusConst.SUCCESS) {
 //            验证码发送成功
                     return ResponseResult.success();
                 } else {
 //                验证码错误
-                    return ResponseResult.error(StatusConst.VERIFYCODE_ERROR, MsgConst.SEND_VERIFYCODE_ERROR);
+                    return ResponseResult.error(StatusConst.VERIFYCODE_ERROR,
+                            MsgConst.SEND_VERIFYCODE_ERROR);
                 }
             }
         }
     }
-//登录
-    public ResponseResult userSignIn(UserDTO userDTO)
-    {
-        if (userDTO.getPhoneNumber()==null)
-        {
-            return   new ResponseResult(StatusConst.PHONE_NULL_ERROR, MsgConst.PHONE_NUMBER_NULL);
-        }else if (!RegexUtil.phoneNumberRegex(userDTO.getPhoneNumber()))
-        {
-            return     new ResponseResult(StatusConst.PHONE_VALIDATOR_ERROR_,
+
+    //登录
+    public ResponseResult userSignIn(UserDTO userDTO) {
+        if (userDTO.getPhoneNumber() == null) {
+            return new ResponseResult(StatusConst.PHONE_NULL_ERROR, MsgConst.PHONE_NUMBER_NULL);
+        } else if (!RegexUtil.phoneNumberRegex(userDTO.getPhoneNumber())) {
+            return new ResponseResult(StatusConst.PHONE_VALIDATOR_ERROR_,
                     MsgConst.PHONE_NUMBER_VALIDATOR);
-        }else if (userDTO.getPassword()==null)
-        {
+        } else if (userDTO.getPassword() == null) {
             return new ResponseResult(StatusConst.PASSWORD_NULL,
                     MsgConst.PASSWORD_NULL_);
-        }else if (!RegexUtil.passRegex(userDTO.getPassword()))
-        {
-            return new ResponseResult(StatusConst.PASSWORD_VALIDATOR,MsgConst.PASSWORD_VALIDATOR);
-        }
-        else {
+        } else if (!RegexUtil.passRegex(userDTO.getPassword())) {
+            return new ResponseResult(StatusConst.PASSWORD_VALIDATOR, MsgConst.PASSWORD_VALIDATOR);
+        } else {
             int status = signIn(userDTO);
             if (status == StatusConst.SUCCESS) {
                 User user = userMapper.getUserByPhoneNumber(userDTO.getPhoneNumber());
@@ -192,55 +176,51 @@ public class UserServiceImp implements UserService {
 
         }
     }
-//            更新我的资料
-    public int updateMyDocument(User user)
-    {
+
+    //            更新我的资料
+    public int updateMyDocument(User user) {
         int index = userMapper.updateMyMsg(user);
-        System.out.println(index+"=============");
-        if (index==1)
-        {
-            return  StatusConst.SUCCESS;
+        System.out.println(index + "=============");
+        if (index == 1) {
+            return StatusConst.SUCCESS;
         }
         System.out.println("业务层操作失败");
         return StatusConst.ERROR;
     }
+
     @Autowired
     QuestionMapper questionMapper;
-//        启用/禁用用户
-    public ResponseResult setUserStatus(Integer userId)
-    {
+
+    //        启用/禁用用户
+    public ResponseResult setUserStatus(Integer userId) {
         Integer status;
         User user = questionMapper.getUserById(userId);
         status = user.getStatus();
-        CollectDTO collectDTO=new CollectDTO();
-        if (status==0)
-        {
+        CollectDTO collectDTO = new CollectDTO();
+        if (status == 0) {
             int index = userMapper.setStatus(userId, status);
-            if (index==1)
-            {
+            if (index == 1) {
                 collectDTO.setStatus(questionMapper.getUserById(userId).getStatus());
                 collectDTO.setMsg("已禁用");
-                return  ResponseResult.success(collectDTO);
+                return ResponseResult.success(collectDTO);
             }
-            return ResponseResult.error(StatusConst.ERROR,MsgConst.FAIL);
-        }else
-        {
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
+        } else {
             int index = userMapper.setStatus(userId, status);
-            if (index==1)
-            {
+            if (index == 1) {
                 status = questionMapper.getUserById(userId).getStatus();
                 System.out.println(status);
                 collectDTO.setStatus(status);
                 collectDTO.setMsg("已启用");
                 return ResponseResult.success(collectDTO);
             }
-                return ResponseResult.error(StatusConst.ERROR,MsgConst.FAIL);
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
         }
     }
 
-    public ResponseResult addUserRear(String userName,String sex,String phoneNumber,
-                                  String email,String identity,String userAddress,String headUrl)
-    {
+    public ResponseResult addUserRear(String userName, String sex, String phoneNumber,
+                                      String email, String identity, String userAddress,
+                                      String headUrl) {
         User user = new User();
         user.setRegitsterTime(new Timestamp(System.currentTimeMillis()));
         user.setUserName(userName);
@@ -252,10 +232,16 @@ public class UserServiceImp implements UserService {
         user.setEmail(email);
         user.setRegitsterTime(new Timestamp(System.currentTimeMillis()));
         int index = userMapper.addUser(user);
-        if (index==1)
+        if (index == 1)
             return ResponseResult.success();
         else
-            return ResponseResult.error(StatusConst.ERROR,MsgConst.FAIL);
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
+    }
+
+    public ResponseResult getAllUser(Integer currPage, Integer pageSize) {
+        Map<Object, Object> map = PageUtil.pageDemo(currPage, pageSize);
+        List<User> users = userMapper.selectAll(map);
+        return ResponseResult.success(users);
     }
 
 }

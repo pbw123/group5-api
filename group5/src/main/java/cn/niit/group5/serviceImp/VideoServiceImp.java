@@ -24,8 +24,9 @@ public class VideoServiceImp {
     private VideoSortMapper videoSortMapper;
 
     public ResponseResult getAllVideoSort(Integer currPage, Integer pageSize) {
+        Integer index=(currPage-1)*pageSize;
         VideoSort videoSort = new VideoSort();
-        videoSort.setCurrPage(currPage);
+        videoSort.setCurrPage(index);
         videoSort.setPageSize(pageSize);
         List<VideoSort> videoSorts = videoSortMapper.selectAll(videoSort);
         return ResponseResult.success(videoSorts);
@@ -66,7 +67,8 @@ public class VideoServiceImp {
     private ExhibitionMapper exhibitionMapper;
 
     public ResponseResult getAllExhibition(Integer currPage, Integer pageSize) {
-        List<Exhibition> exhibitions = exhibitionMapper.selectAll(currPage, pageSize);
+        Integer index=(currPage-1)*pageSize;
+        List<Exhibition> exhibitions = exhibitionMapper.selectAll(index, pageSize);
         return ResponseResult.success(exhibitions);
     }
 
@@ -178,7 +180,8 @@ public class VideoServiceImp {
     public ResponseResult getAllVideo(Integer currPage,Integer pageSize)
     {
         Video video = new Video();
-        video.setCurrPage(currPage);
+        Integer index=(currPage-1)*pageSize;
+        video.setCurrPage(index);
         video.setPageSize(pageSize);
         List<Video> videos = videoMapper.selectAllVideo(video);
         return ResponseResult.success(videos);

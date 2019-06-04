@@ -16,7 +16,8 @@ public class FeedbackServiceImp {
     private FeedbackMapper feedbackMapper;
 
     public ResponseResult getAllFeedback(Integer currPage, Integer pageSize) {
-        List<Feedback> allFeedBack = feedbackMapper.getAllFeedBack(currPage, pageSize);
+        Integer index=(currPage-1)*pageSize;
+        List<Feedback> allFeedBack = feedbackMapper.getAllFeedBack(index, pageSize);
         return ResponseResult.success(allFeedBack);
     }
 

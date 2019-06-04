@@ -17,9 +17,9 @@ public class FeedbackController {
     private FeedbackServiceImp feedbackServiceImp;
 
     @ApiOperation(value = "所有反馈列表")
-    @GetMapping(value = "getFeedbackList/{currPage}/{pageSize}")
-    public ResponseResult getFeedbackList(@PathVariable Integer currPage,
-                                          @PathVariable Integer pageSize) {
+    @GetMapping(value = "getFeedbackList")
+    public ResponseResult getFeedbackList(@RequestParam(defaultValue = "1") Integer currPage,
+                                          @RequestParam(defaultValue = "10") Integer pageSize) {
         return feedbackServiceImp.getAllFeedback(currPage, pageSize);
     }
 

@@ -8,10 +8,12 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
+
 @Mapper
 @Component
 public interface TechnologySortMapper {
-    List<TechnologySort> selectAll();
+    List<TechnologySort> selectAll(Map<Object,Object>map);
 
     List<News>getNewsBySortId(Integer id);
 //添加农业科技分类

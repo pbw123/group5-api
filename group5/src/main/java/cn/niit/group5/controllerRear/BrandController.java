@@ -18,9 +18,9 @@ public class BrandController {
     private BrandServiceImp brandServiceImp;
 
     @ApiOperation(value = "品牌农资分类列表")
-    @GetMapping(value = "getAllBrandList/{currPage}/{pageSize}")
-    public ResponseResult getAllBrandList(@PathVariable Integer currPage,
-                                          @PathVariable Integer pageSize) {
+    @GetMapping(value = "getAllBrandList")
+    public ResponseResult getAllBrandList(@RequestParam(defaultValue = "1") Integer currPage,
+                                          @RequestParam(defaultValue = "10") Integer pageSize) {
         return brandServiceImp.getAllBrand(currPage, pageSize);
     }
 
@@ -89,10 +89,11 @@ public class BrandController {
     }
 
     @ApiOperation(value = "添加农资")
-    @GetMapping(value = "getAllCommodity/{currPage}/{pageSize}")
-    public ResponseResult getAllCommodity(@PathVariable Integer currPage,
-                                          @PathVariable Integer pageSize) {
-        return brandServiceImp.getAllCommodity(currPage, pageSize);
+    @PostMapping(value = "getAllCommodity")
+    public int getAllCommodity(String title, Integer sort, String source,
+                               String phoneNumber,Integer readNumber) {
+        return brandServiceImp.insertCommodity(title,sort,source,
+                phoneNumber, readNumber);
     }
 
     @ApiOperation(value = "删除农资")
