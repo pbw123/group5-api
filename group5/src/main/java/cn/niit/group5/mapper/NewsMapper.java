@@ -53,4 +53,6 @@ int deleteByPrimaryKey(Integer id);
 
 //    改变状态
     int updateStatus(Map<Object,Object>map);
+
+//
 }

@@ -1,11 +1,14 @@
 package cn.niit.group5.controller;
 
-import cn.niit.group5.entity.Attention;
 import cn.niit.group5.entity.Collection;
 import cn.niit.group5.entity.Question;
 import cn.niit.group5.entity.Reply;
-import cn.niit.group5.mapper.*;
+import cn.niit.group5.mapper.CollectionMapper;
+import cn.niit.group5.mapper.ImgMapper;
+import cn.niit.group5.mapper.QuestionMapper;
+import cn.niit.group5.mapper.ReplyMapper;
 import cn.niit.group5.serviceImp.ExchangeServiceImp;
+import cn.niit.group5.serviceImp.QuestionServiceImp;
 import cn.niit.group5.util.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,16 +42,15 @@ public class QuestionController {
             @RequestParam(required = true) Integer userId,
             @RequestParam(required = true) String content,
             String sort, MultipartFile file
-            ) {
+    ) {
         Question question = new Question();
         question.setUserId(userId);
         question.setContent(content);
         question.setCreateTime(new Timestamp(System.currentTimeMillis()));
         question.setSort(sort);
 
-        if (file!=null)
-        {
-            String img=UploadImg.ossUpload(file);
+        if (file != null) {
+            String img = UploadImg.ossUpload(file);
             question.setImg(img);
         }
         questionMapper.insertQuestion(question);
@@ -93,18 +95,14 @@ public class QuestionController {
     }
 
     @Autowired
-    private AttentionMapper attentionMapper;
+    private QuestionServiceImp questionServiceImp;
 
     //关注提问
-    @ApiOperation(value = "关注提问")
+    @ApiOperation(value = "关注/取消提问")
     @PostMapping(value = "/attentionQuestion")
     public ResponseResult attentionQuestion(@RequestParam(required = true) Integer userId,
                                             @RequestParam(required = true) Integer questionId) {
-        Attention attention = new Attention();
-        attention.setUserId(userId);
-        attention.setQuestionId(questionId);
-        attentionMapper.attentionQuestion(attention);
-        return ResponseResult.success();
+        return questionServiceImp.attentionOrNo(userId, questionId);
     }
 
     @ApiOperation(value = "所有提问")
@@ -115,15 +113,13 @@ public class QuestionController {
             question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
             question.setTime(StringUtil.getDateString(question.getCreateTime()));
             List<Reply> replies = question.getReplies();
-              if (replies!=null)
-              {
-                  for (Reply reply:replies)
-                  {
-                      String time = StringUtil.getDateString(reply.getReplyTime());
-                      if (time!=null)
-                      reply.setTime(time);
-                  }
-              }
+            if (replies != null) {
+                for (Reply reply : replies) {
+                    String time = StringUtil.getDateString(reply.getReplyTime());
+                    if (time != null)
+                        reply.setTime(time);
+                }
+            }
         }
         return ResponseResult.success(questionLists);
     }
@@ -139,10 +135,10 @@ public class QuestionController {
 
     @Autowired
     private ExchangeServiceImp exchangeServiceImp;
+
     @ApiOperation(value = "后台-更新我的问答")
     @PostMapping(value = "updateQuestion")
-    public ResponseResult updateQuestion(String content,String createTime)
-    {
-        return exchangeServiceImp.updateQuestion(content,createTime);
+    public ResponseResult updateQuestion(String content, String createTime) {
+        return exchangeServiceImp.updateQuestion(content, createTime);
     }
 }

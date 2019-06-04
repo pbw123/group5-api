@@ -17,7 +17,8 @@ public class CollectionServiceImp {
     public ResponseResult collectNewsOrNo(Integer userId,Integer newsId)
     {
         CollectDTO collectDTO=new CollectDTO();
-        Collection collection = collectionMapper.getCollectionById(userId, newsId);
+        Collection collection;
+        collection= collectionMapper.getCollectionById(userId, newsId);
         Integer status;
         if (collection==null)
         {
@@ -26,9 +27,8 @@ public class CollectionServiceImp {
             {
                 collection = collectionMapper.getCollectionById(userId, newsId);
                  status = collection.getStatus();
-                System.out.println("收藏成功");
                 collectDTO.setStatus(status);
-                collectDTO.setMsg("收藏成功");
+                collectDTO.setMsg("已收藏");
                 return ResponseResult.success(collectDTO);
             }else {
                 return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
@@ -37,39 +37,21 @@ public class CollectionServiceImp {
         }else {
             status = collection.getStatus();
             Integer id = collection.getId();
-            if (status == 1) {
-                System.out.println("原来状态" + collection.getStatus() + "未收藏");
                 int index = collectionMapper.isNoCollect(id, status);
                 if (index==1)
                 {
                     collection = collectionMapper.getCollectionById(userId, newsId);
-                    System.out.println("现在的状态" + collection.getStatus() + "收藏成功");
-                    status = collection.getStatus();
-                    collectDTO.setMsg("已收藏");
-                    collectDTO.setStatus(status);
-                    return ResponseResult.success(collectDTO);
-                }else
-                {
-                    return ResponseResult.error(StatusConst.ERROR,MsgConst.FAIL);
-                }
-
-            } else {
-                System.out.println("原来状态" + collection.getStatus() + "+++已收藏");
-                int index = collectionMapper.isNoCollect(id, status);
-                if (index==1)
-                {
-                    collection = collectionMapper.getCollectionById(userId, newsId);
-                    System.out.println("现在的状态" + collection.getStatus() + "++++取消收藏成功");
                     status = collection.getStatus();
                     collectDTO.setStatus(status);
-                    collectDTO.setMsg("未收藏");
+                    if (status==1)
+                    {
+                        collectDTO.setMsg("未收藏");
+                    }else {
+                        collectDTO.setMsg("已收藏");
+                    }
                     return ResponseResult.success(collectDTO);
-                }else {
-                    return ResponseResult.error(StatusConst.ERROR,MsgConst.FAIL);
                 }
-
-            }
-
+                return ResponseResult.error(StatusConst.ERROR,MsgConst.FAIL);
         }
     }
 }

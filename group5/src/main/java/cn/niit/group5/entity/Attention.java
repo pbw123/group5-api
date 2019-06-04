@@ -10,7 +10,7 @@ public class Attention implements Serializable {
 
     private Integer questionId;
 
-    private Byte status;
+    private Integer status;
 
     private Question question;
 
@@ -58,11 +58,11 @@ public class Attention implements Serializable {
         this.questionId = questionId;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
