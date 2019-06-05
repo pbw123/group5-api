@@ -23,14 +23,23 @@ public class Exchange implements Serializable {
 
     private List<Img> imgs;
 
-    private List<Reply>replies;
+    private List<Reply> replies;
 
     private int replyAmount;
 
     private String img;
 
     private Integer status;
-private Integer collectNumber;
+    private Integer collectNumber;
+    private Integer isLike;
+
+    public Integer getIsLike() {
+        return isLike;
+    }
+
+    public void setIsLike(Integer isLike) {
+        this.isLike = isLike;
+    }
 
     public Integer getCollectNumber() {
         return collectNumber;
@@ -71,6 +80,7 @@ private Integer collectNumber;
     public void setImgs(List<Img> imgs) {
         this.imgs = imgs;
     }
+
     public int getReplyAmount() {
         return replyAmount;
     }

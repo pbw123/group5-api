@@ -9,6 +9,16 @@ public class Animal implements Serializable {
 
     private Integer isDelete;
 
+    private String icon;
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {

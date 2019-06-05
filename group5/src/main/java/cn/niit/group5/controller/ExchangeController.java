@@ -2,9 +2,7 @@ package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.Exchange;
 import cn.niit.group5.entity.Reply;
-import cn.niit.group5.mapper.CollectionMapper;
 import cn.niit.group5.mapper.ExchangeMapper;
-import cn.niit.group5.mapper.ImgMapper;
 import cn.niit.group5.mapper.ReplyMapper;
 import cn.niit.group5.serviceImp.CollectionServiceImp;
 import cn.niit.group5.serviceImp.ExchangeServiceImp;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/exchange")
@@ -27,29 +24,12 @@ public class ExchangeController {
     private ExchangeMapper exchangeMapper;
     @Autowired
     private ReplyMapper replyMapper;
-    @Autowired
-    private CollectionMapper collectionMapper;
-    @Autowired
-    private ImgMapper imgMapper;
 
     @ApiOperation(value = "所有交流列表")
     @GetMapping(value = "getExchangeList")
-    public ResponseResult getExchangeListByMyId() {
-        List<Exchange> exchangeList = exchangeMapper.getExchangeList();
-
-        for (Exchange exchange : exchangeList) {
-            exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
-            exchange.setTime(StringUtil.getDateString(exchange.getCreateTime()));
-            List<Reply> replies = exchange.getReplies();
-            if (replies != null) {
-                for (Reply reply : replies) {
-                    String time = StringUtil.getDateString(reply.getReplyTime());
-                    if (time != null)
-                        reply.setTime(time);
-                }
-            }
-        }
-        return ResponseResult.success(exchangeList);
+    public ResponseResult getExchangeListByMyId(@RequestParam(defaultValue = "1") Integer currPage
+            , @RequestParam(defaultValue = "10") Integer pageSize) {
+        return exchangeServiceImp.getAllList(currPage, pageSize);
     }
 
     /*
@@ -113,12 +93,7 @@ public class ExchangeController {
     @ApiOperation(value = "我的交流", notes = "我的交流列表,传入我的用户id")
     @GetMapping(value = "getMyExchangeList")
     public ResponseResult getMyExchangeList(Integer userId) {
-        List<Exchange> exchangeList = exchangeMapper.getExchangeListByUserId(userId);
-        for (Exchange exchange : exchangeList) {
-            exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
-            exchange.setTime(StringUtil.getDateString(exchange.getCreateTime()));
-        }
-        return ResponseResult.success(exchangeList);
+        return exchangeServiceImp.getMyAllList(userId);
     }
 
     @Autowired
@@ -140,4 +115,10 @@ public class ExchangeController {
         }
     }
 
+    @ApiOperation(value = "点赞/取消点赞-交流")
+    @GetMapping(value = "checkLike")
+    public ResponseResult checkLike(Integer userId, Integer exchangeId) {
+        String column = "exchange_id";
+        return exchangeServiceImp.checkLike(userId, column, exchangeId);
+    }
 }

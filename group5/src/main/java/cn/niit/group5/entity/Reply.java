@@ -22,6 +22,16 @@ public class Reply implements Serializable {
 
     private Question question;
 
+    private Integer isLike;
+
+    public Integer getIsLike() {
+        return isLike;
+    }
+
+    public void setIsLike(Integer isLike) {
+        this.isLike = isLike;
+    }
+
     private String userName;
 
     public String getUserName() {
