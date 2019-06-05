@@ -38,5 +38,4 @@ public interface AttentionMapper {
           "status=0")
   Attention isHasAttention(@Param("userId") Integer user_id,
                            @Param("questionId") Integer question_id);
-
 }

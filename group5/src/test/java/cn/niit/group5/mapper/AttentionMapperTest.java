@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class AttentionMapperTest extends BasicTest {
 
@@ -26,6 +27,13 @@ public class AttentionMapperTest extends BasicTest {
     {
         Attention attention = attentionMapper.getAttentionById(1, 1);
         System.out.println(attention.toString());
+    }
+
+    @Test
+    public void  getAttentionByUserId()
+    {
+        List<Attention> attentions = attentionMapper.getAttentionByUserId(33);
+        attentions.forEach(attention -> System.out.println(attention.toString()));
     }
 
     @Test
