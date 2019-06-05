@@ -33,4 +33,10 @@ public interface AttentionMapper {
 //  改变是否关注状态
      int updateStatus(Map<Object,Object> map);
 
+//
+  @Select("SELECT * FROM t_attention WHERE user_id=#{userId} AND question_id=#{questionId} and " +
+          "status=0")
+  Attention isHasAttention(@Param("userId") Integer user_id,
+                           @Param("questionId") Integer question_id);
+
 }

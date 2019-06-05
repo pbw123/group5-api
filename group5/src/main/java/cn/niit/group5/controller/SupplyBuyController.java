@@ -20,13 +20,13 @@ public class SupplyBuyController {
 
     @ApiOperation(value = "供应列表", notes = "暂时无法上传和显示图片")
     @GetMapping(value = "supplyList")
-    public ResponseResult supplyBuysList() {
-        return supplyBuyServiceImp.buyList();
+    public ResponseResult supplyList() {
+        return supplyBuyServiceImp.supplyList();
     }
 
     @ApiOperation(value = "求购列表", notes = "暂时无法上传和显示图片")
     @GetMapping(value = "seekList")
-    public ResponseResult supplyBuyList() {
+    public ResponseResult seekList() {
         return supplyBuyServiceImp.buyList();
     }
 
@@ -47,7 +47,7 @@ public class SupplyBuyController {
             @RequestParam(required = true) int userId,
             String sort, String title, String content, String unit, int amount, int price,
             String enterprise, String sellerName, String sellerPhone) {
-        return supplyBuyServiceImp.addSuppy(userId, sort, title, content, unit, amount, price,
+        return supplyBuyServiceImp.addSupply(userId, sort, title, content, unit, amount, price,
                 enterprise, sellerName,
                 sellerPhone);
     }

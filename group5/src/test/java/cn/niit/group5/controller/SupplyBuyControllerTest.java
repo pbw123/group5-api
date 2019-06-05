@@ -2,14 +2,14 @@ package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.SupplyBuy;
 import cn.niit.group5.mapper.SupplyBuyMapper;
+import cn.niit.group5.util.ResponseResult;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-
-import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SupplyBuyControllerTest {
@@ -23,6 +23,21 @@ public class SupplyBuyControllerTest {
         supplyBuy.setIsSupplyBuy(1);
         supplyBuyMapper.insertSeek(supplyBuy);
         System.out.println(supplyBuy);
-
     }
+
+    @Autowired
+    SupplyBuyController supplyBuyController;
+    @Test
+    public void getSupplyListTest()
+    {
+        ResponseResult responseResult = supplyBuyController.supplyList();
+        System.out.println(responseResult.toString());
+    }
+
+//    @Test
+//    public void getSeekListTest()
+//    {
+//        ResponseResult responseResult = supplyBuyController.seekList();
+//        System.out.println(responseResult.toString());
+//    }
 }

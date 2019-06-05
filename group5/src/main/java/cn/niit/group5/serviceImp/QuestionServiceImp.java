@@ -30,7 +30,7 @@ public class QuestionServiceImp {
                 attention=attentionMapper.getAttentionById(userId, questionId);
                 Integer s = attention.getStatus();
                 collectDTO.setStatus(s);
-                collectDTO.setMsg("已成功");
+                collectDTO.setMsg("已关注");
                 return ResponseResult.success(collectDTO);
             } else {
                 return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);

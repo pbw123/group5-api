@@ -154,10 +154,18 @@ public class UserController {
     }
 
     //    问题详情
-    @ApiOperation(value = "问题详情", notes = "关于提问的问题详情,传入该问题的id")
+    @Autowired
+    private AttentionMapper attentionMapper;
+    @ApiOperation(value = "问题详情", notes = "关于提问的问题详情,传入该问题的id及用户的id,用来判断该用户是否关注了该问题")
     @GetMapping(value = "getQuestionDetailById")
-    public ResponseResult getQuestionDetailById(Integer id) {
-        Question question = questionMapper.getQuestionDetail(id);
+    public ResponseResult getQuestionDetailById(Integer id,Integer userId) {
+        Attention hasAttention = attentionMapper.isHasAttention(userId, id);
+
+            Question question = questionMapper.getQuestionDetail(id);
+            if (hasAttention==null)
+                question.setStatus(1);
+            else
+                question.setStatus(0);
         question.setTime(StringUtil.getDateString(question.getCreateTime()));
         question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
         List<Reply> replies = question.getReplies();
@@ -216,8 +224,6 @@ public class UserController {
         return new ResponseResult(StatusConst.ERROR, MsgConst.FAIL);
     }
 
-    @Autowired
-    private AttentionMapper attentionMapper;
 
     //我的关注列表
     @ApiOperation(value = "我的关注列表", notes = "根据我的用户id显示出我关注的问题")

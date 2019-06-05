@@ -61,7 +61,7 @@ public class SupplyBuyServiceImp {
         return ResponseResult.success(supplyBuy);
     }
 
-    public int addSuppy(int userId,
+    public int addSupply(int userId,
                         String sort, String title, String content, String unit, int amount,
                         int price,
                         String enterprise, String sellerName, String sellerPhone) {

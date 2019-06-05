@@ -25,6 +25,16 @@ public class Question implements Serializable {
 
     private String img;
 
+    private Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public String getImg() {
         return img;
     }
