@@ -308,20 +308,21 @@ public class Group5ApplicationTests {
 
     @Autowired
     CollectionMapper collectionMapper;
-    @Test
-    public void getCollectionTest()
-    {
-        Integer userId=1;
-        Integer questionId=1;
-        Collection collection = collectionMapper.getCollectionById(userId, questionId);
-        System.out.println(collection.toString());
-    }
+//    @Test
+//    public void getCollectionTest()
+//    {
+//        Integer userId=1;
+//        Integer questionId=1;
+//        Collection collection = collectionMapper.getCollectionById(userId, questionId);
+//        System.out.println(collection.toString());
+//    }
     @Test
     public void addCollectionTest()
     {
         Integer userId=1;
-        Integer newsId=13;
-        int index = collectionMapper.addNewsCollect(userId, newsId);
+        Integer newsId=131;
+        String column="news_id";
+        int index = collectionMapper.addNewsCollect(userId,column, newsId);
         System.out.println(index+"===========");
     }
     @Autowired

@@ -28,6 +28,8 @@ public class News implements Serializable {
 
     private Integer state;
 
+   private Integer status;
+
     private Integer reviewStatus;
 
     private Integer isTop;
@@ -41,6 +43,14 @@ public class News implements Serializable {
     private Integer currPage;
 
     private Integer pageSize;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public Integer getCurrPage() {
         return currPage;

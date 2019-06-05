@@ -1,15 +1,23 @@
 package cn.niit.group5.serviceImp;
 
 import cn.niit.group5.entity.Attention;
+import cn.niit.group5.entity.Collection;
+import cn.niit.group5.entity.Question;
+import cn.niit.group5.entity.Reply;
 import cn.niit.group5.entity.dto.CollectDTO;
 import cn.niit.group5.mapper.AttentionMapper;
+import cn.niit.group5.mapper.CollectionMapper;
+import cn.niit.group5.mapper.ImgMapper;
+import cn.niit.group5.mapper.QuestionMapper;
 import cn.niit.group5.util.MsgConst;
 import cn.niit.group5.util.ResponseResult;
 import cn.niit.group5.util.StatusConst;
+import cn.niit.group5.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class QuestionServiceImp {
@@ -57,5 +65,40 @@ public class QuestionServiceImp {
             }
             return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
         }
+    }
+    @Autowired
+    private CollectionMapper collectionMapper;
+    @Autowired
+    private QuestionMapper questionMapper;
+    @Autowired
+    private ImgMapper imgMapper;
+    public ResponseResult questionDetail(Integer id,Integer userId)
+    {
+        Attention hasAttention = attentionMapper.isHasAttention(userId, id);
+        String column="question_id";
+        int number = collectionMapper.getExchangeNumber(column, id);
+        Collection collection = collectionMapper.getCollectionById(userId, column, id);
+        Question question = questionMapper.getQuestionDetail(id);
+        if (collection==null)
+        {
+            question.setIsCollect(1);
+        }else {
+            if (collection.getStatus()==1)
+                question.setIsCollect(1);
+            else
+                question.setIsCollect(0);
+        }
+        if (hasAttention==null)
+            question.setStatus(1);
+        else
+            question.setStatus(0);
+        question.setCollectNumber(number);
+        question.setTime(StringUtil.getDateString(question.getCreateTime()));
+        question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
+        List<Reply> replies = question.getReplies();
+        for (Reply reply : replies) {
+            reply.setTime(StringUtil.getDateString(reply.getReplyTime()));
+        }
+        return ResponseResult.success(question);
     }
 }

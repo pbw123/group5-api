@@ -101,9 +101,9 @@ public class NewsControllerRear {
     }
 
     @ApiOperation(value = "据id查资讯")
-    @GetMapping(value = "getNewsById/{id}")
-    public ResponseResult getNewsById(@PathVariable Integer id) {
-        return newsServiceImp.getNewsById(id);
+    @GetMapping(value = "getNewsById")
+    public ResponseResult getNewsById(Integer newsId,Integer userId) {
+        return newsServiceImp.getNewsById(newsId,userId);
     }
 
     @ApiOperation(value = "修改资讯")

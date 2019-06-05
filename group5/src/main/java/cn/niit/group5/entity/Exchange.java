@@ -29,6 +29,25 @@ public class Exchange implements Serializable {
 
     private String img;
 
+    private Integer status;
+private Integer collectNumber;
+
+    public Integer getCollectNumber() {
+        return collectNumber;
+    }
+
+    public void setCollectNumber(Integer collectNumber) {
+        this.collectNumber = collectNumber;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public String getImg() {
         return img;
     }

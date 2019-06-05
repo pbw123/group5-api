@@ -4,6 +4,7 @@ import cn.niit.group5.entity.*;
 import cn.niit.group5.entity.dto.UserCode;
 import cn.niit.group5.entity.dto.UserDTO;
 import cn.niit.group5.mapper.*;
+import cn.niit.group5.serviceImp.QuestionServiceImp;
 import cn.niit.group5.serviceImp.UserServiceImp;
 import cn.niit.group5.util.*;
 import io.swagger.annotations.Api;
@@ -156,23 +157,13 @@ public class UserController {
     //    问题详情
     @Autowired
     private AttentionMapper attentionMapper;
+    @Autowired
+    private QuestionServiceImp questionServiceImp;
+
     @ApiOperation(value = "问题详情", notes = "关于提问的问题详情,传入该问题的id及用户的id,用来判断该用户是否关注了该问题")
     @GetMapping(value = "getQuestionDetailById")
-    public ResponseResult getQuestionDetailById(Integer id,Integer userId) {
-        Attention hasAttention = attentionMapper.isHasAttention(userId, id);
-
-            Question question = questionMapper.getQuestionDetail(id);
-            if (hasAttention==null)
-                question.setStatus(1);
-            else
-                question.setStatus(0);
-        question.setTime(StringUtil.getDateString(question.getCreateTime()));
-        question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
-        List<Reply> replies = question.getReplies();
-        for (Reply reply : replies) {
-            reply.setTime(StringUtil.getDateString(reply.getReplyTime()));
-        }
-        return ResponseResult.success(question);
+    public ResponseResult getQuestionDetailById(Integer id, Integer userId) {
+        return questionServiceImp.questionDetail(id, userId);
     }
 
     //    根据id查询要添加的用户信息
@@ -223,7 +214,6 @@ public class UserController {
         }
         return new ResponseResult(StatusConst.ERROR, MsgConst.FAIL);
     }
-
 
     //我的关注列表
     @ApiOperation(value = "我的关注列表", notes = "根据我的用户id显示出我关注的问题")

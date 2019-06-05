@@ -40,4 +40,6 @@ public interface QuestionMapper {
 
 //后台修改问题
    int updateQuestion(Question question);
+
+
 }

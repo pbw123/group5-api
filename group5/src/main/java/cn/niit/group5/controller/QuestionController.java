@@ -1,12 +1,12 @@
 package cn.niit.group5.controller;
 
-import cn.niit.group5.entity.Collection;
 import cn.niit.group5.entity.Question;
 import cn.niit.group5.entity.Reply;
 import cn.niit.group5.mapper.CollectionMapper;
 import cn.niit.group5.mapper.ImgMapper;
 import cn.niit.group5.mapper.QuestionMapper;
 import cn.niit.group5.mapper.ReplyMapper;
+import cn.niit.group5.serviceImp.CollectionServiceImp;
 import cn.niit.group5.serviceImp.ExchangeServiceImp;
 import cn.niit.group5.serviceImp.QuestionServiceImp;
 import cn.niit.group5.util.*;
@@ -81,17 +81,15 @@ public class QuestionController {
 
     @Autowired
     private CollectionMapper collectionMapper;
-
+    @Autowired
+    private CollectionServiceImp  collectionServiceImp;
     //  收藏问答
     @ApiOperation(value = "收藏问答")
     @PostMapping(value = "/collectQuestion")
     public ResponseResult CollectQuestion(@RequestParam(required = true) Integer userId,
                                           @RequestParam(required = true) Integer questionId) {
-        Collection collection = new Collection();
-        collection.setUserId(userId);
-        collection.setQuestionId(questionId);
-        collectionMapper.collectQuestion(collection);
-        return ResponseResult.success();
+        String column="question_id";
+        return collectionServiceImp.collectOrNo(userId,column, questionId);
     }
 
     @Autowired

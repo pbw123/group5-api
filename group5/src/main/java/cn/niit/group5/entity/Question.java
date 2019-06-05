@@ -27,6 +27,26 @@ public class Question implements Serializable {
 
     private Integer status;
 
+    private Integer collectNumber;
+
+    private Integer isCollect;
+
+    public Integer getIsCollect() {
+        return isCollect;
+    }
+
+    public void setIsCollect(Integer isCollect) {
+        this.isCollect = isCollect;
+    }
+
+    public Integer getCollectNumber() {
+        return collectNumber;
+    }
+
+    public void setCollectNumber(Integer collectNumber) {
+        this.collectNumber = collectNumber;
+    }
+
     public Integer getStatus() {
         return status;
     }

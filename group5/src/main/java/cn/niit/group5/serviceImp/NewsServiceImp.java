@@ -1,8 +1,10 @@
 package cn.niit.group5.serviceImp;
 
+import cn.niit.group5.entity.Collection;
 import cn.niit.group5.entity.Module;
 import cn.niit.group5.entity.News;
 import cn.niit.group5.entity.TechnologySort;
+import cn.niit.group5.mapper.CollectionMapper;
 import cn.niit.group5.mapper.ModuleMapper;
 import cn.niit.group5.mapper.NewsMapper;
 import cn.niit.group5.mapper.TechnologySortMapper;
@@ -114,7 +116,6 @@ public class NewsServiceImp {
         return moduleMapper.updateModule(module);
     }
 
-
     public ResponseResult getAllNewsOrSearch(String title, Integer reviewStatus,
                                              @RequestParam(defaultValue = "1") Integer currPage,
                                              @RequestParam(defaultValue = "10") Integer pageSize) {
@@ -133,8 +134,22 @@ public class NewsServiceImp {
             return StatusConst.ERROR;
     }
 
-    public ResponseResult getNewsById(Integer id) {
-        News news = newsMapper.selectByPrimaryKey(id);
+    @Autowired
+    private CollectionMapper collectionMapper;
+
+    public ResponseResult getNewsById(Integer newsId, Integer userId) {
+        String column = "news_id";
+        News news = newsMapper.selectByPrimaryKey(newsId);
+        Collection collection = collectionMapper.getCollectionById(newsId, column, userId);
+        if (collection == null) {
+            news.setStatus(1);
+        } else {
+            if (collection.getStatus() == 1)
+                news.setStatus(1);
+            else
+                news.setStatus(0);
+        }
+
         return ResponseResult.success(news);
     }
 
@@ -143,26 +158,24 @@ public class NewsServiceImp {
         map.put("status", status);
         map.put("id", id);
         int i = newsMapper.updateStatus(map);
-        if (i==1)
+        if (i == 1)
             return StatusConst.SUCCESS;
         else
             return StatusConst.ERROR;
     }
 
-    public int updateNews(Integer id,String title,String content)
-    {
+    public int updateNews(Integer id, String title, String content) {
         News news = new News();
         news.setTitle(title);
         news.setContent(content);
         int i = newsMapper.updateByPrimaryKey(news);
-        if (i==1)
+        if (i == 1)
             return StatusConst.SUCCESS;
         else
             return StatusConst.ERROR;
     }
 
-    public int addNews(String title,String content,String author,String source,Integer isTop)
-    {
+    public int addNews(String title, String content, String author, String source, Integer isTop) {
         News news = new News();
         news.setContent(content);
         news.setTitle(title);
@@ -170,9 +183,10 @@ public class NewsServiceImp {
         news.setSource(source);
         news.setIsTop(isTop);
         int insert = newsMapper.insert(news);
-        if (insert==1)
+        if (insert == 1)
             return StatusConst.SUCCESS;
         else
             return StatusConst.ERROR;
     }
+
 }
