@@ -6,6 +6,7 @@ import cn.niit.group5.mapper.ExchangeMapper;
 import cn.niit.group5.mapper.ReplyMapper;
 import cn.niit.group5.serviceImp.CollectionServiceImp;
 import cn.niit.group5.serviceImp.ExchangeServiceImp;
+import cn.niit.group5.serviceImp.ReplyServiceImp;
 import cn.niit.group5.util.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -121,6 +122,7 @@ public class ExchangeController {
         String column = "exchange_id";
         return exchangeServiceImp.checkLike(userId, column, exchangeId);
     }
+
     @ApiOperation(value = "点赞/取消点赞-评论")
     @GetMapping(value = "checkReplyLike")
     public ResponseResult checkReplyLike(Integer userId, Integer replyId) {
@@ -128,5 +130,13 @@ public class ExchangeController {
         return exchangeServiceImp.checkLike(userId, column, replyId);
     }
 
+    @Autowired
+    private ReplyServiceImp replyServiceImp;
+
+    @ApiOperation(value = "删除评论", notes = "提问/交流的评论删除都调这个接口，传入回复的id")
+    @GetMapping(value = "delReplyById")
+    public ResponseResult delReplyById(Integer id) {
+        return replyServiceImp.delReplyById(id);
+    }
 
 }
