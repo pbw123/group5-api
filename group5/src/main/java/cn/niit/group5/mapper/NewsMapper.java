@@ -3,6 +3,7 @@ package cn.niit.group5.mapper;
 import cn.niit.group5.entity.News;
 import cn.niit.group5.entity.TechnologySort;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
@@ -53,5 +54,7 @@ public interface NewsMapper {
     //    改变状态
     int updateStatus(Map<Object, Object> map);
 
-//
+    //    更新视频/资讯访问量
+    @Update("update ${column} set ${column2}=${column2}+1 where id=#{id} ")
+    int addReadNumber(String column, String column2, @Param("id") Integer id);
 }

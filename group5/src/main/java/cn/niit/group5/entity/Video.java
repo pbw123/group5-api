@@ -1,7 +1,7 @@
 package cn.niit.group5.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Video implements Serializable {
     private Integer id;
@@ -24,15 +24,33 @@ public class Video implements Serializable {
 
     private String author;
 
-    private Date createTime;
+    private Timestamp createTime;
 
     private Integer isDelete;
 
-   private Integer pageSize;
+    private Integer pageSize;
 
-   private Integer currPage;
+    private Integer currPage;
 
+    private Integer isCollect;
 
+    private String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public Integer getIsCollect() {
+        return isCollect;
+    }
+
+    public void setIsCollect(Integer isCollect) {
+        this.isCollect = isCollect;
+    }
 
     public Integer getPageSize() {
         return pageSize;
@@ -132,11 +150,11 @@ public class Video implements Serializable {
         this.author = author == null ? null : author.trim();
     }
 
-    public Date getCreateTime() {
+    public Timestamp getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
     }
 

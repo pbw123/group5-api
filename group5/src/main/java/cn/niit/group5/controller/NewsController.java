@@ -4,6 +4,7 @@ import cn.niit.group5.entity.*;
 import cn.niit.group5.mapper.*;
 import cn.niit.group5.serviceImp.CollectionServiceImp;
 import cn.niit.group5.serviceImp.NewsServiceImp;
+import cn.niit.group5.serviceImp.VideoServiceImp;
 import cn.niit.group5.util.Client;
 import cn.niit.group5.util.PageUtil;
 import cn.niit.group5.util.ResponseResult;
@@ -86,16 +87,25 @@ public class NewsController {
     @PostMapping(value = "collectNews")
     public ResponseResult collectNews(@RequestParam(required = true) Integer userId,
                                       @RequestParam(required = true) Integer newsId) {
-        String column="news_id";
-        return collectionServiceImp.collectOrNo(userId,column, newsId);
+        String column = "news_id";
+        return collectionServiceImp.collectOrNo(userId, column, newsId);
     }
 
-    @ApiOperation(value = "收藏视频")
+    @ApiOperation(value = "收藏/取消收藏视频")
     @PostMapping(value = "collectVideo")
     public ResponseResult collectVideo(@RequestParam(required = true) Integer userId,
                                        @RequestParam(required = true) Integer videoId) {
-        String column="video";
-        return collectionServiceImp.collectOrNo(userId,column, videoId);
+        String column = "video";
+        return collectionServiceImp.collectOrNo(userId, column, videoId);
+    }
+
+    @Autowired
+    private VideoServiceImp videoServiceImp;
+
+    @ApiOperation(value = "视频详情")
+    @GetMapping(value = "videoDetail")
+    public ResponseResult videoDetail(Integer userId, Integer id) {
+        return videoServiceImp.getVideoDetail(userId, id);
     }
 
     @ApiOperation(value = "品牌农资中通过分类sort_id遍历出相应资讯")

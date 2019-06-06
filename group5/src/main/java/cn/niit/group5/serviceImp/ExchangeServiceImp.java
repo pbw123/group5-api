@@ -42,7 +42,6 @@ public class ExchangeServiceImp {
         Exchange exchange = exchangeMapper.getExchangeDetailById(id);
         String column = "exchange_id";
         String replyColumn = "reply_id";
-        Collection collection = collectionMapper.getCollectionById(userId, column, id);
 //        点赞量
         int likeNumber = exchangeMapper.getExchangeLikeNumber(column, id);
         exchange.setLike(likeNumber);
@@ -57,6 +56,7 @@ public class ExchangeServiceImp {
         int number = collectionMapper.getExchangeNumber(column, id);
         exchange.setCollectNumber(number);
 //        该登录用户是否收藏了
+        Collection collection = collectionMapper.getCollectionById(userId, column, id);
         if (collection == null || collection.getStatus() == 1) {
             exchange.setStatus(1);
         } else {

@@ -1,15 +1,10 @@
 package cn.niit.group5.serviceImp;
 
-import cn.niit.group5.entity.Exhibition;
-import cn.niit.group5.entity.Video;
-import cn.niit.group5.entity.VideoExhibition;
-import cn.niit.group5.entity.VideoSort;
-import cn.niit.group5.mapper.ExhibitionMapper;
-import cn.niit.group5.mapper.VideoExhibitionMapper;
-import cn.niit.group5.mapper.VideoMapper;
-import cn.niit.group5.mapper.VideoSortMapper;
+import cn.niit.group5.entity.*;
+import cn.niit.group5.mapper.*;
 import cn.niit.group5.util.ResponseResult;
 import cn.niit.group5.util.StatusConst;
+import cn.niit.group5.util.StringUtil;
 import cn.niit.group5.util.UploadImg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +19,7 @@ public class VideoServiceImp {
     private VideoSortMapper videoSortMapper;
 
     public ResponseResult getAllVideoSort(Integer currPage, Integer pageSize) {
-        Integer index=(currPage-1)*pageSize;
+        Integer index = (currPage - 1) * pageSize;
         VideoSort videoSort = new VideoSort();
         videoSort.setCurrPage(index);
         videoSort.setPageSize(pageSize);
@@ -67,7 +62,7 @@ public class VideoServiceImp {
     private ExhibitionMapper exhibitionMapper;
 
     public ResponseResult getAllExhibition(Integer currPage, Integer pageSize) {
-        Integer index=(currPage-1)*pageSize;
+        Integer index = (currPage - 1) * pageSize;
         List<Exhibition> exhibitions = exhibitionMapper.selectAll(index, pageSize);
         return ResponseResult.success(exhibitions);
     }
@@ -84,28 +79,25 @@ public class VideoServiceImp {
             return StatusConst.ERROR;
     }
 
-    public Integer addExhibition(String name,MultipartFile file)
-    {
+    public Integer addExhibition(String name, MultipartFile file) {
         Exhibition exhibition = new Exhibition();
         exhibition.setTitle(name);
-        if (file!=null)
-        {
+        if (file != null) {
             String s = UploadImg.ossUpload(file);
             exhibition.setImg(s);
         }
         int insert = exhibitionMapper.insert(exhibition);
-        if (insert==1)
+        if (insert == 1)
             return StatusConst.SUCCESS;
         else
             return StatusConst.ERROR;
     }
 
-    public Integer updateExhibition(Integer id, String title,MultipartFile file) {
+    public Integer updateExhibition(Integer id, String title, MultipartFile file) {
         Exhibition exhibition = new Exhibition();
         exhibition.setTitle(title);
         exhibition.setId(id);
-        if (file!=null)
-        {
+        if (file != null) {
             String s = UploadImg.ossUpload(file);
             exhibition.setImg(s);
         }
@@ -156,75 +148,90 @@ public class VideoServiceImp {
             return StatusConst.ERROR;
     }
 
-    public Integer removeVideoSort(Integer id)
-    {
+    public Integer removeVideoSort(Integer id) {
         int i = videoSortMapper.deleteByPrimaryKey(id);
-        if(i==1)
+        if (i == 1)
             return StatusConst.SUCCESS;
         else
             return StatusConst.ERROR;
     }
 
-    public ResponseResult searchVideoSort(String name)
-    {
+    public ResponseResult searchVideoSort(String name) {
         List<VideoSort> videoSorts = videoSortMapper.selectSortByName(name);
         return ResponseResult.success(videoSorts);
     }
 
-    public ResponseResult searchExhibition(String title)
-    {
-        List<Exhibition> exhibitions=exhibitionMapper.searchExhibition(title);
+    public ResponseResult searchExhibition(String title) {
+        List<Exhibition> exhibitions = exhibitionMapper.searchExhibition(title);
         return ResponseResult.success(exhibitions);
     }
 
-    public ResponseResult getAllVideo(Integer currPage,Integer pageSize)
-    {
+    public ResponseResult getAllVideo(Integer currPage, Integer pageSize) {
         Video video = new Video();
-        Integer index=(currPage-1)*pageSize;
+        Integer index = (currPage - 1) * pageSize;
         video.setCurrPage(index);
         video.setPageSize(pageSize);
         List<Video> videos = videoMapper.selectAllVideo(video);
         return ResponseResult.success(videos);
     }
 
-    public Integer changeVideoTitleById(Integer id,String title)
-    {
+    public Integer changeVideoTitleById(Integer id, String title) {
         Video video = new Video();
         video.setId(id);
         video.setVideoTitle(title);
         int i = videoMapper.updateVideoTitle(video);
-        if (i==1)
+        if (i == 1)
             return StatusConst.SUCCESS;
         else
-            return  StatusConst.ERROR;
+            return StatusConst.ERROR;
     }
 
-    public Integer removeVideoById(Integer id)
-    {
+    public Integer removeVideoById(Integer id) {
         int i = videoMapper.removeVideo(id);
-        if (i==1)
+        if (i == 1)
             return StatusConst.SUCCESS;
         else
             return StatusConst.ERROR;
 
     }
 
-    public ResponseResult searchVideoBySort(Integer sort,Integer currPage,Integer pageSize)
-    {
+    public ResponseResult searchVideoBySort(Integer sort, Integer currPage, Integer pageSize) {
         Video video = new Video();
         video.setCurrPage(currPage);
         video.setPageSize(pageSize);
         video.setVideoSort(sort);
-        List<Video> videos= videoMapper.getVideoBySort(video);
+        List<Video> videos = videoMapper.getVideoBySort(video);
         return ResponseResult.success(videos);
     }
-    public ResponseResult searchVideoByReview(Integer review,Integer currPage,Integer pageSize)
-    {
+
+    public ResponseResult searchVideoByReview(Integer review, Integer currPage, Integer pageSize) {
         Video video = new Video();
         video.setCurrPage(currPage);
         video.setPageSize(pageSize);
         video.setReviewState(review);
-        List<Video> videos= videoMapper.getVideoByReview(video);
+        List<Video> videos = videoMapper.getVideoByReview(video);
         return ResponseResult.success(videos);
     }
+
+    @Autowired
+    private CollectionMapper collectionMapper;
+@Autowired
+private NewsMapper newsMapper;
+    public ResponseResult getVideoDetail(Integer userId, Integer id) {
+        newsMapper.addReadNumber("t_video", "read_number", id);
+        String column = "video";
+        Video video = videoMapper.getVideoDetail(id);
+        Timestamp createTime = video.getCreateTime();
+        if (createTime!=null)
+            video.setTime(StringUtil.getDateString(createTime));
+
+        Collection collection = collectionMapper.getCollectionById(userId, column, id);
+        if (collection == null || collection.getStatus() == 1)
+            video.setIsCollect(1);
+        else
+            video.setIsCollect(0);
+
+        return ResponseResult.success(video);
+    }
+
 }

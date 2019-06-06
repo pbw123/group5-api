@@ -2,6 +2,7 @@ package cn.niit.group5.mapper;
 
 import cn.niit.group5.entity.Video;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
@@ -35,4 +36,10 @@ public interface VideoMapper {
 
 //    据审核状态搜索视频
     List<Video>getVideoByReview(Video video);
+
+//    查询视频详情
+    @Select("select * from t_video where id=#{id}")
+    Video getVideoDetail(@Param("id") Integer id);
+
+
 }

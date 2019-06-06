@@ -139,6 +139,9 @@ public class NewsServiceImp {
 
     public ResponseResult getNewsById(Integer newsId, Integer userId) {
         String column = "news_id";
+        int i = newsMapper.addReadNumber("t_news", "read_number", newsId);
+        if(i!=1)
+            return ResponseResult.error(StatusConst.ERROR,"更新访问量失败");
         News news = newsMapper.selectByPrimaryKey(newsId);
         Collection collection = collectionMapper.getCollectionById(newsId, column, userId);
         if (collection == null) {
@@ -188,5 +191,7 @@ public class NewsServiceImp {
         else
             return StatusConst.ERROR;
     }
+
+
 
 }
