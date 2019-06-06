@@ -138,11 +138,13 @@ public class ExchangeServiceImp {
             if (i == 1) {
                 likeOrNo = exchangeMapper.isLikeOrNo(userId, column, exchangeId);
                 Integer s = likeOrNo.getStatus();
-                if (s == 1)
+                if (s == 1) {
                     return ResponseResult.success(collectDTO);
-                else {
+                } else {
                     collectDTO.setStatus(0);
                     collectDTO.setMsg("已点赞");
+                    return ResponseResult.success(collectDTO);
+
                 }
             }
         }

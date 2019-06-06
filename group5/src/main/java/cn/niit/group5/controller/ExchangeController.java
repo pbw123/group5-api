@@ -121,4 +121,12 @@ public class ExchangeController {
         String column = "exchange_id";
         return exchangeServiceImp.checkLike(userId, column, exchangeId);
     }
+    @ApiOperation(value = "点赞/取消点赞-评论")
+    @GetMapping(value = "checkReplyLike")
+    public ResponseResult checkReplyLike(Integer userId, Integer replyId) {
+        String column = "reply_id";
+        return exchangeServiceImp.checkLike(userId, column, replyId);
+    }
+
+
 }

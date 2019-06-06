@@ -39,12 +39,5 @@
     from t_like
   </select>
 
-  <update id="updateStatus" parameterType="Integer">
-    update t_like
-    <trim prefix="set" >
-      <if test="status lt 1">status=1</if>
-      <if test="status gt 0">status=0</if>
-    </trim>
-    where id=#{id}
-  </update>
+
 </mapper>
