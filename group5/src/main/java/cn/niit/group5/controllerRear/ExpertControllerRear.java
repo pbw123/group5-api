@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @Manager
-@Api(tags = "10.专家管理")
+@Api(tags = "A.专家管理")
 @RequestMapping(value = "/expert")
 public class ExpertControllerRear {
     @Autowired

@@ -46,4 +46,12 @@
     from t_technology_sort
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+    <select id="delByArrayList" parameterType="java.util.ArrayList" resultMap="BaseResultMap">
+        select * from t_technology_sort where id in
+        <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
 </mapper>

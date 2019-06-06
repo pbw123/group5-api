@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AdvertiseControllerTest extends BasicTest {
 
     @Autowired
-    AdvertiseController advertiseController;
+    AdController advertiseController;
     @Test
     public void getAllAdvertiseIndex() {
         ResponseResult allAdvertiseIndex = advertiseController.getAllAdvertiseIndex(1,14);

@@ -24,6 +24,7 @@ public class VideoControllerRear {
         return videoServiceImp.getAllVideoSort(currPage, pageSize);
     }
 
+
     @ApiOperation(value = "添加视频分类")
     @GetMapping(value = "addVideoSort/{name}")
     public Integer addVideoSort(@PathVariable String name) {
