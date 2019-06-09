@@ -47,11 +47,13 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-    <select id="delByArrayList" parameterType="java.util.ArrayList" resultMap="BaseResultMap">
-        select * from t_technology_sort where id in
+    <update id="delByArrayList" parameterType="java.util.ArrayList">
+         update t_technology_sort
+          set is_delete=1
+         where id in
         <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>
-    </select>
+    </update>
 
 </mapper>

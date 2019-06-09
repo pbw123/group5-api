@@ -29,5 +29,5 @@ public interface TechnologySortMapper {
     int updateByPrimaryKey(TechnologySort record);
 
 //    批量删除
-    List<TechnologySort> delByArrayList(@Param("ids") int[] ids);
+    int delByArrayList(@Param("ids") int[] ids);
 }

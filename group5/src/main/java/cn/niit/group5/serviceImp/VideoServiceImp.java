@@ -206,7 +206,7 @@ public class VideoServiceImp {
 
     public ResponseResult searchVideoByReview(Integer review, Integer currPage, Integer pageSize) {
         Video video = new Video();
-        video.setCurrPage(currPage);
+        video.setCurrPage((currPage-1)*pageSize);
         video.setPageSize(pageSize);
         video.setReviewState(review);
         List<Video> videos = videoMapper.getVideoByReview(video);

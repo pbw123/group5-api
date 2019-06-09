@@ -1,6 +1,5 @@
 package cn.niit.group5.controllerRear;
 
-import cn.niit.group5.entity.TechnologySort;
 import cn.niit.group5.mapper.TechnologySortMapper;
 import cn.niit.group5.serviceImp.AdvertiseServiceImp;
 import cn.niit.group5.util.Manager;
@@ -10,8 +9,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 @RestController
 @Manager
@@ -71,16 +68,16 @@ public class AdController {
 
     @Autowired
     private TechnologySortMapper technologySortMapper;
+
     @ApiOperation(value = "批量删除")
     @GetMapping(value = "deleteAll")
-    public void deleteAll(int[] id) {
-//        List<String> lists = JSONArray.parseArray(ids, String.class);
-        List<TechnologySort> sorts = technologySortMapper.delByArrayList(id);
-        sorts.forEach(sort-> System.out.println(sort));
-        for (int i=0;i<id.length;i++)
-       {
-           System.out.println(id[i]);
-       }
+    public ResponseResult deleteAll(int[] ids) {
+        int i = technologySortMapper.delByArrayList(ids);
+        System.out.println(i+"+++++++++++");
+//        if (i == 1)
+            return ResponseResult.success();
+//        else
+//            return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
     }
 
 }
