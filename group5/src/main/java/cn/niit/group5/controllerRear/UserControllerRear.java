@@ -5,7 +5,6 @@ import cn.niit.group5.mapper.QuestionMapper;
 import cn.niit.group5.serviceImp.UserServiceImp;
 import cn.niit.group5.util.Manager;
 import cn.niit.group5.util.ResponseResult;
-import cn.niit.group5.util.UploadImg;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +41,9 @@ public class UserControllerRear {
                                   String email, String identity, String userAddress,
                                   MultipartFile file)
     {
-        String f = UploadImg.ossUpload(file);
+
         ResponseResult responseResult = userServiceImp.addUserRear(userName, sex,
-                phoneNumber, email, identity, userAddress,f);
+                phoneNumber, email, identity, userAddress,file);
         return responseResult;
 
     }

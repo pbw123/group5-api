@@ -84,7 +84,7 @@ public class QuestionController {
     private CollectionServiceImp collectionServiceImp;
 
     //  收藏问答
-    @ApiOperation(value = "收藏问答")
+    @ApiOperation(value = "收藏/取消收藏问答")
     @PostMapping(value = "/collectQuestion")
     public ResponseResult CollectQuestion(@RequestParam(required = true) Integer userId,
                                           @RequestParam(required = true) Integer questionId) {

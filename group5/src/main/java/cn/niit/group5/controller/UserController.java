@@ -105,9 +105,10 @@ public class UserController {
     public ResponseResult updateMyMsg(@RequestParam(required = true) Integer id, String vocation,
                                       String headUrl, String userName, String unitName,
                                       String identity, String educational, String email,
-                                      String sex, MultipartFile file) {
+                                      String sex, String userAddress,MultipartFile file) {
         User user = new User();
         user.setId(id);
+        user.setUserAddress(userAddress);
         user.setVocation(vocation);
         user.setUserName(userName);
         user.setIdentity(identity);

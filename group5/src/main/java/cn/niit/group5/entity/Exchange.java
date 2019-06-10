@@ -21,13 +21,15 @@ public class Exchange implements Serializable {
 
     private User user;
 
-    private List<Img> imgs;
+    private List imgs;
 
     private List<Reply> replies;
 
     private int replyAmount;
 
     private String img;
+
+//    private List image;
 
     private Integer status;
     private Integer collectNumber;
@@ -73,11 +75,11 @@ public class Exchange implements Serializable {
         this.time = time;
     }
 
-    public List<Img> getImgs() {
+    public List getImgs() {
         return imgs;
     }
 
-    public void setImgs(List<Img> imgs) {
+    public void setImgs(List imgs) {
         this.imgs = imgs;
     }
 

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -220,11 +221,14 @@ public class UserServiceImp implements UserService {
 
     public ResponseResult addUserRear(String userName, String sex, String phoneNumber,
                                       String email, String identity, String userAddress,
-                                      String headUrl) {
+                                      MultipartFile file) {
         User user = new User();
         user.setRegitsterTime(new Timestamp(System.currentTimeMillis()));
         user.setUserName(userName);
-        user.setHeadUrl(headUrl);
+        if (file!=null){
+            String f = UploadImg.ossUpload(file);
+            user.setHeadUrl(f);
+        }
         user.setPhoneNumber(phoneNumber);
         user.setSex(sex);
         user.setIdentity(identity);
@@ -232,8 +236,10 @@ public class UserServiceImp implements UserService {
         user.setEmail(email);
         user.setRegitsterTime(new Timestamp(System.currentTimeMillis()));
         int index = userMapper.addUser(user);
-        if (index == 1)
+        if (index == 1){
+            System.out.println(user.toString());
             return ResponseResult.success();
+        }
         else
             return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
     }
