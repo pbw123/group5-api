@@ -171,4 +171,6 @@ public class NewsController {
     public ResponseResult getNewsDetail(Integer newsId, Integer userId) {
         return newsServiceImp.getNewsById(newsId, userId);
     }
+
+
 }

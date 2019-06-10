@@ -43,6 +43,15 @@ public class News implements Serializable {
     private Integer currPage;
 
     private Integer pageSize;
+private String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public Integer getStatus() {
         return status;

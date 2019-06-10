@@ -31,7 +31,7 @@ public class UserControllerRear {
     @Autowired
     private UserServiceImp userServiceImp;
     @ApiOperation(value = "启用/禁用用户")
-    @PostMapping(value = "setStatusUser")
+    @GetMapping(value = "setStatusUser")
     public ResponseResult setStatusUser(Integer id)
     {
        return userServiceImp.setUserStatus(id);

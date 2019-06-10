@@ -96,7 +96,7 @@ public class ExchangeServiceImp {
         return ResponseResult.success(exchangeList);
     }
 
-    public ResponseResult getAllList(Integer currPage, Integer pageSize) {
+    public ResponseResult getAllList(Integer userId,Integer currPage, Integer pageSize) {
         Map<Object, Object> map = PageUtil.pageDemo(currPage, pageSize);
         List<Exchange> exchangeList = exchangeMapper.getExchangeList(map);
         String column = "exchange_id";
@@ -114,6 +114,18 @@ public class ExchangeServiceImp {
                     reply.setLike(number);
                     if (replyTime != null)
                         reply.setTime(StringUtil.getDateString(replyTime));
+                }
+            }
+            int number = collectionMapper.getExchangeNumber(column, exchange.getId());
+            exchange.setCollectNumber(number);
+            if (userId!=null)
+            {
+                //        该登录用户是否已经点赞
+                Like likeOrNo = exchangeMapper.isLikeOrNo(userId, column, exchange.getId());
+                if (likeOrNo == null || likeOrNo.getStatus() == 1) {
+                    exchange.setIsLike(1);
+                } else {
+                    exchange.setIsLike(0);
                 }
             }
         }

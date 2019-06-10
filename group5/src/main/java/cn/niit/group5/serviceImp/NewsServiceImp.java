@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -140,9 +141,12 @@ public class NewsServiceImp {
     public ResponseResult getNewsById(Integer newsId, Integer userId) {
         String column = "news_id";
         int i = newsMapper.addReadNumber("t_news", "read_number", newsId);
-        if(i!=1)
-            return ResponseResult.error(StatusConst.ERROR,"更新访问量失败");
+        if (i != 1)
+            return ResponseResult.error(StatusConst.ERROR, "更新访问量失败");
         News news = newsMapper.selectByPrimaryKey(newsId);
+        Date createTime = news.getCreateTime();
+        if (createTime != null)
+            news.setTime(StringUtil.getDateString(createTime));
         Collection collection = collectionMapper.getCollectionById(newsId, column, userId);
         if (collection == null) {
             news.setStatus(1);
@@ -191,7 +195,5 @@ public class NewsServiceImp {
         else
             return StatusConst.ERROR;
     }
-
-
 
 }

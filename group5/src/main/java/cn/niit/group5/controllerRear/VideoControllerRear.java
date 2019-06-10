@@ -76,7 +76,9 @@ public class VideoControllerRear {
     }
     @ApiOperation(value = "据审核状态搜索视频")
     @PostMapping(value = "searchVideoByReview")
-    public ResponseResult searchVideoByReview(Integer review, Integer currPage, Integer pageSize) {
+    public ResponseResult searchVideoByReview( Integer review,
+                                              @RequestParam(defaultValue = "1") Integer currPage,
+                                              @RequestParam(defaultValue = "10") Integer pageSize) {
         return videoServiceImp.searchVideoByReview(review, currPage, pageSize);
     }
 

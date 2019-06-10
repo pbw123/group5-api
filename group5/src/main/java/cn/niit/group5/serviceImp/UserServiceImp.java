@@ -241,6 +241,14 @@ public class UserServiceImp implements UserService {
     public ResponseResult getAllUser(Integer currPage, Integer pageSize) {
         Map<Object, Object> map = PageUtil.pageDemo(currPage, pageSize);
         List<User> users = userMapper.selectAll(map);
+        for(User user:users)
+        {
+            Timestamp regitsterTime = user.getRegitsterTime();
+            if (regitsterTime!=null)
+            {
+                user.setTime(StringUtil.getDateString(regitsterTime));
+            }
+        }
         return ResponseResult.success(users);
     }
 

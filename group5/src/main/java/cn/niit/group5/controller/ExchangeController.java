@@ -26,11 +26,12 @@ public class ExchangeController {
     @Autowired
     private ReplyMapper replyMapper;
 
-    @ApiOperation(value = "所有交流列表")
+    @ApiOperation(value = "所有交流列表",notes = "用户id用来判断是否已经点赞")
     @GetMapping(value = "getExchangeList")
-    public ResponseResult getExchangeListByMyId(@RequestParam(defaultValue = "1") Integer currPage
+    public ResponseResult getExchangeListByMyId(Integer userId,
+                                                @RequestParam(defaultValue = "1") Integer currPage
             , @RequestParam(defaultValue = "10") Integer pageSize) {
-        return exchangeServiceImp.getAllList(currPage, pageSize);
+        return exchangeServiceImp.getAllList(userId,currPage, pageSize);
     }
 
     /*
