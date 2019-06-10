@@ -157,18 +157,22 @@ public class Exchange implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", userId=").append(userId);
-        sb.append(", content=").append(content);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", like=").append(like);
-        sb.append(", isDelete=").append(isDelete);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "Exchange{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", content='" + content + '\'' +
+                ", createTime=" + createTime +
+                ", time='" + time + '\'' +
+                ", like=" + like +
+                ", isDelete=" + isDelete +
+                ", user=" + user +
+                ", imgs=" + imgs +
+                ", replies=" + replies +
+                ", replyAmount=" + replyAmount +
+                ", img='" + img + '\'' +
+                ", status=" + status +
+                ", collectNumber=" + collectNumber +
+                ", isLike=" + isLike +
+                '}';
     }
 }

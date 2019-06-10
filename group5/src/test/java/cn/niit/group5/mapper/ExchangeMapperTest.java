@@ -1,9 +1,8 @@
 package cn.niit.group5.mapper;
 
+import cn.niit.group5.entity.Exchange;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import static org.junit.Assert.*;
 
 public class ExchangeMapperTest extends BasicTest {
     @Autowired
@@ -18,4 +17,10 @@ public class ExchangeMapperTest extends BasicTest {
 
     }
 
+    @Test
+    public void getExchangeTest()
+    {
+        Exchange exchangeTest = exchangeMapper.getExchangeDetailById(1);
+        System.out.println(exchangeTest.toString());
+    }
 }

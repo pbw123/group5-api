@@ -14,6 +14,16 @@ public class Attention implements Serializable {
 
     private Question question;
 
+    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
     public Question getQuestion() {
         return question;
     }

@@ -1,7 +1,6 @@
 package cn.niit.group5.serviceImp;
 
 import cn.niit.group5.entity.*;
-import cn.niit.group5.entity.dto.CollectDTO;
 import cn.niit.group5.mapper.*;
 import cn.niit.group5.util.MsgConst;
 import cn.niit.group5.util.ResponseResult;
@@ -21,7 +20,6 @@ public class QuestionServiceImp {
     private AttentionMapper attentionMapper;
 
     public ResponseResult attentionOrNo(Integer userId, Integer questionId) {
-        CollectDTO collectDTO = new CollectDTO();
         Attention attention;
         attention = attentionMapper.getAttentionById(userId, questionId);
         if (attention == null) {
@@ -32,9 +30,9 @@ public class QuestionServiceImp {
             if (index == 1) {
                 attention = attentionMapper.getAttentionById(userId, questionId);
                 Integer s = attention.getStatus();
-                collectDTO.setStatus(s);
-                collectDTO.setMsg("已关注");
-                return ResponseResult.success(collectDTO);
+                attention.setStatus(s);
+                attention.setMsg("已关注");
+                return ResponseResult.success(attention);
             } else {
                 return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
             }
@@ -50,13 +48,12 @@ public class QuestionServiceImp {
             if (index == 1) {
                 attention = attentionMapper.getAttentionById(userId, questionId);
                 status = attention.getStatus();
-                collectDTO.setStatus(status);
                 if (status == 1) {
-                    collectDTO.setMsg("未关注");
+                    attention.setMsg("未关注");
                 } else {
-                    collectDTO.setMsg("已关注");
+                    attention.setMsg("已关注");
                 }
-                return ResponseResult.success(collectDTO);
+                return ResponseResult.success(attention);
             }
             return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
         }
@@ -78,17 +75,17 @@ public class QuestionServiceImp {
         Collection collection = collectionMapper.getCollectionById(userId, column, id);
         Question question = questionMapper.getQuestionDetail(id);
         if (collection == null) {
-            question.setIsCollect(1);
+            question.setStatus(1);
         } else {
             if (collection.getStatus() == 1)
-                question.setIsCollect(1);
+                question.setStatus(1);
             else
-                question.setIsCollect(0);
+                question.setStatus(0);
         }
         if (hasAttention == null)
-            question.setStatus(1);
+            question.setIsAtten(1);
         else
-            question.setStatus(0);
+            question.setIsAtten(0);
         question.setCollectNumber(number);
         question.setTime(StringUtil.getDateString(question.getCreateTime()));
         question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
@@ -107,5 +104,23 @@ public class QuestionServiceImp {
                 reply.setIsLike(0);
         }
         return ResponseResult.success(question);
+    }
+
+    public ResponseResult getQuestionList()
+    {
+        List<Question> questionLists = questionMapper.getQuestionList();
+        for (Question question : questionLists) {
+            question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
+            question.setTime(StringUtil.getDateString(question.getCreateTime()));
+            List<Reply> replies = question.getReplies();
+            if (replies != null) {
+                for (Reply reply : replies) {
+                    String time = StringUtil.getDateString(reply.getReplyTime());
+                    if (time != null)
+                        reply.setTime(time);
+                }
+            }
+        }
+        return ResponseResult.success(questionLists);
     }
 }

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @RestController
 @Api(tags = "2.快速提问")
@@ -82,14 +81,15 @@ public class QuestionController {
     @Autowired
     private CollectionMapper collectionMapper;
     @Autowired
-    private CollectionServiceImp  collectionServiceImp;
+    private CollectionServiceImp collectionServiceImp;
+
     //  收藏问答
     @ApiOperation(value = "收藏问答")
     @PostMapping(value = "/collectQuestion")
     public ResponseResult CollectQuestion(@RequestParam(required = true) Integer userId,
                                           @RequestParam(required = true) Integer questionId) {
-        String column="question_id";
-        return collectionServiceImp.collectOrNo(userId,column, questionId);
+        String column = "question_id";
+        return collectionServiceImp.collectOrNo(userId, column, questionId);
     }
 
     @Autowired
@@ -106,20 +106,7 @@ public class QuestionController {
     @ApiOperation(value = "所有提问")
     @PostMapping(value = "/getQuestionList")
     public ResponseResult getQuestionList() {
-        List<Question> questionLists = questionMapper.getQuestionList();
-        for (Question question : questionLists) {
-            question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
-            question.setTime(StringUtil.getDateString(question.getCreateTime()));
-            List<Reply> replies = question.getReplies();
-            if (replies != null) {
-                for (Reply reply : replies) {
-                    String time = StringUtil.getDateString(reply.getReplyTime());
-                    if (time != null)
-                        reply.setTime(time);
-                }
-            }
-        }
-        return ResponseResult.success(questionLists);
+        return questionServiceImp.getQuestionList();
     }
 
     @ApiOperation(value = "删除‘我的提问'的问题", notes = "需要传入该问题的id")

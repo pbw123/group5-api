@@ -39,11 +39,11 @@ public interface ExchangeMapper {
 
     //    用户是否点赞了该交流/评论
     @Select("SELECT * FROM t_like WHERE user_id=#{userId} and ${column}=#{id}")
-    Like isLikeOrNo(@Param("userId") Integer userId, String column,@Param("id")Integer id);
+    Like isLikeOrNo(@Param("userId") Integer userId, String column, @Param("id") Integer id);
 
     @Insert("INSERT INTO t_like(user_id,${column}) VALUES(#{userId},#{id})")
-    int addLike(String column,@Param("userId")Integer userId,@Param("id")Integer id);
+    int addLike(String column, @Param("userId") Integer userId, @Param("id") Integer id);
 
-    int updateStatus(@Param("status")Integer status,@Param("id")Integer id);
+    int updateStatus(@Param("status") Integer status, @Param("id") Integer id);
 
 }

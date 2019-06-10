@@ -29,14 +29,14 @@ public class Question implements Serializable {
 
     private Integer collectNumber;
 
-    private Integer isCollect;
+    private Integer isAtten;
 
-    public Integer getIsCollect() {
-        return isCollect;
+    public Integer getIsAtten() {
+        return isAtten;
     }
 
-    public void setIsCollect(Integer isCollect) {
-        this.isCollect = isCollect;
+    public void setIsAtten(Integer isAtten) {
+        this.isAtten = isAtten;
     }
 
     public Integer getCollectNumber() {

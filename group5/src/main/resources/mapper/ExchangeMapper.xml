@@ -10,7 +10,7 @@
         <result column="like" jdbcType="INTEGER" property="like"/>
         <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
-        <result column="img" jdbcType="LONGVARCHAR" property="img"/>
+        <result column="img" jdbcType="VARCHAR" property="img"/>
     </resultMap>
     <select id="getUserById" parameterType="Integer"
             resultType="User">
@@ -44,7 +44,7 @@
 
 
     <select id="getExchangeList" resultMap="exchangeRM" parameterType="map">
-    SELECT e.id, e.content,e.user_id euid,e.create_time,e.like
+    SELECT e.id, e.content,e.user_id euid,e.create_time,e.like,e.img
   FROM t_exchange e,t_user u
   WHERE
   e.user_id=u.id
@@ -62,7 +62,7 @@
                 ORDER BY reply_time DESC
     </select>
 
-    <resultMap id="exchangeRM" type="Exchange">
+    <resultMap id="exchangeRM" type="Exchange" extends="BaseResultMap">
         <id column="id" property="id"/>
         <result column="euid" property="userId"/>
         <association property="user" select="cn.niit.group5.mapper.QuestionMapper.getUserById"
