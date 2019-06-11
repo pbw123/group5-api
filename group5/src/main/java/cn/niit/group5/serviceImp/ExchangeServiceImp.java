@@ -110,6 +110,7 @@ public class ExchangeServiceImp {
 //            exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
            List<String>list=new ArrayList<>();
            list.add(exchange.getImg());
+           list.add(exchange.getImg());
             exchange.setImgs(list);
             exchange.setTime(StringUtil.getDateString(exchange.getCreateTime()));
             int likeNumber = exchangeMapper.getExchangeLikeNumber(column, exchange.getId());

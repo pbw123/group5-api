@@ -114,4 +114,16 @@ VALUES(#{userName},#{sex},#{headUrl},#{phoneNumber},#{email},#{identity},#{userA
         </if>
         limit #{index},#{pageSize}
     </select>
+
+    <select id="search" parameterType="Map" resultMap="BaseResultMap">
+        select * from t_user
+    <trim prefix="where" prefixOverrides="and">
+        <if test="userAddress!=null and userAddress!=''">
+        user_address like concat('%',#{userAddress},'%')</if>
+        <if test="identity!=null and identity!=''">
+        and identity like concat('%',#{identity},'%')
+        </if>
+    </trim>
+    limit #{index},#{pageSize}
+    </select>
 </mapper>

@@ -2,6 +2,7 @@ package cn.niit.group5.serviceImp;
 
 import cn.niit.group5.entity.*;
 import cn.niit.group5.entity.dto.CollectDTO;
+import cn.niit.group5.entity.dto.PageDTO;
 import cn.niit.group5.entity.dto.UserCode;
 import cn.niit.group5.entity.dto.UserDTO;
 import cn.niit.group5.mapper.CollectionMapper;
@@ -248,9 +249,16 @@ public class UserServiceImp implements UserService {
     }
 
     public ResponseResult getAllUser(Integer currPage, Integer pageSize) {
-        Map<Object, Object> map = PageUtil.pageDemo(currPage, pageSize);
-        List<User> users = userMapper.selectAll(map);
-        for(User user:users)
+//        Map<Object, Object> map = PageUtil.pageDemo(currPage, pageSize);
+        List<User> users = userMapper.getUserList();
+
+//        int total=(int)Math.ceil(size/pageSize);
+//        int total=size%pageSize==0?size/pageSize:size/pageSize+1;
+//        System.out.println("总记录数："+size+"+++++总页数"+total);
+
+        PageDTO page = PageUtil.page(currPage, pageSize, users);
+        List<User> userList = page.getList();
+        for(User user:userList)
         {
             Timestamp regitsterTime = user.getRegitsterTime();
             if (regitsterTime!=null)
@@ -258,7 +266,7 @@ public class UserServiceImp implements UserService {
                 user.setTime(StringUtil.getDateString(regitsterTime));
             }
         }
-        return ResponseResult.success(users);
+        return ResponseResult.succ(userList,page.getSize());
     }
 
     public ResponseResult search(Integer currPage,Integer pageSize,String keyword)
@@ -283,6 +291,7 @@ public class UserServiceImp implements UserService {
                 exchange.setTime(StringUtil.getDateString(createTime));
             List list = new ArrayList<>();
             list.add(exchange.getImg());
+
             exchange.setImgs(list);
             Like like = exchangeMapper.isLikeOrNo(userId, "exchange_id", exchange.getId());
             if (like!=null&&like.getStatus()==0)
@@ -310,5 +319,14 @@ public class UserServiceImp implements UserService {
 
         }
         return ResponseResult.success(collections);
+    }
+
+    public ResponseResult search(String city,String identity,Integer currPage,Integer pageSize)
+    {
+        Map<Object, Object> map = PageUtil.pageDemo(currPage, pageSize);
+        map.put("userAddress",city);
+        map.put("identity",identity);
+        List<User> users = userMapper.search(map);
+        return ResponseResult.success(users);
     }
 }

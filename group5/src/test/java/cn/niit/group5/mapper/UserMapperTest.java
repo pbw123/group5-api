@@ -76,4 +76,14 @@ public class UserMapperTest extends BasicTest {
         users.forEach(user -> System.out.println(user.toString()));
 
     }
+
+    @Test
+    public void searchTest()
+    {
+        Map<Object, Object> map = PageUtil.pageDemo(1,10);
+        map.put("userAddress","南京");
+        map.put("identity","农技推广人员");
+        List<User> users = userMapper.search(map);
+        users.forEach(user -> System.out.println(user.toString()));
+    }
 }

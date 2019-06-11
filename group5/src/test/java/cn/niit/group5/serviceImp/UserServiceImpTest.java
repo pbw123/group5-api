@@ -24,4 +24,11 @@ public class UserServiceImpTest extends BasicTest {
     public void addUserTest()
     {
     }
+
+    @Test
+    public void pageTest()
+    {
+        ResponseResult allUser = userServiceImp.getAllUser(1, 6);
+        System.out.println(allUser.toString());
+    }
 }

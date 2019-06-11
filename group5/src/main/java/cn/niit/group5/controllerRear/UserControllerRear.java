@@ -56,4 +56,12 @@ public class UserControllerRear {
         return userServiceImp.search(currPage, pageSize, keyword);
     }
 
+    @ApiOperation(value = "城市、人员类别搜索")
+    @GetMapping(value = "search")
+    public ResponseResult search(String city, String identity,
+                                 @RequestParam(defaultValue = "1") Integer currPage,
+                                 @RequestParam(defaultValue = "10") Integer pageSize) {
+        return userServiceImp.search(city, identity, currPage, pageSize);
+    }
+
 }

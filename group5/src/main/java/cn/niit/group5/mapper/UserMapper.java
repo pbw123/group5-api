@@ -39,6 +39,10 @@ public interface UserMapper {
 
     @Select("select * from t_user limit #{index},#{pageSize}")
     List<User> selectAll(Map<Object, Object> map);
+    @Select("select * from t_user")
+    List<User> getUserList();
 
     List<User> searchUser(Map<Object,Object>map);
+
+    List<User>search(Map<Object,Object>map);
 }

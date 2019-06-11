@@ -16,6 +16,7 @@ public class ResponseResult {
     private int code;
     private String msg;
     private Object data;
+    private Integer total;
 
     public static ResponseResult error(int code, String msg) {
         ResponseResult responseResult = new ResponseResult();
@@ -36,6 +37,14 @@ public class ResponseResult {
         responseResult.setCode(StatusConst.SUCCESS);
         responseResult.setMsg(MsgConst.SUCCESS);
         responseResult.setData(data);
+        return responseResult;
+    }
+    public static ResponseResult succ(Object data,Integer total) {
+        ResponseResult responseResult = new ResponseResult();
+        responseResult.setCode(StatusConst.SUCCESS);
+        responseResult.setMsg(MsgConst.SUCCESS);
+        responseResult.setData(data);
+        responseResult.setTotal(total);
         return responseResult;
     }
 
