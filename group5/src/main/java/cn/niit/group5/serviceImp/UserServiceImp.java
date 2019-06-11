@@ -1,9 +1,11 @@
 package cn.niit.group5.serviceImp;
 
-import cn.niit.group5.entity.User;
+import cn.niit.group5.entity.*;
 import cn.niit.group5.entity.dto.CollectDTO;
 import cn.niit.group5.entity.dto.UserCode;
 import cn.niit.group5.entity.dto.UserDTO;
+import cn.niit.group5.mapper.CollectionMapper;
+import cn.niit.group5.mapper.ExchangeMapper;
 import cn.niit.group5.mapper.QuestionMapper;
 import cn.niit.group5.mapper.UserMapper;
 import cn.niit.group5.service.UserService;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -258,4 +261,54 @@ public class UserServiceImp implements UserService {
         return ResponseResult.success(users);
     }
 
+    public ResponseResult search(Integer currPage,Integer pageSize,String keyword)
+    {
+        Map<Object, Object> map = PageUtil.pageDemo(currPage, pageSize);
+        map.put("keyword",keyword);
+        List<User> users = userMapper.searchUser(map);
+        return ResponseResult.success(users);
+    }
+    @Autowired
+    private CollectionMapper collectionMapper;
+    @Autowired
+    private ExchangeMapper exchangeMapper;
+    public ResponseResult getCollectExchange(Integer userId)
+    {
+        List<Collection> collections = collectionMapper.getCollectExchangeById(userId);
+        for (Collection collection:collections)
+        {
+            Exchange exchange = collection.getExchange();
+            Timestamp createTime = exchange.getCreateTime();
+            if (createTime!=null)
+                exchange.setTime(StringUtil.getDateString(createTime));
+            List list = new ArrayList<>();
+            list.add(exchange.getImg());
+            exchange.setImgs(list);
+            Like like = exchangeMapper.isLikeOrNo(userId, "exchange_id", exchange.getId());
+            if (like!=null&&like.getStatus()==0)
+                exchange.setIsLike(0);
+            else
+                exchange.setIsLike(1);
+
+            int number = exchangeMapper.getExchangeLikeNumber("exchange_id", exchange.getId());
+            exchange.setLike(number);
+        }
+        return ResponseResult.success(collections);
+    }
+    public ResponseResult getCollectQuestion(Integer userId)
+    {
+        List<Collection> collections = collectionMapper.getCollectQuestionById(userId);
+        for (Collection collection:collections)
+        {
+            Question question = collection.getQuestion();
+            Timestamp createTime = question.getCreateTime();
+            if (createTime!=null)
+            question.setTime(StringUtil.getDateString(createTime));
+          List list=new ArrayList<>();
+          list.add(question.getImg());
+          question.setImgs(list);
+
+        }
+        return ResponseResult.success(collections);
+    }
 }

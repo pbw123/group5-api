@@ -106,4 +106,12 @@ VALUES(#{userName},#{sex},#{headUrl},#{phoneNumber},#{email},#{identity},#{userA
         select * from t_user
     </select>
 
+    <select id="searchUser" resultMap="BaseResultMap" parameterType="map">
+        select u.* from t_user u
+        where is_delete=0
+        <if test="keyword!=null">
+            and concat(u.user_name,u.user_address,u.phone_number) like '%${keyword}%'
+        </if>
+        limit #{index},#{pageSize}
+    </select>
 </mapper>

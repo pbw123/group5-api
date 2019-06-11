@@ -29,11 +29,14 @@
   </insert>
 
   <select id="getCollectQuestionById"  parameterType="Integer"  resultMap="collectionRM">
-    SELECT c.id,c.user_id,c.question_id,q.id qid,q.user_id quid,q.content,q.create_time,q.sort,
-	u.id uid,u.user_name,u.user_address,u.identity FROM t_collection c,t_question q,t_user u
+    SELECT c.id,c.user_id,c.question_id,q.id qid,q.user_id
+    quid,q.content,q.create_time,q.sort,q.img,q.address_id,
+	u.id uid,u.user_name,u.head_url,u.user_address,u.identity
+	 FROM t_collection c,t_question q,t_user u
 	WHERE c.user_id=#{userId}
 	AND q.user_id=u.id
 	AND c.question_id=q.id
+	and c.status=0
   </select>
 
   <resultMap id="collectionRM" type="cn.niit.group5.entity.Collection">
@@ -48,6 +51,8 @@
       <result column="content" property="content"/>
       <result column="create_time" property="createTime"/>
       <result column="sort" property="sort"/>
+      <result column="img" property="img"/>
+      <result column="address_id" property="addressId"/>
       <association property="replyAmount" column="id" select="cn.niit.group5.mapper.QuestionMapper.getQuestionReplyNumber">
       </association>
       <association property="user" javaType="User">
@@ -55,18 +60,21 @@
         <result column="user_name" property="userName"/>
         <result column="user_address" property="userAddress"/>
         <result column="identity" property="identity"/>
+        <result column="head_url" property="headUrl"/>
       </association>
     </association>
 
   </resultMap>
 
   <select id="getCollectExchangeById" resultMap="CollectionRM" parameterType="Integer">
-    SELECT c.id,c.user_id,c.exchange_id,e.id eid,e.user_id euid,e.content,e.create_time,e.like,
-	u.id uid,u.user_name,u.user_address,u.identity
+    SELECT c.id,c.user_id,c.exchange_id,e.id eid,e.user_id
+    euid,e.img,e.content,e.create_time,e.like,
+	u.id uid,u.user_name,u.user_address,u.identity,u.head_url
 	FROM t_collection c,t_exchange e,t_user u
 	WHERE c.user_id=#{userId}
 	AND e.user_id=u.id
 	AND c.exchange_id=e.id
+	and c.status=0
   </select>
   <resultMap id="CollectionRM" type="cn.niit.group5.entity.Collection">
     <id column="id" property="id"/>
@@ -77,7 +85,7 @@
       <result column="euid" property="userId"/>
       <result column="content" property="content"/>
       <result column="create_time" property="createTime"/>
-      <result column="like" property="like"/>
+      <result column="img" property="img"/>
       <association property="replyAmount" column="id" select="cn.niit.group5.mapper.ExchangeMapper.getExchangeReplyNumber">
       </association>
       <association property="user" javaType="User">
@@ -85,6 +93,7 @@
         <result column="user_name" property="userName"/>
         <result column="user_address" property="userAddress"/>
         <result column="identity" property="identity"/>
+        <result column="head_url" property="headUrl"/>
       </association>
     </association>
   </resultMap>

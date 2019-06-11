@@ -105,7 +105,7 @@ public class UserController {
     public ResponseResult updateMyMsg(@RequestParam(required = true) Integer id, String vocation,
                                       String headUrl, String userName, String unitName,
                                       String identity, String educational, String email,
-                                      String sex, String userAddress,MultipartFile file) {
+                                      String sex, String userAddress, MultipartFile file) {
         User user = new User();
         user.setId(id);
         user.setUserAddress(userAddress);
@@ -230,17 +230,15 @@ public class UserController {
     //我的收藏-问答
     @ApiOperation(value = "我的收藏-问答", notes = "根据我的用户id显示出我收藏的问答")
     @GetMapping(value = "/getCollectQuestionById")
-    public ResponseResult getCollectQuestion(int userId) {
-        List<Collection> collectionList = collectionMapper.getCollectQuestionById(userId);
-        return ResponseResult.success(collectionList);
+    public ResponseResult getCollectQuestion(Integer userId) {
+        return userServiceImp.getCollectQuestion(userId);
     }
 
     //我的收藏-交流
     @ApiOperation(value = "我的收藏-交流", notes = "根据我的用户id显示出我收藏的交流")
     @GetMapping(value = "/getCollectExchangeById")
-    public ResponseResult getCollectExchange(int userId) {
-        List<Collection> collectionList = collectionMapper.getCollectExchangeById(userId);
-        return ResponseResult.success(collectionList);
+    public ResponseResult getCollectExchange(Integer userId) {
+        return userServiceImp.getCollectExchange(userId);
     }
 
     //我的收藏-资讯
