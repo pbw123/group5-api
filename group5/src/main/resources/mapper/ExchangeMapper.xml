@@ -43,15 +43,13 @@
     </resultMap>
 
 
-    <select id="getExchangeList" resultMap="exchangeRM" parameterType="map">
+    <select id="getExchangeList" resultMap="exchangeRM">
     SELECT e.id, e.content,e.user_id euid,e.create_time,e.like,e.img
   FROM t_exchange e,t_user u
   WHERE
   e.user_id=u.id
   AND e.is_delete=0
-
      ORDER BY create_time DESC
-     limit #{index},#{pageSize}
   </select>
     <select id="getRepliesByExchangeId" parameterType="Integer"
             resultMap="cn.niit.group5.mapper.ReplyMapper.BaseResultMap">

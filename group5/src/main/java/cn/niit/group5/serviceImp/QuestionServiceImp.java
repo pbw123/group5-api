@@ -1,11 +1,9 @@
 package cn.niit.group5.serviceImp;
 
 import cn.niit.group5.entity.*;
+import cn.niit.group5.entity.dto.PageDTO;
 import cn.niit.group5.mapper.*;
-import cn.niit.group5.util.MsgConst;
-import cn.niit.group5.util.ResponseResult;
-import cn.niit.group5.util.StatusConst;
-import cn.niit.group5.util.StringUtil;
+import cn.niit.group5.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -106,9 +104,11 @@ public class QuestionServiceImp {
         return ResponseResult.success(question);
     }
 
-    public ResponseResult getQuestionList()
+    public ResponseResult getQuestionList(Integer currPage,Integer pageSize)
     {
-        List<Question> questionLists = questionMapper.getQuestionList();
+        List<Question> lists = questionMapper.getQuestionList();
+        PageDTO page = PageUtil.page(currPage, pageSize, lists);
+        List<Question> questionLists = page.getList();
         for (Question question : questionLists) {
             question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
             question.setTime(StringUtil.getDateString(question.getCreateTime()));
@@ -121,6 +121,6 @@ public class QuestionServiceImp {
                 }
             }
         }
-        return ResponseResult.success(questionLists);
+        return ResponseResult.succ(questionLists,page.getSize());
     }
 }

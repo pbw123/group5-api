@@ -2,6 +2,7 @@ package cn.niit.group5.serviceImp;
 
 import cn.niit.group5.entity.*;
 import cn.niit.group5.entity.dto.CollectDTO;
+import cn.niit.group5.entity.dto.PageDTO;
 import cn.niit.group5.mapper.CollectionMapper;
 import cn.niit.group5.mapper.ExchangeMapper;
 import cn.niit.group5.mapper.ImgMapper;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ExchangeServiceImp {
@@ -102,8 +102,9 @@ public class ExchangeServiceImp {
     }
 
     public ResponseResult getAllList(Integer userId,Integer currPage, Integer pageSize) {
-        Map<Object, Object> map = PageUtil.pageDemo(currPage, pageSize);
-        List<Exchange> exchangeList = exchangeMapper.getExchangeList(map);
+        List<Exchange> lists = exchangeMapper.getExchangeList();
+        PageDTO page = PageUtil.page(currPage, pageSize, lists);
+        List<Exchange> exchangeList = page.getList();
         String column = "exchange_id";
         String replyColumn = "reply_id";
         for (Exchange exchange : exchangeList) {
@@ -138,7 +139,7 @@ public class ExchangeServiceImp {
                 }
             }
         }
-        return ResponseResult.success(exchangeList);
+        return ResponseResult.succ(exchangeList,page.getSize());
     }
 
     public ResponseResult checkLike(Integer userId, String column, Integer exchangeId) {

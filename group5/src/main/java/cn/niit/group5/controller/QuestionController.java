@@ -105,8 +105,9 @@ public class QuestionController {
 
     @ApiOperation(value = "所有提问")
     @PostMapping(value = "/getQuestionList")
-    public ResponseResult getQuestionList() {
-        return questionServiceImp.getQuestionList();
+    public ResponseResult getQuestionList(@RequestParam(defaultValue = "1") Integer currPage,
+                                          @RequestParam(defaultValue = "10") Integer pageSize) {
+        return questionServiceImp.getQuestionList(currPage,pageSize);
     }
 
     @ApiOperation(value = "删除‘我的提问'的问题", notes = "需要传入该问题的id")
