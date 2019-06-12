@@ -45,9 +45,9 @@ public class VideoControllerRear {
 
     @ApiOperation(value = "添加视频")
     @PostMapping(value = "addVideo")
-    public Integer addVideo(String title, Integer relationModule, MultipartFile file,
+    public Integer addVideo(String title, Integer relationModule, String icon,
                             String videoUrl) {
-        return videoServiceImp.addVideo(title, relationModule, file, videoUrl);
+        return videoServiceImp.addVideo(title, relationModule, icon, videoUrl);
     }
 
     @ApiOperation(value = "所有视频")

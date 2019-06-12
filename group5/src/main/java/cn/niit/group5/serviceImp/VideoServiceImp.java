@@ -40,17 +40,14 @@ public class VideoServiceImp {
     @Autowired
     private VideoMapper videoMapper;
 
-    public Integer addVideo(String title, Integer relationModule, MultipartFile file,
+    public Integer addVideo(String title, Integer relationModule, String icon,
                             String videoUrl) {
         Video video = new Video();
         video.setVideoUrl(videoUrl);
         video.setCreateTime(new Timestamp(System.currentTimeMillis()));
         video.setRelationModule(relationModule);
         video.setVideoTitle(title);
-        if (file != null) {
-            String img = UploadImg.ossUpload(file);
-            video.setImg(img);
-        }
+            video.setImg(icon);
         int i = videoMapper.addVideo(video);
         if (i == 1)
             return StatusConst.SUCCESS;

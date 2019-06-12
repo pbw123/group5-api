@@ -13,14 +13,12 @@ import cn.niit.group5.util.Client;
 import cn.niit.group5.util.MsgConst;
 import cn.niit.group5.util.ResponseResult;
 import cn.niit.group5.util.StatusConst;
-import com.alibaba.fastjson.JSONArray;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/exchange")
@@ -49,9 +47,8 @@ public class ExchangeController {
     private ImgMapper imgMapper;
     @ApiOperation(value = "发表交流")
     @PostMapping(value = "/add")
-    public ResponseResult addExchange(
-            Integer userId, String content, String imgs) {
-        List<String> imgList = JSONArray.parseArray(imgs, String.class);
+    public ResponseResult addExchange(Integer userId, String content, String[] imgs) {
+//        List<String> imgList = JSONArray.parseArray(imgs, String.class);
         Exchange exchange = new Exchange();
         exchange.setUserId(userId);
         exchange.setContent(content);
@@ -60,7 +57,7 @@ public class ExchangeController {
         if (i == 1) {
             if (imgs!=null)
             {
-                for (String image:imgList)
+                for (String image:imgs)
                 {
                     Img img = new Img();
                     img.setExchangeId(exchange.getId());
@@ -70,6 +67,17 @@ public class ExchangeController {
                 }
             }
         }
+        return ResponseResult.success();
+    }
+
+    @GetMapping(value = "test")
+    public ResponseResult test(String[]imgs)
+    {
+        for (String img:imgs)
+        {
+            System.out.println(img);
+        }
+        System.out.println(imgs.length);
         return ResponseResult.success();
     }
 
@@ -92,6 +100,7 @@ public class ExchangeController {
         replyMapper.insertComment1(reply);
         return ResponseResult.success();
     }
+
 
     @Autowired
     private CollectionServiceImp collectionServiceImp;
@@ -154,5 +163,6 @@ public class ExchangeController {
     public ResponseResult delReplyById(Integer id) {
         return replyServiceImp.delReplyById(id);
     }
+
 
 }

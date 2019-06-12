@@ -27,7 +27,7 @@ public interface QuestionMapper {
     User getUserById(int userId);
 
     //    发布一条提问
-    void insertQuestion(Question question);
+    int insertQuestion(Question question);
 
     //删除我的提问文章
     @Update("UPDATE  t_question SET is_delete=1 WHERE id=#{0}")

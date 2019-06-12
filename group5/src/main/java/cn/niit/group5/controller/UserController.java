@@ -11,7 +11,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -60,9 +59,7 @@ public class UserController {
      */
     @ApiOperation(value = "注册", notes = "填写注册信息")
     @PostMapping(value = "signUp")
-    public ResponseResult signUp(@RequestParam(required = true) String phoneNumber,
-                                 @RequestParam(required = true) String password,
-                                 @RequestParam(required = true) String userName,
+    public ResponseResult signUp(String phoneNumber, String password, String userName,
                                  String identity, String userAddress, String icon) {
 
         User user;
@@ -100,10 +97,12 @@ public class UserController {
 
     @ApiOperation(value = "更新我的资料", notes = "修改我的资料并保存")
     @PostMapping(value = "updateMyMsg")
-    public ResponseResult updateMyMsg(@RequestParam(required = true) Integer id, String vocation,
-                                      String headUrl, String userName, String unitName,
+    public ResponseResult updateMyMsg(Integer id, String vocation,
+                                      String userName, String unitName,
                                       String identity, String educational, String email,
-                                      String sex, String userAddress, MultipartFile file) {
+                                      String sex, String userAddress,String icon) {
+        if (id==null)
+            return ResponseResult.error(StatusConst.ERROR,"id不能为空");
         User user = new User();
         user.setId(id);
         user.setUserAddress(userAddress);
@@ -114,10 +113,7 @@ public class UserController {
         user.setSex(sex);
         user.setEmail(email);
         user.setEducational(educational);
-        if (file != null) {
-            String f = UploadImg.ossUpload(file);
-            user.setHeadUrl(f);
-        }
+            user.setHeadUrl(icon);
         if (userServiceImp.updateMyDocument(user) == StatusConst.SUCCESS) {
             System.out.println("控制层操作成功");
             return ResponseResult.success(user);

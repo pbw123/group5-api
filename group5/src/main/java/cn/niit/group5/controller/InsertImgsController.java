@@ -60,11 +60,14 @@ public class InsertImgsController {
     // 生成URL
     URL url = ossClient.generatePresignedUrl(bucketName, filedir + prefix2, expiration);
     ossClient.shutdown();
-    return ResponseResult.success(url.toString());
+        String str = url.toString();
+        String substring = str.substring(0, str.indexOf("?Expires="));
+        System.out.println(substring);
+        return ResponseResult.success(substring);
 }
 
-    @ApiOperation(value = "存储提问内容中的图片地址",notes="传入提问id和图片地址")
-    @PostMapping(value = "/insertQuestionImg")
+//    @ApiOperation(value = "存储提问内容中的图片地址",notes="传入提问id和图片地址")
+//    @PostMapping(value = "/insertQuestionImg")
     public ResponseResult insertQuestionImgs(
             @RequestParam("questionId") int questionId,
             @RequestParam("imgs") String imgs
@@ -80,8 +83,8 @@ public class InsertImgsController {
         }
         return ResponseResult.success();
     }
-    @ApiOperation(value = "存储交流中的图片地址",notes="传入交流id和图片地址")
-    @PostMapping(value = "/insertExchangeImg")
+//    @ApiOperation(value = "存储交流中的图片地址",notes="传入交流id和图片地址")
+//    @PostMapping(value = "/insertExchangeImg")
     public ResponseResult insertExchangeImgs(
             @RequestParam("exchangeId") int exchangeId,
             @RequestParam("imgs") String imgs

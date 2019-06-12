@@ -20,7 +20,7 @@ public class NewsControllerRear {
 
     @ApiOperation(value = "添加农业科技分类")
     @PostMapping(value = "addTechnoSort")
-    public ResponseResult addTechnoSort(String name, MultipartFile icon) {
+    public ResponseResult addTechnoSort(String name, String icon) {
         return newsServiceImp.addTechnoSort(name, icon);
     }
 
@@ -72,7 +72,7 @@ public class NewsControllerRear {
 
     @ApiOperation(value = "修改农资分类")
     @PostMapping(value = "updateTechnology")
-    public Integer updateTechnology(Integer id, String name, MultipartFile icon) {
+    public Integer updateTechnology(Integer id, String name, String icon) {
         return newsServiceImp.updateTechnoSort(id, name, icon);
     }
 

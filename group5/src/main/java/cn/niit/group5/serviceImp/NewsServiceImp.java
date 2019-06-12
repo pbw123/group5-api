@@ -25,13 +25,8 @@ public class NewsServiceImp {
     @Autowired
     private TechnologySortMapper technologySortMapper;
 
-    public ResponseResult addTechnoSort(String name, MultipartFile icon) {
-        String file;
-        if (icon != null) {
-            file = UploadImg.ossUpload(icon);
-        } else
-            file = "1.png";
-        int index = technologySortMapper.addSortTechno(name, file);
+    public ResponseResult addTechnoSort(String name, String icon) {
+        int index = technologySortMapper.addSortTechno(name, icon);
         if (index == 1)
             return ResponseResult.success();
         else
@@ -91,14 +86,11 @@ public class NewsServiceImp {
             return StatusConst.ERROR;
     }
 
-    public Integer updateTechnoSort(Integer id, String name, MultipartFile icon) {
+    public Integer updateTechnoSort(Integer id, String name, String icon) {
         TechnologySort technologySort = new TechnologySort();
         technologySort.setName(name);
         technologySort.setId(id);
-        if (icon != null) {
-            String file = UploadImg.ossUpload(icon);
-            technologySort.setIcon(file);
-        }
+        technologySort.setIcon(icon);
         int i = newsMapper.updateTechnoSort(technologySort);
         if (i == 1)
             return StatusConst.SUCCESS;

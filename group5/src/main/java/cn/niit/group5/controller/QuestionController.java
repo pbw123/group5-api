@@ -1,5 +1,6 @@
 package cn.niit.group5.controller;
 
+import cn.niit.group5.entity.Img;
 import cn.niit.group5.entity.Question;
 import cn.niit.group5.entity.Reply;
 import cn.niit.group5.mapper.CollectionMapper;
@@ -9,12 +10,14 @@ import cn.niit.group5.mapper.ReplyMapper;
 import cn.niit.group5.serviceImp.CollectionServiceImp;
 import cn.niit.group5.serviceImp.ExchangeServiceImp;
 import cn.niit.group5.serviceImp.QuestionServiceImp;
-import cn.niit.group5.util.*;
+import cn.niit.group5.util.Client;
+import cn.niit.group5.util.MsgConst;
+import cn.niit.group5.util.ResponseResult;
+import cn.niit.group5.util.StatusConst;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 
@@ -37,22 +40,24 @@ public class QuestionController {
      */
     @ApiOperation(value = "发布一条提问")
     @PostMapping(value = "/add")
-    public ResponseResult addQuestion(
-            @RequestParam(required = true) Integer userId,
-            @RequestParam(required = true) String content,
-            String sort, MultipartFile file
-    ) {
+    public ResponseResult addQuestion(Integer userId, String content, String sort, String[] imgs) {
         Question question = new Question();
         question.setUserId(userId);
         question.setContent(content);
         question.setCreateTime(new Timestamp(System.currentTimeMillis()));
         question.setSort(sort);
-
-        if (file != null) {
-            String img = UploadImg.ossUpload(file);
-            question.setImg(img);
-        }
         questionMapper.insertQuestion(question);
+        if (imgs!=null)
+        {
+           for (String image:imgs)
+           {
+               Img img = new Img();
+               img.setImgUrl(image);
+               img.setQuestionId(question.getId());
+               imgMapper.insertQuestionImg(img);
+           }
+
+        }
         return ResponseResult.success();
     }
 
@@ -107,7 +112,7 @@ public class QuestionController {
     @PostMapping(value = "/getQuestionList")
     public ResponseResult getQuestionList(@RequestParam(defaultValue = "1") Integer currPage,
                                           @RequestParam(defaultValue = "10") Integer pageSize) {
-        return questionServiceImp.getQuestionList(currPage,pageSize);
+        return questionServiceImp.getQuestionList(currPage, pageSize);
     }
 
     @ApiOperation(value = "删除‘我的提问'的问题", notes = "需要传入该问题的id")

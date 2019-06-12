@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -63,10 +62,10 @@ public class ExchangeServiceImp {
         } else {
             exchange.setStatus(0);
         }
-//        exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
-        List<String>list=new ArrayList<>();
-        list.add(exchange.getImg());
-        exchange.setImgs(list);
+        exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
+//        List<String>list=new ArrayList<>();
+//        list.add(exchange.getImg());
+//        exchange.setImgs(list);
         exchange.setTime(StringUtil.getDateString(exchange.getCreateTime()));
 
         List<Reply> replies = exchange.getReplies();
@@ -108,11 +107,11 @@ public class ExchangeServiceImp {
         String column = "exchange_id";
         String replyColumn = "reply_id";
         for (Exchange exchange : exchangeList) {
-//            exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
-           List<String>list=new ArrayList<>();
-           list.add(exchange.getImg());
-           list.add(exchange.getImg());
-            exchange.setImgs(list);
+            exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
+//           List<String>list=new ArrayList<>();
+//           list.add(exchange.getImg());
+//           list.add(exchange.getImg());
+//            exchange.setImgs(list);
             exchange.setTime(StringUtil.getDateString(exchange.getCreateTime()));
             int likeNumber = exchangeMapper.getExchangeLikeNumber(column, exchange.getId());
             exchange.setLike(likeNumber);

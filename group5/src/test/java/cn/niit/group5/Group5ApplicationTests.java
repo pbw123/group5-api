@@ -387,7 +387,7 @@ public class Group5ApplicationTests {
         exchange.setCreateTime(new Timestamp(System.currentTimeMillis()));
 //        System.out.println("前"+exchange.getId());
 //        int i = exchangeMapper.insertExchange(exchange);
-        exchangeController.addExchange(userId,content,imgs);
+//        exchangeController.addExchange(userId,content,imgs);
 //        System.out.println("后"+exchange.getId());
     }
 }
