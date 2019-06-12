@@ -14,7 +14,7 @@ public interface ExchangeMapper {
     List<Exchange> getExchangeList();
 
     //    发布一条交流
-    void insertExchange(Exchange exchange);
+    int insertExchange(Exchange exchange);
 
     //    我的交流文章
     List<Exchange> getExchangeListByUserId(Integer userId);
@@ -44,5 +44,12 @@ public interface ExchangeMapper {
     int addLike(String column, @Param("userId") Integer userId, @Param("id") Integer id);
 
     int updateStatus(@Param("status") Integer status, @Param("id") Integer id);
+
+//    据内容和用户查询交流
+    @Select("select * from t_exchange where user_id=#{userId} and create_time=#{createTime}")
+    Exchange getByTime(@Param("userId")Integer userId,@Param("createTime") String createTime);
+
+    @Select("select * from t_exchange where id=#{0}")
+    Exchange getById(Integer id);
 
 }

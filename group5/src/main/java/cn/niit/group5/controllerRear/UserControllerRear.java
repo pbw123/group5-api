@@ -9,7 +9,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping(value = "/rear/user")
@@ -40,10 +39,10 @@ public class UserControllerRear {
     @PostMapping(value = "addUser")
     public ResponseResult addUser(String userName, String sex, String phoneNumber,
                                   String email, String identity, String userAddress,
-                                  MultipartFile file) {
+                                  String icon) {
 
         ResponseResult responseResult = userServiceImp.addUserRear(userName, sex,
-                phoneNumber, email, identity, userAddress, file);
+                phoneNumber, email, identity, userAddress, icon);
         return responseResult;
 
     }

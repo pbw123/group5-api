@@ -1,5 +1,6 @@
 package cn.niit.group5;
 
+import cn.niit.group5.controller.ExchangeController;
 import cn.niit.group5.entity.*;
 import cn.niit.group5.mapper.*;
 import cn.niit.group5.serviceImp.UserServiceImp;
@@ -373,5 +374,20 @@ public class Group5ApplicationTests {
         System.out.println(responseResult.toString());
     }
 
-
+    @Autowired
+    ExchangeController exchangeController;
+    @Test
+    public void addExchange() {
+   Integer userId=1;
+        String content="测试";
+        String imgs="8988";
+        Exchange exchange = new Exchange();
+        exchange.setUserId(userId);
+        exchange.setContent(content);
+        exchange.setCreateTime(new Timestamp(System.currentTimeMillis()));
+//        System.out.println("前"+exchange.getId());
+//        int i = exchangeMapper.insertExchange(exchange);
+        exchangeController.addExchange(userId,content,imgs);
+//        System.out.println("后"+exchange.getId());
+    }
 }

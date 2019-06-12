@@ -63,29 +63,27 @@ public class UserController {
     public ResponseResult signUp(@RequestParam(required = true) String phoneNumber,
                                  @RequestParam(required = true) String password,
                                  @RequestParam(required = true) String userName,
-                                 String identity, String userAddress, MultipartFile file) {
+                                 String identity, String userAddress, String icon) {
 
-        User user = userMapper.getUserByPhoneNumber(phoneNumber);
+        User user;
+        System.out.println("测试+++++++++++++++");
+        user = userMapper.getUserByPhoneNumber(phoneNumber);
         if (user != null) {
             return ResponseResult.error(StatusConst.MOBILE_EXIST, MsgConst.MOBILE_EXIST);
         } else if (!RegexUtil.passRegex(password)) {
             return new ResponseResult(StatusConst.PASSWORD_VALIDATOR,
                     MsgConst.PASSWORD_VALIDATOR);
         } else {
-            User user2 = new User();
-            user2.setPhoneNumber(phoneNumber);
-            user2.setPassword(password);
-            user2.setUserName(userName);
-            user2.setIdentity(identity);
-            user2.setUnitAddress(userAddress);
-            user2.setRegitsterTime(new Timestamp(System.currentTimeMillis()));
-            if (file != null) {
-                String head = UploadImg.ossUpload(file);
-                user2.setHeadUrl(head);
-                System.out.println(head + "====================");
-            }
-            System.out.println(user2.toString());
-            int index = userMapper.signUp(user2);
+            user = new User();
+            user.setPhoneNumber(phoneNumber);
+            user.setPassword(password);
+            user.setUserName(userName);
+            user.setIdentity(identity);
+            user.setUnitAddress(userAddress);
+            user.setRegitsterTime(new Timestamp(System.currentTimeMillis()));
+            user.setHeadUrl(icon);
+            System.out.println(icon);
+            int index = userMapper.signUp(user);
 //            Integer index=1;
             if (index == 1) {
                 return new ResponseResult(StatusConst.SUCCESS, MsgConst.SUCCESS);

@@ -13,7 +13,7 @@ public interface ImgMapper {
     void insertQuestionImg(Img img);
 
     //存储交流内容中的图片
-    void insertExchangeImg(Img img);
+    int insertExchangeImg(Img img);
     //通过提问的id遍历出图片数组
     List<Img> selectImgByQuestionId(int questionId);
 

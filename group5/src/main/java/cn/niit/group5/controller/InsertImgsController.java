@@ -10,10 +10,7 @@ import com.aliyun.oss.OSSClient;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -34,35 +31,36 @@ public class InsertImgsController {
 
     @ApiOperation(value = "图片上传至阿里云OSS，生成图片地址")
     @PostMapping(value = "/img/insetImg")
-        public String ossUpload(@RequestParam("file") MultipartFile sourceFile) {
+        public ResponseResult ossUpload(MultipartFile file) {
     String endpoint = "http://oss-cn-shanghai.aliyuncs.com";
     String accessKeyId = "LTAIelFvJkV74tTC";
     String accessKeySecret = "PumKvfJwNZPO8F2WHfg8lwgjKhKjLL";
     String bucketName = "save-pan";
     String filedir = "img/";
     // 获取文件名
-    String fileName = sourceFile.getOriginalFilename();
+//    String fileName = file.getOriginalFilename();
     // 获取文件后缀
-    String suffix = fileName.substring(fileName.lastIndexOf("."));
+//    String suffix = fileName.substring(fileName.lastIndexOf("."));
     //uuid生成主文件名
     String prefix = UUID.randomUUID().toString();
-    String newFileName = prefix + suffix;
+    String prefix2=prefix+".jpg";
+//    String newFileName = prefix + suffix;
     File tempFile = null;
     try {
         //创建临时文件
-        tempFile = File.createTempFile(prefix, prefix);
+        tempFile = File.createTempFile(prefix2, prefix2);
         // MultipartFile to File
-        sourceFile.transferTo(tempFile);
+        file.transferTo(tempFile);
     } catch (IOException e) {
         e.printStackTrace();
     }
     OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
-    ossClient.putObject(bucketName, filedir + newFileName, tempFile);
+    ossClient.putObject(bucketName, filedir + prefix2, tempFile);
     Date expiration = new Date(new Date().getTime() + 3600l * 1000 * 24 * 365 * 10);
     // 生成URL
-    URL url = ossClient.generatePresignedUrl(bucketName, filedir + newFileName, expiration);
+    URL url = ossClient.generatePresignedUrl(bucketName, filedir + prefix2, expiration);
     ossClient.shutdown();
-    return url.toString();
+    return ResponseResult.success(url.toString());
 }
 
     @ApiOperation(value = "存储提问内容中的图片地址",notes="传入提问id和图片地址")

@@ -2,7 +2,6 @@ package cn.niit.group5.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class SupplyBuy implements Serializable {
     private Integer id;
@@ -24,6 +23,22 @@ public class SupplyBuy implements Serializable {
     private String enterprise;
 
     private Timestamp limitTime;
+
+    public Timestamp getLimitTime() {
+        return limitTime;
+    }
+
+    public void setLimitTime(Timestamp limitTime) {
+        this.limitTime = limitTime;
+    }
+
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
 
     private String sellerName;
 
@@ -151,17 +166,6 @@ private String endTime;
         this.enterprise = enterprise == null ? null : enterprise.trim();
     }
 
-    public Date getLimitTime() {
-        return limitTime;
-    }
-
-    public void setLimitTime(Timestamp limitTime) {
-        this.limitTime = limitTime;
-    }
-
-    public void setCreateTime(Timestamp createTime) {
-        this.createTime = createTime;
-    }
 
     public String getSellerName() {
         return sellerName;
@@ -195,9 +199,6 @@ private String endTime;
         this.isSupplyBuy = isSupplyBuy;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
 
 
     public Integer getIsDelete() {

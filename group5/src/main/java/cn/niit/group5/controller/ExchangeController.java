@@ -1,20 +1,26 @@
 package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.Exchange;
+import cn.niit.group5.entity.Img;
 import cn.niit.group5.entity.Reply;
 import cn.niit.group5.mapper.ExchangeMapper;
+import cn.niit.group5.mapper.ImgMapper;
 import cn.niit.group5.mapper.ReplyMapper;
 import cn.niit.group5.serviceImp.CollectionServiceImp;
 import cn.niit.group5.serviceImp.ExchangeServiceImp;
 import cn.niit.group5.serviceImp.ReplyServiceImp;
-import cn.niit.group5.util.*;
+import cn.niit.group5.util.Client;
+import cn.niit.group5.util.MsgConst;
+import cn.niit.group5.util.ResponseResult;
+import cn.niit.group5.util.StatusConst;
+import com.alibaba.fastjson.JSONArray;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/exchange")
@@ -26,12 +32,12 @@ public class ExchangeController {
     @Autowired
     private ReplyMapper replyMapper;
 
-    @ApiOperation(value = "所有交流列表",notes = "用户id用来判断是否已经点赞")
+    @ApiOperation(value = "所有交流列表", notes = "用户id用来判断是否已经点赞")
     @GetMapping(value = "getExchangeList")
     public ResponseResult getExchangeListByMyId(Integer userId,
                                                 @RequestParam(defaultValue = "1") Integer currPage
             , @RequestParam(defaultValue = "10") Integer pageSize) {
-        return exchangeServiceImp.getAllList(userId,currPage, pageSize);
+        return exchangeServiceImp.getAllList(userId, currPage, pageSize);
     }
 
     /*
@@ -39,22 +45,31 @@ public class ExchangeController {
      * 发布一条交流
      *
      */
+    @Autowired
+    private ImgMapper imgMapper;
     @ApiOperation(value = "发表交流")
     @PostMapping(value = "/add")
     public ResponseResult addExchange(
-            @RequestParam(required = true) Integer userId,
-            @RequestParam(required = true) String content,
-            MultipartFile file
-    ) {
+            Integer userId, String content, String imgs) {
+        List<String> imgList = JSONArray.parseArray(imgs, String.class);
         Exchange exchange = new Exchange();
         exchange.setUserId(userId);
         exchange.setContent(content);
         exchange.setCreateTime(new Timestamp(System.currentTimeMillis()));
-        if (file != null) {
-            String imgUrl = UploadImg.ossUpload(file);
-            exchange.setImg(imgUrl);
+        int i = exchangeMapper.insertExchange(exchange);
+        if (i == 1) {
+            if (imgs!=null)
+            {
+                for (String image:imgList)
+                {
+                    Img img = new Img();
+                    img.setExchangeId(exchange.getId());
+                    img.setImgUrl(image);
+                    imgMapper.insertExchangeImg(img);
+                    System.out.println(image);
+                }
+            }
         }
-        exchangeMapper.insertExchange(exchange);
         return ResponseResult.success();
     }
 
@@ -139,6 +154,5 @@ public class ExchangeController {
     public ResponseResult delReplyById(Integer id) {
         return replyServiceImp.delReplyById(id);
     }
-
 
 }

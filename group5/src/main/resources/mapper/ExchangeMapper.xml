@@ -77,7 +77,8 @@
   AND r.is_delete=0
     </select>
 
-    <insert id="insertExchange" parameterType="cn.niit.group5.entity.Exchange">
+    <insert id="insertExchange" parameterType="cn.niit.group5.entity.Exchange"
+            useGeneratedKeys="true" keyProperty="id">
    INSERT INTO t_exchange(user_id,content,create_time,img) VALUES
    (#{userId},#{content},#{createTime},#{img})
  </insert>

@@ -128,29 +128,29 @@ public class SupplyBuyServiceImp {
         List<SupplyBuy> supplyBuyList = supplyBuyMapper.seekList();
         if (supplyBuyList != null) {
             for (SupplyBuy supplyBuy : supplyBuyList) {
-                String time = StringUtil.getDateString(supplyBuy.getCreateTime());
-                if (time != null)
-                    supplyBuy.setTime(time);
-                String endTime = StringUtil.getDateString(supplyBuy.getLimitTime());
-                if (endTime != null)
-                    supplyBuy.setEndTime(endTime);
+                Timestamp createTime = supplyBuy.getCreateTime();
+                Timestamp limitTime = supplyBuy.getLimitTime();
+                if (createTime != null) {
+                    supplyBuy.setTime(StringUtil.getDateString(createTime));
+                }
+                if (limitTime != null) {
+                    supplyBuy.setEndTime(StringUtil.getDateString(limitTime));
+                }
             }
             return ResponseResult.success(supplyBuyList);
         }
-        else {
             return ResponseResult.success();
-        }
     }
 
     public ResponseResult supplyList() {
         List<SupplyBuy> supplyBuyList = supplyBuyMapper.supplyList();
         for (SupplyBuy supplyBuy : supplyBuyList) {
-            String time = StringUtil.getDateString(supplyBuy.getCreateTime());
-            if (time != null)
-                supplyBuy.setTime(time);
-            String endTime = StringUtil.getDateString(supplyBuy.getLimitTime());
-            if (endTime != null)
-                supplyBuy.setEndTime(endTime);
+            Timestamp createTime = supplyBuy.getCreateTime();
+            Timestamp limitTime = supplyBuy.getLimitTime();
+            if (createTime!=null)
+                supplyBuy.setTime(StringUtil.getDateString(createTime));
+            if (limitTime!=null)
+                supplyBuy.setEndTime(StringUtil.getDateString(limitTime));
         }
         supplyBuyList.forEach(supplyBuy -> System.out.println(supplyBuy));
         return ResponseResult.success(supplyBuyList);

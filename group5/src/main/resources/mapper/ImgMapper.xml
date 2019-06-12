@@ -6,7 +6,7 @@
         <result column="question_id" property="questionId" jdbcType="INTEGER" />
         <result column="exchange_id" property="exchangeId" jdbcType="INTEGER" />
         <result column="news_id" property="newsId" jdbcType="INTEGER" />
-        <result column="img_url" property="imgUrl" jdbcType="LONGVARCHAR" />
+        <result column="img_url" property="imgUrl" jdbcType="LONGVARCHAR"/>
     </resultMap>
  <insert id="insertQuestionImg" parameterType="cn.niit.group5.entity.Img">
    INSERT INTO t_img(question_id,img_url) VALUES (#{questionId},#{imgUrl})
@@ -22,4 +22,7 @@
     <select id="selectImgByExchangeId" parameterType="Integer" resultMap="BaseResultMap">
         SELECT id,exchange_id,img_url FROM t_img WHERE exchange_id=#{exchangeId}
     </select>
+
+
+
 </mapper>
