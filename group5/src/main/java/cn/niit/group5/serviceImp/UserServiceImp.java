@@ -408,13 +408,20 @@ public class UserServiceImp implements UserService {
         System.out.println("测试+++++++++++++++");
         user = userMapper.getUserByPhoneNumber(phoneNumber);
         if (user != null) {
-            if (user.getIsDelete()==0)
-            {
+            if (user.getIsDelete() == 0) {
                 return ResponseResult.error(StatusConst.MOBILE_EXIST, MsgConst.MOBILE_EXIST);
             }
-            if (user.getIsDelete()==1)
-            {
-
+            if (user.getIsDelete() == 1) {
+                user.setPhoneNumber(phoneNumber);
+                user.setPassword(password);
+                user.setUserName(userName);
+                user.setIdentity(identity);
+                user.setUserAddress(userAddress);
+                user.setHeadUrl(icon);
+//                user.setIsDelete(0);
+                updateMyDocument(user);
+                System.out.println("测试");
+                return ResponseResult.success();
             }
         } else if (!RegexUtil.passRegex(password)) {
             return new ResponseResult(StatusConst.PASSWORD_VALIDATOR,
@@ -437,6 +444,7 @@ public class UserServiceImp implements UserService {
                 return new ResponseResult(StatusConst.ERROR, MsgConst.FAIL);
             }
         }
+        return ResponseResult.success();
     }
 
     public ResponseResult getUserMsg(Integer userId) {

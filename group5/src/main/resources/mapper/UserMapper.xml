@@ -26,7 +26,7 @@
     </resultMap>
 
     <select id="getUserByPhoneNumber" resultMap="BaseResultMap" parameterType="String">
-    select  * from t_user where phone_number=#{phoneNumber} and is_delete=0
+    select  * from t_user where phone_number=#{phoneNumber}
   </select>
 
     <sql id="signUpColumns">
