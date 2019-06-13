@@ -2,6 +2,7 @@ package cn.niit.group5.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 public class SupplyBuy implements Serializable {
     private Integer id;
@@ -23,6 +24,16 @@ public class SupplyBuy implements Serializable {
     private String enterprise;
 
     private Timestamp limitTime;
+
+    private List imgs;
+
+    public List getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(List imgs) {
+        this.imgs = imgs;
+    }
 
     public Timestamp getLimitTime() {
         return limitTime;

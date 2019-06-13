@@ -11,6 +11,7 @@
         <result column="sort" property="sort" jdbcType="VARCHAR"/>
         <result column="is_delete" property="isDelete" jdbcType="TINYINT"/>
         <result column="img" property="img"/>
+        <result column="address" property="address"/>
     </resultMap>
     <select id="getUserById" parameterType="Integer"
            resultMap="cn.niit.group5.mapper.UserMapper.BaseResultMap">
@@ -37,8 +38,8 @@
 
     <insert id="insertQuestion" parameterType="cn.niit.group5.entity.Question"
             useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-    INSERT INTO t_question(user_id,content,create_time,sort,img) VALUES
-    (#{userId},#{content},#{createTime},#{sort},#{img})
+    INSERT INTO t_question(user_id,content,create_time,sort,address,img) VALUES
+    (#{userId},#{content},#{createTime},#{sort},#{address},#{img})
   </insert>
 
 
@@ -50,7 +51,7 @@
         ORDER BY create_time DESC
     </select>
   <select id="getQuestionDetail" parameterType="Integer" resultMap="questionRM">
-    SELECT q.id ,q.content,q.create_time,q.user_id,q.sort
+    SELECT q.id ,q.content,q.create_time,q.user_id,q.sort,q.address
  FROM t_question q
   WHERE q.id=#{0}
   </select>

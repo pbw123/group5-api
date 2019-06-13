@@ -31,6 +31,16 @@ public class Question implements Serializable {
 
     private Integer isAtten;
 
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public Integer getIsAtten() {
         return isAtten;
     }

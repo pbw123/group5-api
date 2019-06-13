@@ -40,10 +40,12 @@ public class QuestionController {
      */
     @ApiOperation(value = "发布一条提问")
     @PostMapping(value = "/add")
-    public ResponseResult addQuestion(Integer userId, String content, String sort, String[] imgs) {
+    public ResponseResult addQuestion(Integer userId, String content, String sort,
+                                      String address, String[] imgs) {
         Question question = new Question();
         question.setUserId(userId);
         question.setContent(content);
+        question.setAddress(address);
         question.setCreateTime(new Timestamp(System.currentTimeMillis()));
         question.setSort(sort);
         questionMapper.insertQuestion(question);

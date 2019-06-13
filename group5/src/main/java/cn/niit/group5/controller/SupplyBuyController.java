@@ -1,6 +1,5 @@
 package cn.niit.group5.controller;
 
-import cn.niit.group5.mapper.SupplyBuyMapper;
 import cn.niit.group5.serviceImp.SupplyBuyServiceImp;
 import cn.niit.group5.util.Client;
 import cn.niit.group5.util.ResponseResult;
@@ -15,52 +14,46 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/supply")
 public class SupplyBuyController {
 
-    @Autowired
-    private SupplyBuyMapper supplyBuyMapper;
-
-    @ApiOperation(value = "供应列表", notes = "暂时无法上传和显示图片")
+    @ApiOperation(value = "供应列表", notes = "")
     @GetMapping(value = "supplyList")
-    public ResponseResult supplyList() {
-        return supplyBuyServiceImp.supplyList();
+    public ResponseResult supplyList(Integer currPage,Integer pageSize) {
+        return supplyBuyServiceImp.supplyList(currPage,pageSize);
     }
 
-    @ApiOperation(value = "求购列表", notes = "暂时无法上传和显示图片")
+    @ApiOperation(value = "求购列表", notes = "")
     @GetMapping(value = "seekList")
-    public ResponseResult seekList() {
-        return supplyBuyServiceImp.buyList();
+    public ResponseResult seekList(Integer currPage,Integer pageSize) {
+        return supplyBuyServiceImp.buyList(currPage,pageSize);
     }
 
     @ApiOperation(value = "发布求购")
     @PostMapping(value = "/insertSeek")
-    public ResponseResult insertSeek(
-            @RequestParam(required = true) int userId,
-            String sort, String title, String content, String unit, int amount, int price,
-            String sellerName, String sellerPhone) {
+    public ResponseResult insertSeek(Integer userId, String sort, String title, String content, String unit, Integer amount, Integer price,
+            String sellerName, String sellerPhone,String[] imgs) {
         return supplyBuyServiceImp.addSeek(userId, sort, title, content, unit, amount, price,
                 sellerName,
-                sellerPhone);
+                sellerPhone,imgs);
     }
 
     @ApiOperation(value = "发布供应")
     @PostMapping(value = "/insertSupply")
-    public int insertSupply(
-            @RequestParam(required = true) int userId,
-            String sort, String title, String content, String unit, int amount, int price,
-            String enterprise, String sellerName, String sellerPhone) {
+    public int insertSupply(Integer userId,
+            String sort, String title, String content, String unit, Integer amount, Integer price,
+            String enterprise, String sellerName, String sellerPhone,String[]imgs) {
         return supplyBuyServiceImp.addSupply(userId, sort, title, content, unit, amount, price,
                 enterprise, sellerName,
-                sellerPhone);
+                sellerPhone,imgs);
     }
 
     @ApiOperation(value = "供应详情")
     @GetMapping(value = "/SupplyDetail")
-    public ResponseResult getSupplyDetail(int id) {
+    public ResponseResult getSupplyDetail(Integer id) {
         return supplyBuyServiceImp.getDetail(id);
     }
 
     @ApiOperation(value = "求购详情")
     @GetMapping(value = "/SeekDetail")
-    public ResponseResult getSeekDetail(int id) {
+    public ResponseResult getSeekDetail(Integer id) {
         return supplyBuyServiceImp.seekDetail(id);
     }
 

@@ -1,11 +1,11 @@
 package cn.niit.group5.serviceImp;
 
+import cn.niit.group5.entity.Img;
 import cn.niit.group5.entity.SupplyBuy;
+import cn.niit.group5.entity.dto.PageDTO;
+import cn.niit.group5.mapper.ImgMapper;
 import cn.niit.group5.mapper.SupplyBuyMapper;
-import cn.niit.group5.util.MsgConst;
-import cn.niit.group5.util.ResponseResult;
-import cn.niit.group5.util.StatusConst;
-import cn.niit.group5.util.StringUtil;
+import cn.niit.group5.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +35,12 @@ public class SupplyBuyServiceImp {
     }
 
     public ResponseResult getDetail(Integer id) {
+        if (id == null) {
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.ID_NULL);
+        }
+
         SupplyBuy supplyDetail = supplyBuyMapper.getSupplyDetail(id);
+
         if (supplyDetail != null) {
             String time = StringUtil.getDateString(supplyDetail.getCreateTime());
             if (time != null)
@@ -45,11 +50,17 @@ public class SupplyBuyServiceImp {
                 supplyDetail.setEndTime(endTime);
             return ResponseResult.success(supplyDetail);
         } else
-            return ResponseResult.success();
+            return ResponseResult.error(StatusConst.ERROR,"返回空");
     }
 
     public ResponseResult seekDetail(Integer id) {
+        if (id == null) {
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.ID_NULL);
+        }
         SupplyBuy supplyBuy = supplyBuyMapper.getSeekDetail(id);
+        if (supplyBuy == null) {
+            return ResponseResult.error(StatusConst.ERROR, "返回空");
+        }
         String time = StringUtil.getDateString(supplyBuy.getCreateTime());
         String endTime = StringUtil.getDateString(supplyBuy.getLimitTime());
         if (time != null) {
@@ -58,13 +69,17 @@ public class SupplyBuyServiceImp {
         if (endTime != null) {
             supplyBuy.setEndTime(endTime);
         }
+        supplyBuy.setImgs(imgMapper.getBuyImgs(id));
         return ResponseResult.success(supplyBuy);
     }
 
-    public int addSupply(int userId,
-                        String sort, String title, String content, String unit, int amount,
-                        int price,
-                        String enterprise, String sellerName, String sellerPhone) {
+    public int addSupply(Integer userId,
+                         String sort, String title, String content, String unit, Integer amount,
+                         Integer price,
+                         String enterprise, String sellerName, String sellerPhone, String[] imgs) {
+        if (userId == null) {
+            return StatusConst.ERROR;
+        }
         SupplyBuy supplyBuy = new SupplyBuy();
         supplyBuy.setUserId(userId);
         supplyBuy.setSort(sort);
@@ -79,10 +94,16 @@ public class SupplyBuyServiceImp {
         supplyBuy.setIsSupplyBuy(0);
         supplyBuy.setCreateTime(new Timestamp(System.currentTimeMillis()));
         int i = supplyBuyMapper.insertSupply(supplyBuy);
-        if (i == 1)
+        if (i == 1) {
+            for (String image : imgs) {
+                Img img = new Img();
+                img.setBuyId(supplyBuy.getId());
+                img.setImgUrl(image);
+                imgMapper.insertBuyImg(img);
+            }
             return StatusConst.SUCCESS;
-        else
-            return StatusConst.ERROR;
+        }
+        return StatusConst.ERROR;
     }
 
     public ResponseResult getBySort(String sort) {
@@ -91,20 +112,21 @@ public class SupplyBuyServiceImp {
             return ResponseResult.success();
         else
             for (SupplyBuy supplyBuy : supplyBuyList) {
-                String time = StringUtil.getDateString(supplyBuy.getCreateTime());
-                if (time != null)
-                    supplyBuy.setTime(time);
-                String endTime = StringUtil.getDateString(supplyBuy.getLimitTime());
-                if (endTime != null)
-                    supplyBuy.setEndTime(endTime);
+
+                if (supplyBuy.getCreateTime()!= null)
+                    supplyBuy.setTime(StringUtil.getDateString(supplyBuy.getCreateTime()));
+                if (supplyBuy.getLimitTime()!= null)
+                    supplyBuy.setEndTime(StringUtil.getDateString(supplyBuy.getLimitTime()));
+                supplyBuy.setImgs(imgMapper.getBuyImgs(supplyBuy.getId()));
             }
         return ResponseResult.success(supplyBuyList);
     }
 
-    public ResponseResult addSeek(int userId,
+    public ResponseResult addSeek(Integer userId,
                                   String sort, String title, String content, String unit,
-                                  int amount, int price,
-                                  String sellerName, String sellerPhone) {
+                                  Integer amount, Integer price, String sellerName,
+                                  String sellerPhone,
+                                  String[] imgs) {
         SupplyBuy supplyBuy = new SupplyBuy();
         supplyBuy.setUserId(userId);
         supplyBuy.setSort(sort);
@@ -118,41 +140,71 @@ public class SupplyBuyServiceImp {
         supplyBuy.setIsSupplyBuy(1);
         supplyBuy.setCreateTime(new Timestamp(System.currentTimeMillis()));
         int i = supplyBuyMapper.insertSeek(supplyBuy);
-        if (i == 1)
-            return ResponseResult.success();
-        else
-            return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
-    }
-
-    public ResponseResult buyList() {
-        List<SupplyBuy> supplyBuyList = supplyBuyMapper.seekList();
-        if (supplyBuyList != null) {
-            for (SupplyBuy supplyBuy : supplyBuyList) {
-                Timestamp createTime = supplyBuy.getCreateTime();
-                Timestamp limitTime = supplyBuy.getLimitTime();
-                if (createTime != null) {
-                    supplyBuy.setTime(StringUtil.getDateString(createTime));
-                }
-                if (limitTime != null) {
-                    supplyBuy.setEndTime(StringUtil.getDateString(limitTime));
+        if (i == 1) {
+            if (imgs != null) {
+                for (String image : imgs) {
+                    Img img = new Img();
+                    img.setBuyId(supplyBuy.getId());
+                    img.setImgUrl(image);
+                    imgMapper.insertBuyImg(img);
                 }
             }
-            return ResponseResult.success(supplyBuyList);
-        }
             return ResponseResult.success();
+        }
+        return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
     }
 
-    public ResponseResult supplyList() {
-        List<SupplyBuy> supplyBuyList = supplyBuyMapper.supplyList();
-        for (SupplyBuy supplyBuy : supplyBuyList) {
+    public ResponseResult buyList(Integer currPage, Integer pageSize) {
+        Integer curr = StatusConst.CURRENTPAGE;
+        Integer size = StatusConst.PAGESIZE;
+        if (currPage != null) {
+            curr = currPage;
+        }
+        if (pageSize != null) {
+            size = pageSize;
+        }
+        List<SupplyBuy> buyList = supplyBuyMapper.seekList();
+        PageDTO page = PageUtil.page(curr, size, buyList);
+        List<SupplyBuy> pageList = page.getList();
+        for (SupplyBuy supplyBuy : pageList) {
             Timestamp createTime = supplyBuy.getCreateTime();
             Timestamp limitTime = supplyBuy.getLimitTime();
-            if (createTime!=null)
+            if (createTime != null) {
                 supplyBuy.setTime(StringUtil.getDateString(createTime));
-            if (limitTime!=null)
+            }
+            if (limitTime != null) {
                 supplyBuy.setEndTime(StringUtil.getDateString(limitTime));
+            }
+            supplyBuy.setImgs(imgMapper.getBuyImgs(supplyBuy.getId()));
         }
-        supplyBuyList.forEach(supplyBuy -> System.out.println(supplyBuy));
-        return ResponseResult.success(supplyBuyList);
+        return ResponseResult.succ(pageList, page.getSize());
+    }
+
+    @Autowired
+    private ImgMapper imgMapper;
+
+    public ResponseResult supplyList(Integer currPage, Integer pageSize) {
+        Integer curr = StatusConst.CURRENTPAGE;
+        Integer size = StatusConst.PAGESIZE;
+        if (currPage != null) {
+            curr = currPage;
+        }
+        if (pageSize != null) {
+            size = pageSize;
+        }
+        List<SupplyBuy> supplyList = supplyBuyMapper.supplyList();
+        PageDTO page = PageUtil.page(curr, size, supplyList);
+        List<SupplyBuy> pageList = page.getList();
+        for (SupplyBuy supplyBuy : pageList) {
+            Timestamp createTime = supplyBuy.getCreateTime();
+            Timestamp limitTime = supplyBuy.getLimitTime();
+            if (createTime != null)
+                supplyBuy.setTime(StringUtil.getDateString(createTime));
+            if (limitTime != null)
+                supplyBuy.setEndTime(StringUtil.getDateString(limitTime));
+
+            supplyBuy.setImgs(imgMapper.getBuyImgs(supplyBuy.getId()));
+        }
+        return ResponseResult.succ(supplyList, page.getSize());
     }
 }

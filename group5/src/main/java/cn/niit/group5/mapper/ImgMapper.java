@@ -23,4 +23,13 @@ public interface ImgMapper {
     //遍历图片
  @Select("SELECT * FROM t_img")
   List<Img> getImg();
+
+//
+ @Select("select * from t_img where news_id=#{0}")
+ List<Img>getNewsImgsList(Integer newsId);
+
+ @Select("select * from t_img where buy_id=#{0}")
+ List<Img>getBuyImgs(Integer id);
+
+ int insertBuyImg(Img img);
 }

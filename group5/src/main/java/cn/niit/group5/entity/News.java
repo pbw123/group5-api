@@ -2,6 +2,7 @@ package cn.niit.group5.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class News implements Serializable {
     private Integer id;
@@ -28,7 +29,7 @@ public class News implements Serializable {
 
     private Integer state;
 
-   private Integer status;
+    private Integer status;
 
     private Integer reviewStatus;
 
@@ -43,7 +44,17 @@ public class News implements Serializable {
     private Integer currPage;
 
     private Integer pageSize;
-private String time;
+    private String time;
+
+    private List imgs;
+
+    public List getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(List imgs) {
+        this.imgs = imgs;
+    }
 
     public String getTime() {
         return time;

@@ -13,6 +13,16 @@ public class Img implements Serializable {
 
     private String imgUrl;
 
+    private Integer buyId;
+
+    public Integer getBuyId() {
+        return buyId;
+    }
+
+    public void setBuyId(Integer buyId) {
+        this.buyId = buyId;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {

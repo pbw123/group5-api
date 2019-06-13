@@ -6,13 +6,15 @@ import cn.niit.group5.entity.dto.UserDTO;
 import cn.niit.group5.mapper.*;
 import cn.niit.group5.serviceImp.QuestionServiceImp;
 import cn.niit.group5.serviceImp.UserServiceImp;
-import cn.niit.group5.util.*;
+import cn.niit.group5.util.Client;
+import cn.niit.group5.util.MsgConst;
+import cn.niit.group5.util.ResponseResult;
+import cn.niit.group5.util.StatusConst;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -61,33 +63,7 @@ public class UserController {
     @PostMapping(value = "signUp")
     public ResponseResult signUp(String phoneNumber, String password, String userName,
                                  String identity, String userAddress, String icon) {
-
-        User user;
-        System.out.println("测试+++++++++++++++");
-        user = userMapper.getUserByPhoneNumber(phoneNumber);
-        if (user != null) {
-            return ResponseResult.error(StatusConst.MOBILE_EXIST, MsgConst.MOBILE_EXIST);
-        } else if (!RegexUtil.passRegex(password)) {
-            return new ResponseResult(StatusConst.PASSWORD_VALIDATOR,
-                    MsgConst.PASSWORD_VALIDATOR);
-        } else {
-            user = new User();
-            user.setPhoneNumber(phoneNumber);
-            user.setPassword(password);
-            user.setUserName(userName);
-            user.setIdentity(identity);
-            user.setUnitAddress(userAddress);
-            user.setRegitsterTime(new Timestamp(System.currentTimeMillis()));
-            user.setHeadUrl(icon);
-            System.out.println(icon);
-            int index = userMapper.signUp(user);
-//            Integer index=1;
-            if (index == 1) {
-                return new ResponseResult(StatusConst.SUCCESS, MsgConst.SUCCESS);
-            } else {
-                return new ResponseResult(StatusConst.ERROR, MsgConst.FAIL);
-            }
-        }
+        return userServiceImp.addUser(phoneNumber, password, userName, identity, userAddress, icon);
     }
 
     /**
@@ -100,53 +76,16 @@ public class UserController {
     public ResponseResult updateMyMsg(Integer id, String vocation,
                                       String userName, String unitName,
                                       String identity, String educational, String email,
-                                      String sex, String userAddress,String icon) {
-        if (id==null)
-            return ResponseResult.error(StatusConst.ERROR,"id不能为空");
-        User user = new User();
-        user.setId(id);
-        user.setUserAddress(userAddress);
-        user.setVocation(vocation);
-        user.setUserName(userName);
-        user.setIdentity(identity);
-        user.setUnitName(unitName);
-        user.setSex(sex);
-        user.setEmail(email);
-        user.setEducational(educational);
-            user.setHeadUrl(icon);
-        if (userServiceImp.updateMyDocument(user) == StatusConst.SUCCESS) {
-            System.out.println("控制层操作成功");
-            return ResponseResult.success(user);
-        } else {
-            System.out.println("控制层操作失败");
-            return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
-        }
+                                      String sex, String userAddress, String icon) {
+        return userServiceImp.changeMsg(id, vocation, userName, unitName, identity, educational,
+                email, sex, userAddress, icon);
     }
-
-    @Autowired
-    private QuestionMapper questionMapper;
-    //    我的提问
-//    @ApiOperation(value = "我的提问",notes = "我的提问一个请求三个页面的数据")
-//    @GetMapping(value = "getMyQuestion/{id}")
-//    public List<Question> getMyQuestion(@PathVariable int id)
-//    {
-//        return  questionMapper.selectAllByUserId(id);
-//    }
-
-    @Autowired
-    private ImgMapper imgMapper;
 
     //我的提问列表
     @ApiOperation(value = "我的提问列表", notes = "根据我的用户id我提出过的所有问题")
     @GetMapping(value = "getQuestionList")
-    public ResponseResult getQuestionList(int userId) {
-        List<Question> lists = questionMapper.getQuestionListByUserId(userId);
-        for (Question question : lists) {
-            question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
-            String time = StringUtil.getDateString(question.getCreateTime());
-            question.setTime(time);
-        }
-        return ResponseResult.success(lists);
+    public ResponseResult getQuestionList(Integer userId, Integer currPage, Integer pageSize) {
+        return userServiceImp.getMyQuestionList(userId, currPage, pageSize);
     }
 
     //    问题详情
@@ -165,30 +104,14 @@ public class UserController {
     @ApiOperation(value = "我的详细资料/其他用户的资料", notes = "传入用户id查看用户详细资料")
     @GetMapping(value = "getUserMsgById")
     public ResponseResult getUserMsgById(Integer userId) {
-        User user = questionMapper.getUserById(userId);
-        if (user != null) {
-            Timestamp regitsterTime = user.getRegitsterTime();
-            String time = StringUtil.getDateString(regitsterTime);
-            user.setTime(time);
-            return ResponseResult.success(user);
-        } else
-            return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
+        return userServiceImp.getUserMsg(userId);
     }
-
-    @Autowired
-    private ReplyMapper replyMapper;
 
     //    我的回答列表
     @ApiOperation(value = "我的回答", notes = "我的所有回复列表")
     @GetMapping(value = "getMyReplyById")
-    public ResponseResult getMyReplyById(int userId) {
-        List<Reply> replies = replyMapper.getMyReplyById(userId);
-        for (Reply reply : replies) {
-            String time = StringUtil.getDateString(reply.getReplyTime());
-            if (time != null)
-                reply.setTime(time);
-        }
-        return ResponseResult.success(replies);
+    public ResponseResult getMyReplyById(Integer userId, Integer currPage, Integer pageSize) {
+        return userServiceImp.myReplies(userId, currPage, pageSize);
     }
 
     @Autowired
@@ -213,13 +136,9 @@ public class UserController {
     //我的关注列表
     @ApiOperation(value = "我的关注列表", notes = "根据我的用户id显示出我关注的问题")
     @GetMapping(value = "/getAttentionByUserId")
-    public ResponseResult getAttentionList(int userId) {
-        List<Attention> lists = attentionMapper.getAttentionByUserId(userId);
-        return ResponseResult.success(lists);
+    public ResponseResult getAttentionList(Integer userId, Integer currPage, Integer pageSize) {
+        return userServiceImp.myAttenList(userId, currPage, pageSize);
     }
-
-    @Autowired
-    private CollectionMapper collectionMapper;
 
     //我的收藏-问答
     @ApiOperation(value = "我的收藏-问答", notes = "根据我的用户id显示出我收藏的问答")
@@ -231,43 +150,36 @@ public class UserController {
     //我的收藏-交流
     @ApiOperation(value = "我的收藏-交流", notes = "根据我的用户id显示出我收藏的交流")
     @GetMapping(value = "/getCollectExchangeById")
-    public ResponseResult getCollectExchange(Integer userId) {
-        return userServiceImp.getCollectExchange(userId);
+    public ResponseResult getCollectExchange(Integer userId, Integer currPage, Integer pageSize) {
+        return userServiceImp.getCollectExchange(userId, currPage, pageSize);
     }
 
     //我的收藏-资讯
     @ApiOperation(value = "我的收藏-资讯", notes = "根据我的用户id显示出我收藏的资讯")
     @GetMapping(value = "/getCollectNewsById")
-    public ResponseResult getCollectNews(int userId) {
-        List<Collection> collectionList = collectionMapper.getCollectNewsById(userId);
-        return ResponseResult.success(collectionList);
+    public ResponseResult getCollectNews(Integer userId, Integer currPage, Integer pageSize) {
+        return userServiceImp.myCollectNews(userId, currPage, pageSize);
     }
 
     //我的收藏-视频
     @ApiOperation(value = "我的收藏-视频", notes = "根据我的用户id显示出我收藏的视频")
     @GetMapping(value = "/getCollectVideoById")
-    public ResponseResult getCollectVideo(int userId) {
-        List<Collection> collectionList = collectionMapper.getCollectVideoById(userId);
-        return ResponseResult.success(collectionList);
+    public ResponseResult getCollectVideo(Integer userId, Integer currPage, Integer pageSize) {
+        return userServiceImp.myCollectVedio(userId, currPage, pageSize);
     }
-
-    @Autowired
-    private SupplyBuyMapper supplyBuyMapper;
 
     //我的供应
     @ApiOperation(value = "我的供应", notes = "根据我的用户id显示出我的供应列表")
     @GetMapping(value = "/getSupplyById")
-    public ResponseResult getSupply(int userId) {
-        List<SupplyBuy> supplyBuyList = supplyBuyMapper.getSupplyById(userId);
-        return ResponseResult.success(supplyBuyList);
+    public ResponseResult getSupply(Integer userId, Integer currPage, Integer pageSize) {
+        return userServiceImp.mySupply(userId, currPage, pageSize);
     }
 
     //我的求购
     @ApiOperation(value = "我的求购", notes = "根据我的用户id显示出我的求购列表")
     @GetMapping(value = "/getSeekById")
-    public ResponseResult getSeek(int userId) {
-        List<SupplyBuy> supplyBuyList = supplyBuyMapper.getSeekById(userId);
-        return ResponseResult.success(supplyBuyList);
+    public ResponseResult getSeek(Integer userId, Integer currPage, Integer pageSize) {
+        return userServiceImp.myBuy(userId, currPage, pageSize);
     }
 
     @Autowired

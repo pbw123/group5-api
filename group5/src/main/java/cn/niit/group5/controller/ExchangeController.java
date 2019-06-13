@@ -47,11 +47,12 @@ public class ExchangeController {
     private ImgMapper imgMapper;
     @ApiOperation(value = "发表交流")
     @PostMapping(value = "/add")
-    public ResponseResult addExchange(Integer userId, String content, String[] imgs) {
+    public ResponseResult addExchange(Integer userId, String content,String address,String[] imgs) {
 //        List<String> imgList = JSONArray.parseArray(imgs, String.class);
         Exchange exchange = new Exchange();
         exchange.setUserId(userId);
         exchange.setContent(content);
+        exchange.setAddress(address);
         exchange.setCreateTime(new Timestamp(System.currentTimeMillis()));
         int i = exchangeMapper.insertExchange(exchange);
         if (i == 1) {
@@ -70,9 +71,10 @@ public class ExchangeController {
         return ResponseResult.success();
     }
 
-    @GetMapping(value = "test")
-    public ResponseResult test(String[]imgs)
+    @PostMapping(value = "test")
+    public ResponseResult test(String[] imgs)
     {
+//                List<String> imgList = JSONArray.parseArray(imgs, String.class);
         for (String img:imgs)
         {
             System.out.println(img);

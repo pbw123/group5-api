@@ -23,7 +23,7 @@ public class UserControllerTest extends BasicTest {
     @Test
     public void myRepliesTest()
     {
-        ResponseResult responseResult = userController.getMyReplyById(1);
-        System.out.println(responseResult.toString());
+//        ResponseResult responseResult = userController.getMyReplyById(1);
+//        System.out.println(responseResult.toString());
     }
 }

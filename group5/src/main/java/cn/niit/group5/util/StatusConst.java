@@ -16,6 +16,9 @@ public class StatusConst {
     public static final int PASSWORD_NULL = 11;
     public static final int PASSWORD_VALIDATOR =12;
     public static final int ERROR =13;
+    public static final int CURRENTPAGE =1;
+    public static final int PAGESIZE =15;
+
 
 
 }

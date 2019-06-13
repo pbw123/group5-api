@@ -34,6 +34,8 @@
       <result column="content" property="content"/>
       <result column="create_time" property="createTime"/>
       <result column="sort" property="sort"/>
+      <association property="replyAmount"
+                   select="cn.niit.group5.mapper.QuestionMapper.replyAmount"></association>
     </association>
 
   </resultMap>

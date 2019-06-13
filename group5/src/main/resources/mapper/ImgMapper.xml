@@ -11,7 +11,8 @@
  <insert id="insertQuestionImg" parameterType="cn.niit.group5.entity.Img">
    INSERT INTO t_img(question_id,img_url) VALUES (#{questionId},#{imgUrl})
  </insert>
-    <insert id="insertExchangeImg" parameterType="cn.niit.group5.entity.Img">
+    <insert id="insertExchangeImg" parameterType="cn.niit.group5.entity.Img"
+            useGeneratedKeys="true" keyProperty="id">
    INSERT INTO t_img(exchange_id,img_url) VALUES (#{exchangeId},#{imgUrl})
  </insert>
 
@@ -23,6 +24,8 @@
         SELECT id,exchange_id,img_url FROM t_img WHERE exchange_id=#{exchangeId}
     </select>
 
-
+<insert id="insertBuyImg" keyProperty="id" useGeneratedKeys="true" parameterType="Img">
+       INSERT INTO t_img(buy_id,img_url) VALUES (#{buyId},#{imgUrl})
+</insert>
 
 </mapper>

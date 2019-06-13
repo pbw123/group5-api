@@ -9,7 +9,6 @@ import cn.niit.group5.mapper.IndustrySystemMapper;
 import cn.niit.group5.serviceImp.IndustryServerImp;
 import cn.niit.group5.util.Client;
 import cn.niit.group5.util.ResponseResult;
-import cn.niit.group5.util.StatusConst;
 import cn.niit.group5.util.StringUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -76,11 +75,7 @@ public class ExpertController {
 
     @ApiOperation(value = "获取农业专家", notes = "传入分类的id和等级的id,等级客户端指定，1是省级，2是地方级")
     @GetMapping(value = "getAgricultureExpert")
-    public ResponseResult getAgricultureExpert(@RequestParam(required = true) Integer sortId,
-                                               @RequestParam(required = true) Integer gradeId) {
-        if (sortId == null && gradeId == null) {
-            return ResponseResult.error(StatusConst.ERROR, "哈哈，参数没传过来，看看哪里没写对~-~");
-        }
+    public ResponseResult getAgricultureExpert(Integer sortId,Integer gradeId) {
         List<Expert> experts = expertMapper.getAgricultureExpert(sortId, gradeId);
         return ResponseResult.success(experts);
     }

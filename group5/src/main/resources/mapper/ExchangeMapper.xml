@@ -11,6 +11,7 @@
         <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
         <result column="img" jdbcType="VARCHAR" property="img"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
     </resultMap>
     <select id="getUserById" parameterType="Integer"
             resultType="User">
@@ -44,7 +45,7 @@
 
 
     <select id="getExchangeList" resultMap="exchangeRM">
-    SELECT e.id, e.content,e.user_id euid,e.create_time,e.like,e.img
+    SELECT e.id, e.content,e.user_id euid,e.create_time,e.like,e.img,e.address
   FROM t_exchange e,t_user u
   WHERE
   e.user_id=u.id

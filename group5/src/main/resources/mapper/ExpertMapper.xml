@@ -17,7 +17,7 @@
         <result column="score" property="score" jdbcType="INTEGER"/>
         <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
         <result column="state" property="state" jdbcType="INTEGER"/>
-        <result column="grade" jdbcType="VARCHAR" property="grade"/>
+<!--        <result column="grade" jdbcType="VARCHAR" property="grade"/>-->
         <result column="sortName" jdbcType="VARCHAR" property="sortName"/>
     </resultMap>
     <select id="getExpertDetail" parameterType="Integer" resultMap="expertRM">
@@ -41,12 +41,12 @@
   </select>
 
     <resultMap id="agricultureRM" type="Expert" extends="BaseResultMap">
-        <result column="grade" property="grade"/>
+        <result column="gradeName" property="grade"/>
         <result column="sort" property="sort"/>
     </resultMap>
 
     <select id="getAgricultureExpert" parameterType="Integer" resultMap="agricultureRM">
-        SELECT e.*,g.grade grade,t.name sort
+        SELECT e.*,g.grade gradeName,t.name sort
         FROM t_expert e,t_expert_grade eg,t_grade g,t_technology_sort t
         WHERE eg.expert_id=e.id
         AND eg.grade_id=g.id
