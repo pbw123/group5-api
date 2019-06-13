@@ -14,7 +14,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -277,15 +276,8 @@ public class UserServiceImp implements UserService {
             return ResponseResult.error(StatusConst.ERROR, "id不能为空");
         }
         List<Collection> collections = collectionMapper.getCollectExchangeById(userId);
-        Integer curr = 1;
-        Integer size = 15;
-        if (currPage != null) {
-            curr = currPage;
-        }
-        if (pageSize != null) {
-            size = pageSize;
-        }
-        PageDTO page = PageUtil.page(curr, size, collections);
+
+        PageDTO page = PageUtil.pageListDemo(currPage, pageSize, collections);
         List<Collection> pageList = page.getList();
         for (Collection collection : pageList) {
             Exchange exchange = collection.getExchange();
@@ -308,19 +300,23 @@ public class UserServiceImp implements UserService {
         return ResponseResult.succ(collections, page.getSize());
     }
 
-    public ResponseResult getCollectQuestion(Integer userId) {
+    public ResponseResult getCollectQuestion(Integer userId, Integer currPage, Integer pageSize) {
+        if (userId == null) {
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.ID_NULL);
+        }
         List<Collection> collections = collectionMapper.getCollectQuestionById(userId);
-        for (Collection collection : collections) {
+        PageDTO page = PageUtil.pageListDemo(currPage, pageSize, collections);
+        List<Collection> pageList = page.getList();
+        for (Collection collection : pageList) {
             Question question = collection.getQuestion();
             Timestamp createTime = question.getCreateTime();
             if (createTime != null)
                 question.setTime(StringUtil.getDateString(createTime));
-            List list = new ArrayList<>();
-            list.add(question.getImg());
-            question.setImgs(list);
-
+//            List list = new ArrayList<>();
+//            list.add(question.getImg());
+            question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
         }
-        return ResponseResult.success(collections);
+        return ResponseResult.succ(collections, page.getSize());
     }
 
     @Autowired
@@ -339,26 +335,15 @@ public class UserServiceImp implements UserService {
             return ResponseResult.error(StatusConst.ERROR, "id不能为空");
         }
         List<Reply> replies = replyMapper.getMyReplyById(userId);
-        Integer curr = 1;
-        Integer size = 15;
-        if (currPage != null) {
-            curr = currPage;
-        }
-        if (pageSize != null) {
-            size = pageSize;
-        }
-        if (replies != null) {
-            PageDTO page = PageUtil.page(curr, size, replies);
-            List<Reply> lists = page.getList();
-            for (Reply reply : lists) {
-                Timestamp replyTime = reply.getReplyTime();
-                if (replyTime != null) {
-                    reply.setTime(StringUtil.getDateString(replyTime));
-                }
+        PageDTO page = PageUtil.pageListDemo(currPage, pageSize, replies);
+        List<Reply> lists = page.getList();
+        for (Reply reply : lists) {
+            Timestamp replyTime = reply.getReplyTime();
+            if (replyTime != null) {
+                reply.setTime(StringUtil.getDateString(replyTime));
             }
-            return ResponseResult.succ(lists, page.getSize());
         }
-        return ResponseResult.success();
+        return ResponseResult.succ(lists, page.getSize());
     }
 
     @Autowired
@@ -547,84 +532,94 @@ public class UserServiceImp implements UserService {
                 videos.setTime(StringUtil.getDateString(createTime));
             }
         }
-        return ResponseResult.succ(pageList,page.getSize());
+        return ResponseResult.succ(pageList, page.getSize());
     }
+
     @Autowired
     private SupplyBuyMapper supplyBuyMapper;
-    public ResponseResult myBuy(Integer userId,Integer currPage,Integer pageSize)
-    {
-        if (userId==null)
-        {
-            return  ResponseResult.error(StatusConst.ERROR,MsgConst.ID_NULL);
+
+    public ResponseResult myBuy(Integer userId, Integer currPage, Integer pageSize) {
+        if (userId == null) {
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.ID_NULL);
         }
         List<SupplyBuy> buyList = supplyBuyMapper.getSeekById(userId);
-        if (buyList==null)
-        {
+        if (buyList == null) {
             return ResponseResult.success();
         }
-        Integer curr=StatusConst.CURRENTPAGE;
-        Integer size=StatusConst.PAGESIZE;
-        if (currPage!=null)
-        {
-            curr=currPage;
+        Integer curr = StatusConst.CURRENTPAGE;
+        Integer size = StatusConst.PAGESIZE;
+        if (currPage != null) {
+            curr = currPage;
         }
-        if (pageSize!=null)
-        {
-            size=pageSize;
+        if (pageSize != null) {
+            size = pageSize;
         }
         PageDTO page = PageUtil.page(curr, size, buyList);
         List<SupplyBuy> list = page.getList();
-        for (SupplyBuy buy:list)
-        {
-            if (buy.getCreateTime()!=null)
-            {
+        for (SupplyBuy buy : list) {
+            if (buy.getCreateTime() != null) {
                 buy.setTime(StringUtil.getDateString(buy.getCreateTime()));
             }
-            if (buy.getLimitTime()!=null)
-            {
+            if (buy.getLimitTime() != null) {
                 buy.setEndTime(StringUtil.getDateString(buy.getLimitTime()));
             }
             buy.setImgs(imgMapper.getBuyImgs(buy.getId()));
         }
-        return ResponseResult.succ(list,page.getSize());
+        return ResponseResult.succ(list, page.getSize());
     }
 
-    public ResponseResult mySupply(Integer userId,Integer currPage,Integer pageSize)
-    {
-        if (userId==null)
-        {
-            return ResponseResult.error(StatusConst.ERROR,MsgConst.ID_NULL);
+    public ResponseResult mySupply(Integer userId, Integer currPage, Integer pageSize) {
+        if (userId == null) {
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.ID_NULL);
         }
         List<SupplyBuy> supplyList = supplyBuyMapper.getSupplyById(userId);
-        if (supplyList==null)
-        {
+        if (supplyList == null) {
             return ResponseResult.success();
         }
-        Integer curr=StatusConst.CURRENTPAGE;
-        Integer size=StatusConst.PAGESIZE;
-        if (currPage!=null)
-        {
-            curr=currPage;
+        Integer curr = StatusConst.CURRENTPAGE;
+        Integer size = StatusConst.PAGESIZE;
+        if (currPage != null) {
+            curr = currPage;
         }
-        if (pageSize!=null)
-        {
-            size=pageSize;
+        if (pageSize != null) {
+            size = pageSize;
         }
         PageDTO page = PageUtil.page(curr, size, supplyList);
         List<SupplyBuy> pageList = page.getList();
-        for (SupplyBuy supply:pageList)
-        {
-            if (supply.getCreateTime()!=null)
-            {
+        for (SupplyBuy supply : pageList) {
+            if (supply.getCreateTime() != null) {
                 supply.setTime(StringUtil.getDateString(supply.getCreateTime()));
             }
-            if (supply.getLimitTime()!=null)
-            {
+            if (supply.getLimitTime() != null) {
                 supply.setEndTime(StringUtil.getDateString(supply.getLimitTime()));
             }
             supply.setImgs(imgMapper.getBuyImgs(supply.getId()));
         }
 
-        return ResponseResult.succ(pageList,page.getSize());
+        return ResponseResult.succ(pageList, page.getSize());
+    }
+
+    @Autowired
+    private ExpertMapper expertMapper;
+    @Autowired
+    private ExpertQuestionMapper expertQuestionMapper;
+
+    public ResponseResult myExpertQuestion(Integer userId, Integer currPage, Integer pageSize) {
+        if (userId == null) {
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.ID_NULL);
+        }
+        List<ExpertQuestion> questions = expertQuestionMapper.getMyExpertQuestionList(userId);
+        PageDTO page = PageUtil.pageListDemo(currPage, pageSize, questions);
+        List<ExpertQuestion> pageList = page.getList();
+        for (ExpertQuestion question : pageList) {
+            Expert expert = expertMapper.selectById(question.getExpertId());
+
+            question.setSort(expert.getSortName());
+            if (question.getCreateTime() != null) {
+                question.setTime(StringUtil.getDateString(question.getCreateTime()));
+            }
+            question.setImgs(imgMapper.getExpertImgs(question.getId()));
+        }
+        return ResponseResult.succ(pageList, page.getSize());
     }
 }

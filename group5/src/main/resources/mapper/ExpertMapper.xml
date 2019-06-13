@@ -123,12 +123,12 @@
     <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select e.*,t.name sortName
     from t_expert e,t_technology_sort t
-    where id = #{id,jdbcType=INTEGER}
+    where e.id = #{0}
     and t.id=expert_sort
   </select>
 
     <select id="search" parameterType="map" resultMap="BaseResultMap">
-        select e.*,t.name
+        select e.*,t.name sortName
         from t_expert e,t_technology_sort t
         where t.id=expert_sort
         <trim>

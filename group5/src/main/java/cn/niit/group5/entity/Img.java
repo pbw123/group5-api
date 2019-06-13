@@ -15,6 +15,16 @@ public class Img implements Serializable {
 
     private Integer buyId;
 
+    private Integer expertQuestionId;
+
+    public Integer getExpertQuestionId() {
+        return expertQuestionId;
+    }
+
+    public void setExpertQuestionId(Integer expertQuestionId) {
+        this.expertQuestionId = expertQuestionId;
+    }
+
     public Integer getBuyId() {
         return buyId;
     }

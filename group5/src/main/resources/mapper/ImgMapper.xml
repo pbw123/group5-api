@@ -27,5 +27,8 @@
 <insert id="insertBuyImg" keyProperty="id" useGeneratedKeys="true" parameterType="Img">
        INSERT INTO t_img(buy_id,img_url) VALUES (#{buyId},#{imgUrl})
 </insert>
+<insert id="addExpertQuestionImgs" keyProperty="id" useGeneratedKeys="true" parameterType="Img">
+       INSERT INTO t_img(expert_question_id,img_url) VALUES (#{expertQuestionId},#{imgUrl})
+</insert>
 
 </mapper>

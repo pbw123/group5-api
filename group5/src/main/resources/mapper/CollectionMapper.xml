@@ -30,7 +30,7 @@
 
   <select id="getCollectQuestionById"  parameterType="Integer"  resultMap="collectionRM">
     SELECT c.id,c.user_id,c.question_id,q.id qid,q.user_id
-    quid,q.content,q.create_time,q.sort,q.img,q.address_id,
+    quid,q.content,q.create_time,q.sort,q.img,q.address_id,q.address,
 	u.id uid,u.user_name,u.head_url,u.user_address,u.identity
 	 FROM t_collection c,t_question q,t_user u
 	WHERE c.user_id=#{userId}

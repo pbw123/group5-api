@@ -26,4 +26,17 @@ public class PageUtil {
         List resultList = list.subList(first, last);
         return new PageDTO(first,last,size,resultList);
     }
+
+    public static PageDTO pageListDemo(Integer currPage,Integer pageSize,List list)
+    {
+        Integer curr = StatusConst.CURRENTPAGE;
+        Integer size = StatusConst.PAGESIZE;
+        if (currPage != null) {
+            curr = currPage;
+        }
+        if (pageSize != null) {
+            size = pageSize;
+        }
+        return PageUtil.page(curr, size, list);
+    }
 }

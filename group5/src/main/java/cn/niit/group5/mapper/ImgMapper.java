@@ -27,9 +27,15 @@ public interface ImgMapper {
 //
  @Select("select * from t_img where news_id=#{0}")
  List<Img>getNewsImgsList(Integer newsId);
-
+//获取供求图片
  @Select("select * from t_img where buy_id=#{0}")
  List<Img>getBuyImgs(Integer id);
-
+//供求添加图片
  int insertBuyImg(Img img);
+// 咨询专家添加图片
+ int addExpertQuestionImgs(Img img);
+//获取专家图片
+@Select("select * from t_img where expert_question_id=#{0}")
+ List<Img>getExpertImgs(Integer id);
+
 }

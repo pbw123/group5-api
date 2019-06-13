@@ -19,6 +19,25 @@ public class ExpertQuestion implements Serializable {
 
     private String content;
 
+    private String sort;
+    private List imgs;
+
+    public List getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(List imgs) {
+        this.imgs = imgs;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
     private List<ExpertReply> expertReplys;
 
     private User user;

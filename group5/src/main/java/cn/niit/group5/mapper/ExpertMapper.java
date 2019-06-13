@@ -48,7 +48,7 @@ List<Expert>getAgricultureExpert(@Param("sortId") Integer sortId, @Param("gradeI
 //    改变专家状态
     int updateStatus(Map<Object,Object>map);
 
-//    据id查询专爱
+//    据id查询专家
     Expert selectById(Integer id);
 
 //    搜索专家

@@ -3,6 +3,7 @@ package cn.niit.group5.mapper;
 import cn.niit.group5.entity.ExpertQuestion;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,7 +17,11 @@ public interface ExpertQuestionMapper {
    ExpertQuestion expertQuestionDetail(Integer id);
 
 //   我向专家提问的问题列表
-   @Select("SELECT * FROM t_expert_question WHERE user_id=#{0}")
+   @Select("SELECT * FROM t_expert_question WHERE user_id=#{0} and is_delete=0")
    List<ExpertQuestion>getMyExpertQuestionList(Integer id);
+
+//   删除专家提问
+   @Update("update t_expert_question set is_delete=1 where user_id=#{0}")
+   int delExpertQuestion(Integer id);
 
 }

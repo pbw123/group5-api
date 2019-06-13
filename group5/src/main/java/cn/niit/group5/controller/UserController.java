@@ -1,9 +1,12 @@
 package cn.niit.group5.controller;
 
-import cn.niit.group5.entity.*;
+import cn.niit.group5.entity.Feedback;
 import cn.niit.group5.entity.dto.UserCode;
 import cn.niit.group5.entity.dto.UserDTO;
-import cn.niit.group5.mapper.*;
+import cn.niit.group5.mapper.AttentionMapper;
+import cn.niit.group5.mapper.ExpertQuestionMapper;
+import cn.niit.group5.mapper.FeedbackMapper;
+import cn.niit.group5.mapper.UserMapper;
 import cn.niit.group5.serviceImp.QuestionServiceImp;
 import cn.niit.group5.serviceImp.UserServiceImp;
 import cn.niit.group5.util.Client;
@@ -16,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.List;
 
 @RestController
 @Api(tags = "1.用户模块")
@@ -143,8 +145,8 @@ public class UserController {
     //我的收藏-问答
     @ApiOperation(value = "我的收藏-问答", notes = "根据我的用户id显示出我收藏的问答")
     @GetMapping(value = "/getCollectQuestionById")
-    public ResponseResult getCollectQuestion(Integer userId) {
-        return userServiceImp.getCollectQuestion(userId);
+    public ResponseResult getCollectQuestion(Integer userId, Integer currPage, Integer pageSize) {
+        return userServiceImp.getCollectQuestion(userId, currPage, pageSize);
     }
 
     //我的收藏-交流
@@ -182,14 +184,26 @@ public class UserController {
         return userServiceImp.myBuy(userId, currPage, pageSize);
     }
 
-    @Autowired
-    private ExpertQuestionMapper expertQuestionMapper;
-
     @ApiOperation(value = "‘我的提问’中的‘专家提问’", notes = "传入我的用户id")
     @GetMapping(value = "getMyExpertQuestionList")
-    public ResponseResult getMyExpertQuestionList(Integer id) {
-        List<ExpertQuestion> experts = expertQuestionMapper.getMyExpertQuestionList(id);
-        return ResponseResult.success(experts);
+    public ResponseResult getMyExpertQuestionList(Integer id, Integer currPage, Integer pageSize) {
+        return userServiceImp.myExpertQuestion(id, currPage, pageSize);
+    }
+
+    @Autowired
+    private ExpertQuestionMapper expertQuestionMapper;
+    @ApiOperation(value = "删除专家提问")
+    @GetMapping(value = "delExpertQuestion")
+    public ResponseResult delExpertQuestion(Integer id)
+    {
+        if (id==null) {
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.ID_NULL);
+        }
+        else {
+            int i = expertQuestionMapper.delExpertQuestion(id);
+            System.out.println(i);
+            return ResponseResult.success();
+        }
     }
 
     @ApiOperation(value = "添加积分", notes = "传入用户的id和添加的积分数")
