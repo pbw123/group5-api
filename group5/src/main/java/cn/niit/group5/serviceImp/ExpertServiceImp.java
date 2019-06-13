@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -254,13 +255,40 @@ public class ExpertServiceImp {
         return ResponseResult.success(list);
     }
 
-    public Integer delSysExpert(Integer id)
-    {
+    public Integer delSysExpert(Integer id) {
         int i = expertGradeMapper.deleteByPrimaryKey(id);
-        if (i==1)
+        if (i == 1)
             return StatusConst.SUCCESS;
         else
             return StatusConst.ERROR;
     }
 
+    @Autowired
+    private ImgMapper imgMapper;
+    @Autowired
+    private ExpertQuestionMapper expertQuestionMapper;
+
+    public ResponseResult addExpertQuestion(Integer userId, Integer expertId, String content,
+                                            String[] imgs) {
+        if (userId==null||expertId==null)
+        {
+            return ResponseResult.error(StatusConst.ERROR,MsgConst.ID_NULL);
+        }
+        ExpertQuestion expertQuestion = new ExpertQuestion();
+        expertQuestion.setUserId(userId);
+        expertQuestion.setExpertId(expertId);
+        expertQuestion.setContent(content);
+        expertQuestion.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        expertQuestionMapper.insertExpertQuestion(expertQuestion);
+        if (imgs!=null)
+        {
+            for (String image : imgs) {
+                Img img = new Img();
+                img.setExpertQuestionId(expertQuestion.getId());
+                img.setImgUrl(image);
+                imgMapper.addExpertQuestionImgs(img);
+            }
+        }
+        return ResponseResult.success();
+    }
 }

@@ -3,7 +3,6 @@ package cn.niit.group5.controller;
 import cn.niit.group5.entity.Img;
 import cn.niit.group5.entity.Question;
 import cn.niit.group5.entity.Reply;
-import cn.niit.group5.mapper.CollectionMapper;
 import cn.niit.group5.mapper.ImgMapper;
 import cn.niit.group5.mapper.QuestionMapper;
 import cn.niit.group5.mapper.ReplyMapper;
@@ -73,9 +72,7 @@ public class QuestionController {
     public ResponseResult replyQuestion(
             @RequestParam(required = true) Integer userId,
             @RequestParam(required = true) String content,
-            @RequestParam(required = true) Integer questionId
-
-    ) {
+            @RequestParam(required = true) Integer questionId) {
         Reply reply = new Reply();
         reply.setUserId(userId);
         reply.setContent(content);
@@ -85,8 +82,6 @@ public class QuestionController {
         return ResponseResult.success();
     }
 
-    @Autowired
-    private CollectionMapper collectionMapper;
     @Autowired
     private CollectionServiceImp collectionServiceImp;
 

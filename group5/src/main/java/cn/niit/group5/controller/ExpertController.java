@@ -6,6 +6,7 @@ import cn.niit.group5.entity.dto.IndustryDTO;
 import cn.niit.group5.mapper.ExpertMapper;
 import cn.niit.group5.mapper.ExpertQuestionMapper;
 import cn.niit.group5.mapper.IndustrySystemMapper;
+import cn.niit.group5.serviceImp.ExpertServiceImp;
 import cn.niit.group5.serviceImp.IndustryServerImp;
 import cn.niit.group5.util.Client;
 import cn.niit.group5.util.ResponseResult;
@@ -15,7 +16,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -29,29 +29,22 @@ public class ExpertController {
     private ExpertMapper expertMapper;
     @Autowired
     private IndustrySystemMapper industrySystemMapper;
+    @Autowired
+    private ExpertServiceImp expertServiceImp;
 
     @ApiOperation(value = "咨询专家")
     @PostMapping(value = "insertExpertQuestion")
-    public ResponseResult insertExpertQuestion(
-            @RequestParam(required = true) Integer userId,
-            @RequestParam(required = true) Integer expertId,
-            String content
-    ) {
-        ExpertQuestion expertQuestion = new ExpertQuestion();
-        expertQuestion.setUserId(userId);
-        expertQuestion.setExpertId(expertId);
-        expertQuestion.setContent(content);
-        expertQuestion.setCreateTime(new Timestamp(System.currentTimeMillis()));
-        expertQuestionMapper.insertExpertQuestion(expertQuestion);
-        return ResponseResult.success();
+    public ResponseResult insertExpertQuestion(Integer userId, Integer expertId, String content,
+                                               String[] imgs) {
+        return expertServiceImp.addExpertQuestion(userId, expertId, content, imgs);
     }
 
-    @ApiOperation(value = "专家详情/有咨询专家按钮的那个页面",notes = "传入该专家的id/点击专家头像用这个接口")
+    @ApiOperation(value = "专家详情/有咨询专家按钮的那个页面", notes = "传入该专家的id/点击专家头像用这个接口")
     @GetMapping(value = "getExpertDetail")
     public ResponseResult getExpertDetail(Integer id) {
         Expert expert = expertMapper.getExpertDetail(id);
-        List<ExpertQuestion> expertQuestions=expertMapper.getExpertQuestionList(id);
-        ExpertDTO expertDTO=new ExpertDTO();
+        List<ExpertQuestion> expertQuestions = expertMapper.getExpertQuestionList(id);
+        ExpertDTO expertDTO = new ExpertDTO();
         expertDTO.setExpert(expert);
         expertDTO.setExpertQuestions(expertQuestions);
         return ResponseResult.success(expertDTO);
@@ -75,7 +68,7 @@ public class ExpertController {
 
     @ApiOperation(value = "获取农业专家", notes = "传入分类的id和等级的id,等级客户端指定，1是省级，2是地方级")
     @GetMapping(value = "getAgricultureExpert")
-    public ResponseResult getAgricultureExpert(Integer sortId,Integer gradeId) {
+    public ResponseResult getAgricultureExpert(Integer sortId, Integer gradeId) {
         List<Expert> experts = expertMapper.getAgricultureExpert(sortId, gradeId);
         return ResponseResult.success(experts);
     }
@@ -92,8 +85,7 @@ public class ExpertController {
     public ResponseResult getExpertQuestionDetail(Integer id) {
         ExpertQuestion experts = expertQuestionMapper.expertQuestionDetail(id);
         List<ExpertReply> expertReplys = experts.getExpertReplys();
-        for (ExpertReply reply:expertReplys)
-        {
+        for (ExpertReply reply : expertReplys) {
             reply.setTime(StringUtil.getDateString(reply.getCreateTime()));
         }
         return ResponseResult.success(experts);

@@ -9,7 +9,8 @@
     <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
-<insert id="insertExpertQuestion" parameterType="cn.niit.group5.entity.ExpertQuestion">
+<insert id="insertExpertQuestion" parameterType="cn.niit.group5.entity.ExpertQuestion"
+        useGeneratedKeys="true" keyProperty="id">
   INSERT INTO t_expert_question(user_id,create_time,expert_id,content) VALUES (#{userId},#{createTime},#{expertId},#{content})
 </insert>
 

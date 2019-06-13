@@ -408,7 +408,14 @@ public class UserServiceImp implements UserService {
         System.out.println("测试+++++++++++++++");
         user = userMapper.getUserByPhoneNumber(phoneNumber);
         if (user != null) {
-            return ResponseResult.error(StatusConst.MOBILE_EXIST, MsgConst.MOBILE_EXIST);
+            if (user.getIsDelete()==0)
+            {
+                return ResponseResult.error(StatusConst.MOBILE_EXIST, MsgConst.MOBILE_EXIST);
+            }
+            if (user.getIsDelete()==1)
+            {
+
+            }
         } else if (!RegexUtil.passRegex(password)) {
             return new ResponseResult(StatusConst.PASSWORD_VALIDATOR,
                     MsgConst.PASSWORD_VALIDATOR);
