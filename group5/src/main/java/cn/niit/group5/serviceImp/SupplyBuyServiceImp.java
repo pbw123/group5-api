@@ -50,7 +50,7 @@ public class SupplyBuyServiceImp {
                 supplyDetail.setEndTime(endTime);
             return ResponseResult.success(supplyDetail);
         } else
-            return ResponseResult.error(StatusConst.ERROR,"返回空");
+            return ResponseResult.error(StatusConst.ERROR, "返回空");
     }
 
     public ResponseResult seekDetail(Integer id) {
@@ -113,9 +113,9 @@ public class SupplyBuyServiceImp {
         else
             for (SupplyBuy supplyBuy : supplyBuyList) {
 
-                if (supplyBuy.getCreateTime()!= null)
+                if (supplyBuy.getCreateTime() != null)
                     supplyBuy.setTime(StringUtil.getDateString(supplyBuy.getCreateTime()));
-                if (supplyBuy.getLimitTime()!= null)
+                if (supplyBuy.getLimitTime() != null)
                     supplyBuy.setEndTime(StringUtil.getDateString(supplyBuy.getLimitTime()));
                 supplyBuy.setImgs(imgMapper.getBuyImgs(supplyBuy.getId()));
             }

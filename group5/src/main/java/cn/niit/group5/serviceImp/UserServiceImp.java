@@ -515,8 +515,9 @@ public class UserServiceImp implements UserService {
             Timestamp createTime = question.getCreateTime();
             if (createTime != null) {
                 question.setTime(StringUtil.getDateString(createTime));
-                question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
             }
+            question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
+            question.setReplyAmount(questionMapper.getReplyAmount(question.getId()));
         }
         return ResponseResult.succ(pageList, page.getSize());
     }

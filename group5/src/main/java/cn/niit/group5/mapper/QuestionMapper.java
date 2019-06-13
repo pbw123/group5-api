@@ -13,7 +13,6 @@ import java.util.List;
 @Component
 public interface QuestionMapper {
 
-
     //所有的提问
     List<Question> getQuestionList();
 
@@ -38,8 +37,10 @@ public interface QuestionMapper {
             "creat_time desc")
     List<Question> getQuestionBySearch(String content);
 
-//后台修改问题
-   int updateQuestion(Question question);
+    //后台修改问题
+    int updateQuestion(Question question);
 
+    //   问题回复数量
+    int getReplyAmount(Integer id);
 
 }

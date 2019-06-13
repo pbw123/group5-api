@@ -8,11 +8,13 @@ import cn.niit.group5.serviceImp.VideoServiceImp;
 import cn.niit.group5.util.Client;
 import cn.niit.group5.util.PageUtil;
 import cn.niit.group5.util.ResponseResult;
+import cn.niit.group5.util.StringUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +39,12 @@ public class NewsController {
     @GetMapping(value = "getNewsListById")
     public ResponseResult getNewsListById(Integer id) {
         List<News> news = newsMapper.selectAllBySortId(id);
+        for (News one:news)
+        {
+            Date createTime = one.getCreateTime();
+            if (createTime!=null)
+                one.setTime(StringUtil.getDateString(createTime));
+        }
         return ResponseResult.success(news);
     }
 
@@ -53,6 +61,12 @@ public class NewsController {
     @GetMapping(value = "getNewsBySortId")
     public ResponseResult getNewsBySortId(Integer id) {
         List<News> news = technologySortMapper.getNewsBySortId(id);
+        for (News one:news)
+        {
+            Date createTime = one.getCreateTime();
+            if (createTime!=null)
+                one.setTime(StringUtil.getDateString(createTime));
+        }
         return ResponseResult.success(news);
     }
 
@@ -77,14 +91,20 @@ public class NewsController {
     @GetMapping(value = "getNewsListByAnimalId")
     public ResponseResult getNewsListByAnimalId(int id) {
         List<News> news = animalMapper.AnimalNews(id);
+        for (News one:news)
+        {
+            Date createTime = one.getCreateTime();
+            if (createTime!=null)
+                one.setTime(StringUtil.getDateString(createTime));
+        }
         return ResponseResult.success(news);
     }
 
     @Autowired
     private CollectionServiceImp collectionServiceImp;
 
-    @ApiOperation(value = "收藏资讯", notes = "传入用户id和该资讯文章的id")
-    @PostMapping(value = "collectNews")
+    @ApiOperation(value = "收藏/取消收藏资讯", notes = "传入用户id和该资讯文章的id")
+    @GetMapping(value = "collectNews")
     public ResponseResult collectNews(@RequestParam(required = true) Integer userId,
                                       @RequestParam(required = true) Integer newsId) {
         String column = "news_id";
@@ -92,7 +112,7 @@ public class NewsController {
     }
 
     @ApiOperation(value = "收藏/取消收藏视频")
-    @PostMapping(value = "collectVideo")
+    @GetMapping(value = "collectVideo")
     public ResponseResult collectVideo(@RequestParam(required = true) Integer userId,
                                        @RequestParam(required = true) Integer videoId) {
         String column = "video";
@@ -128,8 +148,7 @@ public class NewsController {
     @ApiOperation(value = "通过品牌农资分类sort遍历出企业推荐", notes = "传入品牌农资分类sort_id的值")
     @GetMapping(value = "getEnterpriseRecommendBySort")
     public ResponseResult getEnterpriseRecommendBySort(
-            Integer sort
-    ) {
+            Integer sort) {
         List<EnterpriseRecommend> enterpriseRecommendList =
                 enterpriseRecommendMapper.getEnterpriseRecommendBySort(sort);
         return ResponseResult.success(enterpriseRecommendList);
@@ -138,8 +157,7 @@ public class NewsController {
     @ApiOperation(value = "通过企业id获取企业详情", notes = "传入企业的id")
     @GetMapping(value = "getEnterpriseRecommendById")
     public ResponseResult getEnterpriseRecommendById(
-            Integer id
-    ) {
+            Integer id) {
         EnterpriseRecommend enterpriseRecommend =
                 enterpriseRecommendMapper.getEnterpriseRecommendById(id);
         enterpriseRecommend.setId(id);
@@ -160,6 +178,12 @@ public class NewsController {
     @GetMapping(value = "getTopicNews")
     public ResponseResult getTopicNews(Integer id) {
         List<News> topicNewsList = topicMapper.getNewsByTopicId(id);
+        for (News one:topicNewsList)
+        {
+            Date createTime = one.getCreateTime();
+            if (createTime!=null)
+                one.setTime(StringUtil.getDateString(createTime));
+        }
         return ResponseResult.success(topicNewsList);
     }
 

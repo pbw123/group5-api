@@ -2,7 +2,6 @@ package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.SupplyBuy;
 import cn.niit.group5.mapper.SupplyBuyMapper;
-import cn.niit.group5.util.ResponseResult;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +29,8 @@ public class SupplyBuyControllerTest {
     @Test
     public void getSupplyListTest()
     {
-        ResponseResult responseResult = supplyBuyController.supplyList();
-        System.out.println(responseResult.toString());
+//        ResponseResult responseResult = supplyBuyController.supplyList();
+//        System.out.println(responseResult.toString());
     }
 
 //    @Test
