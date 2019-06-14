@@ -20,7 +20,7 @@
         <result column="educational" property="educational" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
         <result column="vocation" property="vocation" jdbcType="VARCHAR"/>
-        <result column="is_delete" property="isDelete" jdbcType="TINYINT"/>
+        <result column="is_delete" property="isDelete"/>
         <result column="head_url" property="headUrl" jdbcType="LONGVARCHAR"/>
         <result column="status" property="status" jdbcType="INTEGER" />
     </resultMap>
@@ -37,8 +37,9 @@
             <if test="identity!=null">identity,</if>
             <if test="userAddress!=null">user_address,</if>
             <if test="regitsterTime!=null">regitster_time,</if>
-            <if test="status!=null">status</if>
-            <if test="headUrl!=null">head_url</if>
+            <if test="status!=null">status,</if>
+            <if test="headUrl!=null">head_url,</if>
+            <if test="isDelete!=null">is_delete</if>
         </trim>
     </sql>
 
@@ -50,8 +51,9 @@
             <if test="identity!=null">#{identity},</if>
             <if test="userAddress!=null">#{userAddress},</if>
             <if test="regitsterTime!=null">#{regitsterTime},</if>
-            <if test="status!=null">#{status}</if>
-            <if test="headUrl!=null">#{headUrl}</if>
+            <if test="status!=null">#{status},</if>
+            <if test="headUrl!=null">#{headUrl},</if>
+            <if test="isDelete!=null">#{isDelete}</if>
         </trim>
     </sql>
 
@@ -71,7 +73,8 @@
             <if test="educational!=null">educational=#{educational},</if>
             <if test="userAddress!=null">user_address=#{userAddress},</if>
             <if test="sex!=null">sex=#{sex},</if>
-            <if test="email!=null">email=#{email}</if>
+            <if test="email!=null">email=#{email},</if>
+            <if test="isDelete!=null">is_delete=#{isDelete}</if>
         </trim>
         where id=#{id}
     </update>

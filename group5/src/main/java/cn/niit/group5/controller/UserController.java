@@ -69,6 +69,15 @@ public class UserController {
     }
 
     /**
+     * 注销用户
+     */
+    @ApiOperation(value = "注销账号")
+    @GetMapping(value = "destroyUser")
+    public ResponseResult destroyUser(Integer id) {
+        return userServiceImp.removeUser(id);
+    }
+
+    /**
      * 我的资料，一个查询接口(登录或注册成功时已经返回数据了，不再写)
      * 一个更新接口
      */
@@ -192,14 +201,13 @@ public class UserController {
 
     @Autowired
     private ExpertQuestionMapper expertQuestionMapper;
+
     @ApiOperation(value = "删除专家提问")
     @GetMapping(value = "delExpertQuestion")
-    public ResponseResult delExpertQuestion(Integer id)
-    {
-        if (id==null) {
+    public ResponseResult delExpertQuestion(Integer id) {
+        if (id == null) {
             return ResponseResult.error(StatusConst.ERROR, MsgConst.ID_NULL);
-        }
-        else {
+        } else {
             int i = expertQuestionMapper.delExpertQuestion(id);
             System.out.println(i);
             return ResponseResult.success();

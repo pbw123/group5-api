@@ -30,7 +30,7 @@ public class UserServiceImp implements UserService {
     @Override
     public int signIn(UserDTO userDTO) {
         User user = userMapper.getUserByPhoneNumber(userDTO.getPhoneNumber());
-        if (user != null) {
+        if (user != null&&user.getIsDelete()==0) {
             if (user.getStatus() == 0) {
                 if (user.getPassword().equals(userDTO.getPassword())) {
 //                 登录成功
@@ -87,7 +87,7 @@ public class UserServiceImp implements UserService {
             return new ResponseResult(StatusConst.VERIFYCODE_NUll, MsgConst.VERIFYCODE_NULL_ERROR);
         } else {
             User users = userMapper.getUserByPhoneNumber(userCode.getPhoneNumber());
-            if (users == null) {
+            if (users == null||users.getIsDelete()==1) {
                 int status = plogin(userCode.getPhoneNumber(), userCode.getCode());
                 if (status == StatusConst.SUCCESS) {
 //            验证码和手机号匹配得上,返回手机号和验证码
@@ -129,18 +129,14 @@ public class UserServiceImp implements UserService {
                     MsgConst.PHONE_NUMBER_VALIDATOR);
         } else {
             User user = userMapper.getUserByPhoneNumber(userCode.getPhoneNumber());
-            if (user != null) {
+            if (user != null&&user.getIsDelete()==0) {
                 return ResponseResult.error(StatusConst.MOBILE_EXIST, MsgConst.MOBILE_EXIST);
             } else {
                 int status = saveCode(userCode.getPhoneNumber());
-                if (status == StatusConst.SUCCESS) {
-//            验证码发送成功
-                    return ResponseResult.success();
-                } else {
-//                验证码错误
-                    return ResponseResult.error(StatusConst.VERIFYCODE_ERROR,
-                            MsgConst.SEND_VERIFYCODE_ERROR);
-                }
+                if (status == StatusConst.SUCCESS)
+                    return ResponseResult.success();//            验证码发送成功
+                else
+                    return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
             }
         }
     }
@@ -418,7 +414,8 @@ public class UserServiceImp implements UserService {
                 user.setIdentity(identity);
                 user.setUserAddress(userAddress);
                 user.setHeadUrl(icon);
-//                user.setIsDelete(0);
+                user.setIsDelete(0);
+                System.out.println(user.toString());
                 updateMyDocument(user);
                 System.out.println("测试");
                 return ResponseResult.success();
@@ -438,12 +435,18 @@ public class UserServiceImp implements UserService {
             System.out.println(icon);
             int index = userMapper.signUp(user);
 //            Integer index=1;
+            System.out.println(index);
             if (index == 1) {
                 return new ResponseResult(StatusConst.SUCCESS, MsgConst.SUCCESS);
-            } else {
-                return new ResponseResult(StatusConst.ERROR, MsgConst.FAIL);
             }
         }
+        return new ResponseResult(StatusConst.ERROR, MsgConst.FAIL);
+    }
+
+    public ResponseResult removeUser(Integer id) {
+        if (id == null)
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.ID_NULL);
+        userMapper.delUser(id);
         return ResponseResult.success();
     }
 

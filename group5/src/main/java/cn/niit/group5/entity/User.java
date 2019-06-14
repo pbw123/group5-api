@@ -82,7 +82,7 @@ public class User implements Serializable {
     //行业类型
     private String vocation;
 
-    private Byte isDelete;
+    private Integer isDelete;
 
     private String headUrl;
 
@@ -248,11 +248,11 @@ public class User implements Serializable {
         this.vocation = vocation == null ? null : vocation.trim();
     }
 
-    public Byte getIsDelete() {
+    public Integer getIsDelete() {
         return isDelete;
     }
 
-    public void setIsDelete(Byte isDelete) {
+    public void setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
     }
 

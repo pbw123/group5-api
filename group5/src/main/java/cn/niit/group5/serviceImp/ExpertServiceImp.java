@@ -1,6 +1,7 @@
 package cn.niit.group5.serviceImp;
 
 import cn.niit.group5.entity.*;
+import cn.niit.group5.entity.dto.PageDTO;
 import cn.niit.group5.mapper.*;
 import cn.niit.group5.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,10 @@ public class ExpertServiceImp {
     }
 
     public ResponseResult getAllExpert(Integer currPage, Integer pageSize) {
-        Map<Object, Object> map = PageUtil.pageDemo(currPage, pageSize);
-        List<Expert> experts = expertMapper.selectAll(map);
-        return ResponseResult.success(experts);
+        List<Expert> experts = expertMapper.selectAll();
+        PageDTO page = PageUtil.pageListDemo(currPage, pageSize, experts);
+        List<Expert> pageList = page.getList();
+        return ResponseResult.succ(pageList,page.getSize());
     }
 
     public Integer addExpert(String expertName, String unitName, String email,

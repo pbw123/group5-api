@@ -4,6 +4,7 @@ import cn.niit.group5.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -45,4 +46,7 @@ public interface UserMapper {
     List<User> searchUser(Map<Object,Object>map);
 
     List<User>search(Map<Object,Object>map);
+
+    @Update("update t_user set is_delete=1 where id=#{0}")
+    int delUser(Integer id);
 }

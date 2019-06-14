@@ -69,12 +69,11 @@
 
     </select>
 
-    <select id="selectAll" resultMap="BaseResultMap" parameterType="map">
+    <select id="selectAll" resultMap="BaseResultMap">
     select id, expert_name, unit_name, email, profession, resume, sys_sort, expert_sort,
     job_title, check_all, phone_number, score, is_delete, `state`, head_img
     from t_expert
     where is_delete=0
-    limit #{index},#{pageSize}
   </select>
 
     <insert id="insert" parameterType="cn.niit.group5.entity.Expert">

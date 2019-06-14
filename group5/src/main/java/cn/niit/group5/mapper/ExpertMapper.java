@@ -37,7 +37,7 @@ List<Expert>getAgricultureExpert(@Param("sortId") Integer sortId, @Param("gradeI
     @Update("update t_expert_question set content=#{content} where id=#{id}")
     int updateExpertQuestion(@Param("content")String content,@Param("id")Integer id);
 //所有专家列表
-    List<Expert>selectAll(Map<Object,Object>map);
+    List<Expert>selectAll();
 
 //    添加专家
     int addExpert(Expert expert);
