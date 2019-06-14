@@ -9,9 +9,17 @@ public class Index implements Serializable {
     private List<News>  TopNews;
     private List<News> IndexDynamic;
     private List<Video> videos;
+    private List<Img> imgs;
     private Question IndexHotQuestion;
     private Exchange IndexHotExchange;
 
+    public List<Img> getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(List<Img> imgs) {
+        this.imgs = imgs;
+    }
 
     public List<News> getTopNews() {
         return TopNews;

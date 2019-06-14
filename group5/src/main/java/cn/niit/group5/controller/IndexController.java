@@ -75,11 +75,13 @@ public class IndexController {
         Question question=moduleMapper.getIndexHotQuestion(address);
         Exchange exchange=moduleMapper.getIndexHotExchange(address);
         List<Video> videoList=videoMapper.selectVideo();
-//        imgMapper.getNewsImgsList()
+        List<Img> allNewsImgsList = imgMapper.getAllNewsImgsList();
+
         index.setId(id);
         index.setModules(moduleList);
         index.setVideos(videoList);
         index.setTopNews(newsList);
+        index.setImgs(allNewsImgsList);
         index.setIndexDynamic(newsList1);
         index.setIndexHotQuestion(question);
         index.setIndexHotExchange(exchange);

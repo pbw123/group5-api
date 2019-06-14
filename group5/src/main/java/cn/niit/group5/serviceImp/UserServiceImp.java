@@ -293,7 +293,7 @@ public class UserServiceImp implements UserService {
             int number = exchangeMapper.getExchangeLikeNumber("exchange_id", exchange.getId());
             exchange.setLike(number);
         }
-        return ResponseResult.succ(collections, page.getSize());
+        return ResponseResult.succ(pageList, page.getSize());
     }
 
     public ResponseResult getCollectQuestion(Integer userId, Integer currPage, Integer pageSize) {
@@ -312,7 +312,7 @@ public class UserServiceImp implements UserService {
 //            list.add(question.getImg());
             question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
         }
-        return ResponseResult.succ(collections, page.getSize());
+        return ResponseResult.succ(pageList, page.getSize());
     }
 
     @Autowired
@@ -421,7 +421,7 @@ public class UserServiceImp implements UserService {
             user.setPassword(password);
             user.setUserName(userName);
             user.setIdentity(identity);
-            user.setUnitAddress(userAddress);
+            user.setUserAddress(userAddress);
             user.setRegitsterTime(new Timestamp(System.currentTimeMillis()));
             user.setHeadUrl(icon);
             System.out.println(icon);
