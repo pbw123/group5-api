@@ -27,6 +27,10 @@ public interface ImgMapper {
 //
  @Select("select * from t_img where news_id=#{0}")
  List<Img>getNewsImgsList(Integer newsId);
+
+ @Select("SELECT * FROM t_img WHERE news_id IS NOT NULL")
+ List<Img>getAllNewsImgsList();
+
 //获取供求图片
  @Select("select * from t_img where buy_id=#{0}")
  List<Img>getBuyImgs(Integer id);

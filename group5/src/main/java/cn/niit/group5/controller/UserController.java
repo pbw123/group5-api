@@ -3,7 +3,6 @@ package cn.niit.group5.controller;
 import cn.niit.group5.entity.Feedback;
 import cn.niit.group5.entity.dto.UserCode;
 import cn.niit.group5.entity.dto.UserDTO;
-import cn.niit.group5.mapper.AttentionMapper;
 import cn.niit.group5.mapper.ExpertQuestionMapper;
 import cn.niit.group5.mapper.FeedbackMapper;
 import cn.niit.group5.mapper.UserMapper;
@@ -99,9 +98,7 @@ public class UserController {
         return userServiceImp.getMyQuestionList(userId, currPage, pageSize);
     }
 
-    //    问题详情
-    @Autowired
-    private AttentionMapper attentionMapper;
+
     @Autowired
     private QuestionServiceImp questionServiceImp;
 

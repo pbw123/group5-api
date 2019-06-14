@@ -353,15 +353,7 @@ public class UserServiceImp implements UserService {
         if (lists == null) {
             return ResponseResult.success();
         }
-        Integer curr = 1;
-        Integer size = 15;
-        if (currPage != null) {
-            curr = currPage;
-        }
-        if (pageSize != null) {
-            size = pageSize;
-        }
-        PageDTO page = PageUtil.page(curr, size, lists);
+        PageDTO page = PageUtil.pageListDemo(currPage, pageSize, lists);
         List<Question> pageList = page.getList();
         for (Question question : pageList) {
             question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
@@ -369,7 +361,7 @@ public class UserServiceImp implements UserService {
             if (createTime != null)
                 question.setTime(StringUtil.getDateString(createTime));
         }
-        return ResponseResult.succ(lists, page.getSize());
+        return ResponseResult.succ(pageList, page.getSize());
     }
 
     public ResponseResult changeMsg(Integer id, String vocation,
