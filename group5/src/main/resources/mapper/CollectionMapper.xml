@@ -118,7 +118,7 @@
     </association>
   </resultMap>
   <select id="getCollectVideoById" parameterType="Integer" resultMap="Collection2RM">
-    SELECT c.id,c.user_id,c.video,v.id vid,v.video_title,v.img_url,v.video_url,v.read_number
+    SELECT c.id,c.user_id,c.video,v.id vid,v.video_title,v.img,v.video_url,v.read_number
 FROM t_collection c,t_video v
 WHERE c.user_id=#{userId}
 AND c.video=v.id
@@ -131,7 +131,7 @@ AND v.is_delete=0
     <association property="videos" javaType="Video">
       <id column="vid" property="id"/>
       <result column="video_title" property="videoTitle"/>
-      <result column="img_url" property="imgUrl"/>
+      <result column="img" property="img"/>
       <result column="video_url" property="videoUrl"/>
       <result column="read_number" property="readNumber"/>
     </association>

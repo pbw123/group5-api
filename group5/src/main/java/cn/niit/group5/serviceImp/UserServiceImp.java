@@ -518,7 +518,7 @@ public class UserServiceImp implements UserService {
         return ResponseResult.succ(pageList, page.getSize());
     }
 
-    public ResponseResult myCollectVedio(Integer userId, Integer currPage, Integer pageSize) {
+    public ResponseResult myCollectVideo(Integer userId, Integer currPage, Integer pageSize) {
         if (userId == null) {
             return ResponseResult.error(StatusConst.ERROR, MsgConst.ID_NULL);
         }

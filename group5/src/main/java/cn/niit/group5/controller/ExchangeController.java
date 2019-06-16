@@ -1,7 +1,5 @@
 package cn.niit.group5.controller;
 
-import cn.niit.group5.entity.Exchange;
-import cn.niit.group5.entity.Img;
 import cn.niit.group5.entity.Reply;
 import cn.niit.group5.mapper.ExchangeMapper;
 import cn.niit.group5.mapper.ImgMapper;
@@ -48,26 +46,7 @@ public class ExchangeController {
     @ApiOperation(value = "发表交流")
     @PostMapping(value = "/add")
     public ResponseResult addExchange(Integer userId, String content,String address,String[] imgs) {
-//        List<String> imgList = JSONArray.parseArray(imgs, String.class);
-        Exchange exchange = new Exchange();
-        exchange.setUserId(userId);
-        exchange.setContent(content);
-        exchange.setAddress(address);
-        exchange.setCreateTime(new Timestamp(System.currentTimeMillis()));
-        int i = exchangeMapper.insertExchange(exchange);
-        if (i == 1) {
-            if (imgs!=null)
-            {
-                for (String image:imgs)
-                {
-                    Img img = new Img();
-                    img.setExchangeId(exchange.getId());
-                    img.setImgUrl(image);
-                    imgMapper.insertExchangeImg(img);
-                    System.out.println(image);
-                }
-            }
-        }
+
         return ResponseResult.success();
     }
 

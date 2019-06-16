@@ -21,6 +21,13 @@ public class UserControllerTest extends BasicTest {
     }
 
     @Test
+    public void collectVideoTest()
+    {
+        ResponseResult collectVideo = userController.getCollectVideo(2, 1, 10);
+        System.out.println(collectVideo.toString());
+    }
+
+    @Test
     public void myRepliesTest()
     {
 //        ResponseResult responseResult = userController.getMyReplyById(1);

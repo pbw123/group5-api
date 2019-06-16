@@ -173,7 +173,7 @@ public class UserController {
     @ApiOperation(value = "我的收藏-视频", notes = "根据我的用户id显示出我收藏的视频")
     @GetMapping(value = "/getCollectVideoById")
     public ResponseResult getCollectVideo(Integer userId, Integer currPage, Integer pageSize) {
-        return userServiceImp.myCollectVedio(userId, currPage, pageSize);
+        return userServiceImp.myCollectVideo(userId, currPage, pageSize);
     }
 
     //我的供应
