@@ -139,7 +139,7 @@ public class NewsServiceImp {
         Date createTime = news.getCreateTime();
         if (createTime != null)
             news.setTime(StringUtil.getDateString(createTime));
-        Collection collection = collectionMapper.getCollectionById(newsId, column, userId);
+        Collection collection = collectionMapper.getCollectionById(userId, column,newsId);
         if (collection == null) {
             news.setStatus(1);
         } else {

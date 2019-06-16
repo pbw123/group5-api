@@ -74,7 +74,8 @@
             <if test="userAddress!=null">user_address=#{userAddress},</if>
             <if test="sex!=null">sex=#{sex},</if>
             <if test="email!=null">email=#{email},</if>
-            <if test="isDelete!=null">is_delete=#{isDelete}</if>
+            <if test="isDelete!=null">is_delete=#{isDelete},</if>
+            <if test="password!=null">password=#{password}</if>
         </trim>
         where id=#{id}
     </update>

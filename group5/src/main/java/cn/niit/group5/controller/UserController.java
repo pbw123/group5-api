@@ -86,9 +86,9 @@ public class UserController {
     public ResponseResult updateMyMsg(Integer id, String vocation,
                                       String userName, String unitName,
                                       String identity, String educational, String email,
-                                      String sex, String userAddress, String icon) {
+                                      String sex, String userAddress, String icon,String password) {
         return userServiceImp.changeMsg(id, vocation, userName, unitName, identity, educational,
-                email, sex, userAddress, icon);
+                email, sex, userAddress, icon,password);
     }
 
     //我的提问列表

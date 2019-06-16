@@ -367,7 +367,7 @@ public class UserServiceImp implements UserService {
     public ResponseResult changeMsg(Integer id, String vocation,
                                     String userName, String unitName,
                                     String identity, String educational, String email,
-                                    String sex, String userAddress, String icon) {
+                                    String sex, String userAddress, String icon,String password) {
         if (id == null)
             return ResponseResult.error(StatusConst.ERROR, "id不能为空");
         User user = new User();
@@ -381,6 +381,7 @@ public class UserServiceImp implements UserService {
         user.setEmail(email);
         user.setEducational(educational);
         user.setHeadUrl(icon);
+        user.setPassword(password);
         if (updateMyDocument(user) == StatusConst.SUCCESS) {
             System.out.println("控制层操作成功");
             return ResponseResult.success(user);
