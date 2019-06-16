@@ -36,6 +36,26 @@ public class Video implements Serializable {
 
     private String time;
 
+    private Integer status;
+
+    private Integer collectNumber;
+
+    public Integer getCollectNumber() {
+        return collectNumber;
+    }
+
+    public void setCollectNumber(Integer collectNumber) {
+        this.collectNumber = collectNumber;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public String getTime() {
         return time;
     }
@@ -179,7 +199,7 @@ public class Video implements Serializable {
         sb.append(", videoUrl=").append(videoUrl);
         sb.append(", videoSort=").append(videoSort);
         sb.append(", readNumber=").append(readNumber);
-        sb.append(", state=").append(state);
+        sb.append(", status=").append(status);
         sb.append(", reviewState=").append(reviewState);
         sb.append(", author=").append(author);
         sb.append(", createTime=").append(createTime);

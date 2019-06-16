@@ -39,10 +39,9 @@ public class NewsController {
     @GetMapping(value = "getNewsListById")
     public ResponseResult getNewsListById(Integer id) {
         List<News> news = newsMapper.selectAllBySortId(id);
-        for (News one:news)
-        {
+        for (News one : news) {
             Date createTime = one.getCreateTime();
-            if (createTime!=null)
+            if (createTime != null)
                 one.setTime(StringUtil.getDateString(createTime));
         }
         return ResponseResult.success(news);
@@ -61,20 +60,18 @@ public class NewsController {
     @GetMapping(value = "getNewsBySortId")
     public ResponseResult getNewsBySortId(Integer id) {
         List<News> news = technologySortMapper.getNewsBySortId(id);
-        for (News one:news)
-        {
+        for (News one : news) {
             Date createTime = one.getCreateTime();
-            if (createTime!=null)
+            if (createTime != null)
                 one.setTime(StringUtil.getDateString(createTime));
         }
         return ResponseResult.success(news);
     }
 
-    @ApiOperation(value = "视频")
+    @ApiOperation(value = "所有视频")
     @GetMapping(value = "/selectVideo")
-    public ResponseResult selectVideo() {
-        List<Video> list = videoMapper.selectVideo();
-        return ResponseResult.success(list);
+    public ResponseResult selectVideo(Integer userId, Integer currPage, Integer pageSize) {
+        return newsServiceImp.getVideoList(userId, currPage, pageSize);
     }
 
     @Autowired
@@ -91,10 +88,9 @@ public class NewsController {
     @GetMapping(value = "getNewsListByAnimalId")
     public ResponseResult getNewsListByAnimalId(int id) {
         List<News> news = animalMapper.AnimalNews(id);
-        for (News one:news)
-        {
+        for (News one : news) {
             Date createTime = one.getCreateTime();
-            if (createTime!=null)
+            if (createTime != null)
                 one.setTime(StringUtil.getDateString(createTime));
         }
         return ResponseResult.success(news);
@@ -178,10 +174,9 @@ public class NewsController {
     @GetMapping(value = "getTopicNews")
     public ResponseResult getTopicNews(Integer id) {
         List<News> topicNewsList = topicMapper.getNewsByTopicId(id);
-        for (News one:topicNewsList)
-        {
+        for (News one : topicNewsList) {
             Date createTime = one.getCreateTime();
-            if (createTime!=null)
+            if (createTime != null)
                 one.setTime(StringUtil.getDateString(createTime));
         }
         return ResponseResult.success(topicNewsList);
@@ -195,6 +190,5 @@ public class NewsController {
     public ResponseResult getNewsDetail(Integer newsId, Integer userId) {
         return newsServiceImp.getNewsById(newsId, userId);
     }
-
 
 }

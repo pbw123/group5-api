@@ -89,14 +89,14 @@ public class QuestionServiceImp {
         question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
         List<Reply> replies = question.getReplies();
         for (Reply reply : replies) {
-            String replyColumn="reply_id";
+            String replyColumn = "reply_id";
             Timestamp replyTime = reply.getReplyTime();
-            if (replyTime!=null)
-            reply.setTime(StringUtil.getDateString(replyTime));
-            int replyNumber = exchangeMapper.getExchangeLikeNumber(replyColumn,reply.getId());
+            if (replyTime != null)
+                reply.setTime(StringUtil.getDateString(replyTime));
+            int replyNumber = exchangeMapper.getExchangeLikeNumber(replyColumn, reply.getId());
             reply.setLike(replyNumber);
             Like likeOrNo = exchangeMapper.isLikeOrNo(userId, replyColumn, reply.getId());
-            if (likeOrNo==null||likeOrNo.getStatus()==1)
+            if (likeOrNo == null || likeOrNo.getStatus() == 1)
                 reply.setIsLike(1);
             else
                 reply.setIsLike(0);
@@ -104,8 +104,7 @@ public class QuestionServiceImp {
         return ResponseResult.success(question);
     }
 
-    public ResponseResult getQuestionList(Integer currPage,Integer pageSize)
-    {
+    public ResponseResult getQuestionList(Integer currPage, Integer pageSize) {
         List<Question> lists = questionMapper.getQuestionList();
         PageDTO page = PageUtil.page(currPage, pageSize, lists);
         List<Question> questionLists = page.getList();
@@ -121,6 +120,25 @@ public class QuestionServiceImp {
                 }
             }
         }
-        return ResponseResult.succ(questionLists,page.getSize());
+        return ResponseResult.succ(questionLists, page.getSize());
+    }
+
+    public ResponseResult getBySort(String keyword, Integer currPage,
+                                    Integer pageSize) {
+        List<Question> questionList = questionMapper.getQuestionBySort(keyword);
+        if (questionList == null)
+            return ResponseResult.success();
+        PageDTO pageDTO = PageUtil.pageListDemo(currPage, pageSize, questionList);
+        List<Question> dtoList = pageDTO.getList();
+        for (Question question : dtoList) {
+            if (question.getCreateTime() != null) {
+                question.setTime(StringUtil.getDateString(question.getCreateTime()));
+            }
+           question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
+//            回复数量
+            int replyAmount = questionMapper.getReplyAmount(question.getId());
+            question.setReplyAmount(replyAmount);
+        }
+        return ResponseResult.succ(dtoList,pageDTO.getSize());
     }
 }

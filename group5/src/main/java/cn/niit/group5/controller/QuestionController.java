@@ -48,15 +48,13 @@ public class QuestionController {
         question.setCreateTime(new Timestamp(System.currentTimeMillis()));
         question.setSort(sort);
         questionMapper.insertQuestion(question);
-        if (imgs!=null)
-        {
-           for (String image:imgs)
-           {
-               Img img = new Img();
-               img.setImgUrl(image);
-               img.setQuestionId(question.getId());
-               imgMapper.insertQuestionImg(img);
-           }
+        if (imgs != null) {
+            for (String image : imgs) {
+                Img img = new Img();
+                img.setImgUrl(image);
+                img.setQuestionId(question.getId());
+                imgMapper.insertQuestionImg(img);
+            }
 
         }
         return ResponseResult.success();
@@ -128,5 +126,12 @@ public class QuestionController {
     @PostMapping(value = "updateQuestion")
     public ResponseResult updateQuestion(String content, String createTime) {
         return exchangeServiceImp.updateQuestion(content, createTime);
+    }
+
+    @ApiOperation(value = "按分类查询问题")
+    @PostMapping(value = "getBySort")
+    public ResponseResult getBySort(String keyword, Integer currPage,
+                                    Integer pageSize) {
+        return questionServiceImp.getBySort(keyword, currPage, pageSize);
     }
 }

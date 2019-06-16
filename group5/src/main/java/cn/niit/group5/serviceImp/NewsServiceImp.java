@@ -1,13 +1,8 @@
 package cn.niit.group5.serviceImp;
 
-import cn.niit.group5.entity.Collection;
-import cn.niit.group5.entity.Module;
-import cn.niit.group5.entity.News;
-import cn.niit.group5.entity.TechnologySort;
-import cn.niit.group5.mapper.CollectionMapper;
-import cn.niit.group5.mapper.ModuleMapper;
-import cn.niit.group5.mapper.NewsMapper;
-import cn.niit.group5.mapper.TechnologySortMapper;
+import cn.niit.group5.entity.*;
+import cn.niit.group5.entity.dto.PageDTO;
+import cn.niit.group5.mapper.*;
 import cn.niit.group5.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -139,7 +134,7 @@ public class NewsServiceImp {
         Date createTime = news.getCreateTime();
         if (createTime != null)
             news.setTime(StringUtil.getDateString(createTime));
-        Collection collection = collectionMapper.getCollectionById(userId, column,newsId);
+        Collection collection = collectionMapper.getCollectionById(userId, column, newsId);
         if (collection == null) {
             news.setStatus(1);
         } else {
@@ -188,4 +183,28 @@ public class NewsServiceImp {
             return StatusConst.ERROR;
     }
 
+    @Autowired
+    private VideoMapper videoMapper;
+
+    public ResponseResult getVideoList(Integer userId, Integer currPage, Integer pageSize) {
+        String column = "video";
+        List<Video> list = videoMapper.selectVideo();
+        if (list == null) {
+            return ResponseResult.success();
+        }
+        PageDTO pageListDemo = PageUtil.pageListDemo(currPage, pageSize, list);
+        List<Video> videoList = pageListDemo.getList();
+        for (Video video : videoList) {
+//   该登录用户是否已经收藏
+            Collection collect = collectionMapper.getCollectionById(userId, column, video.getId());
+            if (collect == null || collect.getStatus() == 1)
+                video.setStatus(1);
+            else
+                video.setStatus(0);
+//            该视频被收藏的数量
+            int number = collectionMapper.getExchangeNumber(column, video.getId());
+            video.setCollectNumber(number);
+        }
+        return ResponseResult.succ(videoList,pageListDemo.getSize());
+    }
 }

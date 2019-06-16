@@ -3,6 +3,7 @@ package cn.niit.group5.mapper;
 import cn.niit.group5.entity.Question;
 import cn.niit.group5.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
@@ -42,5 +43,9 @@ public interface QuestionMapper {
 
     //   问题回复数量
     int getReplyAmount(Integer id);
+
+//    根据分类查询问题
+    @Select("select * from t_question where sort like concat('%',#{keyword},'%')")
+    List<Question>getQuestionBySort(@Param("keyword") String keyword);
 
 }
