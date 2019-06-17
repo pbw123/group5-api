@@ -97,8 +97,8 @@ public class ExchangeController {
 
         @ApiOperation(value = "我的交流", notes = "我的交流列表,传入我的用户id")
         @GetMapping(value = "getMyExchangeList")
-        public ResponseResult getMyExchangeList (Integer userId){
-            return exchangeServiceImp.getMyAllList(userId);
+        public ResponseResult getMyExchangeList (Integer userId,Integer currPage,Integer pageSize){
+            return exchangeServiceImp.getMyAllList(userId,currPage,pageSize);
         }
 
 

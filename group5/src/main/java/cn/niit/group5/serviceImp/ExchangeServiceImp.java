@@ -86,10 +86,12 @@ public class ExchangeServiceImp {
         return ResponseResult.success(exchange);
     }
 
-    public ResponseResult getMyAllList(Integer userId) {
+    public ResponseResult getMyAllList(Integer userId,Integer currPage,Integer pageSize) {
         String column = "exchange_id";
         List<Exchange> exchangeList = exchangeMapper.getExchangeListByUserId(userId);
-        for (Exchange exchange : exchangeList) {
+        PageDTO pageDTO = PageUtil.pageListDemo(currPage, pageSize, exchangeList);
+        List<Exchange> dtoList = pageDTO.getList();
+        for (Exchange exchange : dtoList) {
             exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
             Timestamp createTime = exchange.getCreateTime();
             if (createTime != null)
@@ -97,7 +99,7 @@ public class ExchangeServiceImp {
             int likeNumber = exchangeMapper.getExchangeLikeNumber(column, exchange.getId());
             exchange.setLike(likeNumber);
         }
-        return ResponseResult.success(exchangeList);
+        return ResponseResult.succ(dtoList,pageDTO.getSize());
     }
 
     public ResponseResult getAllList(Integer userId,Integer currPage, Integer pageSize) {

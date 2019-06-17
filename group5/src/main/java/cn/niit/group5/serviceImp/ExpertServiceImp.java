@@ -316,6 +316,6 @@ public class ExpertServiceImp {
             question.setTime(StringUtil.getDateString(question.getCreateTime()));
 
         }
-        return ResponseResult.succ(dtoList,pageDTO.getSize());
+        return ResponseResult.success(dtoList);
     }
 }
