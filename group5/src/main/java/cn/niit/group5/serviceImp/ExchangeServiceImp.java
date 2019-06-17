@@ -171,4 +171,10 @@ public class ExchangeServiceImp {
         }
         return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
     }
+
+//    public ResponseResult addExchange(Integer userId, String content,String address,String[] imgs)
+//    {
+//        
+//        exchangeMapper.insertExchange();
+//    }
 }
