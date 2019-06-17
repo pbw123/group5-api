@@ -138,6 +138,10 @@ public class QuestionServiceImp {
 //            回复数量
             int replyAmount = questionMapper.getReplyAmount(question.getId());
             question.setReplyAmount(replyAmount);
+//            问题作者
+            Integer userId = question.getUserId();
+            User user = questionMapper.getUserById(userId);
+            question.setUser(user);
         }
         return ResponseResult.succ(dtoList,pageDTO.getSize());
     }

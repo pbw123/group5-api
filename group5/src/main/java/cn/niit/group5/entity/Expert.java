@@ -40,6 +40,15 @@ public class Expert implements Serializable {
    private String headImg;
 
    private String sortName;
+private Integer number;
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
 
     public String getSortName() {
         return sortName;

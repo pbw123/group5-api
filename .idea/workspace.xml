@@ -5,8 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29385a52-292e-48cc-884f-51a80fd1ffe8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExchangeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExchangeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExpertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExpertController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/IndexController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/QuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/Expert.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/Expert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExpertMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExpertMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExpertQuestionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExpertQuestionMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/ExchangeServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/ExchangeServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/ExpertServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/ExpertServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/QuestionServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/QuestionServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/UserServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/UserServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group5/src/main/resources/mapper/CollectionMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/resources/mapper/CollectionMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group5/src/main/resources/mapper/ExchangeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/group5/src/main/resources/mapper/ExchangeMapper.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/group5/target/" />
@@ -43,46 +54,31 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/NewsServiceImp.java">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExchangeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="207" column="67" selection-start-line="207" selection-start-column="67" selection-end-line="207" selection-end-column="67" />
+            <state relative-caret-position="313">
+              <caret line="49" column="48" selection-start-line="49" selection-start-column="48" selection-end-line="49" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExchangeController.java">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExpertController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="47" column="96" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="97" />
+            <state relative-caret-position="377">
+              <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/ExchangeServiceImp.java">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/Group5Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="455">
-              <caret line="174" column="60" selection-start-line="174" selection-start-column="60" selection-end-line="174" selection-end-column="60" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExchangeMapper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1027">
-              <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/QuestionMapper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1521">
-              <caret line="47" column="79" selection-start-line="47" selection-start-column="79" selection-end-line="47" selection-end-column="79" />
+            <state relative-caret-position="351">
+              <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+              <folding>
+                <element signature="e#246#247#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -90,44 +86,67 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/ExpertServiceImp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="586">
+              <caret line="318" column="62" lean-forward="true" selection-start-line="318" selection-start-column="62" selection-end-line="318" selection-end-column="62" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/QuestionServiceImp.java">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/Expert.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4524">
-              <caret line="125" column="36" selection-start-line="125" selection-start-column="36" selection-end-line="125" selection-end-column="36" />
+            <state relative-caret-position="429">
+              <caret line="44" column="32" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
+              <folding>
+                <element signature="e#764#765#0" expanded="true" />
+                <element signature="e#809#810#0" expanded="true" />
+                <element signature="e#845#846#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ImgMapper.java">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExpertMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="741">
-              <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
+            <state relative-caret-position="625">
+              <caret line="57" column="12" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/Question.java">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/QuestionMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            <state relative-caret-position="235">
+              <caret line="44" column="17" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/QuestionController.java">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExchangeMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4524">
-              <caret line="134" column="44" selection-start-line="134" selection-start-column="44" selection-end-line="134" selection-end-column="44" />
+            <state relative-caret-position="-1013">
+              <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/CollectionMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="430">
+              <caret line="49" column="77" lean-forward="true" selection-start-line="49" selection-start-column="77" selection-end-line="49" selection-end-column="77" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mapper/ExchangeMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="83" column="49" selection-start-line="83" selection-start-column="49" selection-end-line="83" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -178,7 +197,6 @@
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/config/CORSConfig.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/Exchange.java" />
         <option value="$PROJECT_DIR$/group5/src/main/resources/mapper/QuestionMapper.xml" />
-        <option value="$PROJECT_DIR$/group5/src/main/resources/mapper/ExchangeMapper.xml" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/News.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/Question.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/util/StatusConst.java" />
@@ -194,34 +212,35 @@
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/ExpertQuestion.java" />
         <option value="$PROJECT_DIR$/group5/src/main/resources/mapper/ImgMapper.xml" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/Img.java" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/Expert.java" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExpertQuestionMapper.java" />
         <option value="$PROJECT_DIR$/group5/src/main/resources/mapper/ExpertQuestionMapper.xml" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExpertController.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/User.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/UserMapper.java" />
         <option value="$PROJECT_DIR$/group5/src/main/resources/mapper/ExpertMapper.xml" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExpertMapper.java" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/ExpertServiceImp.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ImgMapper.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/Index.java" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/IndexController.java" />
         <option value="$PROJECT_DIR$/group5/src/main/resources/mapper/UserMapper.xml" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExchangeController.java" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/UserServiceImp.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/UserController.java" />
         <option value="$PROJECT_DIR$/group5/src/test/java/cn/niit/group5/controller/UserControllerTest.java" />
         <option value="$PROJECT_DIR$/group5/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/group5/src/main/resources/mapper/CollectionMapper.xml" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/CollectionServiceImp.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/NewsController.java" />
         <option value="$PROJECT_DIR$/group5/src/main/resources/mapper/VideoMapper.xml" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/Video.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/QuestionMapper.java" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/QuestionServiceImp.java" />
-        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/QuestionController.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/NewsServiceImp.java" />
         <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/ExchangeServiceImp.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExchangeController.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/resources/mapper/ExchangeMapper.xml" />
+        <option value="$PROJECT_DIR$/group5/src/main/resources/mapper/CollectionMapper.xml" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExpertQuestionMapper.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/UserServiceImp.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/QuestionServiceImp.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/QuestionController.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/IndexController.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/Expert.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExpertMapper.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/ExpertServiceImp.java" />
+        <option value="$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExpertController.java" />
       </list>
     </option>
   </component>
@@ -365,27 +384,7 @@
               <item name="group5" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="group5" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="group5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="group5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="group5" type="462c0819:PsiDirectoryNode" />
-              <item name="mapper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="group5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="group5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="group5" type="462c0819:PsiDirectoryNode" />
-              <item name="serviceImp" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="group5" type="b2602c69:ProjectViewProjectNode" />
@@ -684,7 +683,7 @@
       <workItem from="1560662325915" duration="740000" />
       <workItem from="1560667504599" duration="2273000" />
       <workItem from="1560673089804" duration="8257000" />
-      <workItem from="1560732052634" duration="578000" />
+      <workItem from="1560732052634" duration="8714000" />
     </task>
     <servers />
   </component>
@@ -721,7 +720,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="830834000" />
+    <option name="totallyTimeSpent" value="838970000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -736,7 +735,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4915254" visible="true" weight="0.2841823" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4915254" weight="0.2841823" />
       <window_info id="Structure" order="1" sideWeight="0.5023112" weight="0.24865952" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -746,7 +745,7 @@
       <window_info id="Web" order="7" sideWeight="0.5084746" side_tool="true" weight="0.23616734" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.3251029" />
       <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.6255144" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.6255144" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3990755" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.32973805" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
@@ -772,8 +771,8 @@
       <window_info anchor="right" id="Database" order="10" weight="0.3297587" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4915254" visible="true" weight="0.28485253" />
-      <window_info id="Structure" order="1" sideWeight="0.5023112" weight="0.13404825" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4915254" visible="true" weight="0.2841823" />
+      <window_info id="Structure" order="1" sideWeight="0.5023112" weight="0.24865952" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Capture Tool" order="4" />
@@ -782,7 +781,7 @@
       <window_info id="Web" order="7" sideWeight="0.5084746" side_tool="true" weight="0.23616734" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.3251029" />
       <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.6255144" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.6255144" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3990755" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.32973805" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
@@ -856,20 +855,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/SupplyBuyMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mapper/SupplyBuyMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="60" column="115" selection-start-line="60" selection-start-column="115" selection-end-line="60" selection-end-column="115" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/SupplyBuyServiceImp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
@@ -940,20 +925,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/Expert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="35" column="25" lean-forward="true" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExpertQuestionMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mapper/ExpertQuestionMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="507">
@@ -987,13 +958,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExpertController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-998">
-          <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controllerRear/ExpertControllerRear.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
@@ -1005,13 +969,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="75" column="21" lean-forward="true" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExpertMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="39" column="26" selection-start-line="39" selection-start-column="26" selection-end-line="39" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -1031,13 +988,6 @@
             <element signature="e#499#500#0" expanded="true" />
             <element signature="e#531#532#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/IndexController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="83" column="37" selection-start-line="83" selection-start-column="37" selection-end-line="83" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -1081,24 +1031,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/UserServiceImp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="524" column="71" lean-forward="true" selection-start-line="524" selection-start-column="71" selection-end-line="524" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/Collection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-429">
           <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mapper/CollectionMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="126" column="65" selection-start-line="126" selection-start-column="65" selection-end-line="126" selection-end-column="65" />
         </state>
       </provider>
     </entry>
@@ -1120,31 +1056,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/CollectionMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/Group5Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
-          <folding>
-            <element signature="e#246#247#0" expanded="true" />
-            <element signature="e#314#315#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6045">
-          <caret line="174" column="26" selection-start-line="174" selection-start-column="26" selection-end-line="174" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -1175,13 +1086,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/QuestionServiceImp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4524">
-          <caret line="125" column="36" selection-start-line="125" selection-start-column="36" selection-end-line="125" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ImgMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="741">
@@ -1196,13 +1100,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/QuestionController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4524">
-          <caret line="134" column="44" selection-start-line="134" selection-start-column="44" selection-end-line="134" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/NewsServiceImp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="338">
@@ -1210,38 +1107,142 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExchangeMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1027">
-          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/QuestionMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1521">
-          <caret line="47" column="79" selection-start-line="47" selection-start-column="79" selection-end-line="47" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/ExpertServiceImp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/ExchangeServiceImp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="174" column="60" selection-start-line="174" selection-start-column="60" selection-end-line="174" selection-end-column="60" />
+        <state relative-caret-position="377">
+          <caret line="180" column="5" lean-forward="true" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mapper/TopicMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-325" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mapper/CollectionMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="55" column="29" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExpertQuestionMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="23" column="68" selection-start-line="23" selection-start-column="68" selection-end-line="23" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/UserServiceImp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="845">
+          <caret line="633" column="72" lean-forward="true" selection-start-line="633" selection-start-column="72" selection-end-line="633" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/QuestionServiceImp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="901">
+          <caret line="143" column="33" selection-start-line="143" selection-start-column="33" selection-end-line="143" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/QuestionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="134" column="73" lean-forward="true" selection-start-line="134" selection-start-column="73" selection-end-line="134" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4628">
+          <caret line="154" column="36" selection-start-line="154" selection-start-column="36" selection-end-line="154" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/IndexController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="172" column="34" lean-forward="true" selection-start-line="172" selection-start-column="34" selection-end-line="172" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExchangeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="47" column="96" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="97" />
+        <state relative-caret-position="313">
+          <caret line="49" column="48" selection-start-line="49" selection-start-column="48" selection-end-line="49" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/resources/mapper/ExchangeMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="83" column="49" selection-start-line="83" selection-start-column="49" selection-end-line="83" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/QuestionMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="44" column="17" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExchangeMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1013">
+          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/CollectionMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="49" column="77" lean-forward="true" selection-start-line="49" selection-start-column="77" selection-end-line="49" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/entity/Expert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="44" column="32" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
+          <folding>
+            <element signature="e#764#765#0" expanded="true" />
+            <element signature="e#809#810#0" expanded="true" />
+            <element signature="e#845#846#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/mapper/ExpertMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="625">
+          <caret line="57" column="12" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/Group5Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+          <folding>
+            <element signature="e#246#247#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/serviceImp/ExpertServiceImp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="586">
+          <caret line="318" column="62" lean-forward="true" selection-start-line="318" selection-start-column="62" selection-end-line="318" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/group5/src/main/java/cn/niit/group5/controller/ExpertController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
         </state>
       </provider>
     </entry>

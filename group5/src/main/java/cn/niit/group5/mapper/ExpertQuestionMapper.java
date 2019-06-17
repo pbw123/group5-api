@@ -21,7 +21,7 @@ public interface ExpertQuestionMapper {
    List<ExpertQuestion>getMyExpertQuestionList(Integer id);
 
 //   删除专家提问
-   @Update("update t_expert_question set is_delete=1 where user_id=#{0}")
+   @Update("update t_expert_question set is_delete=1 where id=#{0}")
    int delExpertQuestion(Integer id);
 
 }

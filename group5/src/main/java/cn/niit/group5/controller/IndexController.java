@@ -169,8 +169,8 @@ public class IndexController {
     }
     @Autowired
     private ImgMapper imgMapper;
-    @ApiOperation(value = "首页顶部轮播图片",notes ="遍历出所有图片" )
-    @GetMapping(value = "/getImg")
+//    @ApiOperation(value = "首页顶部轮播图片",notes ="遍历出所有图片" )
+//    @GetMapping(value = "/getImg")
     public ResponseResult getImg(){
         List<Img> imgList=imgMapper.getImg();
         return ResponseResult.success(imgList);

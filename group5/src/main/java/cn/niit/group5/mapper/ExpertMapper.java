@@ -53,5 +53,7 @@ List<Expert>getAgricultureExpert(@Param("sortId") Integer sortId, @Param("gradeI
 
 //    搜索专家
     List<Expert>search(Map<Object,Object>map);
-
+//该专家被提问的次数
+    @Select("SELECT COUNT(expert_id)  FROM t_expert_question WHERE expert_id=#{0} AND is_delete=0")
+    int getNumber(Integer id);
 }

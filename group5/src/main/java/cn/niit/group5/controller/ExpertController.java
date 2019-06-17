@@ -1,7 +1,6 @@
 package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.*;
-import cn.niit.group5.entity.dto.ExpertDTO;
 import cn.niit.group5.entity.dto.IndustryDTO;
 import cn.niit.group5.mapper.ExpertMapper;
 import cn.niit.group5.mapper.ExpertQuestionMapper;
@@ -42,12 +41,7 @@ public class ExpertController {
     @ApiOperation(value = "专家详情/有咨询专家按钮的那个页面", notes = "传入该专家的id/点击专家头像用这个接口")
     @GetMapping(value = "getExpertDetail")
     public ResponseResult getExpertDetail(Integer id) {
-        Expert expert = expertMapper.getExpertDetail(id);
-        List<ExpertQuestion> expertQuestions = expertMapper.getExpertQuestionList(id);
-        ExpertDTO expertDTO = new ExpertDTO();
-        expertDTO.setExpert(expert);
-        expertDTO.setExpertQuestions(expertQuestions);
-        return ResponseResult.success(expertDTO);
+        return expertServiceImp.getExpertDetail(id);
     }
 
     @ApiOperation(value = "获取产业技术体系类别")
@@ -75,9 +69,8 @@ public class ExpertController {
 
     @ApiOperation(value = "获取该专家被别人问的问题列表", notes = "传入该专家的id")
     @GetMapping(value = "getExpertQuestionList")
-    public ResponseResult getExpertQuestionList(Integer id) {
-        List<ExpertQuestion> experts = expertMapper.getExpertQuestionList(id);
-        return ResponseResult.success(experts);
+    public ResponseResult getExpertQuestionList(Integer id, Integer currPage, Integer pageSize) {
+        return expertServiceImp.getQuestionList(id, currPage, pageSize);
     }
 
     @ApiOperation(value = "专家问题详情", notes = "传入该专家的id")
@@ -85,6 +78,7 @@ public class ExpertController {
     public ResponseResult getExpertQuestionDetail(Integer id) {
         ExpertQuestion experts = expertQuestionMapper.expertQuestionDetail(id);
         List<ExpertReply> expertReplys = experts.getExpertReplys();
+
         for (ExpertReply reply : expertReplys) {
             reply.setTime(StringUtil.getDateString(reply.getCreateTime()));
         }

@@ -311,6 +311,8 @@ public class UserServiceImp implements UserService {
 //            List list = new ArrayList<>();
 //            list.add(question.getImg());
             question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
+            int replyAmount = questionMapper.getReplyAmount(question.getId());
+            question.setReplyAmount(replyAmount);
         }
         return ResponseResult.succ(pageList, page.getSize());
     }

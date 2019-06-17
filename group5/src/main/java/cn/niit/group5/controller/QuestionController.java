@@ -129,7 +129,7 @@ public class QuestionController {
     }
 
     @ApiOperation(value = "按分类查询问题")
-    @PostMapping(value = "getBySort")
+    @GetMapping(value = "getBySort")
     public ResponseResult getBySort(String keyword, Integer currPage,
                                     Integer pageSize) {
         return questionServiceImp.getBySort(keyword, currPage, pageSize);

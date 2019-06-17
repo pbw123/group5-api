@@ -172,9 +172,29 @@ public class ExchangeServiceImp {
         return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
     }
 
-//    public ResponseResult addExchange(Integer userId, String content,String address,String[] imgs)
-//    {
-//        
-//        exchangeMapper.insertExchange();
-//    }
+    public ResponseResult addExchange(Integer userId, String content,String address,String[] imgs)
+    {
+
+        //        List<String> imgList = JSONArray.parseArray(imgs, String.class);
+        Exchange exchange = new Exchange();
+        exchange.setUserId(userId);
+        exchange.setContent(content);
+        exchange.setAddress(address);
+        exchange.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        int i = exchangeMapper.insertExchange(exchange);
+        if (i == 1) {
+            if (imgs!=null)
+            {
+                for (String image:imgs)
+                {
+                    Img img = new Img();
+                    img.setExchangeId(exchange.getId());
+                    img.setImgUrl(image);
+                    imgMapper.insertExchangeImg(img);
+                    System.out.println(image);
+                }
+            }
+        }
+        return ResponseResult.success();
+    }
 }

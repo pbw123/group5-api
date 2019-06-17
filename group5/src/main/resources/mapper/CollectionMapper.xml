@@ -53,6 +53,7 @@
       <result column="sort" property="sort"/>
       <result column="img" property="img"/>
       <result column="address_id" property="addressId"/>
+      <result column="address" property="address"/>
       <association property="replyAmount" column="id" select="cn.niit.group5.mapper.QuestionMapper.getQuestionReplyNumber">
       </association>
       <association property="user" javaType="User">

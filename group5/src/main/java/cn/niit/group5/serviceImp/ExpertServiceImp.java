@@ -1,6 +1,7 @@
 package cn.niit.group5.serviceImp;
 
 import cn.niit.group5.entity.*;
+import cn.niit.group5.entity.dto.ExpertDTO;
 import cn.niit.group5.entity.dto.PageDTO;
 import cn.niit.group5.mapper.*;
 import cn.niit.group5.util.*;
@@ -292,5 +293,29 @@ public class ExpertServiceImp {
             }
         }
         return ResponseResult.success();
+    }
+    public ResponseResult getExpertDetail(Integer id)
+    {
+        Expert expert = expertMapper.getExpertDetail(id);
+        expert.setNumber(expertMapper.getNumber(id));
+        List<ExpertQuestion> expertQuestions = expertMapper.getExpertQuestionList(id);
+        ExpertDTO expertDTO = new ExpertDTO();
+        expertDTO.setExpert(expert);
+        expertDTO.setExpertQuestions(expertQuestions);
+        return ResponseResult.success(expertDTO);
+    }
+
+    public ResponseResult getQuestionList(Integer id,Integer currPage,Integer pageSize)
+    {
+        List<ExpertQuestion> questions = expertMapper.getExpertQuestionList(id);
+        PageDTO pageDTO = PageUtil.pageListDemo(currPage, pageSize, questions);
+        List<ExpertQuestion> dtoList = pageDTO.getList();
+        for (ExpertQuestion question:dtoList)
+        {
+            if (question.getCreateTime()!=null)
+            question.setTime(StringUtil.getDateString(question.getCreateTime()));
+
+        }
+        return ResponseResult.succ(dtoList,pageDTO.getSize());
     }
 }
