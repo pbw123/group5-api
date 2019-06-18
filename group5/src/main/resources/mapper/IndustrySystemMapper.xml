@@ -14,7 +14,7 @@
 </select>
 
     <select id="getIndustryExpertList" parameterType="Integer" resultMap="expertRM">
-   SELECT e.id eid,e.head_img,e.expert_name,e.resume ,g.grade grade
+   SELECT e.id eid,e.head_img,e.expert_name,e.resume,e.logo,g.grade grade
   FROM t_expert_grade eg,t_expert e,t_grade g
   WHERE e.sys_sort=#{sysSortId}
   AND e.id=eg.expert_id
@@ -27,6 +27,7 @@ AND   eg.grade_id=g.id
         <result column="expert_name" property="expertName"/>
         <result column="resume" property="resume"/>
         <result column="grade" property="grade"/>
+        <result column="logo" property="logo"/>
     </resultMap>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

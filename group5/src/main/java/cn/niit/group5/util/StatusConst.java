@@ -19,6 +19,4 @@ public class StatusConst {
     public static final int CURRENTPAGE =1;
     public static final int PAGESIZE =15;
 
-
-
 }

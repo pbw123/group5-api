@@ -66,11 +66,11 @@ public class ExchangeController {
          * */
         @ApiOperation(value = "在交流中发表评论")
         @PostMapping(value = "/reply")
-        public ResponseResult replyExchange (
-        @RequestParam(required = true) int userId,
-        @RequestParam(required = true) String content,
-        @RequestParam(required = true) byte exchangeId
-    ){
+        public ResponseResult replyExchange (Integer userId, String content, Integer exchangeId){
+            if (userId==null||exchangeId==null)
+            {
+                return ResponseResult.error(StatusConst.ERROR,MsgConst.ID_NULL);
+            }
             Reply reply = new Reply();
             reply.setIsExchangeReply(1);
             reply.setUserId(userId);
@@ -89,8 +89,7 @@ public class ExchangeController {
         @PostMapping(value = "/collectExchange")
         public ResponseResult CollectExchange (
         @RequestParam(required = true) int userId,
-        @RequestParam(required = true) int exchangeId
-    ){
+        @RequestParam(required = true) int exchangeId){
             String column = "exchange_id";
             return collectionServiceImp.collectOrNo(userId, column, exchangeId);
         }

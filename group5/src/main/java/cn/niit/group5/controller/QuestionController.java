@@ -67,10 +67,11 @@ public class QuestionController {
      */
     @ApiOperation(value = "在提问中发表评论")
     @PostMapping(value = "/reply")
-    public ResponseResult replyQuestion(
-            @RequestParam(required = true) Integer userId,
-            @RequestParam(required = true) String content,
-            @RequestParam(required = true) Integer questionId) {
+    public ResponseResult replyQuestion(Integer userId, String content,Integer questionId) {
+        if (userId==null||questionId==null)
+        {
+            return ResponseResult.error(StatusConst.ERROR,MsgConst.ID_NULL);
+        }
         Reply reply = new Reply();
         reply.setUserId(userId);
         reply.setContent(content);

@@ -10,7 +10,7 @@
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="question_id" property="questionId" jdbcType="INTEGER" />
-    <result column="exchange_id" property="exchangeId" jdbcType="TINYINT" />
+    <result column="exchange_id" property="exchangeId" jdbcType="INTEGER" />
     <result column="like" property="like" jdbcType="INTEGER" />
     <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
     <result column="user_address" property="userAddress"/>

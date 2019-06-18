@@ -69,7 +69,7 @@
 
   <select id="getCollectExchangeById" resultMap="CollectionRM" parameterType="Integer">
     SELECT c.id,c.user_id,c.exchange_id,e.id eid,e.user_id
-    euid,e.img,e.content,e.create_time,e.like,
+    euid,e.img,e.content,e.create_time,e.like,e.address,
 	u.id uid,u.user_name,u.user_address,u.identity,u.head_url
 	FROM t_collection c,t_exchange e,t_user u
 	WHERE c.user_id=#{userId}
@@ -87,6 +87,7 @@
       <result column="content" property="content"/>
       <result column="create_time" property="createTime"/>
       <result column="img" property="img"/>
+      <result column="address" property="address"/>
       <association property="replyAmount" column="id" select="cn.niit.group5.mapper.ExchangeMapper.getExchangeReplyNumber">
       </association>
       <association property="user" javaType="User">
@@ -105,6 +106,7 @@
     WHERE c.user_id=#{userId}
     AND c.news_id=n.id
     AND n.is_delete=0
+    and c.status=0
   </select>
   <resultMap id="Collection1RM" type="cn.niit.group5.entity.Collection">
     <id column="id" property="id"/>
@@ -124,6 +126,7 @@ FROM t_collection c,t_video v
 WHERE c.user_id=#{userId}
 AND c.video=v.id
 AND v.is_delete=0
+and c.status=0
   </select>
   <resultMap id="Collection2RM" type="cn.niit.group5.entity.Collection">
     <id column="id" property="id"/>

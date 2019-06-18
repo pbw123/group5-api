@@ -12,7 +12,7 @@ public class Reply implements Serializable {
 
     private Integer questionId;
 
-    private Byte exchangeId;
+    private Integer exchangeId;
 
     private Integer like;
 
@@ -152,11 +152,11 @@ public class Reply implements Serializable {
         this.questionId = questionId;
     }
 
-    public Byte getExchangeId() {
+    public Integer getExchangeId() {
         return exchangeId;
     }
 
-    public void setExchangeId(Byte exchangeId) {
+    public void setExchangeId(Integer exchangeId) {
         this.exchangeId = exchangeId;
     }
 

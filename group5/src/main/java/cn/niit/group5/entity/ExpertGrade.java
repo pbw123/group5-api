@@ -17,6 +17,16 @@ public class ExpertGrade implements Serializable {
 
     private String grade;
 
+    private String logo;
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
     public String getGrade() {
         return grade;
     }
