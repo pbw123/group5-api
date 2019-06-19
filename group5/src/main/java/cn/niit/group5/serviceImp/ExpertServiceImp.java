@@ -272,7 +272,7 @@ public class ExpertServiceImp {
     private ExpertQuestionMapper expertQuestionMapper;
 
     public ResponseResult addExpertQuestion(Integer userId, Integer expertId, String content,
-                                            String[] imgs) {
+                                            String[] imgs,String address) {
         if (userId==null||expertId==null)
         {
             return ResponseResult.error(StatusConst.ERROR,MsgConst.ID_NULL);
@@ -281,6 +281,7 @@ public class ExpertServiceImp {
         expertQuestion.setUserId(userId);
         expertQuestion.setExpertId(expertId);
         expertQuestion.setContent(content);
+        expertQuestion.setAddress(address);
         expertQuestion.setCreateTime(new Timestamp(System.currentTimeMillis()));
         expertQuestionMapper.insertExpertQuestion(expertQuestion);
         if (imgs!=null)
@@ -318,4 +319,33 @@ public class ExpertServiceImp {
         }
         return ResponseResult.success(dtoList);
     }
+@Autowired
+private AttentionMapper attentionMapper;
+    public ResponseResult expertQuestionDetail(Integer questionId,Integer userId)
+    {
+        ExpertQuestion question = expertQuestionMapper.expertQuestionDetail(questionId);
+        if (question.getCreateTime()!=null)
+            question.setTime(StringUtil.getDateString(question.getCreateTime()));
+        List<ExpertReply> expertReplys = question.getExpertReplys();
+
+        for (ExpertReply reply : expertReplys) {
+            reply.setTime(StringUtil.getDateString(reply.getCreateTime()));
+            Expert expert = expertMapper.getExpertDetail(reply.getExpertId());
+            reply.setExpert(expert);
+            if (reply.getCreateTime()!=null)
+                reply.setTime(StringUtil.getDateString(reply.getCreateTime()));
+        }
+        if (userId!=null)
+        {
+            Attention attention = attentionMapper.isExpertHasAttention(userId, questionId);
+            if (attention==null||attention.getStatus()==1)
+                question.setIsAtten(1);
+            else
+                question.setIsAtten(0);
+        }
+
+        return ResponseResult.success(question);
+    }
+
+
 }

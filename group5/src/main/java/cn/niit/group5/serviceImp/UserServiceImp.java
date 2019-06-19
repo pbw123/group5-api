@@ -635,4 +635,26 @@ public class UserServiceImp implements UserService {
         }
         return ResponseResult.succ(pageList, page.getSize());
     }
+
+    public ResponseResult myExpertQuestionAttenList(Integer userId,Integer currPage,
+                                                    Integer pageSize)
+    {
+        if (userId == null) {
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.ID_NULL);
+        }
+
+        List<Attention> lists = attentionMapper.getMyExpertQuestionList(userId);
+
+        PageDTO pageDTO = PageUtil.pageListDemo(currPage, pageSize, lists);
+        List<Attention> pageList = pageDTO.getList();
+        for (Attention attention : pageList) {
+            ExpertQuestion question = attention.getExpertQuestion();
+            Timestamp createTime = question.getCreateTime();
+            if (createTime != null) {
+                question.setTime(StringUtil.getDateString(createTime));
+            }
+            question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
+        }
+        return ResponseResult.succ(pageList, lists.size());
+    }
 }

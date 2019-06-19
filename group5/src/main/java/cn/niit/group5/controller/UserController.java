@@ -141,11 +141,17 @@ public class UserController {
         return new ResponseResult(StatusConst.ERROR, MsgConst.FAIL);
     }
 
-    //我的关注列表
-    @ApiOperation(value = "我的关注列表", notes = "根据我的用户id显示出我关注的问题")
+    //我的关注列表/快速提问
+    @ApiOperation(value = "我的关注列表/快速提问", notes = "根据我的用户id显示出我关注的问题")
     @GetMapping(value = "/getAttentionByUserId")
     public ResponseResult getAttentionList(Integer userId, Integer currPage, Integer pageSize) {
         return userServiceImp.myAttenList(userId, currPage, pageSize);
+    }
+
+    @ApiOperation(value = "我的关注列表/专家提问", notes = "根据我的用户id显示出我关注的问题")
+    @GetMapping(value = "/getExpertAttenById")
+    public ResponseResult getExpertAttenById(Integer userId, Integer currPage,Integer pageSize) {
+        return userServiceImp.myExpertQuestionAttenList(userId, currPage, pageSize);
     }
 
     //我的收藏-问答

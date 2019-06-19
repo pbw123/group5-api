@@ -1,6 +1,8 @@
 package cn.niit.group5.controller;
 
-import cn.niit.group5.entity.*;
+import cn.niit.group5.entity.Expert;
+import cn.niit.group5.entity.ExpertGrade;
+import cn.niit.group5.entity.IndustrySystem;
 import cn.niit.group5.entity.dto.IndustryDTO;
 import cn.niit.group5.mapper.ExpertMapper;
 import cn.niit.group5.mapper.ExpertQuestionMapper;
@@ -9,7 +11,6 @@ import cn.niit.group5.serviceImp.ExpertServiceImp;
 import cn.niit.group5.serviceImp.IndustryServerImp;
 import cn.niit.group5.util.Client;
 import cn.niit.group5.util.ResponseResult;
-import cn.niit.group5.util.StringUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,8 @@ public class ExpertController {
     @ApiOperation(value = "咨询专家")
     @PostMapping(value = "insertExpertQuestion")
     public ResponseResult insertExpertQuestion(Integer userId, Integer expertId, String content,
-                                               String[] imgs) {
-        return expertServiceImp.addExpertQuestion(userId, expertId, content, imgs);
+                                               String[] imgs,String address) {
+        return expertServiceImp.addExpertQuestion(userId, expertId, content, imgs,address);
     }
 
     @ApiOperation(value = "专家详情/有咨询专家按钮的那个页面", notes = "传入该专家的id/点击专家头像用这个接口")
@@ -75,14 +76,8 @@ public class ExpertController {
 
     @ApiOperation(value = "专家问题详情", notes = "传入该专家的id")
     @GetMapping(value = "getExpertQuestionDetail")
-    public ResponseResult getExpertQuestionDetail(Integer id) {
-        ExpertQuestion experts = expertQuestionMapper.expertQuestionDetail(id);
-        List<ExpertReply> expertReplys = experts.getExpertReplys();
-
-        for (ExpertReply reply : expertReplys) {
-            reply.setTime(StringUtil.getDateString(reply.getCreateTime()));
-        }
-        return ResponseResult.success(experts);
+    public ResponseResult getExpertQuestionDetail(Integer id, Integer userId) {
+        return expertServiceImp.expertQuestionDetail(id, userId);
     }
 
     @Autowired

@@ -20,6 +20,16 @@ public class ExpertReply implements Serializable {
 
     private Integer isDelete;
 
+    private Expert expert;
+
+    public Expert getExpert() {
+        return expert;
+    }
+
+    public void setExpert(Expert expert) {
+        this.expert = expert;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {

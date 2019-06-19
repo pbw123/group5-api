@@ -8,6 +8,7 @@
     <result column="expert_id" property="expertId" jdbcType="INTEGER" />
     <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
   </resultMap>
 <insert id="insertExpertQuestion" parameterType="cn.niit.group5.entity.ExpertQuestion"
         useGeneratedKeys="true" keyProperty="id">

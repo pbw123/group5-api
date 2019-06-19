@@ -22,6 +22,26 @@ public class ExpertQuestion implements Serializable {
     private String sort;
     private List imgs;
 
+    private Integer isAtten;
+
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Integer getIsAtten() {
+        return isAtten;
+    }
+
+    public void setIsAtten(Integer isAtten) {
+        this.isAtten = isAtten;
+    }
+
     public List getImgs() {
         return imgs;
     }
