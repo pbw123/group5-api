@@ -285,10 +285,10 @@ public class UserServiceImp implements UserService {
 //            exchange.setImgs(list);
             exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
             Like like = exchangeMapper.isLikeOrNo(userId, "exchange_id", exchange.getId());
-            if (like != null && like.getStatus() == 0)
-                exchange.setIsLike(0);
-            else
+            if (like == null || like.getStatus() == 1)
                 exchange.setIsLike(1);
+            else
+                exchange.setIsLike(0);
 
             int number = exchangeMapper.getExchangeLikeNumber("exchange_id", exchange.getId());
             exchange.setLike(number);
