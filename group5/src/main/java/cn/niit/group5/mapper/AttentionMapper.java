@@ -25,6 +25,11 @@ public interface AttentionMapper {
   @Select(" SELECT * FROM t_attention WHERE user_id=#{userId} AND question_id=#{questionId}")
   Attention getAttentionById(@Param("userId") Integer user_id,
                              @Param("questionId") Integer question_id);
+//  查询是否曾经关注过该专家提问
+
+  @Select(" SELECT * FROM t_attention WHERE user_id=#{userId} AND expert_question_id=#{expertQuestionId}")
+  Attention getAttentionExpertById(@Param("userId") Integer userId,
+                             @Param("expertQuestionId") Integer expertQuestionId);
 
 //  添加关注
   @Insert(" INSERT INTO t_attention(user_id,question_id) VALUES(#{userId},#{questionId})")

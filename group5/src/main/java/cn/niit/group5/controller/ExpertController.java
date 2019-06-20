@@ -9,6 +9,7 @@ import cn.niit.group5.mapper.ExpertQuestionMapper;
 import cn.niit.group5.mapper.IndustrySystemMapper;
 import cn.niit.group5.serviceImp.ExpertServiceImp;
 import cn.niit.group5.serviceImp.IndustryServerImp;
+import cn.niit.group5.serviceImp.QuestionServiceImp;
 import cn.niit.group5.util.Client;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
@@ -35,8 +36,8 @@ public class ExpertController {
     @ApiOperation(value = "咨询专家")
     @PostMapping(value = "insertExpertQuestion")
     public ResponseResult insertExpertQuestion(Integer userId, Integer expertId, String content,
-                                               String[] imgs,String address) {
-        return expertServiceImp.addExpertQuestion(userId, expertId, content, imgs,address);
+                                               String[] imgs, String address) {
+        return expertServiceImp.addExpertQuestion(userId, expertId, content, imgs, address);
     }
 
     @ApiOperation(value = "专家详情/有咨询专家按钮的那个页面", notes = "传入该专家的id/点击专家头像用这个接口")
@@ -74,7 +75,7 @@ public class ExpertController {
         return expertServiceImp.getQuestionList(id, currPage, pageSize);
     }
 
-    @ApiOperation(value = "专家问题详情", notes = "传入该专家的id")
+    @ApiOperation(value = "专家问题详情", notes = "传入该问题的id")
     @GetMapping(value = "getExpertQuestionDetail")
     public ResponseResult getExpertQuestionDetail(Integer id, Integer userId) {
         return expertServiceImp.expertQuestionDetail(id, userId);
@@ -94,6 +95,15 @@ public class ExpertController {
         industryDTO.setPostExpertList(postExpertList);
         industryDTO.setBasicExpertList(basicExpertList);
         return ResponseResult.success(industryDTO);
+    }
+
+    @Autowired
+    private QuestionServiceImp questionServiceImp;
+
+    @ApiOperation(value = "关注专家提问")
+    @GetMapping(value = "addExpertAtten")
+    public ResponseResult addExpertAtten(Integer userId, Integer questionId) {
+        return questionServiceImp.attentionExpertOrNo(userId, questionId);
     }
 
 }

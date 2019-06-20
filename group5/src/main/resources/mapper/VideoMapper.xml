@@ -36,9 +36,8 @@
 
 <select id="getVideoBySort" parameterType="video" resultMap="BaseResultMap">
   select * from t_video
-  where video_sort=#{sort}
+  where video_sort=#{videoSort}
    and is_delete=0
-   limit #{currPage},#{pageSize}
 </select>
 <select id="getVideoByReview" parameterType="video" resultMap="BaseResultMap">
   select * from t_video

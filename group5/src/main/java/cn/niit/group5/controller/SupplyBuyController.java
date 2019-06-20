@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/supply")
 public class SupplyBuyController {
 
-    @ApiOperation(value = "供应列表", notes = "")
+    @ApiOperation(value = "供应列表")
     @GetMapping(value = "supplyList")
     public ResponseResult supplyList(Integer currPage,Integer pageSize) {
         return supplyBuyServiceImp.supplyList(currPage,pageSize);
     }
 
-    @ApiOperation(value = "求购列表", notes = "")
+    @ApiOperation(value = "求购列表")
     @GetMapping(value = "seekList")
     public ResponseResult seekList(Integer currPage,Integer pageSize) {
         return supplyBuyServiceImp.buyList(currPage,pageSize);

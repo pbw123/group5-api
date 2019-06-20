@@ -71,8 +71,9 @@ public class VideoControllerRear {
 
     @ApiOperation(value = "据视频分类搜索视频")
     @PostMapping(value = "searchVideoBySort")
-    public ResponseResult searchVideoBySort(Integer sort, Integer currPage, Integer pageSize) {
-        return videoServiceImp.searchVideoBySort(sort, currPage, pageSize);
+    public ResponseResult searchVideoBySort(Integer sort,Integer userId, Integer currPage,
+                                            Integer pageSize) {
+        return videoServiceImp.searchVideoBySort(sort,userId, currPage, pageSize);
     }
     @ApiOperation(value = "据审核状态搜索视频")
     @PostMapping(value = "searchVideoByReview")

@@ -66,6 +66,8 @@ public class IndexController {
     @ApiOperation(value ="首页信息")
     @GetMapping(value = "/getIndexMessage")
     public ResponseResult getIndexMessage(Integer id){
+        if (id==null)
+            id=18;
         Index index=new Index();
         List<Module> moduleList=moduleMapper.getIndexModule(id);
         Address address=new Address();
@@ -73,7 +75,10 @@ public class IndexController {
         List<News> newsList=moduleMapper.getTopNews(address);
         List<News> newsList1=moduleMapper.getIndexDynamic(address);
         Question question=moduleMapper.getIndexHotQuestion(address);
+        User user = questionMapper.getUserById(question.getUserId());
+        question.setUser(user);
         Exchange exchange=moduleMapper.getIndexHotExchange(address);
+        exchange.setUser(questionMapper.getUserById(exchange.getUserId()));
         List<Video> videoList=videoMapper.selectVideo();
         List<Img> allNewsImgsList = imgMapper.getAllNewsImgsList();
 

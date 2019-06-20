@@ -21,7 +21,7 @@ List<Expert> getExpertBySort(Integer expertSort);
 //农业专家里的专家
 List<Expert>getAgricultureExpert(@Param("sortId") Integer sortId, @Param("gradeId") Integer gradeId);
 //专家答疑列表
-    @Select("SELECT eq.* FROM t_expert_question eq WHERE eq.expert_id=#{0}")
+    @Select("SELECT eq.* FROM t_expert_question eq WHERE eq.expert_id=#{0}    ORDER BY eq.create_time DESC")
     List<ExpertQuestion> getExpertQuestionList(Integer id);
 
 //    专家问题详情
@@ -56,4 +56,5 @@ List<Expert>getAgricultureExpert(@Param("sortId") Integer sortId, @Param("gradeI
 //该专家被提问的次数
     @Select("SELECT COUNT(expert_id)  FROM t_expert_question WHERE expert_id=#{0} AND is_delete=0")
     int getNumber(Integer id);
+
 }

@@ -1,11 +1,9 @@
 package cn.niit.group5.serviceImp;
 
 import cn.niit.group5.entity.*;
+import cn.niit.group5.entity.dto.PageDTO;
 import cn.niit.group5.mapper.*;
-import cn.niit.group5.util.ResponseResult;
-import cn.niit.group5.util.StatusConst;
-import cn.niit.group5.util.StringUtil;
-import cn.niit.group5.util.UploadImg;
+import cn.niit.group5.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,7 +45,7 @@ public class VideoServiceImp {
         video.setCreateTime(new Timestamp(System.currentTimeMillis()));
         video.setRelationModule(relationModule);
         video.setVideoTitle(title);
-            video.setImg(icon);
+        video.setImg(icon);
         int i = videoMapper.addVideo(video);
         if (i == 1)
             return StatusConst.SUCCESS;
@@ -192,18 +190,30 @@ public class VideoServiceImp {
 
     }
 
-    public ResponseResult searchVideoBySort(Integer sort, Integer currPage, Integer pageSize) {
+    @Autowired
+    private CollectionMapper collectionMapper;
+
+    public ResponseResult searchVideoBySort(Integer sort, Integer userId, Integer currPage,
+                                            Integer pageSize) {
         Video video = new Video();
-        video.setCurrPage(currPage);
-        video.setPageSize(pageSize);
         video.setVideoSort(sort);
         List<Video> videos = videoMapper.getVideoBySort(video);
-        return ResponseResult.success(videos);
+
+        PageDTO pageDTO = PageUtil.pageListDemo(currPage, pageSize, videos);
+        List<Video> dtoList = pageDTO.getList();
+        for (Video v : dtoList) {
+            Collection video1 = collectionMapper.getCollectionById(userId, "video", v.getId());
+            if (video1 == null || video1.getStatus() == 1)
+                v.setStatus(1);
+            else
+                v.setStatus(0);
+        }
+        return ResponseResult.succ(dtoList, videos.size());
     }
 
     public ResponseResult searchVideoByReview(Integer review, Integer currPage, Integer pageSize) {
         Video video = new Video();
-        video.setCurrPage((currPage-1)*pageSize);
+        video.setCurrPage((currPage - 1) * pageSize);
         video.setPageSize(pageSize);
         video.setReviewState(review);
         List<Video> videos = videoMapper.getVideoByReview(video);
@@ -211,15 +221,14 @@ public class VideoServiceImp {
     }
 
     @Autowired
-    private CollectionMapper collectionMapper;
-@Autowired
-private NewsMapper newsMapper;
+    private NewsMapper newsMapper;
+
     public ResponseResult getVideoDetail(Integer userId, Integer id) {
         newsMapper.addReadNumber("t_video", "read_number", id);
         String column = "video";
         Video video = videoMapper.getVideoDetail(id);
         Timestamp createTime = video.getCreateTime();
-        if (createTime!=null)
+        if (createTime != null)
             video.setTime(StringUtil.getDateString(createTime));
 
         Collection collection = collectionMapper.getCollectionById(userId, column, id);

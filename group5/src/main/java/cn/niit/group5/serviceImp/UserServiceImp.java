@@ -528,22 +528,18 @@ public class UserServiceImp implements UserService {
         if (collectionList == null) {
             return ResponseResult.success();
         }
-        Integer curr = StatusConst.CURRENTPAGE;
-        Integer size = StatusConst.PAGESIZE;
-        if (currPage != null) {
-            curr = currPage;
-        }
-        if (pageSize != null) {
-            size = pageSize;
-        }
-        PageDTO page = PageUtil.page(curr, size, collectionList);
+
+        PageDTO page = PageUtil.pageListDemo(currPage,pageSize, collectionList);
         List<Collection> pageList = page.getList();
         for (Collection collection : pageList) {
             Video videos = collection.getVideos();
+            int number = collectionMapper.getExchangeNumber("video", videos.getId());
+            videos.setCollectNumber(number);
             Timestamp createTime = videos.getCreateTime();
             if (createTime != null) {
                 videos.setTime(StringUtil.getDateString(createTime));
             }
+
         }
         return ResponseResult.succ(pageList, page.getSize());
     }
@@ -636,6 +632,8 @@ public class UserServiceImp implements UserService {
         return ResponseResult.succ(pageList, page.getSize());
     }
 
+    @Autowired
+    private TechnologySortMapper technologySortMapper;
     public ResponseResult myExpertQuestionAttenList(Integer userId,Integer currPage,
                                                     Integer pageSize)
     {
@@ -648,12 +646,19 @@ public class UserServiceImp implements UserService {
         PageDTO pageDTO = PageUtil.pageListDemo(currPage, pageSize, lists);
         List<Attention> pageList = pageDTO.getList();
         for (Attention attention : pageList) {
-            ExpertQuestion question = attention.getExpertQuestion();
-            Timestamp createTime = question.getCreateTime();
-            if (createTime != null) {
-                question.setTime(StringUtil.getDateString(createTime));
+            ExpertQuestion question =
+                    expertQuestionMapper.getById(attention.getExpertQuestionId()                );
+            if (question!=null)
+            {
+                if (question.getCreateTime() != null) {
+                    question.setTime(StringUtil.getDateString(question.getCreateTime()));
+                }
+                question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
             }
-            question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));
+            question.setUser(questionMapper.getUserById(question.getUserId()));
+            Expert expert = expertMapper.getExpertDetail(question.getExpertId());
+            question.setSort(technologySortMapper.getById(expert.getExpertSort()).getName());
+            attention.setExpertQuestion(question);
         }
         return ResponseResult.succ(pageList, lists.size());
     }

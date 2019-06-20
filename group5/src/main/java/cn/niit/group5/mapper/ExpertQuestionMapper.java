@@ -1,6 +1,7 @@
 package cn.niit.group5.mapper;
 
 import cn.niit.group5.entity.ExpertQuestion;
+import cn.niit.group5.entity.ExpertReply;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -23,5 +24,12 @@ public interface ExpertQuestionMapper {
 //   删除专家提问
    @Update("update t_expert_question set is_delete=1 where id=#{0}")
    int delExpertQuestion(Integer id);
+
+//   查问题的回复
+   List<ExpertReply> getExpertReplys(Integer questionId);
+
+//   专家问题
+   @Select("select * from t_expert_question where id=#{0}")
+   ExpertQuestion getById(Integer id);
 
 }

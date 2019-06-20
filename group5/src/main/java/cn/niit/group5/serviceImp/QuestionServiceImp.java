@@ -56,6 +56,47 @@ public class QuestionServiceImp {
             return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
         }
     }
+    public ResponseResult attentionExpertOrNo(Integer userId, Integer questionId) {
+        Attention attention;
+        attention = attentionMapper.getByExpertQuestionId(userId, questionId);
+        if (attention == null) {
+            HashMap<Object, Object> map = new HashMap<>();
+            map.put("userId", userId);
+            map.put("expertQuestionId", questionId);
+            int index = attentionMapper.addExpertAttention(map);
+            if (index == 1) {
+                attention = attentionMapper.getAttentionExpertById(userId, questionId);
+                Integer s = attention.getStatus();
+                attention.setStatus(s);
+                System.out.println("++++++");
+                attention.setMsg("已关注");
+                return ResponseResult.success(attention);
+            } else {
+                return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
+            }
+
+        } else {
+            Integer status = attention.getStatus();
+            Integer id = attention.getId();
+
+            HashMap<Object, Object> map = new HashMap<>();
+            map.put("status", status);
+            map.put("id", id);
+            int index = attentionMapper.updateStatus(map);
+            if (index == 1) {
+                attention = attentionMapper.getAttentionExpertById(userId, questionId);
+                status = attention.getStatus();
+                if (status == 1) {
+                    attention.setMsg("未关注");
+                } else {
+                    System.out.println("=========");
+                    attention.setMsg("已关注");
+                }
+                return ResponseResult.success(attention);
+            }
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
+        }
+    }
 
     @Autowired
     private CollectionMapper collectionMapper;

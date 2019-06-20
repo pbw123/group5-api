@@ -30,7 +30,7 @@ public class PageUtil {
     public static PageDTO pageListDemo(Integer currPage,Integer pageSize,List list)
     {
         Integer curr = StatusConst.CURRENTPAGE;
-        Integer size = StatusConst.PAGESIZE;
+        Integer size = list.size();
         if (currPage != null) {
             curr = currPage;
         }

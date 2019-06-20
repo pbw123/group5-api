@@ -37,9 +37,13 @@ public class ExpertServiceImp {
 
     public ResponseResult getAllExpert(Integer currPage, Integer pageSize) {
         List<Expert> experts = expertMapper.selectAll();
+        for (Expert expert : experts) {
+            int number = expertMapper.getNumber(expert.getId());
+            expert.setNumber(number);
+        }
         PageDTO page = PageUtil.pageListDemo(currPage, pageSize, experts);
         List<Expert> pageList = page.getList();
-        return ResponseResult.succ(pageList,page.getSize());
+        return ResponseResult.succ(pageList, page.getSize());
     }
 
     public Integer addExpert(String expertName, String unitName, String email,
@@ -272,10 +276,9 @@ public class ExpertServiceImp {
     private ExpertQuestionMapper expertQuestionMapper;
 
     public ResponseResult addExpertQuestion(Integer userId, Integer expertId, String content,
-                                            String[] imgs,String address) {
-        if (userId==null||expertId==null)
-        {
-            return ResponseResult.error(StatusConst.ERROR,MsgConst.ID_NULL);
+                                            String[] imgs, String address) {
+        if (userId == null || expertId == null) {
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.ID_NULL);
         }
         ExpertQuestion expertQuestion = new ExpertQuestion();
         expertQuestion.setUserId(userId);
@@ -284,8 +287,7 @@ public class ExpertServiceImp {
         expertQuestion.setAddress(address);
         expertQuestion.setCreateTime(new Timestamp(System.currentTimeMillis()));
         expertQuestionMapper.insertExpertQuestion(expertQuestion);
-        if (imgs!=null)
-        {
+        if (imgs != null) {
             for (String image : imgs) {
                 Img img = new Img();
                 img.setExpertQuestionId(expertQuestion.getId());
@@ -295,8 +297,8 @@ public class ExpertServiceImp {
         }
         return ResponseResult.success();
     }
-    public ResponseResult getExpertDetail(Integer id)
-    {
+
+    public ResponseResult getExpertDetail(Integer id) {
         Expert expert = expertMapper.getExpertDetail(id);
         expert.setNumber(expertMapper.getNumber(id));
         List<ExpertQuestion> expertQuestions = expertMapper.getExpertQuestionList(id);
@@ -306,43 +308,59 @@ public class ExpertServiceImp {
         return ResponseResult.success(expertDTO);
     }
 
-    public ResponseResult getQuestionList(Integer id,Integer currPage,Integer pageSize)
-    {
+    public ResponseResult getQuestionList(Integer id, Integer currPage, Integer pageSize) {
         List<ExpertQuestion> questions = expertMapper.getExpertQuestionList(id);
         PageDTO pageDTO = PageUtil.pageListDemo(currPage, pageSize, questions);
         List<ExpertQuestion> dtoList = pageDTO.getList();
-        for (ExpertQuestion question:dtoList)
-        {
-            if (question.getCreateTime()!=null)
-            question.setTime(StringUtil.getDateString(question.getCreateTime()));
+        for (ExpertQuestion question : dtoList) {
+            if (question.getCreateTime() != null)
+                question.setTime(StringUtil.getDateString(question.getCreateTime()));
+
+            question.setUser(questionMapper.getUserById(question.getUserId()));
+            Expert expert = expertMapper.getExpertDetail(question.getExpertId());
+           question.setSort(technologySortMapper.getById(expert.getExpertSort()).getName());
 
         }
         return ResponseResult.success(dtoList);
     }
-@Autowired
-private AttentionMapper attentionMapper;
-    public ResponseResult expertQuestionDetail(Integer questionId,Integer userId)
-    {
-        ExpertQuestion question = expertQuestionMapper.expertQuestionDetail(questionId);
-        if (question.getCreateTime()!=null)
-            question.setTime(StringUtil.getDateString(question.getCreateTime()));
-        List<ExpertReply> expertReplys = question.getExpertReplys();
 
+    @Autowired
+    private QuestionMapper questionMapper;
+    @Autowired
+    private AttentionMapper attentionMapper;
+
+    public ResponseResult expertQuestionDetail(Integer questionId, Integer userId) {
+        ExpertQuestion question = expertQuestionMapper.expertQuestionDetail(questionId);
+        if (question.getCreateTime() != null)
+            question.setTime(StringUtil.getDateString(question.getCreateTime()));
+//        图片
+        List<Img> expertImgs = imgMapper.getExpertImgs(questionId);
+        question.setImgs(expertImgs);
+//        提问者
+        User user = questionMapper.getUserById(question.getUserId());
+        question.setUser(user);
+//        回复
+        List<ExpertReply> expertReplys = expertQuestionMapper.getExpertReplys(questionId);
         for (ExpertReply reply : expertReplys) {
             reply.setTime(StringUtil.getDateString(reply.getCreateTime()));
+//            回复者
             Expert expert = expertMapper.getExpertDetail(reply.getExpertId());
             reply.setExpert(expert);
-            if (reply.getCreateTime()!=null)
+            if (reply.getCreateTime() != null)
                 reply.setTime(StringUtil.getDateString(reply.getCreateTime()));
         }
-        if (userId!=null)
-        {
+        question.setExpertReplys(expertReplys);
+//        关注/未关注
+        if (userId != null) {
             Attention attention = attentionMapper.isExpertHasAttention(userId, questionId);
-            if (attention==null||attention.getStatus()==1)
+            if (attention == null || attention.getStatus() == 1)
                 question.setIsAtten(1);
             else
                 question.setIsAtten(0);
         }
+        Expert expert = expertMapper.selectById(question.getExpertId());
+        TechnologySort sort = technologySortMapper.getById(expert.getExpertSort());
+        question.setSort(sort.getName());
 
         return ResponseResult.success(question);
     }

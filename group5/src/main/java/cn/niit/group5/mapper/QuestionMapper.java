@@ -35,7 +35,7 @@ public interface QuestionMapper {
 
     //模糊查询问答
     @Select("SELECT * FROM t_question WHERE content LIKE concat('%',#{content},'%') order by " +
-            "creat_time desc")
+            "create_time desc")
     List<Question> getQuestionBySearch(String content);
 
     //后台修改问题
@@ -45,7 +45,7 @@ public interface QuestionMapper {
     int getReplyAmount(Integer id);
 
 //    根据分类查询问题
-    @Select("select * from t_question where sort like concat('%',#{keyword},'%')")
+    @Select("select * from t_question where sort like concat('%',#{keyword},'%') order by create_time desc")
     List<Question>getQuestionBySort(@Param("keyword") String keyword);
 
 }

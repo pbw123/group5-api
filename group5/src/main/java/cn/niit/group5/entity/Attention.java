@@ -17,7 +17,7 @@ public class Attention implements Serializable {
     private String msg;
 
     private Integer expertQuestionId;
-private ExpertQuestion expertQuestion;
+    private ExpertQuestion expertQuestion;
 
     public ExpertQuestion getExpertQuestion() {
         return expertQuestion;

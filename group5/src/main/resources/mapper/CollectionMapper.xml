@@ -37,6 +37,7 @@
 	AND q.user_id=u.id
 	AND c.question_id=q.id
 	and c.status=0
+	order by q.create_time desc
   </select>
 
   <resultMap id="collectionRM" type="cn.niit.group5.entity.Collection">
@@ -76,6 +77,7 @@
 	AND e.user_id=u.id
 	AND c.exchange_id=e.id
 	and c.status=0
+		order by e.create_time desc
   </select>
   <resultMap id="CollectionRM" type="cn.niit.group5.entity.Collection">
     <id column="id" property="id"/>
@@ -107,6 +109,7 @@
     AND c.news_id=n.id
     AND n.is_delete=0
     and c.status=0
+    	order by n.create_time desc
   </select>
   <resultMap id="Collection1RM" type="cn.niit.group5.entity.Collection">
     <id column="id" property="id"/>
@@ -121,12 +124,13 @@
     </association>
   </resultMap>
   <select id="getCollectVideoById" parameterType="Integer" resultMap="Collection2RM">
-    SELECT c.id,c.user_id,c.video,v.id vid,v.video_title,v.img,v.video_url,v.read_number
+    SELECT c.id,c.user_id,c.video,v.id vid,v.video_title,v.img,v.video_url,v.read_number,v.create_time
 FROM t_collection c,t_video v
 WHERE c.user_id=#{userId}
 AND c.video=v.id
 AND v.is_delete=0
 and c.status=0
+	order by v.create_time desc
   </select>
   <resultMap id="Collection2RM" type="cn.niit.group5.entity.Collection">
     <id column="id" property="id"/>
@@ -138,6 +142,7 @@ and c.status=0
       <result column="img" property="img"/>
       <result column="video_url" property="videoUrl"/>
       <result column="read_number" property="readNumber"/>
+      <result column="create_time" property="createTime"/>
     </association>
   </resultMap>
 

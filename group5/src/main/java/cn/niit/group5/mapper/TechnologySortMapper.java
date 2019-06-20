@@ -5,6 +5,7 @@ import cn.niit.group5.entity.TechnologySort;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -30,4 +31,8 @@ public interface TechnologySortMapper {
 
 //    批量删除
     int delByArrayList(@Param("ids") int[] ids);
+
+//    据id查询对应类型名
+    @Select("select name from t_technology_sort where id=#{0}")
+    TechnologySort getById(Integer id);
 }

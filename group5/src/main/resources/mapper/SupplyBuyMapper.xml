@@ -25,17 +25,20 @@
   <select id="supplyList" resultType="SupplyBuy">
       SELECT * FROM t_supply_buy WHERE is_supply_buy=0
   AND is_delete=0
+  order by create_time desc
   </select>
   <select id="getAllSupplyOrBuyList" resultType="SupplyBuy" parameterType="SupplyBuy">
       SELECT * FROM t_supply_buy
       WHERE is_supply_buy=#{state}
   AND is_delete=0
+    order by create_time desc
   limit #{currPage},#{pageSize}
   </select>
 
   <select id="seekList" resultType="SupplyBuy">
       SELECT * FROM t_supply_buy WHERE is_supply_buy=1
   AND is_delete=0
+    order by create_time desc
   </select>
 
   <select id="getSupplyDetail" resultType="SupplyBuy">
@@ -52,6 +55,7 @@
   <select id="getSupplyBySort" resultType="SupplyBuy">
       SELECT * FROM t_supply_buy WHERE sort=#{sort}
   AND is_delete=0
+    order by create_time desc
   </select>
 
   <insert id="insertSeek" parameterType="cn.niit.group5.entity.SupplyBuy">

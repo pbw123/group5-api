@@ -185,14 +185,14 @@ public class SupplyBuyServiceImp {
 
     public ResponseResult supplyList(Integer currPage, Integer pageSize) {
         Integer curr = StatusConst.CURRENTPAGE;
-        Integer size = StatusConst.PAGESIZE;
+        List<SupplyBuy> supplyList = supplyBuyMapper.supplyList();
+        Integer size=supplyList.size();
         if (currPage != null) {
             curr = currPage;
         }
         if (pageSize != null) {
             size = pageSize;
         }
-        List<SupplyBuy> supplyList = supplyBuyMapper.supplyList();
         PageDTO page = PageUtil.page(curr, size, supplyList);
         List<SupplyBuy> pageList = page.getList();
         for (SupplyBuy supplyBuy : pageList) {

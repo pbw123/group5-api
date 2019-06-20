@@ -46,7 +46,7 @@ public interface CollectionMapper {
 //    Collection getUserIsCollect(@Param("newsId")Integer newsId,
 //                                 String column,@Param("userId")Integer userId);
 
-//    统计该问答或交流被收藏的次数
+//    统计该问答或交流/视频被收藏的次数
     @Select("select COUNT(${column})  from t_collection where ${column}=#{id} and status=0")
     int getExchangeNumber(String column,@Param("id")Integer id);
 }
