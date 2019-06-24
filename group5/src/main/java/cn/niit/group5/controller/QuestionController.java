@@ -106,8 +106,7 @@ public class QuestionController {
 
     @ApiOperation(value = "所有提问")
     @PostMapping(value = "/getQuestionList")
-    public ResponseResult getQuestionList(@RequestParam(defaultValue = "1") Integer currPage,
-                                          @RequestParam(defaultValue = "10") Integer pageSize) {
+    public ResponseResult getQuestionList(Integer currPage,Integer pageSize) {
         return questionServiceImp.getQuestionList(currPage, pageSize);
     }
 

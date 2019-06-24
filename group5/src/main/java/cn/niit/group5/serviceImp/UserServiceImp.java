@@ -252,7 +252,7 @@ public class UserServiceImp implements UserService {
                 user.setTime(StringUtil.getDateString(regitsterTime));
             }
         }
-        return ResponseResult.succ(userList, page.getSize());
+        return ResponseResult.succ(userList, users.size());
     }
 
     public ResponseResult search(Integer currPage, Integer pageSize, String keyword) {

@@ -12,7 +12,8 @@
   </resultMap>
 <insert id="insertExpertQuestion" parameterType="cn.niit.group5.entity.ExpertQuestion"
         useGeneratedKeys="true" keyProperty="id">
-  INSERT INTO t_expert_question(user_id,create_time,expert_id,content) VALUES (#{userId},#{createTime},#{expertId},#{content})
+  INSERT INTO t_expert_question(user_id,create_time,expert_id,content,address) VALUES
+  (#{userId},#{createTime},#{expertId},#{content},#{address})
 </insert>
 
   <select id="expertQuestionDetail" parameterType="Integer" resultMap="questionDetailRM">

@@ -147,7 +147,7 @@ public class QuestionServiceImp {
 
     public ResponseResult getQuestionList(Integer currPage, Integer pageSize) {
         List<Question> lists = questionMapper.getQuestionList();
-        PageDTO page = PageUtil.page(currPage, pageSize, lists);
+        PageDTO page = PageUtil.pageListDemo(currPage, pageSize, lists);
         List<Question> questionLists = page.getList();
         for (Question question : questionLists) {
             question.setImgs(imgMapper.selectImgByQuestionId(question.getId()));

@@ -29,9 +29,7 @@ public class ExchangeController {
 
     @ApiOperation(value = "所有交流列表", notes = "用户id用来判断是否已经点赞")
     @GetMapping(value = "getExchangeList")
-    public ResponseResult getExchangeListByMyId(Integer userId,
-                                                @RequestParam(defaultValue = "1") Integer currPage
-            , @RequestParam(defaultValue = "10") Integer pageSize) {
+    public ResponseResult getExchangeListByMyId(Integer userId,Integer currPage,Integer pageSize) {
         return exchangeServiceImp.getAllList(userId, currPage, pageSize);
     }
 

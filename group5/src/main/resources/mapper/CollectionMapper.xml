@@ -10,6 +10,7 @@
     <result column="video" property="video" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" />
+    <result column="icon" property="icon" />
   </resultMap>
 
 
@@ -104,7 +105,7 @@
   </resultMap>
 
   <select id="getCollectNewsById" parameterType="Integer" resultMap="Collection1RM">
-    SELECT c.id,c.user_id,c.news_id,n.id nid,n.title,n.content,n.create_time,n.read_number
+    SELECT c.id,c.user_id,c.news_id,n.id nid,n.title,n.content,n.create_time,n.read_number,n.icon
     FROM t_collection c,t_news n
     WHERE c.user_id=#{userId}
     AND c.news_id=n.id

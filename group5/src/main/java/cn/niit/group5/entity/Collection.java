@@ -28,6 +28,15 @@ public class Collection implements Serializable {
 
     private Video videos;
     private Timestamp createTime;
+    private String icon;
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     public Timestamp getCreateTime() {
         return createTime;
@@ -52,6 +61,7 @@ public class Collection implements Serializable {
     public void setNews(News news) {
         this.news = news;
     }
+
     public Exchange getExchange() {
         return exchange;
     }
@@ -59,6 +69,7 @@ public class Collection implements Serializable {
     public void setExchange(Exchange exchange) {
         this.exchange = exchange;
     }
+
     public User getUser() {
         return user;
     }
@@ -66,6 +77,7 @@ public class Collection implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+
     public Question getQuestion() {
         return question;
     }
@@ -75,9 +87,6 @@ public class Collection implements Serializable {
     }
 
     private static final long serialVersionUID = 1L;
-
-
-
 
     public Integer getId() {
         return id;

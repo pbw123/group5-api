@@ -104,7 +104,7 @@ public class ExchangeServiceImp {
 
     public ResponseResult getAllList(Integer userId,Integer currPage, Integer pageSize) {
         List<Exchange> lists = exchangeMapper.getExchangeList();
-        PageDTO page = PageUtil.page(currPage, pageSize, lists);
+        PageDTO page = PageUtil.pageListDemo(currPage, pageSize, lists);
         List<Exchange> exchangeList = page.getList();
         String column = "exchange_id";
         String replyColumn = "reply_id";
