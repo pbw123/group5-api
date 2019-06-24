@@ -9,6 +9,7 @@
     <result column="news_id" property="newsId" jdbcType="INTEGER" />
     <result column="video" property="video" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" />
   </resultMap>
 
 
@@ -37,10 +38,10 @@
 	AND q.user_id=u.id
 	AND c.question_id=q.id
 	and c.status=0
-	order by q.create_time desc
+	order by c.create_time desc
   </select>
 
-  <resultMap id="collectionRM" type="cn.niit.group5.entity.Collection">
+  <resultMap id="collectionRM" type="cn.niit.group5.entity.Collection" extends="BaseResultMap">
     <id column="id" property="id"/>
    <result column="user_id" property="userId"/>
     <result column="question_id" property="questionId"/>
@@ -77,9 +78,9 @@
 	AND e.user_id=u.id
 	AND c.exchange_id=e.id
 	and c.status=0
-		order by e.create_time desc
+		order by c.create_time desc
   </select>
-  <resultMap id="CollectionRM" type="cn.niit.group5.entity.Collection">
+  <resultMap id="CollectionRM" type="cn.niit.group5.entity.Collection" extends="BaseResultMap">
     <id column="id" property="id"/>
     <result column="user_id" property="userId"/>
     <result column="exchange_id" property="exchangeId"/>
@@ -90,8 +91,8 @@
       <result column="create_time" property="createTime"/>
       <result column="img" property="img"/>
       <result column="address" property="address"/>
-      <association property="replyAmount" column="id" select="cn.niit.group5.mapper.ExchangeMapper.getExchangeReplyNumber">
-      </association>
+<!--      <association property="replyAmount" column="id" select="cn.niit.group5.mapper.ExchangeMapper.getExchangeReplyNumber">-->
+<!--      </association>-->
       <association property="user" javaType="User">
         <id column="uid" property="id"/>
         <result column="user_name" property="userName"/>
@@ -109,9 +110,9 @@
     AND c.news_id=n.id
     AND n.is_delete=0
     and c.status=0
-    	order by n.create_time desc
+    	order by c.create_time desc
   </select>
-  <resultMap id="Collection1RM" type="cn.niit.group5.entity.Collection">
+  <resultMap id="Collection1RM" type="cn.niit.group5.entity.Collection" extends="BaseResultMap">
     <id column="id" property="id"/>
     <result column="user_id" property="userId"/>
     <result column="news_id" property="newsId"/>
@@ -130,9 +131,19 @@ WHERE c.user_id=#{userId}
 AND c.video=v.id
 AND v.is_delete=0
 and c.status=0
-	order by v.create_time desc
+	order by c.create_time desc
   </select>
-  <resultMap id="Collection2RM" type="cn.niit.group5.entity.Collection">
+  <update id="isNoCollect" parameterType="Integer">
+    update t_collection
+    <trim prefix="set" >
+      <if test="status lt 1">status=1</if>
+      <if test="status gt 0">status=0</if>
+      ,create_time=#{createTime}
+    </trim>
+    where id=#{id}
+  </update>
+
+  <resultMap id="Collection2RM" type="cn.niit.group5.entity.Collection" extends="BaseResultMap">
     <id column="id" property="id"/>
     <result column="user_id" property="userId"/>
     <result column="video" property="video"/>
@@ -145,14 +156,5 @@ and c.status=0
       <result column="create_time" property="createTime"/>
     </association>
   </resultMap>
-
-  <update id="isNoCollect" parameterType="Integer">
-    update t_collection
-    <trim prefix="set" >
-     <if test="status lt 1">status=1</if>
-     <if test="status gt 0">status=0</if>
-    </trim>
-    where id=#{id}
-  </update>
 
 </mapper>

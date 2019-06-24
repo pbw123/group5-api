@@ -45,11 +45,13 @@ public interface ExchangeMapper {
 
     int updateStatus(@Param("status") Integer status, @Param("id") Integer id);
 
-//    据内容和用户查询交流
+    //    据内容和用户查询交流
     @Select("select * from t_exchange where user_id=#{userId} and create_time=#{createTime}")
-    Exchange getByTime(@Param("userId")Integer userId,@Param("createTime") String createTime);
+    Exchange getByTime(@Param("userId") Integer userId, @Param("createTime") String createTime);
 
     @Select("select * from t_exchange where id=#{0}")
     Exchange getById(Integer id);
 
+    //统计回复数量
+    int getExchangeReplyNumber(Integer exchangeId);
 }

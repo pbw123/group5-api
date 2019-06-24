@@ -292,6 +292,10 @@ public class UserServiceImp implements UserService {
 
             int number = exchangeMapper.getExchangeLikeNumber("exchange_id", exchange.getId());
             exchange.setLike(number);
+            int num = collectionMapper.getExchangeNumber("exchange_id", exchange.getId());
+            exchange.setCollectNumber(num);
+            int replyNumber = exchangeMapper.getExchangeReplyNumber(exchange.getId());
+            exchange.setReplyNumber(replyNumber);
         }
         return ResponseResult.succ(pageList, page.getSize());
     }

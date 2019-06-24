@@ -4,6 +4,8 @@ import cn.niit.group5.entity.Collection;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.Timestamp;
+
 public class CollectionMapperTest extends BasicTest {
     @Autowired
     CollectionMapper collectionMapper;
@@ -24,9 +26,9 @@ public class CollectionMapperTest extends BasicTest {
     public void addCollectionTest() {
         Integer userId = 1;
         String column = "question_id";
-        Integer newsId = 21;
-        int i = collectionMapper.addNewsCollect(userId, column, newsId);
-        if (i == 1)
+        Integer newsId = 22;
+        int i = collectionMapper.addNewsCollect(userId, column, newsId,new Timestamp(System.currentTimeMillis()));
+        if (i != 1)
             System.out.println("失败++++++++++++++");
         else
             System.out.println(i);

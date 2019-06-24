@@ -9,6 +9,8 @@ import cn.niit.group5.util.StatusConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+
 @Service
 public class CollectionServiceImp {
 
@@ -22,7 +24,8 @@ public class CollectionServiceImp {
         Integer status;
         if (collection==null)
         {
-            int index = collectionMapper.addNewsCollect(userId,column,newsId);
+            int index = collectionMapper.addNewsCollect(userId,column,newsId,
+                    new Timestamp(System.currentTimeMillis()));
             if (index==1)
             {
                 collection = collectionMapper.getCollectionById(userId,column,newsId);
@@ -37,7 +40,7 @@ public class CollectionServiceImp {
         }else {
             status = collection.getStatus();
             Integer id = collection.getId();
-                int index = collectionMapper.isNoCollect(id, status);
+                int index = collectionMapper.isNoCollect(id, status,new Timestamp(System.currentTimeMillis()));
                 if (index==1)
                 {
                     collection = collectionMapper.getCollectionById(userId,column, newsId);

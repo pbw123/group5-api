@@ -128,8 +128,8 @@ public class NewsServiceImp {
     public ResponseResult getNewsById(Integer newsId, Integer userId) {
         String column = "news_id";
         int i = newsMapper.addReadNumber("t_news", "read_number", newsId);
-        if (i != 1)
-            return ResponseResult.error(StatusConst.ERROR, "更新访问量失败");
+//        if (i != 1)
+//            return ResponseResult.error(StatusConst.ERROR, "更新访问量失败");
         News news = newsMapper.selectByPrimaryKey(newsId);
         Date createTime = news.getCreateTime();
         if (createTime != null)
@@ -143,7 +143,8 @@ public class NewsServiceImp {
             else
                 news.setStatus(0);
         }
-
+        int number = collectionMapper.getExchangeNumber(column, newsId);
+        news.setCollectNumber(number);
         return ResponseResult.success(news);
     }
 

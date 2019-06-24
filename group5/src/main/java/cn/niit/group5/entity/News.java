@@ -48,6 +48,16 @@ public class News implements Serializable {
 
     private List imgs;
 
+    private Integer collectNumber;
+
+    public Integer getCollectNumber() {
+        return collectNumber;
+    }
+
+    public void setCollectNumber(Integer collectNumber) {
+        this.collectNumber = collectNumber;
+    }
+
     public List getImgs() {
         return imgs;
     }

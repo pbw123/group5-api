@@ -321,7 +321,7 @@ public class ExpertServiceImp {
            question.setSort(technologySortMapper.getById(expert.getExpertSort()).getName());
 
         }
-        return ResponseResult.success(dtoList);
+        return ResponseResult.succ(dtoList,questions.size());
     }
 
     @Autowired

@@ -18,7 +18,6 @@ public class ExpertQuestion implements Serializable {
     private Integer isDelete;
 
     private String content;
-
     private String sort;
     private List imgs;
 

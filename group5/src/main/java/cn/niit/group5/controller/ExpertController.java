@@ -4,6 +4,7 @@ import cn.niit.group5.entity.Expert;
 import cn.niit.group5.entity.ExpertGrade;
 import cn.niit.group5.entity.IndustrySystem;
 import cn.niit.group5.entity.dto.IndustryDTO;
+import cn.niit.group5.entity.dto.PageDTO;
 import cn.niit.group5.mapper.ExpertMapper;
 import cn.niit.group5.mapper.ExpertQuestionMapper;
 import cn.niit.group5.mapper.IndustrySystemMapper;
@@ -11,6 +12,7 @@ import cn.niit.group5.serviceImp.ExpertServiceImp;
 import cn.niit.group5.serviceImp.IndustryServerImp;
 import cn.niit.group5.serviceImp.QuestionServiceImp;
 import cn.niit.group5.util.Client;
+import cn.niit.group5.util.PageUtil;
 import cn.niit.group5.util.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -55,11 +57,16 @@ public class ExpertController {
 
     @ApiOperation(value = "获取一个体系类别的专家")
     @GetMapping(value = "getExpertBySort")
-    public ResponseResult getExpertBySort(
-            @RequestParam(required = true) Integer expertSort
-    ) {
+    public ResponseResult getExpertBySort(Integer expertSort,Integer currPage,Integer pageSize) {
         List<Expert> experts = expertMapper.getExpertBySort(expertSort);
-        return ResponseResult.success(experts);
+        PageDTO pageDTO = PageUtil.pageListDemo(currPage, pageSize, experts);
+        List<Expert> dtoList = pageDTO.getList();
+        for (Expert expert:dtoList)
+        {
+            int number = expertMapper.getNumber(expert.getId());
+            expert.setNumber(number);
+        }
+        return ResponseResult.succ(dtoList,experts.size());
     }
 
     @ApiOperation(value = "获取农业专家", notes = "传入分类的id和等级的id,等级客户端指定，1是省级，2是地方级")

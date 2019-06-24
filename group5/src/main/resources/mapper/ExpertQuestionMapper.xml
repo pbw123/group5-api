@@ -26,6 +26,7 @@
     <result column="expert_id" property="expertId" jdbcType="INTEGER" />
     <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
 <!--    <association property="user" column="user_id"-->
 <!--                 select="cn.niit.group5.mapper.QuestionMapper.getUserById"></association>-->
 <!--    <collection property="expertReplys" column="expert_id" select="getExpertReplys"></collection>-->

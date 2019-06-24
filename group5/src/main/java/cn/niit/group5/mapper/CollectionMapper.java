@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Mapper
@@ -34,11 +35,14 @@ public interface CollectionMapper {
                                         @Param("newsId") Integer newsId);
 
 
-    @Insert("INSERT INTO t_collection(user_id,${column}) VALUES (#{userId},#{newsId})")
+    @Insert("INSERT INTO t_collection(user_id,${column},create_time) VALUES (#{userId},#{newsId}," +
+            "#{createTime})")
     int addNewsCollect(@Param("userId") Integer userId,
-                       String column,@Param("newsId") Integer newsId);
+                       String column, @Param("newsId") Integer newsId,
+                       @Param("createTime")Timestamp createTime);
 
-   int isNoCollect(@Param("id")Integer id,@Param("status")Integer status);
+   int isNoCollect(@Param("id")Integer id, @Param("status")Integer status,
+                   @Param("createTime")Timestamp createTime);
 
 //查询该用户是否收藏了该资讯/问答/交流/视频
 //    @Select("select * from t_collection where user_id=#{userId} and ${column}=#{newsId} and " +

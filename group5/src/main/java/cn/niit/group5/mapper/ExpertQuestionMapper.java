@@ -29,7 +29,7 @@ public interface ExpertQuestionMapper {
    List<ExpertReply> getExpertReplys(Integer questionId);
 
 //   专家问题
-   @Select("select * from t_expert_question where id=#{0}")
+   @Select("select * from t_expert_question where id=#{0} order by create_time desc")
    ExpertQuestion getById(Integer id);
 
 }

@@ -36,6 +36,15 @@ public class Exchange implements Serializable {
     private Integer isLike;
 
     private String address;
+    private Integer replyNumber;
+
+    public Integer getReplyNumber() {
+        return replyNumber;
+    }
+
+    public void setReplyNumber(Integer replyNumber) {
+        this.replyNumber = replyNumber;
+    }
 
     public String getAddress() {
         return address;

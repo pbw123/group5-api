@@ -323,7 +323,7 @@ public class Group5ApplicationTests {
         Integer userId=1;
         Integer newsId=131;
         String column="news_id";
-        int index = collectionMapper.addNewsCollect(userId,column, newsId);
+        int index = collectionMapper.addNewsCollect(userId,column, newsId,new Timestamp(System.currentTimeMillis()));
         System.out.println(index+"===========");
     }
     @Autowired

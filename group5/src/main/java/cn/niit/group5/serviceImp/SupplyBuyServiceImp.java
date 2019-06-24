@@ -94,16 +94,15 @@ public class SupplyBuyServiceImp {
         supplyBuy.setIsSupplyBuy(0);
         supplyBuy.setCreateTime(new Timestamp(System.currentTimeMillis()));
         int i = supplyBuyMapper.insertSupply(supplyBuy);
-        if (i == 1) {
+        if (imgs!=null) {
             for (String image : imgs) {
                 Img img = new Img();
                 img.setBuyId(supplyBuy.getId());
                 img.setImgUrl(image);
                 imgMapper.insertBuyImg(img);
             }
-            return StatusConst.SUCCESS;
         }
-        return StatusConst.ERROR;
+        return StatusConst.SUCCESS;
     }
 
     public ResponseResult getBySort(String sort) {

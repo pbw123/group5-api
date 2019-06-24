@@ -1,6 +1,7 @@
 package cn.niit.group5.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class Collection implements Serializable {
     private Integer id;
@@ -26,6 +27,15 @@ public class Collection implements Serializable {
     private User user;
 
     private Video videos;
+    private Timestamp createTime;
+
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
 
     public Video getVideos() {
         return videos;
