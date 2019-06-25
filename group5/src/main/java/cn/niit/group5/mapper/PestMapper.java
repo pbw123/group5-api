@@ -16,7 +16,7 @@ public interface PestMapper {
     //通过id获取详情
     Pest getPestDetailById(int id);
 
-//    根据条件搜索
-    List<Pest>searchPest(@Param("breed") String breed,@Param("area") String area,
-                         @Param("month") String month);
+    //    根据条件搜索
+    List<Pest> searchPest(@Param("breed") String breed, @Param("area") String area,
+                          @Param("month") String month);
 }

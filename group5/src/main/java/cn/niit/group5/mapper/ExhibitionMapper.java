@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 @Mapper
 @Component
 public interface ExhibitionMapper {
@@ -16,11 +17,13 @@ public interface ExhibitionMapper {
 
     Exhibition selectByPrimaryKey(Integer id);
 
-    List<Exhibition> selectAll(@Param("currPage")Integer currPage,
-                               @Param("pageSize")Integer pageSize);
+    //查询所有展播
+    List<Exhibition> selectAll(@Param("currPage") Integer currPage,
+                               @Param("pageSize") Integer pageSize);
 
     int updateByPrimaryKey(Exhibition record);
 
+    //据关键字模糊匹配展播标题
     @Select("SELECT * FROM t_exhibition WHERE title LIKE concat('%',#{title},'%')")
-    List<Exhibition>searchExhibition(@Param("title") String title);
+    List<Exhibition> searchExhibition(@Param("title") String title);
 }

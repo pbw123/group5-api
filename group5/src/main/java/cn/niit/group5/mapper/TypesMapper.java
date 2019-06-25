@@ -16,7 +16,7 @@ public interface TypesMapper {
 
     Types selectById(Integer id);
 
-    List<Types> selectAll(Map<String,Object>map);
+    List<Types> selectAll(Map<String, Object> map);
 
     int updateType(Types record);
 }

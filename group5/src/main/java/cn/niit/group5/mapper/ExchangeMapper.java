@@ -36,19 +36,22 @@ public interface ExchangeMapper {
     int getExchangeLikeNumber(String column,
                               @Param("id") Integer id);
 
-    //    用户是否点赞了该交流/评论
+    //    用户是否曾经点赞过该交流/评论
     @Select("SELECT * FROM t_like WHERE user_id=#{userId} and ${column}=#{id}")
     Like isLikeOrNo(@Param("userId") Integer userId, String column, @Param("id") Integer id);
 
+    //首次点击喜欢
     @Insert("INSERT INTO t_like(user_id,${column}) VALUES(#{userId},#{id})")
     int addLike(String column, @Param("userId") Integer userId, @Param("id") Integer id);
 
+    //切换喜欢/未喜欢状态
     int updateStatus(@Param("status") Integer status, @Param("id") Integer id);
 
     //    据内容和用户查询交流
     @Select("select * from t_exchange where user_id=#{userId} and create_time=#{createTime}")
     Exchange getByTime(@Param("userId") Integer userId, @Param("createTime") String createTime);
 
+    //    据id查询交流
     @Select("select * from t_exchange where id=#{0}")
     Exchange getById(Integer id);
 

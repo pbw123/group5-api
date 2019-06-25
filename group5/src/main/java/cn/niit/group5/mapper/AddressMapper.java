@@ -9,6 +9,7 @@ import java.util.List;
 @Mapper
 @Component
 public interface AddressMapper {
+//    查询所有地址
     @Select("select * from t_address")
     List<Address> getAddressList();
 

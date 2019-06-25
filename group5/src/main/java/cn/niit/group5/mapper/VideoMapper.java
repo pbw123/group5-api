@@ -12,8 +12,10 @@ import java.util.List;
 @Mapper
 @Component
 public interface VideoMapper {
+    //    获取所有视频
     List<Video> selectVideo();
 
+    //    获取所有视频(sql分页)
     List<Video> selectAllVideo(Video video);
 
     //修改视频标题
@@ -34,12 +36,11 @@ public interface VideoMapper {
     //    据视频分类查询视频
     List<Video> getVideoBySort(Video video);
 
-//    据审核状态搜索视频
-    List<Video>getVideoByReview(Video video);
+    //    据审核状态搜索视频
+    List<Video> getVideoByReview(Video video);
 
-//    查询视频详情
+    //    查询视频详情
     @Select("select * from t_video where id=#{id}")
     Video getVideoDetail(@Param("id") Integer id);
-
 
 }

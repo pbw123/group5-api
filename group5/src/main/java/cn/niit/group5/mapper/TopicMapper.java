@@ -10,8 +10,9 @@ import java.util.List;
 @Mapper
 @Component
 public interface TopicMapper {
-//专题列表
+    //专题列表
     List<Topic> getTopicList();
-//    专题资讯
-    List<News>getNewsByTopicId(Integer id);
+
+    //    专题资讯
+    List<News> getNewsByTopicId(Integer id);
 }

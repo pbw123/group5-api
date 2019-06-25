@@ -23,26 +23,29 @@ public interface CollectionMapper {
 //    void collectVideo(Collection collection);
     //通过用户id遍历收藏的问答
     List<Collection> getCollectQuestionById(int userId);
+
     //通过用户id遍历收藏的交流
     List<Collection> getCollectExchangeById(int userId);
+
     //通过用户id遍历收藏的资讯
     List<Collection> getCollectNewsById(int userId);
+
     //通过用户id遍历收藏的视频
     List<Collection> getCollectVideoById(int userId);
-//  根据用户id和文章id来查询该资讯/问答/交流/视频是否曾经被收藏过
-   @Select("select * from t_collection where user_id=#{userId} and ${column}=#{newsId}")
-     Collection getCollectionById(@Param("userId")Integer userId,String column,
-                                        @Param("newsId") Integer newsId);
 
+    //  根据用户id和文章id来查询该资讯/问答/交流/视频是否曾经被收藏过
+    @Select("select * from t_collection where user_id=#{userId} and ${column}=#{newsId}")
+    Collection getCollectionById(@Param("userId") Integer userId, String column,
+                                 @Param("newsId") Integer newsId);
 
     @Insert("INSERT INTO t_collection(user_id,${column},create_time) VALUES (#{userId},#{newsId}," +
             "#{createTime})")
     int addNewsCollect(@Param("userId") Integer userId,
                        String column, @Param("newsId") Integer newsId,
-                       @Param("createTime")Timestamp createTime);
+                       @Param("createTime") Timestamp createTime);
 
-   int isNoCollect(@Param("id")Integer id, @Param("status")Integer status,
-                   @Param("createTime")Timestamp createTime);
+    int isNoCollect(@Param("id") Integer id, @Param("status") Integer status,
+                    @Param("createTime") Timestamp createTime);
 
 //查询该用户是否收藏了该资讯/问答/交流/视频
 //    @Select("select * from t_collection where user_id=#{userId} and ${column}=#{newsId} and " +
@@ -50,7 +53,7 @@ public interface CollectionMapper {
 //    Collection getUserIsCollect(@Param("newsId")Integer newsId,
 //                                 String column,@Param("userId")Integer userId);
 
-//    统计该问答或交流/视频被收藏的次数
+    //    统计该问答或交流/视频被收藏的次数
     @Select("select COUNT(${column})  from t_collection where ${column}=#{id} and status=0")
-    int getExchangeNumber(String column,@Param("id")Integer id);
+    int getExchangeNumber(String column, @Param("id") Integer id);
 }

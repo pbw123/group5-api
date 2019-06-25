@@ -44,8 +44,9 @@ public interface QuestionMapper {
     //   问题回复数量
     int getReplyAmount(Integer id);
 
-//    根据分类查询问题
-    @Select("select * from t_question where sort like concat('%',#{keyword},'%') order by create_time desc")
-    List<Question>getQuestionBySort(@Param("keyword") String keyword);
+    //    根据分类查询问题
+    @Select("select * from t_question where sort like concat('%',#{keyword},'%') order by " +
+            "create_time desc")
+    List<Question> getQuestionBySort(@Param("keyword") String keyword);
 
 }

@@ -11,6 +11,7 @@ import java.util.List;
 @Component
 public interface ExpertReplyMapper {
 
+    //    查询专家回复
     @Select("SELECT * FROM t_expert_reply WHERE question_id=#{0}")
-    List<ExpertReply>getQuestionReply(Integer questionId);
+    List<ExpertReply> getQuestionReply(Integer questionId);
 }

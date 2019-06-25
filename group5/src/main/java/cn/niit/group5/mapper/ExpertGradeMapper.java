@@ -10,7 +10,7 @@ import java.util.Map;
 @Mapper
 @Component
 public interface ExpertGradeMapper {
-
+    //据专家等级查询体系专家
     List<ExpertGrade> getIndustryExpertList(Map<Object, Object> map);
 
     int deleteByPrimaryKey(Integer id);

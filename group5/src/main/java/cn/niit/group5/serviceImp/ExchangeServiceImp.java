@@ -22,7 +22,7 @@ public class ExchangeServiceImp {
 
     public ResponseResult updateQuestion(String content, String createTime) {
         Question question = new Question();
-
+        question.setContent(content);
         question.setCreateTime(Timestamp.valueOf(createTime));
         int i = questionMapper.updateQuestion(question);
         if (i == 1)
@@ -62,6 +62,7 @@ public class ExchangeServiceImp {
         } else {
             exchange.setStatus(0);
         }
+//        问题的图片
         exchange.setImgs(imgMapper.selectImgByExchangeId(exchange.getId()));
 //        List<String>list=new ArrayList<>();
 //        list.add(exchange.getImg());
@@ -86,7 +87,7 @@ public class ExchangeServiceImp {
         return ResponseResult.success(exchange);
     }
 
-    public ResponseResult getMyAllList(Integer userId,Integer currPage,Integer pageSize) {
+    public ResponseResult getMyAllList(Integer userId, Integer currPage, Integer pageSize) {
         String column = "exchange_id";
         List<Exchange> exchangeList = exchangeMapper.getExchangeListByUserId(userId);
         PageDTO pageDTO = PageUtil.pageListDemo(currPage, pageSize, exchangeList);
@@ -99,10 +100,10 @@ public class ExchangeServiceImp {
             int likeNumber = exchangeMapper.getExchangeLikeNumber(column, exchange.getId());
             exchange.setLike(likeNumber);
         }
-        return ResponseResult.succ(dtoList,pageDTO.getSize());
+        return ResponseResult.succ(dtoList, pageDTO.getSize());
     }
 
-    public ResponseResult getAllList(Integer userId,Integer currPage, Integer pageSize) {
+    public ResponseResult getAllList(Integer userId, Integer currPage, Integer pageSize) {
         List<Exchange> lists = exchangeMapper.getExchangeList();
         PageDTO page = PageUtil.pageListDemo(currPage, pageSize, lists);
         List<Exchange> exchangeList = page.getList();
@@ -129,8 +130,7 @@ public class ExchangeServiceImp {
             }
             int number = collectionMapper.getExchangeNumber(column, exchange.getId());
             exchange.setCollectNumber(number);
-            if (userId!=null)
-            {
+            if (userId != null) {
                 //        该登录用户是否已经点赞
                 Like likeOrNo = exchangeMapper.isLikeOrNo(userId, column, exchange.getId());
                 if (likeOrNo == null || likeOrNo.getStatus() == 1) {
@@ -140,9 +140,10 @@ public class ExchangeServiceImp {
                 }
             }
         }
-        return ResponseResult.succ(exchangeList,page.getSize());
+        return ResponseResult.succ(exchangeList, page.getSize());
     }
 
+    //首次点赞就插入记录，否则切换状态
     public ResponseResult checkLike(Integer userId, String column, Integer exchangeId) {
         Like likeOrNo;
         likeOrNo = exchangeMapper.isLikeOrNo(userId, column, exchangeId);
@@ -174,8 +175,8 @@ public class ExchangeServiceImp {
         return ResponseResult.error(StatusConst.ERROR, MsgConst.FAIL);
     }
 
-    public ResponseResult addExchange(Integer userId, String content,String address,String[] imgs)
-    {
+    public ResponseResult addExchange(Integer userId, String content, String address,
+                                      String[] imgs) {
 
         //        List<String> imgList = JSONArray.parseArray(imgs, String.class);
         Exchange exchange = new Exchange();
@@ -185,10 +186,8 @@ public class ExchangeServiceImp {
         exchange.setCreateTime(new Timestamp(System.currentTimeMillis()));
         int i = exchangeMapper.insertExchange(exchange);
         if (i == 1) {
-            if (imgs!=null)
-            {
-                for (String image:imgs)
-                {
+            if (imgs != null) {
+                for (String image : imgs) {
                     Img img = new Img();
                     img.setExchangeId(exchange.getId());
                     img.setImgUrl(image);

@@ -14,12 +14,13 @@ import java.util.Map;
 @Mapper
 @Component
 public interface TechnologySortMapper {
-    List<TechnologySort> selectAll(Map<Object,Object>map);
+    List<TechnologySort> selectAll(Map<Object, Object> map);
 
-    List<News>getNewsBySortId(Integer id);
-//添加农业科技分类
+    List<News> getNewsBySortId(Integer id);
+
+    //添加农业科技分类
     @Insert("INSERT INTO t_technology_sort(name,icon) VALUES(#{name},#{icon})")
-    int addSortTechno(@Param("name") String name,@Param("icon")String icon);
+    int addSortTechno(@Param("name") String name, @Param("icon") String icon);
 
     int deleteByPrimaryKey(Integer id);
 
@@ -29,10 +30,10 @@ public interface TechnologySortMapper {
 
     int updateByPrimaryKey(TechnologySort record);
 
-//    批量删除
+    //    批量删除
     int delByArrayList(@Param("ids") int[] ids);
 
-//    据id查询对应类型名
+    //    据id查询对应类型名
     @Select("select name from t_technology_sort where id=#{0}")
     TechnologySort getById(Integer id);
 }

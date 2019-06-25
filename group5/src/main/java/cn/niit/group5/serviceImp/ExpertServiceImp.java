@@ -315,13 +315,16 @@ public class ExpertServiceImp {
         for (ExpertQuestion question : dtoList) {
             if (question.getCreateTime() != null)
                 question.setTime(StringUtil.getDateString(question.getCreateTime()));
-
+//          问题的提出者
             question.setUser(questionMapper.getUserById(question.getUserId()));
             Expert expert = expertMapper.getExpertDetail(question.getExpertId());
-           question.setSort(technologySortMapper.getById(expert.getExpertSort()).getName());
+//            问题类型
+            question.setSort(technologySortMapper.getById(expert.getExpertSort()).getName());
+//           问题图片
+            question.setImgs(imgMapper.getExpertImgs(question.getExpertId()));
 
         }
-        return ResponseResult.succ(dtoList,questions.size());
+        return ResponseResult.succ(dtoList, questions.size());
     }
 
     @Autowired
@@ -364,6 +367,5 @@ public class ExpertServiceImp {
 
         return ResponseResult.success(question);
     }
-
 
 }

@@ -38,14 +38,14 @@
 
     <select id="getIndustryExpertList" parameterType="map" resultMap="IndustryRM">
         SELECT e.id,e.expert_name,e.expert_sort,e.state,e.unit_name,e.sys_sort,g.sys_sort
-     FROM  t_expert_grade eg,t_grade g,t_expert e
-WHERE     eg.expert_id=e.id
-     AND eg.grade_id=g.id
-     and eg.is_delete=0
-  AND   g.sort LIKE '%体系专家%'
-  <if test="gradeName!=null">and g.grade like '%'#{gradeName}'%'</if>
-  limit #{index},#{pageSize}
-  </select>
+        FROM t_expert_grade eg,t_grade g,t_expert e
+        WHERE eg.expert_id=e.id
+        AND eg.grade_id=g.id
+        and eg.is_delete=0
+        AND g.sort LIKE '%体系专家%'
+        <if test="gradeName!=null">and g.grade like '%'#{gradeName}'%'</if>
+        limit #{index},#{pageSize}
+    </select>
 
     <resultMap type="cn.niit.group5.entity.dto.IndustryRearDTO" id="IndustryRM">
         <result column="id" property="id"/>

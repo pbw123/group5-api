@@ -2,7 +2,6 @@ package cn.niit.group5.mapper;
 
 import cn.niit.group5.entity.Brand;
 import cn.niit.group5.entity.Commodity;
-import cn.niit.group5.entity.SupplyBuy;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -18,9 +17,9 @@ public interface BrandMapper {
 
     List<Brand> selectByName(Brand brand);
 
+//    查询所有品牌农资
     List<Brand> selectAllBrand(@Param("currPage") Integer currPage,
                                @Param("pageSize") Integer pageSize);
-
     int updateBrand(Brand brand);
 
     //    所有农资

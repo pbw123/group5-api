@@ -17,7 +17,7 @@ public interface UserMapper {
     //根据手机号码查询用户
     User getUserByPhoneNumber(@Param("phoneNumber") String phoneNumber);
 
-    //
+    //查询用户详情
     @Select("select * from t_user where id=#{id}")
     User getUserById(@Param("id") Integer id);
 
@@ -38,15 +38,21 @@ public interface UserMapper {
 
     List<User> getUserListByLog();
 
+    //
     @Select("select * from t_user limit #{index},#{pageSize}")
     List<User> selectAll(Map<Object, Object> map);
+
+    //    所有用户列表
     @Select("select * from t_user order by regitster_time desc")
     List<User> getUserList();
 
-    List<User> searchUser(Map<Object,Object>map);
+    //据关键字搜索匹配用户名字、地址、手机号
+    List<User> searchUser(Map<Object, Object> map);
 
-    List<User>search(Map<Object,Object>map);
+    //据用户地址或身份搜索用户
+    List<User> search(Map<Object, Object> map);
 
+    //删除一个用户
     @Update("update t_user set is_delete=1 where id=#{0}")
     int delUser(Integer id);
 }

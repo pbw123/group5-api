@@ -44,7 +44,7 @@ public interface SupplyBuyMapper {
     List<SupplyBuy> getSupplyBuyBySearch(String title);
 
     //    获取所有的供应或求购
-    List<SupplyBuy>getAllSupplyOrBuyList(SupplyBuy supplyBuy);
+    List<SupplyBuy> getAllSupplyOrBuyList(SupplyBuy supplyBuy);
 
     //    删除供应或者求购
     int delSupplyOrBuy(@Param("id") Integer id);

@@ -17,11 +17,12 @@ public interface WordMapper {
 
     Word selectById(Integer id);
 
-    List<Word> selectAll(Map<Object,Object> map);
+    List<Word> selectAll(Map<Object, Object> map);
 
     int updateWord(Word record);
 
-    List<Word>searchByName(Map<Object,Object>map);
+    List<Word> searchByName(Map<Object, Object> map);
 
-    int disableWord(@Param("status")Integer status,@Param("id")Integer id);
+    //禁用热词
+    int disableWord(@Param("status") Integer status, @Param("id") Integer id);
 }

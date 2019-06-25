@@ -12,6 +12,7 @@ import java.util.List;
 @Mapper
 @Component
 public interface ExpertQuestionMapper {
+//   咨询
    int insertExpertQuestion(ExpertQuestion expertQuestion);
 
    //    专家问题详情
