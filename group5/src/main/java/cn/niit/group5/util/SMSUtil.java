@@ -16,8 +16,8 @@ public class SMSUtil {
     public static int send(String mobile,String newCode) {
         DefaultProfile profile = DefaultProfile.getProfile(
                 "cn-hangzhou",
-                "LTAIelFvJkV74tTC",
-                "PumKvfJwNZPO8F2WHfg8lwgjKhKjLL");
+                "LTAI4G75ppcvSMeFMhpb9Nr7",
+                "DbxyqujUN2d37ivs7oAR6Nk0J1aCyW");
         IAcsClient client = new DefaultAcsClient(profile);
         CommonRequest request = new CommonRequest();
         request.setMethod(MethodType.POST);

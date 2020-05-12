@@ -33,8 +33,8 @@ public class InsertImgsController {
     @PostMapping(value = "/img/insetImg")
         public ResponseResult ossUpload(MultipartFile file) {
     String endpoint = "http://oss-cn-shanghai.aliyuncs.com";
-    String accessKeyId = "LTAIelFvJkV74tTC";
-    String accessKeySecret = "PumKvfJwNZPO8F2WHfg8lwgjKhKjLL";
+    String accessKeyId = "LTAI4G75ppcvSMeFMhpb9Nr7";
+    String accessKeySecret = "DbxyqujUN2d37ivs7oAR6Nk0J1aCyW";
     String bucketName = "save-pan";
     String filedir = "img/";
     // 获取文件名
@@ -69,8 +69,8 @@ public class InsertImgsController {
     @PostMapping(value = "/img/addImg")
         public String ossUploadImg(MultipartFile file) {
     String endpoint = "http://oss-cn-shanghai.aliyuncs.com";
-    String accessKeyId = "LTAIelFvJkV74tTC";
-    String accessKeySecret = "PumKvfJwNZPO8F2WHfg8lwgjKhKjLL";
+    String accessKeyId = "LTAI4G75ppcvSMeFMhpb9Nr7";
+    String accessKeySecret = "DbxyqujUN2d37ivs7oAR6Nk0J1aCyW";
     String bucketName = "save-pan";
     String filedir = "img/";
     // 获取文件名
