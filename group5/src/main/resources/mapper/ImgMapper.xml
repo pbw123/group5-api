@@ -31,4 +31,13 @@
        INSERT INTO t_img(expert_question_id,img_url) VALUES (#{expertQuestionId},#{imgUrl})
 </insert>
 
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from t_img
+    </select>
+
+    <update id="updateImg" parameterType="Map">
+        update t_img
+        set img_url=#{url}
+        where id=#{id}
+    </update>
 </mapper>

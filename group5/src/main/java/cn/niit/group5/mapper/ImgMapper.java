@@ -3,9 +3,11 @@ package cn.niit.group5.mapper;
 import cn.niit.group5.entity.Img;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 @Component
@@ -48,4 +50,7 @@ public interface ImgMapper {
     @Select("select * from t_img where expert_question_id=#{0}")
     List<Img> getExpertImgs(Integer id);
 
+    List<Img> selectAll();
+
+    int updateImg(Map<Object,Object> map);
 }
