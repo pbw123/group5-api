@@ -37,14 +37,9 @@ public class InsertImgsController {
     String accessKeySecret = "DbxyqujUN2d37ivs7oAR6Nk0J1aCyW";
     String bucketName = "save-pan";
     String filedir = "img/";
-    // 获取文件名
-//    String fileName = file.getOriginalFilename();
-    // 获取文件后缀
-//    String suffix = fileName.substring(fileName.lastIndexOf("."));
     //uuid生成主文件名
     String prefix = UUID.randomUUID().toString();
     String prefix2=prefix+".jpg";
-//    String newFileName = prefix + suffix;
     File tempFile = null;
     try {
         //创建临时文件
@@ -61,9 +56,10 @@ public class InsertImgsController {
     URL url = ossClient.generatePresignedUrl(bucketName, filedir + prefix2, expiration);
     ossClient.shutdown();
         String str = url.toString();
+//        截取
         String substring = str.substring(0, str.indexOf("?Expires="));
+//        替换
         String s = substring.replace("save-pan.oss-cn-shanghai.aliyuncs.com", "img2.panbingwen.cn");
-        System.out.println(s+"============");
         return ResponseResult.success(s);
 }
     @ApiOperation(value = "图片上传至阿里云OSS，返回图片地址")

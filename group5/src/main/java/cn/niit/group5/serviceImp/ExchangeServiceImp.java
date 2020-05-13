@@ -178,6 +178,11 @@ public class ExchangeServiceImp {
     public ResponseResult addExchange(Integer userId, String content, String address,
                                       String[] imgs) {
 
+        int exchangeCount = exchangeMapper.findExchangeCount(userId);
+        if (exchangeCount >= 3) {
+            return new ResponseResult(13, "今天的交流次数已经用完");
+        }
+
         //        List<String> imgList = JSONArray.parseArray(imgs, String.class);
         Exchange exchange = new Exchange();
         exchange.setUserId(userId);

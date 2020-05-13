@@ -41,6 +41,10 @@ public class QuestionController {
     @PostMapping(value = "/add")
     public ResponseResult addQuestion(Integer userId, String content, String sort,
                                       String address, String[] imgs) {
+        int questionCount = questionMapper.findQuestionCount(userId);
+        if (questionCount >= 3) {
+            return new ResponseResult(13, "今天的提问次数已经用完");
+        }
         Question question = new Question();
         question.setUserId(userId);
         question.setContent(content);

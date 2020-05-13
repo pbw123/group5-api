@@ -10,13 +10,47 @@ import lombok.NoArgsConstructor;
  * 不需要返回数据时调用前者, 需要返回数据时调用后者
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class ResponseResult {
     private int code;
     private String msg;
     private Object data;
     private Integer total;
+
+    public ResponseResult() {
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
 
     public static ResponseResult error(int code, String msg) {
         ResponseResult responseResult = new ResponseResult();

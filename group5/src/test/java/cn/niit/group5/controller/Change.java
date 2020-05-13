@@ -15,53 +15,45 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Change extends BasicTest {
-
-    @Autowired
-    ImgMapper imgMapper;
-    @Autowired
-    UserMapper userMapper;
     @Autowired
     NewsMapper newsMapper;
 
-   @Test
+    @Test
     public void updateHttp() {
-//        List<Img> imgs = imgMapper.selectAll();
-
-//        imgs.forEach(img-> System.out.println(img.getImgUrl()));
-//        ArrayList<String> imgs = new ArrayList<>();
-//        imgs.add("https://1");
-//        imgs.add("http://2");
-//        imgs.add("https://3");
-//        imgs.add("http://4");
-//       List<User> all = userMapper.findAll();
-       List<News> all = newsMapper.findAll();
-       for (int i = 0; i < all.size(); i++) {
-                String sb=all.get(i).getIcon();
-                if(sb==null){
-                    System.out.println("null=========");
-                    continue;
-                }else {
-                    if (sb.length() > 6) {
-                        char n = sb.charAt(4);
-                        String s = String.valueOf(n);
-                        if ((s.equals(":"))) {
-                            StringBuilder str = new StringBuilder(sb);
-                            str.insert(4, "s");
-                            sb = str.toString();
-                            int id= all.get(i).getId();
-                            HashMap<Object, Object> map = new HashMap<>();
-                            map.put("id", id);
-                            map.put("url", sb);
-//                            imgMapper.updateImg(map);
-//                            userMapper.updateUrl(map);
-                            newsMapper.updateIcon(map);
-                            System.out.println("-------"+i);
-                        }
-
+//       取出所有数据
+        List<News> all = newsMapper.findAll();
+        for (int i = 0; i < all.size(); i++) {
+//           取得每一条记录的同一个字段
+            String sb = all.get(i).getIcon();
+//                字段数据为空跳出循环
+            if (sb == null) {
+                continue;
+            } else {
+//                    字段数据长度大于6
+                if (sb.length() > 6) {
+//                        取得字段字符串数据下标为4的字符
+                    char n = sb.charAt(4);
+//                        char类型转成String类型
+                    String s = String.valueOf(n);
+//                        字符数据为:
+                    if ((s.equals(":"))) {
+                        StringBuilder str = new StringBuilder(sb);
+//                            下标为4的位置插入字符s
+                        str.insert(4, "s");
+                        sb = str.toString();
+//                            至此数据修改完成，下面是将新数据同步到数据库
+                        int id = all.get(i).getId();
+                        HashMap<Object, Object> map = new HashMap<>();
+                        map.put("id", id);
+                        map.put("url", sb);
+                        newsMapper.updateIcon(map);
+                        System.out.println("-------" + i);
                     }
 
                 }
+
             }
+        }
 
 
     }

@@ -57,4 +57,8 @@ public interface ExchangeMapper {
 
     //统计回复数量
     int getExchangeReplyNumber(Integer exchangeId);
+
+    //    id查询今日的交流数量
+    @Select("select count(*) from t_exchange where to_days(create_time)= to_days(now()) and user_id=#{id}")
+    int findExchangeCount(@Param("id") Integer id);
 }

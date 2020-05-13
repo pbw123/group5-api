@@ -49,4 +49,7 @@ public interface QuestionMapper {
             "create_time desc")
     List<Question> getQuestionBySort(@Param("keyword") String keyword);
 
+    //    今日的提问数量
+    @Select("select count(*) from t_question where to_days(create_time)= to_days(now()) and user_id=#{id}")
+    int findQuestionCount(@Param("id") Integer id);
 }
