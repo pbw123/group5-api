@@ -32,7 +32,7 @@ public class InsertImgsController {
     @ApiOperation(value = "图片上传至阿里云OSS，返回对象")
     @PostMapping(value = "/img/insetImg")
         public ResponseResult ossUpload(MultipartFile file) {
-    String endpoint = "http://oss-cn-shanghai.aliyuncs.com";
+    String endpoint = "https://oss-cn-shanghai.aliyuncs.com";
     String accessKeyId = "LTAI4G75ppcvSMeFMhpb9Nr7";
     String accessKeySecret = "DbxyqujUN2d37ivs7oAR6Nk0J1aCyW";
     String bucketName = "save-pan";
@@ -62,8 +62,9 @@ public class InsertImgsController {
     ossClient.shutdown();
         String str = url.toString();
         String substring = str.substring(0, str.indexOf("?Expires="));
-        System.out.println(substring);
-        return ResponseResult.success(substring);
+        String s = substring.replace("save-pan.oss-cn-shanghai.aliyuncs.com", "img2.panbingwen.cn");
+        System.out.println(s+"============");
+        return ResponseResult.success(s);
 }
     @ApiOperation(value = "图片上传至阿里云OSS，返回图片地址")
     @PostMapping(value = "/img/addImg")
@@ -98,7 +99,9 @@ public class InsertImgsController {
     ossClient.shutdown();
         String str = url.toString();
         String substring = str.substring(0, str.indexOf("?Expires="));
-        return substring;
+        String s = substring.replace("http://save-pan.oss-cn-shanghai.aliyuncs.com", "https://img2.panbingwen.cn");
+
+        return s;
 }
 
 //    @ApiOperation(value = "存储提问内容中的图片地址",notes="传入提问id和图片地址")

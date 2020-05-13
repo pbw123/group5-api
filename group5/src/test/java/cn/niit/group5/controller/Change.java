@@ -1,8 +1,12 @@
 package cn.niit.group5.controller;
 
 import cn.niit.group5.entity.Img;
+import cn.niit.group5.entity.News;
+import cn.niit.group5.entity.User;
 import cn.niit.group5.mapper.BasicTest;
 import cn.niit.group5.mapper.ImgMapper;
+import cn.niit.group5.mapper.NewsMapper;
+import cn.niit.group5.mapper.UserMapper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,18 +18,25 @@ public class Change extends BasicTest {
 
     @Autowired
     ImgMapper imgMapper;
+    @Autowired
+    UserMapper userMapper;
+    @Autowired
+    NewsMapper newsMapper;
 
-    @Test
+   @Test
     public void updateHttp() {
-        List<Img> imgs = imgMapper.selectAll();
+//        List<Img> imgs = imgMapper.selectAll();
+
 //        imgs.forEach(img-> System.out.println(img.getImgUrl()));
 //        ArrayList<String> imgs = new ArrayList<>();
 //        imgs.add("https://1");
 //        imgs.add("http://2");
 //        imgs.add("https://3");
 //        imgs.add("http://4");
-            for (int i = 0; i < imgs.size(); i++) {
-                String sb=imgs.get(i).getImgUrl();
+//       List<User> all = userMapper.findAll();
+       List<News> all = newsMapper.findAll();
+       for (int i = 0; i < all.size(); i++) {
+                String sb=all.get(i).getIcon();
                 if(sb==null){
                     System.out.println("null=========");
                     continue;
@@ -37,11 +48,13 @@ public class Change extends BasicTest {
                             StringBuilder str = new StringBuilder(sb);
                             str.insert(4, "s");
                             sb = str.toString();
-                            int id= imgs.get(i).getId();
+                            int id= all.get(i).getId();
                             HashMap<Object, Object> map = new HashMap<>();
                             map.put("id", id);
                             map.put("url", sb);
-                            imgMapper.updateImg(map);
+//                            imgMapper.updateImg(map);
+//                            userMapper.updateUrl(map);
+                            newsMapper.updateIcon(map);
                             System.out.println("-------"+i);
                         }
 

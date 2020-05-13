@@ -130,4 +130,10 @@ VALUES(#{userName},#{sex},#{headUrl},#{phoneNumber},#{email},#{identity},#{userA
     </trim>
     limit #{index},#{pageSize}
     </select>
+
+    <update id="updateUrl" parameterType="Map">
+        update t_user
+        set head_url=#{url}
+        where id=#{id}
+    </update>
 </mapper>

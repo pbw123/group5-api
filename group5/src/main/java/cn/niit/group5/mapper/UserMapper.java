@@ -42,6 +42,8 @@ public interface UserMapper {
     @Select("select * from t_user limit #{index},#{pageSize}")
     List<User> selectAll(Map<Object, Object> map);
 
+    @Select("select * from t_user")
+    List<User> findAll();
     //    所有用户列表
     @Select("select * from t_user order by regitster_time desc")
     List<User> getUserList();
@@ -55,4 +57,7 @@ public interface UserMapper {
     //删除一个用户
     @Update("update t_user set is_delete=1 where id=#{0}")
     int delUser(Integer id);
+
+    int updateUrl(Map<Object, Object> map);
+
 }

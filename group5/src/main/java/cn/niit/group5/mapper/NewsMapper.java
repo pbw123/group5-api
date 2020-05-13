@@ -49,6 +49,10 @@ public interface NewsMapper {
 
     List<News> selectAll(Map<Object, Object> map);
 
+    @Select("select * from t_news")
+    List<News> findAll();
+
+
     int updateByPrimaryKey(News record);
 
     //    改变状态
@@ -57,4 +61,6 @@ public interface NewsMapper {
     //    更新视频/资讯访问量
     @Update("update ${column} set ${column2}=${column2}+1 where id=#{id} ")
     int addReadNumber(String column, String column2, @Param("id") Integer id);
+
+    int updateIcon(Map<Object, Object>map);
 }
