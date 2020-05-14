@@ -22,4 +22,5 @@ public interface ReplyMapper {
 
     @Update("update t_reply set is_delete=1 where id=#{id}")
     int delReply(@Param("id") Integer id);
+
 }

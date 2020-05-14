@@ -19,6 +19,8 @@ public class MsgConst {
     public static final String FAIL="操作失败";
     public static final String Param_NULL="哈哈，参数为空了，没传参过来";
     public static final String ID_NULL="id不能为空";
+    public static final String WITHOUT="您今日对该问题的回答次数已用完";
+
 
 
 

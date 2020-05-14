@@ -69,6 +69,10 @@ public class ExchangeController {
             {
                 return ResponseResult.error(StatusConst.ERROR,MsgConst.ID_NULL);
             }
+            int exchangeReplyCount = exchangeMapper.findExchangeReplyCount(userId, exchangeId);
+            if (exchangeReplyCount >= 3) {
+                return ResponseResult.error(StatusConst.ERROR, MsgConst.WITHOUT);
+            }
             Reply reply = new Reply();
             reply.setIsExchangeReply(1);
             reply.setUserId(userId);

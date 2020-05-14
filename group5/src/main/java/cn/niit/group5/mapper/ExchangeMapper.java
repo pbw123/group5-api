@@ -61,4 +61,8 @@ public interface ExchangeMapper {
     //    id查询今日的交流数量
     @Select("select count(*) from t_exchange where to_days(create_time)= to_days(now()) and user_id=#{id}")
     int findExchangeCount(@Param("id") Integer id);
+
+    //    今日的回答提问数量
+    @Select("select count(*) from t_reply  where to_days(reply_time)= to_days(now()) and user_id=#{uId} AND exchange_id=#{eId}")
+    int findExchangeReplyCount(@Param("uId") Integer uId,@Param("eId")Integer eId);
 }

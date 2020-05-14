@@ -52,4 +52,8 @@ public interface QuestionMapper {
     //    今日的提问数量
     @Select("select count(*) from t_question where to_days(create_time)= to_days(now()) and user_id=#{id}")
     int findQuestionCount(@Param("id") Integer id);
+
+    //    今日的回答提问数量
+    @Select("select count(*) from t_reply  where to_days(reply_time)= to_days(now()) and user_id=#{uId} AND question_id=#{qId}")
+    int findReplyCount(@Param("uId") Integer uId,@Param("qId")Integer qId);
 }

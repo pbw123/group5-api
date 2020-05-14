@@ -69,12 +69,16 @@ public class QuestionController {
      * 发表评论
      *
      */
-    @ApiOperation(value = "在提问中发表评论")
+    @ApiOperation(value = "回答提问")
     @PostMapping(value = "/reply")
     public ResponseResult replyQuestion(Integer userId, String content,Integer questionId) {
         if (userId==null||questionId==null)
         {
             return ResponseResult.error(StatusConst.ERROR,MsgConst.ID_NULL);
+        }
+        int replyCount = questionMapper.findReplyCount(userId, questionId);
+        if (replyCount >= 3) {
+            return ResponseResult.error(StatusConst.ERROR, MsgConst.WITHOUT);
         }
         Reply reply = new Reply();
         reply.setUserId(userId);
