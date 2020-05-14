@@ -12,8 +12,8 @@ import java.util.UUID;
 public class UploadImg {
     public static String ossUpload(MultipartFile sourceFile) {
         String endpoint = "http://oss-cn-shanghai.aliyuncs.com";
-        String accessKeyId = "LTAI4G75ppcvSMeFMhpb9Nr7";
-        String accessKeySecret = "DbxyqujUN2d37ivs7oAR6Nk0J1aCyW";
+        String accessKeyId = "";
+        String accessKeySecret = "";
         String bucketName = "niit-jay";
         String filedir = "avatar/";
         // 获取文件名
