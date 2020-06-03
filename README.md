@@ -83,6 +83,3 @@ API：
 前台：
 [https://github.com/pbw123/nongjiyun-client.git](https://github.com/pbw123/nongjiyun-client.git)
 
-后台：
-[https://github.com/pbw123/nongjiyun-manager.git](https://github.com/pbw123/nongjiyun-manager.git)
-
